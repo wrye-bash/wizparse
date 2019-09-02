@@ -83,7 +83,7 @@ stmt: assignment
 
 /* = ASSIGNMENT = */
 // Just assigns a value to a variable.
-assignment: variable EQUALS expr;
+assignment: variable ASSIGN expr;
 
 // Compound assignments are statements of the form a x= b, where:
 //   a is a variable
@@ -96,11 +96,11 @@ compoundAssignment:     compoundAddition
                         | compoundMultiplication
                         | compoundDivision
                         | compoundExponentiation;
-compoundAddition:       variable PLUS   EQUALS expr;
-compoundSubtraction:    variable MINUS  EQUALS expr;
-compoundMultiplication: variable TIMES  EQUALS expr;
-compoundDivision:       variable DIVIDE EQUALS expr;
-compoundExponentiation: variable RAISE  EQUALS expr;
+compoundAddition:       variable ASSIGN_ADD expr;
+compoundSubtraction:    variable ASSIGN_SUB expr;
+compoundMultiplication: variable ASSIGN_MUL expr;
+compoundDivision:       variable ASSIGN_DIV expr;
+compoundExponentiation: variable ASSIGN_EXP expr;
 
 /* = CONTROL FLOW = */
 // Statements that alter control flow.
@@ -211,8 +211,23 @@ NEWLINE: '\r'? '\n';
 // A line continuation - a backslash and a newline.
 CONTINUATION: '\\' NEWLINE -> skip;
 
+// Assignment Operators
+// Note that the compound assignment operators use the math
+// operators defined below.
+fragment EQ_SIGN: '=';
+ASSIGN_ADD: EQ_SIGN PLUS;
+ASSIGN_SUB: EQ_SIGN MINUS;
+ASSIGN_MUL: EQ_SIGN TIMES;
+ASSIGN_DIV: EQ_SIGN DIVIDE;
+ASSIGN_EXP: EQ_SIGN RAISE;
+
 // Comparison Operators
-EQUALS: '=';
+EQUALS: EQ_SIGN EQ_SIGN;
+
+// Special Case: need to define this last so it doesn't swallow all
+// equals signs -> we want compound assignments and comparisons to
+// process first.
+ASSIGN: EQ_SIGN;
 
 // Constants
 TRUE:        'True';
@@ -243,7 +258,7 @@ TO:          'to';
 WHILE:       'While';
 
 // Function Call Operators
-// COMMA is also used for Select statements.
+// COMMA is also used for select and keyword statements.
 COMMA: ',';
 DOT: '.';
 LPAREN: '(';
