@@ -29,12 +29,12 @@ image:       string;
 label:       string;
 option:      string;
 
-// These are all high-level aliases for TODO, see above.
+// These are all high-level aliases for IDENTIFIER, see above.
 // Note that I kept functionName flexible (as opposed to keyword,
 // which is built into the lexer). This is to allow future expansion,
 // namely user-defined functions.
-functionName: TODO;
-variable:     TODO;
+functionName: IDENTIFIER;
+variable:     IDENTIFIER;
 
 // These are all high-level aliases for expr, see above.
 forInTarget:   expr;
@@ -72,13 +72,23 @@ argList: (expr (COMMA expr)*)?;
 keywordArgList: argList;
 functionArgList: LPAREN argList RPAREN;
 
+/* === SHARED COMMANDS === */
+// A function call can either be a dot function or a regular one.
+functionCall: dotFunctionCall | regularFunctionCall;
+
+// A dot function call: a.b(...), behaves like b(a, ...).
+dotFunctionCall: expr DOT functionName functionArgList;
+
+// A regular function call with function name and arguments.
+regularFunctionCall: functionName functionArgList;
+
 /* === STATEMENTS === */
 // A command without a return value. All statements can stand on
 // their own.
 stmt: assignment
       | compoundAssignment
       | controlFlowStmt
-      | functionCallStmt
+      | functionCall
       | keywordStmt;
 
 /* = ASSIGNMENT = */
@@ -170,16 +180,6 @@ selectMany: SELECT_MANY description (COMMA optionTuple)* selectCaseList;
 // A simple while loop. Runs until the guard is false.
 whileStmt: WHILE guard loopBody END_WHILE;
 
-/* = FUNCTION CALLS = */
-// A function call can either be a dot function or a regular one.
-functionCallStmt: dotFunctionCallStmt | regularFunctionCallStmt;
-
-// A dot function call: a.b(...), behaves like b(a, ...).
-dotFunctionCallStmt: expr DOT functionName functionArgList;
-
-// A regular function call with function name and arguments.
-regularFunctionCallStmt: functionName functionArgList;
-
 /* = KEYWORD STATEMENTS = */
 // A keyword statement is just a keyword followed by a
 // comma-separated list of arguments.
@@ -191,14 +191,15 @@ expr: execExpr | nonexecExpr;
 
 /* == EXECUTABLE EXPRESSIONS == */
 // An expression that can stand on its own.
-execExpr: functionCallExpr | operatorExpr;
+execExpr: functionCall | operatorExpr;
 
 /* = OPERATORS = */
 // Main operator definition - splits off into a bunch of separate
 // ones.
 operatorExpr: opComparison
               | opIn
-              | opLogical;
+              | opLogical
+              | opMath;
 
 // Comparison operators. == and != work on everything, while the rest
 // only work on numbers.
@@ -222,7 +223,19 @@ opIn: expr IN expr;
 opLogical: opAnd | opNot | opOr;
 opAnd: expr AND expr;
 opNot: NOT expr;
-opOr: expr OR expr;
+opOr:  expr OR  expr;
+
+// Mathematical operators. Also have some overloads for strings.
+opMath: opAdd
+        | opSub
+        | opMult
+        | opDiv
+        | opExp;
+opAdd:  expr PLUS   expr;
+opSub:  expr MINUS  expr;
+opMult: expr TIMES  expr;
+opDiv:  expr DIVIDE expr;
+opExp:  expr RAISE  expr;
 
 /* == NONEXECUTABLE EXPRESSIONS == */
 // An expression that cannot stand on its own.
@@ -327,6 +340,9 @@ COMMA: ',';
 DOT: '.';
 LPAREN: '(';
 RPAREN: ')';
+
+// Identifiers
+IDENTIFIER: [A-Za-z_][A-Za-z0-9_]*;
 
 // Keywords
 // Note the alternatives that are kept for backwards compatibility.
