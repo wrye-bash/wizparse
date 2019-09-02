@@ -19,7 +19,7 @@ runWiz: body EOF;
 body: command*;
 
 // A single line, can have a value or not.
-command: stmt | execExpr;
+command: stmt;// | execExpr;
 
 /* === HELPERS === */
 // These are all just high-level aliases for strings to make the
@@ -58,7 +58,7 @@ loopBodyCommand: breakStmt
 
 // Helper for Select statements. There may only be one Default
 // statement, but it can be anywhere in the case list.
-selectCaseList: caseStmt* defaultStmt caseStmt*;
+selectCaseList: caseStmt* defaultStmt? caseStmt*;
 
 // Helper for Select statements. An option tuple is a comma-separated
 // list of three strings used to describe the options that will be
@@ -74,6 +74,8 @@ functionArgList: LPAREN argList RPAREN;
 
 /* === SHARED COMMANDS === */
 // A function call can either be a dot function or a regular one.
+// Note that we check if the function *actually* returns something
+// or not when interpreting.
 functionCall: dotFunctionCall | regularFunctionCall;
 
 // A dot function call: a.b(...), behaves like b(a, ...).
@@ -187,63 +189,14 @@ keywordStmt: KEYWORD keywordArgList;
 
 /* === EXPRESSIONS === */
 // A command with a return value.
-expr: execExpr | nonexecExpr;
-
-/* == EXECUTABLE EXPRESSIONS == */
-// An expression that can stand on its own.
-execExpr: functionCall | operatorExpr;
-
-/* = OPERATORS = */
-// Main operator definition - splits off into a bunch of separate
-// ones.
-operatorExpr: opComparison
-              | opIn
-              | opLogical
-              | opMath;
-
-// Comparison operators. == and != work on everything, while the rest
-// only work on numbers.
-opComparison: opEqual
-              | opGreater
-              | opGreaterOrEqual
-              | opLesser
-              | opLesserOrEqual
-              | opNotEqual;
-opEqual: expr EQUAL expr;
-opGreater: expr GREATER expr;
-opGreaterOrEqual: expr GREATER_OR_EQUAL expr;
-opLesser: expr LESSER expr;
-opLesserOrEqual: expr LESSER_OR_EQUAL expr;
-opNotEqual: expr NOT_EQUAL expr;
-
-// 'in' operator. A very rarely used feature.
-opIn: expr IN expr;
-
-// Logical operators. Could gain bitwise functionality in the future.
-opLogical: opAnd | opNot | opOr;
-opAnd: expr AND expr;
-opNot: NOT expr;
-opOr:  expr OR  expr;
-
-// Mathematical operators. Also have some overloads for strings.
-opMath: opAdd
-        | opSub
-        | opMult
-        | opDiv
-        | opExp;
-opAdd:  expr PLUS   expr;
-opSub:  expr MINUS  expr;
-opMult: expr TIMES  expr;
-opDiv:  expr DIVIDE expr;
-opExp:  expr RAISE  expr;
+expr: constant
+    | literal
+    | variable;
 
 /* == NONEXECUTABLE EXPRESSIONS == */
-// An expression that cannot stand on its own.
-// Note that the definition for variables is in the helpers section
-// at the top.
-nonexecExpr: constant
-             | literal
-             | variable;
+// Direct values are expressions that immediately resolve to a value,
+// without any operation being involved.
+// These cannot stand on their own.
 
 /* = CONSTANTS = */
 // One of the predefined constants for wizards.
@@ -272,13 +225,10 @@ string: STRING_DQUOTE | STRING_SQUOTE;
 // Skip all comments.
 COMMENT: ';' ~[\r\n]* -> skip;
 
-// Matches both Windows-style and Unix-style newlines.
-NEWLINE: '\r'? '\n';
-
 // A line continuation - a backslash and a newline.
 // We simply ignore them, eating the newline in the process. This
 // simulates us appending the next line to the end of this one.
-CONTINUATION: '\\' NEWLINE -> skip;
+CONTINUATION: '\\' '\r'? '\n' -> skip;
 
 // Assignment Operators
 // Note that the compound assignment operators use the math
@@ -341,8 +291,6 @@ DOT: '.';
 LPAREN: '(';
 RPAREN: ')';
 
-// Identifiers
-IDENTIFIER: [A-Za-z_][A-Za-z0-9_]*;
 
 // Keywords
 // Note the alternatives that are kept for backwards compatibility.
@@ -391,3 +339,12 @@ PLUS:   '+';
 RAISE:  '^';
 TIMES:  '*';
 TO:     'to';
+
+// These rules need to pretty much come last, otherwise they would
+// swallow up previous definitions.
+// Identifiers - basically captures most leftovers.
+IDENTIFIER: [A-Za-z_][A-Za-z0-9_]*;
+
+// Ignore whitespace - at least for now, we might actually need this
+// token though.
+WHITESPACE: [ \n\r]+ -> skip;
