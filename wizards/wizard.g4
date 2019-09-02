@@ -6,6 +6,7 @@
 // TODO Check if multiple Default statements are allowed
 // TODO See if there was any reason not to implement modulo
 // TODO See if the use of fragments for keywords is OK or annoying in the interpreter
+// TODO If lexing of strings breaks, consider using modes
 grammar wizard;
 
 /* ==== PARSER ==== */
@@ -23,10 +24,10 @@ command: stmt | execExpr;
 /* === HELPERS === */
 // These are all just high-level aliases for strings to make the
 // interpreter nicer.
-description: STRING;
-image:       STRING;
-label:       STRING;
-option:      STRING;
+description: string;
+image:       string;
+label:       string;
+option:      string;
 
 // These are all high-level aliases for TODO, see above.
 // Note that I kept functionName flexible (as opposed to keyword,
@@ -190,8 +191,7 @@ expr: execExpr | nonexecExpr;
 
 /* == EXECUTABLE EXPRESSIONS == */
 // An expression that can stand on its own.
-execExpr: functionCallExpr
-          | operatorExpr;
+execExpr: functionCallExpr | operatorExpr;
 
 /* = OPERATORS = */
 // Main operator definition - splits off into a bunch of separate
@@ -226,6 +226,8 @@ opOr: expr OR expr;
 
 /* == NONEXECUTABLE EXPRESSIONS == */
 // An expression that cannot stand on its own.
+// Note that the definition for variables is in the helpers section
+// at the top.
 nonexecExpr: constant
              | literal
              | variable;
@@ -235,6 +237,23 @@ nonexecExpr: constant
 constant: FALSE
           | TRUE
           | SUB_PACKAGES;
+
+/* = LITERALS = */
+// Only three types in this language - plus some 'pseudotypes' for
+// list-like objects such as SubPackages.
+literal: int
+         | float
+         | string;
+
+// Numbers - may be positive, negative or zero.
+// Note that we keep these unnecessarily complex to simplify the
+// interpreter.
+int: MINUS? DIGIT_SEQ;
+float: MINUS? DIGIT_SEQ DOT DIGIT_SEQ;
+
+// Strings - can use either "my string" or 'my string'. May also
+// contain escape sequences.
+string: STRING_DQUOTE | STRING_SQUOTE;
 
 /* ==== LEXER ==== */
 // Skip all comments.
@@ -334,6 +353,14 @@ KEYWORD: DESELECT_ALL
          | SELECT_ALL_PLUGINS
          | SELECT_PLUGIN
          | SELECT_SUB_PACKAGE;
+
+// Literals
+// We need to be careful with the ESC here - we don't want to break
+// our CONTINUATION token above.
+fragment ESC: '\\' ~[\n\r];
+DIGIT_SEQ: [0-9]+;
+STRING_DQUOTE: '"' (ESC | ~[\\"])* '"';
+STRING_SQUOTE: '\'' (ESC | ~[\\'])* '\'';
 
 // Operators
 AND:    '&' | 'and';
