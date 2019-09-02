@@ -13,7 +13,7 @@ grammar wizard;
 /* === BASICS === */
 // The main entry point.
 // A body, followed by EOF.
-file: body EOF;
+runWiz: body EOF;
 
 // A series of commands.
 body: command*;
@@ -254,15 +254,15 @@ constant: FALSE
 /* = LITERALS = */
 // Only three types in this language - plus some 'pseudotypes' for
 // list-like objects such as SubPackages.
-literal: int
-         | float
+literal: integer
+         | decimal
          | string;
 
 // Numbers - may be positive, negative or zero.
 // Note that we keep these unnecessarily complex to simplify the
 // interpreter.
-int: MINUS? DIGIT_SEQ;
-float: MINUS? DIGIT_SEQ DOT DIGIT_SEQ;
+integer: MINUS? DIGIT_SEQ;
+decimal: MINUS? DIGIT_SEQ DOT DIGIT_SEQ;
 
 // Strings - can use either "my string" or 'my string'. May also
 // contain escape sequences.
