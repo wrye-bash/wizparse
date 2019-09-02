@@ -1,5 +1,4 @@
 // TODO Check that my statements *actually* don't have a return value in belt
-// TODO dot operator
 // TODO Exec (shudder)
 // TODO newlines: skip or needed?
 // TODO line continuations - can we skip?
@@ -37,11 +36,11 @@ functionName: TODO;
 variable:     TODO;
 
 // These are all high-level aliases for expr, see above.
-forInTarget: expr;
+forInTarget:   expr;
 forRangeStart: expr;
 forRangeEnd:   expr;
 forRangeStep:  expr;
-guard: expr;
+guard:         expr;
 
 // Helper for Case statements. They are one of the two places where
 // Break may occur.
