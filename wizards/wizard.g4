@@ -5,6 +5,8 @@
 // TODO line continuations - can we skip?
 // TODO Check if a Default statement can occur in the middle of Case statements
 // TODO Check if multiple Default statements are allowed
+// TODO See if there was any reason not to implement modulo
+// TODO See if the use of fragments for keywords is OK or annoying in the interpreter
 grammar wizard;
 
 /* ==== PARSER ==== */
@@ -28,6 +30,9 @@ label:       STRING;
 option:      STRING;
 
 // These are all high-level aliases for TODO, see above.
+// Note that I kept functionName flexible (as opposed to keyword,
+// which is built into the lexer). This is to allow future expansion,
+// namely user-defined functions.
 functionName: TODO;
 variable:     TODO;
 
@@ -60,10 +65,12 @@ selectCaseList: caseStmt* defaultStmt caseStmt*;
 // shown in the installer.
 optionTuple: option COMMA description COMMA image;
 
-// Helper for function calls (both statements and expressions).
-// Matches an entire argument list, including correct commas and
-// parantheses.
-argList: LPAREN (expr (COMMA expr)*)? RPAREN;
+// Helper for function calls and keyword statements.
+// Matches an entire argument list, including correct commas and, in
+// the case of functionArgList, parantheses.
+argList: (expr (COMMA expr)*)?;
+keywordArgList: argList;
+functionArgList: LPAREN argList RPAREN;
 
 /* == STATEMENTS == */
 // A command without a return value. All statements can stand on
@@ -168,10 +175,15 @@ whileStmt: WHILE guard loopBody END_WHILE;
 functionCallStmt: dotFunctionCallStmt | regularFunctionCallStmt;
 
 // A dot function call: a.b(...), behaves like b(a, ...).
-dotFunctionCallStmt: expr DOT functionName argList;
+dotFunctionCallStmt: expr DOT functionName functionArgList;
 
 // A regular function call with function name and arguments.
-regularFunctionCallStmt: functionName argList;
+regularFunctionCallStmt: functionName functionArgList;
+
+/* = KEYWORD STATEMENTS = */
+// A keyword statement is just a keyword followed by a
+// comma-separated list of arguments.
+keywordStmt: KEYWORD keywordArgList;
 
 /* == EXPRESSIONS == */
 // A command with a return value.
@@ -200,8 +212,6 @@ NEWLINE: '\r'? '\n';
 CONTINUATION: '\\' NEWLINE -> skip;
 
 // Comparison Operators
-// Note that assignment is built from EQUALS and the math operators
-// below.
 EQUALS: '=';
 
 // Constants
@@ -209,7 +219,7 @@ TRUE:        'True';
 FALSE:       'False';
 SUBPACKAGES: 'SubPackages';
 
-// Keywords, used mainly for control flow statements
+// Control Flow Keywords
 BREAK:       'Break';
 BY:          'by';
 CANCEL:      'Cancel';
@@ -238,6 +248,32 @@ COMMA: ',';
 DOT: '.';
 LPAREN: '(';
 RPAREN: ')';
+
+// Keywords
+// Note the alternatives that are kept for backwards compatibility.
+fragment DESELECT_ALL:         'DeSelectAll';
+fragment DESELECT_ALL_PLUGINS: 'DeSelectAllPlugins' | 'DeSelectAllEspms';
+fragment DESELECT_PLUGIN:      'DeSelectPlugin'     | 'DeSelectEspm';
+fragment DESELECT_SUB_PACKAGE: 'DeSelectSubPackage';
+fragment NOTE:                 'Note';
+fragment RENAME_PLUGIN:        'RenamePlugin'       | 'RenameEspm';
+fragment REQUIRE_VERSIONS:     'RequireVersions';
+fragment RESET_PLUGIN_NAME:    'ResetPluginName'    | 'ResetEspmName';
+fragment SELECT_ALL:           'SelectAll';
+fragment SELECT_ALL_PLUGINS:   'SelectAllPlugins'   | 'SelectAllEspms';
+fragment SELECT_PLUGIN:        'SelectPlugin'       | 'SelectEspm';
+fragment SELECT_SUB_PACKAGE:   'SelectSubPackage';
+KEYWORD: DESELECT_ALL
+         | DESELECT_ALL_PLUGINS
+         | DESELECT_PLUGIN
+         | DESELECT_SUB_PACKAGE
+         | NOTE
+         | RENAME_PLUGIN
+         | REQUIRE_VERSIONS
+         | SELECT_ALL
+         | SELECT_ALL_PLUGINS
+         | SELECT_PLUGIN
+         | SELECT_SUB_PACKAGE;
 
 // Math Operators
 PLUS:   '+';
