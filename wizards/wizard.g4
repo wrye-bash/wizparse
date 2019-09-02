@@ -9,7 +9,7 @@
 grammar wizard;
 
 /* ==== PARSER ==== */
-/* == BASICS == */
+/* === BASICS === */
 // The main entry point.
 // A body, followed by EOF.
 file: body EOF;
@@ -20,7 +20,7 @@ body: command*;
 // A single line, can have a value or not.
 command: stmt | execExpr;
 
-/* == HELPERS == */
+/* === HELPERS === */
 // These are all just high-level aliases for strings to make the
 // interpreter nicer.
 description: STRING;
@@ -71,7 +71,7 @@ argList: (expr (COMMA expr)*)?;
 keywordArgList: argList;
 functionArgList: LPAREN argList RPAREN;
 
-/* == STATEMENTS == */
+/* === STATEMENTS === */
 // A command without a return value. All statements can stand on
 // their own.
 stmt: assignment
@@ -86,7 +86,7 @@ assignment: variable ASSIGN expr;
 
 // Compound assignments are statements of the form a x= b, where:
 //   a is a variable
-//   x is a MATH_OPERATOR (see lexer definition)
+//   x is a mathematical operation
 //   b is an expression
 // Note that we do this in such a redundant way to simplify the
 // interpreter later on.
@@ -184,17 +184,31 @@ regularFunctionCallStmt: functionName functionArgList;
 // comma-separated list of arguments.
 keywordStmt: KEYWORD keywordArgList;
 
-/* == EXPRESSIONS == */
+/* === EXPRESSIONS === */
 // A command with a return value.
 expr: execExpr | nonexecExpr;
 
+/* == EXECUTABLE EXPRESSIONS == */
 // An expression that can stand on its own.
-execExpr: boolOp
-          | comparison
-          | decrement
-          | increment
-          | mathOp;
+execExpr: functionCallExpr
+          | operator;
 
+/* = OPERATORS = */
+// Main operator definition - splits off into a bunch of separate
+// ones.
+operator: opIn
+          | opLogical;
+
+// 'in' operator. A very rarely used feature.
+opIn: expr IN expr;
+
+// Logical operators. Could gain bitwise functionality in the future.
+opLogical: opAnd | opNot | opOr;
+opAnd: expr AND expr;
+opNot: NOT expr;
+opOr: expr OR expr;
+
+/* == NONEXECUTABLE EXPRESSIONS == */
 // An expression that cannot stand on its own.
 nonexecExpr: constant
              | literal
@@ -241,7 +255,6 @@ SUB_PACKAGES: 'SubPackages';
 
 // Control Flow Keywords
 BREAK:       'Break';
-BY:          'by';
 CANCEL:      'Cancel';
 CASE:        'Case';
 CONTINUE:    'Continue';
@@ -253,13 +266,10 @@ END_FOR:     'EndFor';
 END_SELECT:  'EndSelect';
 END_WHILE:   'EndWhile';
 FOR:         'For';
-FROM:        'from';
 IF:          'If';
-IN:          'in';
 RETURN:      'Return';
 SELECT_ONE:  'SelectOne';
 SELECT_MANY: 'SelectMany';
-TO:          'to';
 WHILE:       'While';
 
 // Function Call Operators
@@ -295,9 +305,16 @@ KEYWORD: DESELECT_ALL
          | SELECT_PLUGIN
          | SELECT_SUB_PACKAGE;
 
-// Math Operators
-PLUS:   '+';
-MINUS:  '-';
-TIMES:  '*';
+// Operators
+AND:    '&' | 'and';
+BY:     'by';
 DIVIDE: '/';
+FROM:   'from';
+IN:     'in';
+MINUS:  '-';
+NOT:    '!' | 'not';
+OR:     '|' | 'or';
+PLUS:   '+';
 RAISE:  '^';
+TIMES:  '*';
+TO:     'to';
