@@ -200,6 +200,12 @@ nonexecExpr: constant
              | literal
              | variable;
 
+/* = CONSTANTS = */
+// One of the predefined constants for wizards.
+constant: FALSE
+          | TRUE
+          | SUB_PACKAGES;
+
 /* ==== LEXER ==== */
 // Skip all comments.
 COMMENT: ';' ~[\r\n]* -> skip;
@@ -229,9 +235,9 @@ EQUALS: EQ_SIGN EQ_SIGN;
 ASSIGN: EQ_SIGN;
 
 // Constants
-TRUE:        'True';
-FALSE:       'False';
-SUBPACKAGES: 'SubPackages';
+TRUE:         'True';
+FALSE:        'False';
+SUB_PACKAGES: 'SubPackages';
 
 // Control Flow Keywords
 BREAK:       'Break';
