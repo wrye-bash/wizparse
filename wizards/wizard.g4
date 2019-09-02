@@ -63,7 +63,7 @@ optionTuple: option COMMA description COMMA image;
 // Helper for function calls (both statements and expressions).
 // Matches an entire argument list, including correct commas and
 // parantheses.
-argList: LPAREN (expr (COMMA expr)*)? RPAREN
+argList: LPAREN (expr (COMMA expr)*)? RPAREN;
 
 /* == STATEMENTS == */
 // A command without a return value. All statements can stand on
@@ -167,7 +167,11 @@ whileStmt: WHILE guard loopBody END_WHILE;
 // A function call can either be a dot function or a regular one.
 functionCallStmt: dotFunctionCallStmt | regularFunctionCallStmt;
 
+// A dot function call: a.b(...), behaves like b(a, ...).
 dotFunctionCallStmt: expr DOT functionName argList;
+
+// A regular function call with function name and arguments.
+regularFunctionCallStmt: functionName argList;
 
 /* == EXPRESSIONS == */
 // A command with a return value.
@@ -227,6 +231,13 @@ SELECT_ONE:  'SelectOne';
 SELECT_MANY: 'SelectMany';
 TO:          'to';
 WHILE:       'While';
+
+// Function Call Operators
+// COMMA is also used for Select statements.
+COMMA: ',';
+DOT: '.';
+LPAREN: '(';
+RPAREN: ')';
 
 // Math Operators
 PLUS:   '+';
