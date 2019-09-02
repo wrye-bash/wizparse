@@ -191,13 +191,29 @@ expr: execExpr | nonexecExpr;
 /* == EXECUTABLE EXPRESSIONS == */
 // An expression that can stand on its own.
 execExpr: functionCallExpr
-          | operator;
+          | operatorExpr;
 
 /* = OPERATORS = */
 // Main operator definition - splits off into a bunch of separate
 // ones.
-operator: opIn
-          | opLogical;
+operatorExpr: opComparison
+              | opIn
+              | opLogical;
+
+// Comparison operators. == and != work on everything, while the rest
+// only work on numbers.
+opComparison: opEqual
+              | opGreater
+              | opGreaterOrEqual
+              | opLesser
+              | opLesserOrEqual
+              | opNotEqual;
+opEqual: expr EQUAL expr;
+opGreater: expr GREATER expr;
+opGreaterOrEqual: expr GREATER_OR_EQUAL expr;
+opLesser: expr LESSER expr;
+opLesserOrEqual: expr LESSER_OR_EQUAL expr;
+opNotEqual: expr NOT_EQUAL expr;
 
 // 'in' operator. A very rarely used feature.
 opIn: expr IN expr;
@@ -228,6 +244,8 @@ COMMENT: ';' ~[\r\n]* -> skip;
 NEWLINE: '\r'? '\n';
 
 // A line continuation - a backslash and a newline.
+// We simply ignore them, eating the newline in the process. This
+// simulates us appending the next line to the end of this one.
 CONTINUATION: '\\' NEWLINE -> skip;
 
 // Assignment Operators
@@ -241,7 +259,19 @@ ASSIGN_DIV: EQ_SIGN DIVIDE;
 ASSIGN_EXP: EQ_SIGN RAISE;
 
 // Comparison Operators
-EQUALS: EQ_SIGN EQ_SIGN;
+// Note that the order matters here - we want the LESSER_OR_EQUAL
+// token filled first, if possible. Otherwise, the LESSER token
+// would be matched even for legitimate cases where the
+// LESSER_OR_EQUAL one needs to match.
+fragment GT_SIGN: '>';
+fragment LT_SIGN: '<';
+fragment EXMARK: '!';
+EQUAL: EQ_SIGN EQ_SIGN;
+GREATER_OR_EQUAL: EQ_SIGN GT_SIGN;
+GREATER: GT_SIGN;
+LESSER_OR_EQUAL: LT_SIGN EQ_SIGN;
+LESSER: LT_SIGN;
+NOT_EQUAL: EXMARK EQ_SIGN;
 
 // Special Case: need to define this last so it doesn't swallow all
 // equals signs -> we want compound assignments and comparisons to
