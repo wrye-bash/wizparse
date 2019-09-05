@@ -122,6 +122,12 @@ expr: LPAREN expr RPAREN
     | IDENTIFIER LPAREN argList RPAREN
     // Logic operators, part 1
     | NOT expr
+    // Indexing
+    | expr LBRACKET expr RBRACKET
+    // Slicing
+    // Note that we check if this actually has at least one colon
+    // during semantic analysis.
+    | expr LBRACKET expr? COLON? expr? COLON? expr? RBRACKET
     // Mathematical operators
     | expr RAISE expr
     | expr (TIMES | DIVIDE) expr
@@ -173,6 +179,15 @@ COMMENT: ';' ~[\r\n]* -> skip;
 // We simply ignore them, eating the newline in the process. This
 // simulates us appending the next line to the end of this one.
 CONTINUATION: '\\' '\r'? '\n' -> skip;
+
+// Common Operators
+COMMA: ',';
+DOT: '.';
+LPAREN: '(';
+RPAREN: ')';
+LBRACKET: '[';
+RBRACKET: ']';
+COLON: ':';
 
 // Assignment Operators
 // Note that the compound assignment operators use the math
@@ -227,13 +242,6 @@ RETURN:      'Return';
 SELECT_ONE:  'SelectOne';
 SELECT_MANY: 'SelectMany';
 WHILE:       'While';
-
-// Function Call Operators
-// COMMA is also used for select and keyword statements.
-COMMA: ',';
-DOT: '.';
-LPAREN: '(';
-RPAREN: ')';
 
 // Keywords
 // Note the alternatives that are kept for backwards compatibility.
