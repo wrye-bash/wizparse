@@ -126,9 +126,7 @@ expr: LPAREN expr RPAREN
     // Indexing
     | expr LBRACKET expr RBRACKET
     // Slicing
-    // Note that we check if this actually has at least one colon
-    // during semantic analysis.
-    | expr LBRACKET expr? COLON? expr? COLON? expr? RBRACKET
+    | expr LBRACKET expr? COLON expr? (COLON expr?)? RBRACKET
     // Mathematical operators
     | expr RAISE expr
     | expr (TIMES | DIVIDE) expr
