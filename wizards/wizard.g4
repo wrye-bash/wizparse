@@ -1,12 +1,10 @@
 // TODO Check that my statements *actually* don't have a return value in belt
 // TODO newlines: skip or needed?
-// TODO line continuations - can we skip?
 // TODO Check if a Default statement can occur in the middle of Case statements
 // TODO Check if multiple Default statements are allowed
 // TODO See if there was any reason not to implement modulo
-// TODO See if the use of fragments for keywords is OK or annoying in the interpreter
-// TODO If lexing of strings breaks, consider using modes
-// TODO Indexing / Splicing
+// TODO See if the use of fragments for keywords is OK or annoying in semantic analysis
+// TODO See if belt allows a comment after the line continuation backslash
 grammar wizard;
 
 /* ==== PARSER ==== */
@@ -177,7 +175,7 @@ COMMENT: ';' ~[\r\n]* -> skip;
 // A line continuation - a backslash and a newline.
 // We simply ignore them, eating the newline in the process. This
 // simulates us appending the next line to the end of this one.
-CONTINUATION: '\\' '\r'? '\n' -> skip;
+CONTINUATION: '\\' [ \t]* '\r'? '\n' -> skip;
 
 // Common Operators
 COMMA: ',';
@@ -269,8 +267,6 @@ KEYWORD: DESELECT_ALL
          | SELECT_SUB_PACKAGE;
 
 // Literals
-// We need to be careful with the ESC here - we don't want to break
-// our CONTINUATION token above.
 fragment ESC: '\\' ~[\n\r];
 DIGIT_SEQ: [0-9]+;
 STRING_DQUOTE: '"' (ESC | ~[\\"])* '"';
