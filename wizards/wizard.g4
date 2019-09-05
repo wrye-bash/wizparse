@@ -299,4 +299,4 @@ IDENTIFIER: [A-Za-z_][A-Za-z0-9_]*;
 
 // Ignore whitespace - at least for now, we might actually need this
 // token though.
-WHITESPACE: [ \n\r]+ -> skip;
+WHITESPACE: [ \t\n\r]+ -> skip;
