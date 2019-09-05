@@ -11,7 +11,7 @@ grammar wizard;
 /* === BASICS === */
 // The main entry point.
 // A body, followed by EOF.
-runWiz: body EOF;
+parseWizard: body EOF;
 
 // A series of commands.
 body: command*;
