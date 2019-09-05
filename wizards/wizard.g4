@@ -137,7 +137,7 @@ expr: LPAREN expr RPAREN
     | expr OR expr
     | expr AND expr
     // Direct values
-    | (constant | literal | IDENTIFIER);
+    | (constant | decimal | integer | string | IDENTIFIER);
 
 /* == NONEXECUTABLE EXPRESSIONS == */
 // These are expressions that immediately resolve to a value,
@@ -154,10 +154,6 @@ constant: FALSE
 /* = LITERALS = */
 // Only three types in this language - plus some 'pseudotypes' for
 // list-like objects such as SubPackages.
-literal: integer
-         | decimal
-         | string;
-
 // Numbers - may be positive, negative or zero.
 // Note that we keep these unnecessarily complex to simplify the
 // semantic analysis.
