@@ -53,8 +53,9 @@ controlFlowStmt: CANCEL
                  | whileStmt;
 
 // Describes what do in a select statement if a certain case is hit.
+// expr must be a string, type-check is during semantic analysis.
 caseBody: (BREAK | command)*;
-caseStmt: CASE string caseBody;
+caseStmt: CASE expr caseBody;
 
 // Describes what to do in a select statement if none of the cases are
 // hit.
@@ -94,11 +95,11 @@ selectStmt: (selectOne | selectMany) END_SELECT;
 // The two types differ only in their initial keyword.
 // We copy their signature here to simplify the semantic analysis.
 // Note that we check whether or not the selectCaseList is valid
-// during semantic analysis.
+// and all these expr's resolve to strings during semantic analysis.
 selectCaseList: (caseStmt | defaultStmt)*;
-optionTuple: string COMMA string COMMA string;
-selectOne:  SELECT_ONE  string (COMMA optionTuple)* selectCaseList;
-selectMany: SELECT_MANY string (COMMA optionTuple)* selectCaseList;
+optionTuple: expr COMMA expr COMMA expr;
+selectOne:  SELECT_ONE  expr (COMMA optionTuple)* selectCaseList;
+selectMany: SELECT_MANY expr (COMMA optionTuple)* selectCaseList;
 
 // A simple while loop. Runs until the guard is false.
 whileStmt: WHILE expr loopBody END_WHILE;
