@@ -1,5 +1,4 @@
 // TODO Check that my statements *actually* don't have a return value in belt
-// TODO Exec (shudder)
 // TODO newlines: skip or needed?
 // TODO line continuations - can we skip?
 // TODO Check if a Default statement can occur in the middle of Case statements
@@ -7,6 +6,7 @@
 // TODO See if there was any reason not to implement modulo
 // TODO See if the use of fragments for keywords is OK or annoying in the interpreter
 // TODO If lexing of strings breaks, consider using modes
+// TODO Indexing / Splicing
 grammar wizard;
 
 /* ==== PARSER ==== */
@@ -19,70 +19,7 @@ runWiz: body EOF;
 body: command*;
 
 // A single line, can have a value or not.
-command: stmt;// | execExpr;
-
-/* === HELPERS === */
-// These are all just high-level aliases for strings to make the
-// interpreter nicer.
-description: string;
-image:       string;
-label:       string;
-option:      string;
-
-// These are all high-level aliases for IDENTIFIER, see above.
-// Note that I kept functionName flexible (as opposed to keyword,
-// which is built into the lexer). This is to allow future expansion,
-// namely user-defined functions.
-functionName: IDENTIFIER;
-variable:     IDENTIFIER;
-
-// These are all high-level aliases for expr, see above.
-forInTarget:   expr;
-forRangeStart: expr;
-forRangeEnd:   expr;
-forRangeStep:  expr;
-guard:         expr;
-
-// Helper for Case statements. They are one of the two places where
-// Break may occur.
-caseBody:        caseBodyCommand*;
-caseBodyCommand: breakStmt
-                 | command;
-
-// Helper for loops. They are the only places where Continue may
-// occur and one of the two places where Break may occur.
-loopBody:        loopBodyCommand*;
-loopBodyCommand: breakStmt
-                 | continueStmt
-                 | command;
-
-// Helper for Select statements. There may only be one Default
-// statement, but it can be anywhere in the case list.
-selectCaseList: caseStmt* defaultStmt? caseStmt*;
-
-// Helper for Select statements. An option tuple is a comma-separated
-// list of three strings used to describe the options that will be
-// shown in the installer.
-optionTuple: option COMMA description COMMA image;
-
-// Helper for function calls and keyword statements.
-// Matches an entire argument list, including correct commas and, in
-// the case of functionArgList, parantheses.
-argList: (expr (COMMA expr)*)?;
-keywordArgList: argList;
-functionArgList: LPAREN argList RPAREN;
-
-/* === SHARED COMMANDS === */
-// A function call can either be a dot function or a regular one.
-// Note that we check if the function *actually* returns something
-// or not when interpreting.
-functionCall: dotFunctionCall | regularFunctionCall;
-
-// A dot function call: a.b(...), behaves like b(a, ...).
-dotFunctionCall: expr DOT functionName functionArgList;
-
-// A regular function call with function name and arguments.
-regularFunctionCall: functionName functionArgList;
+command: stmt | expr;
 
 /* === STATEMENTS === */
 // A command without a return value. All statements can stand on
@@ -90,113 +27,120 @@ regularFunctionCall: functionName functionArgList;
 stmt: assignment
       | compoundAssignment
       | controlFlowStmt
-      | functionCall
       | keywordStmt;
 
 /* = ASSIGNMENT = */
 // Just assigns a value to a variable.
-assignment: variable ASSIGN expr;
+assignment: IDENTIFIER ASSIGN expr;
 
 // Compound assignments are statements of the form a x= b, where:
 //   a is a variable
 //   x is a mathematical operation
 //   b is an expression
-// Note that we do this in such a redundant way to simplify the
-// interpreter later on.
-compoundAssignment:     compoundAddition
-                        | compoundSubtraction
-                        | compoundMultiplication
-                        | compoundDivision
-                        | compoundExponentiation;
-compoundAddition:       variable ASSIGN_ADD expr;
-compoundSubtraction:    variable ASSIGN_SUB expr;
-compoundMultiplication: variable ASSIGN_MUL expr;
-compoundDivision:       variable ASSIGN_DIV expr;
-compoundExponentiation: variable ASSIGN_EXP expr;
+compoundAssignment: IDENTIFIER (ASSIGN_EXP
+                               | ASSIGN_MUL
+                               | ASSIGN_DIV
+                               | ASSIGN_ADD
+                               | ASSIGN_SUB) expr;
 
 /* = CONTROL FLOW = */
 // Statements that alter control flow.
-// Note that we put a level of abstraction over the tokens here
-// because we need to visit these as nodes later for the interpreter.
-controlFlowStmt: cancelStmt
+controlFlowStmt: CANCEL
                  | forStmt
                  | ifStmt
-                 | returnStmt
+                 | RETURN
                  | selectStmt
                  | whileStmt;
 
-// Breaks out of a loop or select statement.
-breakStmt: BREAK;
-
-// Cancels the entire wizard and shows an appropriate window.
-cancelStmt: CANCEL;
-
 // Describes what do in a select statement if a certain case is hit.
-caseStmt: CASE label caseBody;
-
-// Ends the current iteration of a loop and moves on to the next one,
-// if possible.
-continueStmt: CONTINUE;
+caseBody: (BREAK | command)*;
+caseStmt: CASE string caseBody;
 
 // Describes what to do in a select statement if none of the cases are
 // hit.
 defaultStmt: DEFAULT caseBody;
 
 // An elif statement, parsed like a regular if statement.
-elifStmt: ELIF guard body;
+elifStmt: ELIF expr body;
 
 // An else statement, parsed like an if statement without a guard
 // expression.
 elseStmt: ELSE body;
 
 // A for loop. There are two possible types of for loop.
+// Note that loopBody is used further down for whileStmt.
 forStmt: FOR (forRangeLoop | forInLoop) END_FOR;
+loopBody: (BREAK | CONTINUE | command)*;
 
 // A for loop of the form 'For a from b to c [by d]', where:
 //   a is a variable
 //   b is the start value
 //   c is the end value
 //   d (optional) is the step size
-forRangeLoop:  variable FROM forRangeStart TO forRangeEnd (BY forRangeStep)? loopBody;
+forRangeLoop: IDENTIFIER FROM expr TO expr (BY expr)? loopBody;
 
 // A for loop of the form 'For a in b', where:
 //   a is a variable
 //   b is a value to iterate over
-forInLoop:   variable IN forInTarget loopBody;
+forInLoop: IDENTIFIER IN expr loopBody;
 
 // An if statement may have any number of elif statements, but at
 // most one else statement.
-ifStmt: IF guard body elifStmt* elseStmt? END_IF;
-
-// Finishes the entire wizard and shows a results page.
-returnStmt: RETURN;
+ifStmt: IF expr body elifStmt* elseStmt? END_IF;
 
 // There are two types of Select statement.
 selectStmt: (selectOne | selectMany) END_SELECT;
 
 // The two types differ only in their initial keyword.
-// We copy their signature here to simplify the interpreter.
-selectOne:  SELECT_ONE  description (COMMA optionTuple)* selectCaseList;
-selectMany: SELECT_MANY description (COMMA optionTuple)* selectCaseList;
+// We copy their signature here to simplify the semantic analysis.
+// Note that we check whether or not the selectCaseList is valid
+// during semantic analysis.
+selectCaseList: (caseStmt | defaultStmt)*;
+optionTuple: string COMMA string COMMA string;
+selectOne:  SELECT_ONE  string (COMMA optionTuple)* selectCaseList;
+selectMany: SELECT_MANY string (COMMA optionTuple)* selectCaseList;
 
 // A simple while loop. Runs until the guard is false.
-whileStmt: WHILE guard loopBody END_WHILE;
+whileStmt: WHILE expr loopBody END_WHILE;
 
 /* = KEYWORD STATEMENTS = */
 // A keyword statement is just a keyword followed by a
 // comma-separated list of arguments.
-keywordStmt: KEYWORD keywordArgList;
+// Note that argList is reused for functions later down.
+argList: (expr (COMMA expr)*)?;
+keywordStmt: KEYWORD argList;
 
 /* === EXPRESSIONS === */
 // A command with a return value.
-expr: constant
-    | literal
-    | variable;
+// The order matters here - it specifies the operator precedence.
+expr: LPAREN expr RPAREN
+    // Function calls
+    // May not actually return anything - we still parse them as
+    // expressions for simplicity and check the return type when
+    // doing semantic analysis.
+    | expr DOT IDENTIFIER LPAREN argList RPAREN
+    | IDENTIFIER LPAREN argList RPAREN
+    // Logic operators, part 1
+    | NOT expr
+    // Mathematical operators
+    | expr RAISE expr
+    | expr (TIMES | DIVIDE) expr
+    | expr (PLUS | MINUS) expr
+    // Comparison operators
+    | expr (GREATER | GREATER_OR_EQUAL) expr
+    | expr (LESSER | LESSER_OR_EQUAL) expr
+    | expr (EQUAL | NOT_EQUAL) expr
+    // Logic operators, part 2
+    | expr OR expr
+    | expr AND expr
+    // Direct values
+    | (constant | literal | IDENTIFIER);
 
 /* == NONEXECUTABLE EXPRESSIONS == */
-// Direct values are expressions that immediately resolve to a value,
+// These are expressions that immediately resolve to a value,
 // without any operation being involved.
-// These cannot stand on their own.
+// They cannot stand on their own, but we check this during semantic
+// analysis.
 
 /* = CONSTANTS = */
 // One of the predefined constants for wizards.
@@ -213,7 +157,7 @@ literal: integer
 
 // Numbers - may be positive, negative or zero.
 // Note that we keep these unnecessarily complex to simplify the
-// interpreter.
+// semantic analysis.
 integer: MINUS? DIGIT_SEQ;
 decimal: MINUS? DIGIT_SEQ DOT DIGIT_SEQ;
 
@@ -249,7 +193,7 @@ fragment GT_SIGN: '>';
 fragment LT_SIGN: '<';
 fragment EXMARK: '!';
 EQUAL: EQ_SIGN EQ_SIGN;
-GREATER_OR_EQUAL: EQ_SIGN GT_SIGN;
+GREATER_OR_EQUAL: GT_SIGN EQ_SIGN;
 GREATER: GT_SIGN;
 LESSER_OR_EQUAL: LT_SIGN EQ_SIGN;
 LESSER: LT_SIGN;
@@ -290,7 +234,6 @@ COMMA: ',';
 DOT: '.';
 LPAREN: '(';
 RPAREN: ')';
-
 
 // Keywords
 // Note the alternatives that are kept for backwards compatibility.
