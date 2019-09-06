@@ -53,7 +53,9 @@ compoundAssignment: Identifier (CompoundExp
 
 /* = CONTROL FLOW = */
 // Statements that alter control flow.
-controlFlowStmt: 'Cancel'
+controlFlowStmt: 'Break'
+                 | 'Cancel'
+                 | 'Continue'
                  | forStmt
                  | ifStmt
                  | 'Return'
@@ -62,12 +64,11 @@ controlFlowStmt: 'Cancel'
 
 // Describes what do in a select statement if a certain case is hit.
 // expr must be a string, type-check is during semantic analysis.
-caseBody: (Break | command)*;
-caseStmt: 'Case' expr caseBody;
+caseStmt: 'Case' expr body;
 
 // Describes what to do in a select statement if none of the cases
 // are hit.
-defaultStmt: 'Default' caseBody;
+defaultStmt: 'Default' body;
 
 // An elif statement, parsed like a regular if statement.
 elifStmt: 'Elif' expr body;
@@ -77,21 +78,19 @@ elifStmt: 'Elif' expr body;
 elseStmt: 'Else' body;
 
 // A for loop. There are two possible types of for loop.
-// Note that loopBody is used further down for whileStmt.
 forStmt: 'For' (forRangeLoop | forInLoop) 'EndFor';
-loopBody: (Break | 'Continue' | command)*;
 
 // A for loop of the form 'For a from b to c [by d]', where:
 //   a is a variable
 //   b is the start value
 //   c is the end value
 //   d (optional) is the step size
-forRangeLoop: Identifier 'from' expr 'to' expr ('by' expr)? loopBody;
+forRangeLoop: Identifier 'from' expr 'to' expr ('by' expr)? body;
 
 // A for loop of the form 'For a in b', where:
 //   a is a variable
 //   b is a value to iterate over
-forInLoop: Identifier In expr loopBody;
+forInLoop: Identifier In expr body;
 
 // An if statement may have any number of elif statements, but at
 // most one else statement.
@@ -111,7 +110,7 @@ selectOne:  'SelectOne' expr (Comma optionTuple)* Comma? selectCaseList;
 selectMany: 'SelectMany' expr (Comma optionTuple)* Comma? selectCaseList;
 
 // A simple while loop. Runs until the guard is false.
-whileStmt: 'While' expr loopBody 'EndWhile';
+whileStmt: 'While' expr body 'EndWhile';
 
 /* = Keyword STATEMENTS = */
 // A keyword statement is just a keyword followed by a
