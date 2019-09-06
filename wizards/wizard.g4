@@ -1,8 +1,4 @@
-// TODO Check that my statements *actually* don't have a return value in belt
-// TODO newlines: skip or needed?
-// TODO See if there was any reason not to implement modulo
 // TODO See if the use of fragments for keywords is OK or annoying in semantic analysis
-// TODO See if belt allows a comment after the line continuation backslash
 
 // Style guide:
 //  - Parser rules are camelCase
