@@ -5,6 +5,16 @@
 // TODO See if there was any reason not to implement modulo
 // TODO See if the use of fragments for keywords is OK or annoying in semantic analysis
 // TODO See if belt allows a comment after the line continuation backslash
+
+// Style guide:
+//  - Parser rules are camelCase
+//  - Lexer rules are PascalCase
+//    - Exception: fragments and skips (i.e. ones that users will
+//      _never_ see) are entirely uppercase.
+//  - Wrap to 70 characters
+//  - If a token has a single usage, move it up to its usage in the
+//    parser. Saves a line. Exception is if the definition is long or
+//    complex (e.g. Keyword).
 grammar wizard;
 
 /* ==== PARSER ==== */
@@ -29,115 +39,116 @@ stmt: assignment
 
 /* = ASSIGNMENT = */
 // Just assigns a value to a variable.
-assignment: IDENTIFIER ASSIGN expr;
+assignment: Identifier Assign expr;
 
 // Compound assignments are statements of the form a x= b, where:
 //   a is a variable
 //   x is a mathematical operation
 //   b is an expression
-compoundAssignment: IDENTIFIER (ASSIGN_EXP
-                               | ASSIGN_MUL
-                               | ASSIGN_DIV
-                               | ASSIGN_ADD
-                               | ASSIGN_SUB) expr;
+compoundAssignment: Identifier (CompoundExp
+                               | CompoundMult
+                               | CompoundDiv
+                               | CompoundAdd
+                               | CompoundSub) expr;
 
 /* = CONTROL FLOW = */
 // Statements that alter control flow.
-controlFlowStmt: CANCEL
+controlFlowStmt: 'Cancel'
                  | forStmt
                  | ifStmt
-                 | RETURN
+                 | 'Return'
                  | selectStmt
                  | whileStmt;
 
 // Describes what do in a select statement if a certain case is hit.
 // expr must be a string, type-check is during semantic analysis.
-caseBody: (BREAK | command)*;
-caseStmt: CASE expr caseBody;
+caseBody: (Break | command)*;
+caseStmt: 'Case' expr caseBody;
 
-// Describes what to do in a select statement if none of the cases are
-// hit.
-defaultStmt: DEFAULT caseBody;
+// Describes what to do in a select statement if none of the cases
+// are hit.
+defaultStmt: 'Default' caseBody;
 
 // An elif statement, parsed like a regular if statement.
-elifStmt: ELIF expr body;
+elifStmt: 'Elif' expr body;
 
 // An else statement, parsed like an if statement without a guard
 // expression.
-elseStmt: ELSE body;
+elseStmt: 'Else' body;
 
 // A for loop. There are two possible types of for loop.
 // Note that loopBody is used further down for whileStmt.
-forStmt: FOR (forRangeLoop | forInLoop) END_FOR;
-loopBody: (BREAK | CONTINUE | command)*;
+forStmt: 'For' (forRangeLoop | forInLoop) 'EndFor';
+loopBody: (Break | 'Continue' | command)*;
 
 // A for loop of the form 'For a from b to c [by d]', where:
 //   a is a variable
 //   b is the start value
 //   c is the end value
 //   d (optional) is the step size
-forRangeLoop: IDENTIFIER FROM expr TO expr (BY expr)? loopBody;
+forRangeLoop: Identifier 'from' expr 'to' expr ('by' expr)? loopBody;
 
 // A for loop of the form 'For a in b', where:
 //   a is a variable
 //   b is a value to iterate over
-forInLoop: IDENTIFIER IN expr loopBody;
+forInLoop: Identifier In expr loopBody;
 
 // An if statement may have any number of elif statements, but at
 // most one else statement.
-ifStmt: IF expr body elifStmt* elseStmt? END_IF;
+ifStmt: 'If' expr body elifStmt* elseStmt? 'EndIf';
 
 // There are two types of Select statement.
-selectStmt: (selectOne | selectMany) END_SELECT;
+selectStmt: (selectOne | selectMany) 'EndSelect';
 
 // The two types differ only in their initial keyword.
 // We copy their signature here to simplify the semantic analysis.
 // Note that we check whether or not the selectCaseList is valid
 // and all these expr's resolve to strings during semantic analysis.
 selectCaseList: (caseStmt | defaultStmt)*;
-optionTuple: expr COMMA expr COMMA expr;
-selectOne:  SELECT_ONE  expr (COMMA optionTuple)* selectCaseList;
-selectMany: SELECT_MANY expr (COMMA optionTuple)* selectCaseList;
+optionTuple: expr Comma expr Comma expr;
+selectOne:  'SelectOne' expr (Comma optionTuple)* selectCaseList;
+selectMany: 'SelectMany' expr (Comma optionTuple)* selectCaseList;
 
 // A simple while loop. Runs until the guard is false.
-whileStmt: WHILE expr loopBody END_WHILE;
+whileStmt: 'While' expr loopBody 'EndWhile';
 
-/* = KEYWORD STATEMENTS = */
+/* = Keyword STATEMENTS = */
 // A keyword statement is just a keyword followed by a
 // comma-separated list of arguments.
 // Note that argList is reused for functions later down.
-argList: (expr (COMMA expr)*)?;
-keywordStmt: KEYWORD argList;
+argList: (expr (Comma expr)*)?;
+keywordStmt: Keyword argList;
 
 /* === EXPRESSIONS === */
 // A command with a return value.
 // The order matters here - it specifies the operator precedence.
-expr: LPAREN expr RPAREN
+expr: LeftParenthesis expr RightParenthesis
     // Function calls
     // May not actually return anything - we still parse them as
     // expressions for simplicity and check the return type when
     // doing semantic analysis.
-    | expr DOT IDENTIFIER LPAREN argList RPAREN
-    | IDENTIFIER LPAREN argList RPAREN
+    | expr Dot Identifier LeftParenthesis argList RightParenthesis
+    | Identifier LeftParenthesis argList RightParenthesis
     // Logic operators, part 1
-    | NOT expr
+    | ('!' | 'not') expr
     // Indexing
-    | expr LBRACKET expr RBRACKET
+    | expr LeftBracket expr RightBracket
     // Slicing
-    | expr LBRACKET expr? COLON expr? (COLON expr?)? RBRACKET
+    | expr LeftBracket expr? Colon expr? (Colon expr?)? RightBracket
     // Mathematical operators
-    | expr RAISE expr
-    | expr (TIMES | DIVIDE) expr
-    | expr (PLUS | MINUS) expr
+    | expr Raise expr
+    | expr (Times | Divide) expr
+    | expr (Plus | Minus) expr
     // Comparison operators
-    | expr (GREATER | GREATER_OR_EQUAL) expr
-    | expr (LESSER | LESSER_OR_EQUAL) expr
-    | expr (EQUAL | NOT_EQUAL) expr
+    | expr (Greater | GreaterOrEqual) expr
+    | expr (Lesser | LesserOrEqual) expr
+    | expr (Equal | NotEqual) expr
     // Logic operators, part 2
-    | expr OR expr
-    | expr AND expr
+    | expr ('|' | 'or') expr
+    | expr ('&' | 'and') expr
     // Direct values
-    | (constant | decimal | integer | string | IDENTIFIER);
+    // Constants, literals (three types) and variables
+    | (constant | decimal | integer | string | Identifier);
 
 /* == NONEXECUTABLE EXPRESSIONS == */
 // These are expressions that immediately resolve to a value,
@@ -147,9 +158,7 @@ expr: LPAREN expr RPAREN
 
 /* = CONSTANTS = */
 // One of the predefined constants for wizards.
-constant: FALSE
-          | TRUE
-          | SUB_PACKAGES;
+constant: 'False' | 'True' | 'SubPackages';
 
 /* = LITERALS = */
 // Only three types in this language - plus some 'pseudotypes' for
@@ -157,12 +166,12 @@ constant: FALSE
 // Numbers - may be positive, negative or zero.
 // Note that we keep these unnecessarily complex to simplify the
 // semantic analysis.
-integer: MINUS? DIGIT_SEQ;
-decimal: MINUS? DIGIT_SEQ DOT DIGIT_SEQ;
+integer: Minus? Number;
+decimal: Minus? Number Dot Number;
 
 // Strings - can use either "my string" or 'my string'. May also
 // contain escape sequences.
-string: STRING_DQUOTE | STRING_SQUOTE;
+string: DoubleQuotedString | SingleQuotedString;
 
 /* ==== LEXER ==== */
 // Skip all comments.
@@ -174,118 +183,80 @@ COMMENT: ';' ~[\r\n]* -> skip;
 CONTINUATION: '\\' [ \t]* '\r'? '\n' -> skip;
 
 // Common Operators
-COMMA: ',';
-DOT: '.';
-LPAREN: '(';
-RPAREN: ')';
-LBRACKET: '[';
-RBRACKET: ']';
-COLON: ':';
+Comma: ',';
+Dot: '.';
+LeftParenthesis: '(';
+RightParenthesis: ')';
+LeftBracket: '[';
+RightBracket: ']';
+Colon: ':';
 
 // Assignment Operators
 // Note that the compound assignment operators use the math
 // operators defined below.
 fragment EQ_SIGN: '=';
-ASSIGN_ADD: EQ_SIGN PLUS;
-ASSIGN_SUB: EQ_SIGN MINUS;
-ASSIGN_MUL: EQ_SIGN TIMES;
-ASSIGN_DIV: EQ_SIGN DIVIDE;
-ASSIGN_EXP: EQ_SIGN RAISE;
+CompoundAdd: Plus EQ_SIGN;
+CompoundSub: Minus EQ_SIGN;
+CompoundMult: Times EQ_SIGN;
+CompoundDiv: Divide EQ_SIGN;
+CompoundExp: Raise EQ_SIGN;
 
 // Comparison Operators
-// Note that the order matters here - we want the LESSER_OR_EQUAL
-// token filled first, if possible. Otherwise, the LESSER token
+// Note that the order matters here - we want the LesserOrEqual
+// token filled first, if possible. Otherwise, the Lesser token
 // would be matched even for legitimate cases where the
-// LESSER_OR_EQUAL one needs to match.
+// LesserOrEqual one needs to match.
 fragment GT_SIGN: '>';
 fragment LT_SIGN: '<';
 fragment EXMARK: '!';
-EQUAL: EQ_SIGN EQ_SIGN;
-GREATER_OR_EQUAL: GT_SIGN EQ_SIGN;
-GREATER: GT_SIGN;
-LESSER_OR_EQUAL: LT_SIGN EQ_SIGN;
-LESSER: LT_SIGN;
-NOT_EQUAL: EXMARK EQ_SIGN;
+Equal: EQ_SIGN EQ_SIGN;
+GreaterOrEqual: GT_SIGN EQ_SIGN;
+Greater: GT_SIGN;
+LesserOrEqual: LT_SIGN EQ_SIGN;
+Lesser: LT_SIGN;
+NotEqual: EXMARK EQ_SIGN;
 
 // Special Case: need to define this last so it doesn't swallow all
 // equals signs -> we want compound assignments and comparisons to
 // process first.
-ASSIGN: EQ_SIGN;
-
-// Constants
-TRUE:         'True';
-FALSE:        'False';
-SUB_PACKAGES: 'SubPackages';
+Assign: EQ_SIGN;
 
 // Control Flow Keywords
-BREAK:       'Break';
-CANCEL:      'Cancel';
-CASE:        'Case';
-CONTINUE:    'Continue';
-DEFAULT:     'Default';
-ELSE:        'Else';
-ELIF:        'Elif';
-END_IF:      'EndIf';
-END_FOR:     'EndFor';
-END_SELECT:  'EndSelect';
-END_WHILE:   'EndWhile';
-FOR:         'For';
-IF:          'If';
-RETURN:      'Return';
-SELECT_ONE:  'SelectOne';
-SELECT_MANY: 'SelectMany';
-WHILE:       'While';
+Break: 'Break';
 
 // Keywords
 // Note the alternatives that are kept for backwards compatibility.
-fragment DESELECT_ALL:         'DeSelectAll';
-fragment DESELECT_ALL_PLUGINS: 'DeSelectAllPlugins' | 'DeSelectAllEspms';
-fragment DESELECT_PLUGIN:      'DeSelectPlugin'     | 'DeSelectEspm';
-fragment DESELECT_SUB_PACKAGE: 'DeSelectSubPackage';
-fragment NOTE:                 'Note';
-fragment RENAME_PLUGIN:        'RenamePlugin'       | 'RenameEspm';
-fragment REQUIRE_VERSIONS:     'RequireVersions';
-fragment RESET_PLUGIN_NAME:    'ResetPluginName'    | 'ResetEspmName';
-fragment SELECT_ALL:           'SelectAll';
-fragment SELECT_ALL_PLUGINS:   'SelectAllPlugins'   | 'SelectAllEspms';
-fragment SELECT_PLUGIN:        'SelectPlugin'       | 'SelectEspm';
-fragment SELECT_SUB_PACKAGE:   'SelectSubPackage';
-KEYWORD: DESELECT_ALL
-         | DESELECT_ALL_PLUGINS
-         | DESELECT_PLUGIN
-         | DESELECT_SUB_PACKAGE
-         | NOTE
-         | RENAME_PLUGIN
-         | REQUIRE_VERSIONS
-         | SELECT_ALL
-         | SELECT_ALL_PLUGINS
-         | SELECT_PLUGIN
-         | SELECT_SUB_PACKAGE;
+Keyword: 'DeSelectAll'
+         | 'DeSelectAllPlugins' | 'DeSelectAllEspms'
+         | 'DeSelectPlugin'     | 'DeSelectEspm'
+         | 'DeSelectSubPackage'
+         | 'Note'
+         | 'RenamePlugin'       | 'RenameEspm'
+         | 'RequireVersions'
+         | 'ResetPluginName'    | 'ResetEspmName'
+         | 'SelectAll'
+         | 'SelectAllPlugins'   | 'SelectAllEspms'
+         | 'SelectPlugin'       | 'SelectEspm'
+         | 'SelectSubPackage';
 
 // Literals
 fragment ESC: '\\' ~[\n\r];
-DIGIT_SEQ: [0-9]+;
-STRING_DQUOTE: '"' (ESC | ~[\\"])* '"';
-STRING_SQUOTE: '\'' (ESC | ~[\\'])* '\'';
+Number: [0-9]+;
+DoubleQuotedString: '"' (ESC | ~[\\"])* '"';
+SingleQuotedString: '\'' (ESC | ~[\\'])* '\'';
 
 // Operators
-AND:    '&' | 'and';
-BY:     'by';
-DIVIDE: '/';
-FROM:   'from';
-IN:     'in';
-MINUS:  '-';
-NOT:    '!' | 'not';
-OR:     '|' | 'or';
-PLUS:   '+';
-RAISE:  '^';
-TIMES:  '*';
-TO:     'to';
+Divide: '/';
+In:     'in';
+Minus:  '-';
+Plus:   '+';
+Raise:  '^';
+Times:  '*';
 
 // These rules need to pretty much come last, otherwise they would
 // swallow up previous definitions.
 // Identifiers - basically captures most leftovers.
-IDENTIFIER: [A-Za-z_][A-Za-z0-9_]*;
+Identifier: [A-Za-z_][A-Za-z0-9_]*;
 
 // Ignore whitespace - at least for now, we might actually need this
 // token though.
