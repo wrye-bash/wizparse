@@ -182,7 +182,11 @@ COMMENT: ';' ~[\r\n]* -> skip;
 // A line continuation - a backslash and a newline.
 // We simply ignore them, eating the newline in the process. This
 // simulates us appending the next line to the end of this one.
-CONTINUATION: '\\' [ \t]* '\r'? '\n' -> skip;
+// Note the [ \\\t]* section - eats up any backslashes and whitespace
+// between the initial backslash and the newline. The old parser
+// accepted those too, so we accept them for the sake of (relatively)
+// painless backwards compatibility.
+CONTINUATION: '\\' [ \\\t]* '\r'? '\n' -> skip;
 
 // Common Operators
 Comma: ',';
