@@ -128,13 +128,15 @@ expr: LeftParenthesis expr RightParenthesis
     // doing semantic analysis.
     | expr Dot Identifier LeftParenthesis argList RightParenthesis
     | Identifier LeftParenthesis argList RightParenthesis
+    // Mathematical operators, part 1
+    | Minus expr
     // Logic operators, part 1
     | ('!' | 'not') expr
     // Indexing
     | expr LeftBracket expr RightBracket
     // Slicing
     | expr LeftBracket expr? Colon expr? (Colon expr?)? RightBracket
-    // Mathematical operators
+    // Mathematical operators, part 2
     | expr Raise expr
     | expr (Times | Divide | Modulo) expr
     | expr (Plus | Minus) expr
@@ -167,8 +169,8 @@ constant: 'False' | 'True' | 'SubPackages';
 // Numbers - may be positive, negative or zero.
 // Note that we keep these unnecessarily complex to simplify the
 // semantic analysis.
-integer: Minus? Number;
-decimal: Minus? Number Dot Number;
+integer: Number;
+decimal: Number Dot Number;
 
 // Strings - can use either "my string" or 'my string'. May also
 // contain escape sequences.
