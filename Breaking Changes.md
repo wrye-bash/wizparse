@@ -49,12 +49,28 @@ A full list of breaking changes follows:
   However, because both `Cancel` and `Return` tell the interpreter to finish executing the wizard,
   it never actually reads the next line to notice the lack of an `EndSelect`.
   This is a necessary breaking change, since we now parse the entire file before interpreting.
+- The pseudo-bareword strings that the old parser accidentally accepted are now outlawed.
+  This was valid:
+  ```
+  Note thisIsAString
+  ; Prints 'thisIsAString'
+  thisIsAString = thisIsNotAString
+  Note thisIsAString
+  ; Prints 'thisIsNotAString'
+  ```
+  They were never mentioned in documentation and I could not find a single wizard that used this (thank god).
+  Still, this technically breaks backwards compatibility, so noting it here.
 - As mentioned above, assignments and compound assignments no longer return a value,
   meaning that they cannot be used for commands that expect a value (e.g. If statements).
 - Multiple `Default` statements for a single `SelectOne` / `SelectMany` statement are explicitly disallowed.
   Previously, they were allowed, but the second one would never be executed.
-- Random unicode characters in a wizard are no longer silently ignored, but instead cause an error.
-  For example, one SSE wizard had several ▒ characters (MEDIUM SHADE, U+2592) at the end of a line.
+- Functions now *must* have parentheses after them. Previously, this was allowed:
+  ```
+  Note 'foo'.len
+  ; Prints '3'
+  ```
+  Now, functions must always be followed by parentheses, even if the argument list is empty.
+  The documentation already made this clear, but the parser did not obey it.
 - Escape sequences are only allowed in strings now. Previously, this was legal:
   ```
   \; This is a comment
@@ -76,6 +92,8 @@ A full list of breaking changes follows:
   ```
   The reason is, again, backwards compatibility.
   Double and triple backslashes for line continuation occur in several wizards and are relatively easy to support.
+- Random unicode characters in a wizard are no longer silently ignored, but instead cause an error.
+  For example, one SSE wizard had several ▒ characters (MEDIUM SHADE, U+2592) at the end of a line.
 - New keywords:
   - `DeSelectAllPlugins`
   - `DeSelectPlugin`
