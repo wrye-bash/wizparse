@@ -44,8 +44,9 @@ assignment: Identifier Assign expr;
 //   x is a mathematical operation
 //   b is an expression
 compoundAssignment: Identifier (CompoundExp
-                               | CompoundMult
+                               | CompoundMul
                                | CompoundDiv
+                               | CompoundMod
                                | CompoundAdd
                                | CompoundSub) expr;
 
@@ -135,7 +136,7 @@ expr: LeftParenthesis expr RightParenthesis
     | expr LeftBracket expr? Colon expr? (Colon expr?)? RightBracket
     // Mathematical operators
     | expr Raise expr
-    | expr (Times | Divide) expr
+    | expr (Times | Divide | Modulo) expr
     | expr (Plus | Minus) expr
     // Comparison operators
     | expr (Greater | GreaterOrEqual) expr
@@ -201,9 +202,10 @@ Colon: ':';
 fragment EQ_SIGN: '=';
 CompoundAdd: Plus EQ_SIGN;
 CompoundSub: Minus EQ_SIGN;
-CompoundMult: Times EQ_SIGN;
+CompoundMul: Times EQ_SIGN;
 CompoundDiv: Divide EQ_SIGN;
 CompoundExp: Raise EQ_SIGN;
+CompoundMod: Modulo EQ_SIGN;
 
 // Comparison Operators
 // Note that the order matters here - we want the LesserOrEqual
@@ -256,6 +258,7 @@ Minus:  '-';
 Plus:   '+';
 Raise:  '^';
 Times:  '*';
+Modulo: '%';
 
 // These rules need to pretty much come last, otherwise they would
 // swallow up previous definitions.
