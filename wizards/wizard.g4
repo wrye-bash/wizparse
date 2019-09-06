@@ -128,6 +128,11 @@ expr: LeftParenthesis expr RightParenthesis
     // doing semantic analysis.
     | expr Dot Identifier LeftParenthesis argList RightParenthesis
     | Identifier LeftParenthesis argList RightParenthesis
+    // Increment / Decrement
+    // Note that, for backwards compatibility, postfix and prefix
+    // should both return the new value.
+    | Increment expr | expr Increment
+    | Decrement expr | expr Decrement
     // Mathematical operators, part 1
     | Minus expr
     // Logic operators, part 1
@@ -253,14 +258,18 @@ Number: [0-9]+;
 DoubleQuotedString: '"' (ESC | ~[\\"])* '"';
 SingleQuotedString: '\'' (ESC | ~[\\'])* '\'';
 
-// Operators
+// Mathematical Operators
 Divide: '/';
-In:     'in';
 Minus:  '-';
 Plus:   '+';
 Raise:  '^';
 Times:  '*';
 Modulo: '%';
+
+// Misc Operators
+Decrement: Minus Minus;
+In: 'in';
+Increment: Plus Plus;
 
 // These rules need to pretty much come last, otherwise they would
 // swallow up previous definitions.
