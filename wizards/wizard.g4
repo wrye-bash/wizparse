@@ -143,14 +143,16 @@ expr: LeftParenthesis expr RightParenthesis
     | expr (Times | Divide | Modulo) expr
     | expr (Plus | Minus) expr
     // Comparison operators
-    | expr (Greater | GreaterOrEqual) expr
-    | expr (Lesser | LesserOrEqual) expr
-    | expr (Equal | NotEqual) expr
+    // Colon present => case-insensitive
+    | expr (Greater | GreaterOrEqual) Colon? expr
+    | expr (Lesser | LesserOrEqual) Colon? expr
+    | expr (Equal | NotEqual) Colon? expr
     // Logic operators, part 2
     | expr ('|' | 'or') expr
     | expr ('&' | 'and') expr
     // 'in' operator
-    | expr In expr
+    // Colon present => case-insensitive
+    | expr In expr Colon?
     // Direct values
     // Constants, literals (three types) and variables
     | (constant | decimal | integer | string | Identifier);
