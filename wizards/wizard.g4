@@ -104,10 +104,11 @@ selectStmt: (selectOne | selectMany) 'EndSelect';
 // We copy their signature here to simplify the semantic analysis.
 // Note that we check whether or not the selectCaseList is valid
 // and all these expr's resolve to strings during semantic analysis.
+// A trailing comma is allowed here - it's simply ignored.
 selectCaseList: (caseStmt | defaultStmt)*;
 optionTuple: expr Comma expr Comma expr;
-selectOne:  'SelectOne' expr (Comma optionTuple)* selectCaseList;
-selectMany: 'SelectMany' expr (Comma optionTuple)* selectCaseList;
+selectOne:  'SelectOne' expr (Comma optionTuple)* Comma? selectCaseList;
+selectMany: 'SelectMany' expr (Comma optionTuple)* Comma? selectCaseList;
 
 // A simple while loop. Runs until the guard is false.
 whileStmt: 'While' expr loopBody 'EndWhile';
