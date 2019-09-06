@@ -146,6 +146,8 @@ expr: LeftParenthesis expr RightParenthesis
     // Logic operators, part 2
     | expr ('|' | 'or') expr
     | expr ('&' | 'and') expr
+    // 'in' operator
+    | expr In expr
     // Direct values
     // Constants, literals (three types) and variables
     | (constant | decimal | integer | string | Identifier);
