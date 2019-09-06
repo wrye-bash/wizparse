@@ -22,10 +22,7 @@ grammar wizard;
 parseWizard: body EOF;
 
 // A series of commands.
-body: command*;
-
-// A single line, can have a value or not.
-command: stmt | expr;
+body: (stmt | expr)*;
 
 /* === STATEMENTS === */
 // A command without a return value. All statements can stand on
