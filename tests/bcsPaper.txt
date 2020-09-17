@@ -1,0 +1,44 @@
+; ##############################################################################
+; ### Book Covers Skyrim Optional Paper Textures Installer
+; ###
+; ### HISTORY
+; ### DATE     AUTHOR              DESCRIPTION
+; ### -------- ------------------- --------------------------------------------
+; ### 09/07/13 DanielCoffey        Initial Creation
+; ##############################################################################
+
+RequireVersions "", "", "", "303" ; Skyrim version, SKSE, (SKGE doesn't exist yet), Wrye Bash 
+
+
+DeSelectAll
+
+; ##############################################################################
+; # Set variables
+
+bWorld = False
+bInventory = False
+
+
+; ##############################################################################
+; # Which to install?
+
+SelectMany "This is a simple Texture Replacer for the World and Inventory view of the Books in Skyrim. The World texture is 512x512 DXT1 and its normal map is 512x512 DXT5. The Inventory texture is 1024x1024 DXT1 and its normal map is 512x512 DXT5. You can choose to install the World texture, the Inventory texture or both.", \
+	"|World", "Books in Skyrim will be displayed using the new texture (image on right)", "Images\\BCSPaperWorld.jpg", \
+	"Inventory", "Books in your Inventory will be displayed using the new texture (image on right)", "Images\\BCSPaperInventoryEdge.jpg"
+
+	Case "World"
+		bWorld = True
+	Break
+
+	Case "Inventory"
+		bInventory = True
+	Break
+EndSelect
+
+If bWorld
+	  SelectSubPackage "01 BCS Optional Paper World"
+EndIf
+
+If bInventory
+	  SelectSubPackage "01 BCS Optional Paper Inventory"
+EndIf

@@ -1,0 +1,96 @@
+; ##############################################################################
+; ### Wizard Installer for Book Covers Skyrim by Malinoric (and updated by William Imm)
+; ### Created for ease of installation.
+; ###
+; ### HISTORY
+; ### DATE      AUTHOR              DESCRIPTION
+; ### --------  ------------------- --------------------------------------------
+; ### 10/28/16  DanielCoffey        Initial creation
+; ##############################################################################
+
+RequireVersions "", "", "", "303" ; Skyrim version, SKSE, (SKGE doesn't exist yet), Wrye Bash 
+
+DeSelectAll
+
+
+; ##############################################################################
+; # Choose your Language
+
+bEN = False
+bDE = False
+bES = False
+bFR = False
+bIT = False
+bPO = False
+bRU = False
+
+SelectOne "Choose the language that the Books, Journals and Notes should be displayed in. The mod is no longer Localized but now contains unique ESP files for each of the supported languages. You are free to choose the language you want to see.",\
+	"|English", "Displays Books, Journals and Notes in English.", "",\
+	"French", "Displays the Books, Journals and Notes in French.", "",\
+	"German", "Displays the Books, Journals and Notes in German.", "",\
+	"Italian", "Displays the Books, Journals and Notes in Italian.", "",\
+	"Polish", "Displays the Books, Journals and Notes in Polish.", "",\
+	"Spanish", "Displays the Books, Journals and Notes in Spanish.", "",\
+	"Russian", "Displays the Books, Journals and Notes in Russian.", ""
+
+	Case "English"
+		bEN = True
+		Break
+	Case "French"
+		bFR = True
+		Break
+	Case "German"
+		bDE = True
+		Break
+	Case "Italian"
+		bIT = True
+		Break
+	Case "Polish"
+		bPO = True
+		Break
+	Case "Spanish"
+		bES = True
+		Break
+	Case "Russian"
+		bRU = True
+		Break
+EndSelect
+
+
+; ##############################################################################
+; # Sort out the ESPs that we need
+
+If bEN
+	SelectSubPackage "01 Skyrim ESP EN"
+EndIf
+
+If bFR
+	SelectSubPackage "01 Skyrim ESP FR"
+EndIf
+
+If bDE
+	SelectSubPackage "01 Skyrim ESP DE"
+EndIf
+
+If bIT
+	SelectSubPackage "01 Skyrim ESP IT"
+EndIf
+
+If bPO
+	SelectSubPackage "01 Skyrim ESP PO"
+EndIf
+
+If bES
+	SelectSubPackage "01 Skyrim ESP ES"
+EndIf
+
+If bRU
+	SelectSubPackage "01 Skyrim ESP RU"
+EndIf
+
+
+; ##############################################################################
+; How about some classical music to go along with your reading? For instance, http://www.youtube.com/watch?feature=player_detailpage&v=U5iVwPCxsGk#t=15s. 
+; Wait, it's from 2004? Well, it's entirely on piano... Still, for what Beatmania is, it's a bizarre fit.
+; Of course, you go to your local club to hear a piano concerto. And that was a complete lie.
+; (Just don't go "WAH! MOY IU DA!" spontaneously and leap out of a window. For your own safety)
