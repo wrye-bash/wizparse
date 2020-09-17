@@ -1,0 +1,22 @@
+name: CI
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout commit
+        uses: actions/checkout@v2
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@0.5.0
+      - name: Setup Java
+        uses: actions/setup-java@v1.4.2
+        with:
+          java-version: 8 # ANTLR needs Java 8
+      - name: Download ANTLR v4
+        run: ./scripts/prereq.sh
+      - name: Build wizparse
+        run: ./scripts/build.sh
+      - name: Run tests
+        run: ./scripts/test.sh

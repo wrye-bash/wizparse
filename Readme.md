@@ -16,6 +16,17 @@ Not yet implemented
 ## Interpreter
 Not yet implemented
 
+## Building & Testing
+Still a bit rough because it was designed for CI, but see the [scripts](scripts) folder.
+In short:
+ 1. Make sure you're on Linux. You're on your own on Windows.
+ 1. Make sure you have Java 8 and that it's the one you're currently using.
+    For example, on Arch Linux, check with `archlinux-java status` and switch with `archlinux-java set`.
+ 1. Run `./scripts/prereq.sh`. This will download a copy of ANTLR.
+ 1. Run `./scripts/build.sh`. This will generate a Java parser and compile it.
+ 1. Run `./scripts/test.sh`. This will run all tests in the tests folder.
+ 1. If it worked, yo
+
 ## License
 wizparse is licensed under the MIT license. See [LICENSE](LICENSE) for the full text.
 
