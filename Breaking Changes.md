@@ -94,6 +94,10 @@ A full list of breaking changes follows:
   Double and triple backslashes for line continuation occur in several wizards and are relatively easy to support.
 - Random unicode characters in a wizard are no longer silently ignored, but instead cause an error.
   For example, one SSE wizard had several ▒ characters (MEDIUM SHADE, U+2592) at the end of a line.
+
+## Historical
+These were previously listed as breaking changes, but have since made their way into the old parser as well.
+
 - New keywords:
   - `DeSelectAllPlugins`
   - `DeSelectPlugin`
@@ -103,6 +107,4 @@ A full list of breaking changes follows:
   - `SelectPlugin`
 
   The old versions, with `Espm` instead of `Plugin` and `Espms` instead of `Plugins`, are deprecated but retained for backwards compatibility.
-  However, wizards that used one of the names listed above for a variable name will break.
 - New operator: modulo (`a % b`) - calculates the remainder.
-  Shouldn't cause any breakage, but listed here just in case.
