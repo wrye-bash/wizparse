@@ -18,3 +18,6 @@ Not yet implemented
 
 ## License
 wizparse is licensed under the MIT license. See [LICENSE](LICENSE) for the full text.
+
+The exception is [tests](tests). All files in there have their own accompanying license file, which applies to that file only.
+The vast majority of those files are licensed under Nexus' weird permission system, with most having terms similar to a CC-BY-NC license.
