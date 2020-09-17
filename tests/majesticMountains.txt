@@ -1,0 +1,64 @@
+;=-=-=-|Majestic Mountains Wrye Bash BAIN wizard by Mertz for T4gtr34um3r |-=-=-=
+
+RequireVersions "1.0.0.0", "", "", "307" 
+DeSelectAll
+
+MM_Readme = str("Majestic Mountains v 1.57 22/07/2017\n\nTABLE OF CONTENTS\n--------------------\n-It is very uncommon in a readme\. But this mod is gaining complexity.\n1. Snow\n1.1 Improved Snow\n\nGENERAL USAGE NOTES\n--------------------\n\n- Majestic Mountains 1\.56 suggests using Improved Snow\.\nIf you are using Dolomite Weathers use Dolomite Weathers fix\. I\'ve tested the fix and it looks good in various lighting situations and can be used in ENBs that have too bright snow at night too\. You may sometimes have only barely visible sparkles at night but I choose the snw SSS settings for fitting\. Other settings create ugly visible seems between objects that have snow textures and the landscape snow\. The problem is that the snow shader isn\'t applied to objects although they have a snow texture\. The whole object has to be marked with \"considered snow\" then\.\n\n- You can always adjust the snow settings to fit your needs in the MajesticMountains\.ini in Skyrim\'s data folder\: You can find your favorite settings ingame with the command\:\nsetini \"fSnowSSSColorR\:display\" \(your number\) for example\.\nsetini \"fSnowSSSColor\:Gdisplay\" \(your number\) for example\.\nsetini \"fSnowSSSColorB\:display\" \(your number\) for example\.\n\nThe tint depends on the relations between the values of r\,g and b.\\nOnce you\'ve found your favorite setting simply write the values in the ini then\.\n\n- The snow in this mod is designed for working with the projecteddiffuse texture\. This texture is usally loaded if the Snow Shader is enabled in the launcher and will be skipped when it is disabled\. If you want to play without Improved Snow you need to set \"bEnableProjecteUVDiffuseNormals\" in your SkyrimPrefs\.ini to 1\. Custom inis don\'t work with SkyrimPref\.ini settings unfortunatly\.\n\n-All landscape and snow textures are put in a compmentary texture pack for better compatibility\. This helps users who use different textures because there are no conflicts while installing anymore\. This pack will be expanded in the future and finally seperated as a stand alone mod\.\n\n- Majestic Mountains v 1\.41 and up will be as modular as possible to improve compatibility and to allow users adjusting it to fit their needs\.\n\n- The moss was put into a seperate esp\. This gives the user the choice to play without it\.\n\n- The sun direction was transfered into seperate esp files\. You have the choice between the game default sun direction by disabling\n\"SunDaytimeNorth_MM_default\" and \"SunDaytimeSouth\.esp\"\.\n\"SunDaytimeNorth_MM_default\" contains the Majestic Mountains default setting while \"SunDaytimeSouth\.esp\" is naturally correct way of the sun during day\. You should only have one of them active\. I\'m planning an installer for future versions to prevent searching the modlist for the esp files\.\n\n CAUTION\:\nSun direction MAY cause conflicts with future versions of ENB\.\nIf you run into a 95 percent daytime issue you need to disable sun direction esp\`s\.\n\n- Make sure that MajesticMountains\.esp is on top of the other parts of the mod.\n\n- The load order of the other parts doesn\'t matter\. They don\'t conflict with each other\.\n\n- The base mod doesn\'t contain alternate textures or compatibility patches\.\nReason 1\:\nYou have a better control of these optional files as seperate mod\. Because they don\'t contain esp\'s.\ You\'ll have to fiddle around in the file structure for swapping or replacing\.\nReason 2\:\nNot everyone uses SMIM for example. Providing these files automatically may collide with the ethical rules of the Nexus.\n\n- Unused esp files can be safely deleted. It is also possible to merge the plugins because they don\'t conflict with each other\.Except the DaytimeNorth conflicts with the DaytimeSouth\.\n\n\nINSTALLATION\n-----------------\n\n- I would highly recommend you to use the Nexus Mod Manager for installation\. NMM makes it easier to swap textures\.\nIf you try out alternate textures and you want to go back to the default texture set all you have to do is disabling the mod of the alternate texture\. NMM should restore the default texture set of Majestic Mountains\. If not\! Simply right klick at the main mod and choose reinstall\.\n\n\nTROUBLESHOOTING\n-----------------------\n\n-Report issues in the comment section or via pm please\.\nI\'ll try to help as fast as possible\. And if I can\'t solve the issue there were many helpful members active in the comment section\.\nI will abuse this line to say\: Thank you very much\.\n\n\nPERMISSIONS\n---------------\n\n- You may change the files and use them into your own mod with following conditions\:\n\n-You change a larger amount of files. Creating a simple texture pack doesn\'t need to have the meshes included\.\n-You want to create a compatibility patch\.\n-You are creating a larger mod like Falskaar and you want to include Parts of Majestic Mountains.\n-You may upload this mod without changes if you give me full credit and link to the main mod\.\n- You don't need to contact me first. A simple credit is enough honor for me\.")
+
+
+;== Welcome screen and install core mod
+SelectOne "Majestic Mountains Installation Wizard",\
+    "|Welcome"," This BAIN wizard installs Majestic Mountains for Skyrim Special Edition\n\nClick Read Me below to select the Readme for this mod\n\nClick 'Credits' above to view the credits.\n\nClick Next to continue the installation","images\\logo.png",\
+	"Read Me",MM_Readme,"images\\logo.png",\
+    "Credits","Majestic Mountains by T4gtr34um3r.\n\n\nWizBAIN installer by Mertz\n\nClick next to continue the installation","images\\logo.png"
+EndSelect
+
+SelectOne "Main Files",\
+	"|Begin Installation"," - 8192 x 4096 sized textures achieved by unifying subnodes in the meshes\n - Vertex colors in meshes are replaced with Ambient Occlusion baking better fitting snow\n - ALL MOUNTAINS CAST SHADOWS\n - new moss shaders at many mountains\n - texture projection on all snow materials \(requires ini tweak\)\n - reworked Improved Snow \(requires ini tweak\)\n - BC7 normal map compression \(same texture size but with the quality like an uncompressed texture\).","images\\logo.png",\
+	"Cancel","Cancel the installation","images\\logo.png"
+		Case "Begin Installation"
+			SelectSubPackage '00 Majestic Mountains'
+			Break
+		Case "Cancel"
+			Cancel "The installation has been cancelled by the user"
+EndSelect
+
+SelectMany "Optionals\n\nPlease click on an option below to read more information on the selection",\
+	"|Landscape Textures","Complementary landscapes \(roads and terrain\) and snow textures.\n\nThis is optional to improve compatibility with other landscape textures pack\, if you have any installed.","images\\landscapes.png",\
+	"|Moss Rocks","Adds procedural moss to many mountains. This decision hides the tiling even more and makes the mountains more interesting in some way. Recommended.","images\\moss.jpg"
+		Case "Landscape Textures"
+			SelectSubPackage '10 Complementary Landscape Texture Pack'
+			Break
+		Case "Moss Rocks"
+			SelectSubPackage '01 Moss'
+			Break
+EndSelect
+
+SelectOne "Sun Direction \(choose one or none\)",\
+	"|North \(Default\)","Change the direction of the sun to cast better mountains shadows.\n\nYou have the choice between\: \"North\" default\, recommended by Majestic Mountains\. \"South\" is naturally correct way of the sun during day\. The game default sun direction by choosing \"None\". Suggested for ENB users\, for more read below.\n\nCAUTION \(for ENB users\)\:\nSun direction MAY cause conflicts with future versions of ENB.\nIf you run into a 95 percent daytime issue you need to disable sun direction esp\'s \(or choose \"None\" while installing\)\.","",\
+	"South \(Natural\)","You have the choice between\: \"North\" default\, recommended by Majestic Mountains\. \"South\" is naturally correct way of the sun during day\. The game default sun direction by choosing \"None\". Suggested for ENB users\, for more read below.\n\nCAUTION \(for ENB users\)\:\nSun direction MAY cause conflicts with future versions of ENB.\nIf you run into a 95 percent daytime issue you need to disable sun direction esp\'s \(or choose \"None\" while installing\)\.","",\
+	"None","Select this to skip installing the sun direction ESPs.",""
+		Case "North \(Default\)"
+			SelectSubPackage '02 SunDaytimeNorth'
+			Break
+		Case "South \(Natural\)"
+			SelectSubPackage '03 SunDatytimeSouth'
+			Break
+		Case "None"
+			Break
+EndSelect
+
+SelectMany "Compatibility Patches\n\nPlease click on an option below to read more information on the selection",\
+	"SMIM","Compatible meshes for SMIM - Static Mesh Improvement Mod\. It is only necessary if you want small high poly rocks\.","images\\landscapes.png",\
+	"Dolomite Weathers","Changes to \.ini to better fit the colors changes in Dolomite Weathers\.\n\nNOTE: Make sure that \"MajesticMountains.esp\" is loaded after the \"Dolomite Weathers.esp\" - it changes the snow color which doesn\'t fit in.","images\\default.png"
+		Case "SMIM"
+			SelectSubPackage '21 SMIM Patch Milestone'
+			Break
+		Case "Dolomite Weathers"
+			SelectSubPackage '20 Dolomite Weathers Improved Snow Fix'
+			Break
+EndSelect
+		
+
+;== Finish Page ==
+Note "If you are manually sorting your load order\, make sure that MajesticMountains.esp is loaded before other plugins in the mod\, or sort with LOOT\.\n\nConfirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"
