@@ -1,0 +1,158 @@
+DeSelectAll
+SelectSubPackage '00 Core'
+
+SelectOne 'Choose version', \
+    '|Underwear', '', '', \
+    'Nude', '', ''
+    Case 'Underwear'
+        SelectOne 'Choose body type', \
+            '|Normal', 'The regular body. E cup and Medium lower body size.', '-- Screenshots\\N&F Underwear Front.jpg', \
+            'Fighter', 'A more muscular body. E cup and Medium lower body size.', '-- Screenshots\\N&F Underwear Front.jpg', \
+            'Fighter Extra Buff Edition (EBE)', 'A body with a bit more substance in the shoulders and upper arms that aims to be the HGEC derived body most faithful to the original Exnem\'s Eye Candy Body. E cup and Medium lower body size.', '-- Screenshots\\EBE Underwear 1.jpg'
+            Case 'Normal'
+                SelectSubPackage '05 Normal Hand Meshes'
+                SelectSubPackage '10 Normal Underwear'
+            Break
+            Case 'Fighter'
+                SelectSubPackage '05 Fighter and EBE and GUTS Hand Meshes'
+                SelectSubPackage '07 Fighter and EBE Underwear Textures'
+                SelectSubPackage '10 Fighter Underwear Meshes'
+            Break
+            Case 'Fighter Extra Buff Edition (EBE)'
+                SelectSubPackage '05 Fighter and EBE and GUTS Hand Meshes'
+                SelectSubPackage '07 Fighter and EBE Underwear Textures'
+                SelectSubPackage '10 Extra Buff Edition (EBE) Underwear Meshes'
+            Break
+        EndSelect
+    Break
+
+    Case 'Nude'
+        SelectOne 'Choose body type', \
+            '|Normal', 'The regular body.', '-- Screenshots\\Normal Nude Figure.jpg', \
+            'Fighter', 'A more muscular body.', '-- Screenshots\\Fighter Nude Figure.jpg', \
+            'Fighter Extra Buff Edition (EBE)', 'A body with a bit more substance in the shoulders and upper arms that aims to be the HGEC derived body most faithful to the original Exnem\'s Eye Candy Body. E cup and Medium lower body size.', '-- Screenshots\\EBE Nude.jpg', \
+            'GUTS', 'A very muscular/bulky body featuring H cups and a really large lower body.', '-- Screenshots\\GUTS Front.jpg'
+
+            ; ========== NORMAL ===============================================
+            Case 'Normal'
+                SelectSubPackage '05 Normal Hand Meshes'
+                SelectOne 'Choose cup size', \
+                    'AA', '', '-- Screenshots\\Alternate Screenshots\\Small Breasts - Normal Body.jpg', \
+                    'A', '', '-- Screenshots\\Alternate Screenshots\\Small Breasts - Normal Body.jpg', \
+                    'B', '', '-- Screenshots\\Alternate Screenshots\\Small Breasts - Normal Body.jpg', \
+                    'C', '', '-- Screenshots\\Alternate Screenshots\\Small Breasts - Normal Body.jpg', \
+                    'D', '', '-- Screenshots\\Alternate Screenshots\\Large Breasts - Normal Body.jpg', \
+                    '|E', '', '-- Screenshots\\Alternate Screenshots\\Large Breasts - Normal Body.jpg', \
+                    'H (gravity)', '', '-- Screenshots\\Alternate Screenshots\\Large Breasts - Normal Body.jpg', \
+                    'H (implants)', '', '-- Screenshots\\Alternate Screenshots\\Large Breasts - Normal Body.jpg'
+                    Case 'AA'
+                        SelectSubPackage '10 Normal Upper Body AA Cup Nude'
+                    Break
+                    Case 'A'
+                        SelectSubPackage '10 Normal Upper Body A Cup Nude'
+                    Break
+                    Case 'B'
+                        SelectSubPackage '10 Normal Upper Body B Cup Nude'
+                    Break
+                    Case 'C'
+                        SelectSubPackage '10 Normal Upper Body C Cup Nude'
+                    Break
+                    Case 'D'
+                        SelectSubPackage '10 Normal Upper Body D Cup Nude'
+                    Break
+                    Case 'E'
+                        SelectSubPackage '10 Normal Upper Body E Cup Nude'
+                    Break
+                    Case 'H (gravity)'
+                        SelectSubPackage '10 Normal Upper Body H Cup Gravity Nude'
+                    Break
+                    Case 'H (implants)'
+                        SelectSubPackage '10 Normal Upper Body H Cup Implants Nude'
+                    Break
+                EndSelect
+                SelectOne 'Choose lower body size', \
+                    'Small', '', '-- Screenshots\\N&F Lower Body Size.jpg', \
+                    '|Medium', '', '-- Screenshots\\N&F Lower Body Size.jpg', \
+                    'Large', '', '-- Screenshots\\N&F Lower Body Size.jpg', \
+                    'Extra Large', '', '-- Screenshots\\N&F Lower Body Size.jpg'
+                    Case 'Small'
+                        SelectSubPackage '09 Normal and Fighter Lower Body S Nude'
+                    Break
+                    Case 'Medium'
+                        SelectSubPackage '09 Normal and Fighter Lower Body M Nude'
+                    Break
+                    Case 'Large'
+                        SelectSubPackage '09 Normal and Fighter Lower Body L Nude'
+                    Break
+                    Case 'Extra Large'
+                        SelectSubPackage '09 Normal and Fighter Lower Body LL Nude'
+                    Break
+                EndSelect
+            Break
+            ; ========== END NORMAL ===========================================
+
+            ; ========== FIGHTER ==============================================
+            Case 'Fighter'
+                SelectSubPackage '05 Fighter and EBE and GUTS Hand Meshes'
+                SelectOne 'Choose cup size', \
+                    'A', '', '-- Screenshots\\Alternate Screenshots\\Small Breasts - Fighter Body.jpg', \
+                    'B', '', '-- Screenshots\\Alternate Screenshots\\Small Breasts - Fighter Body.jpg', \
+                    'C', '', '-- Screenshots\\Alternate Screenshots\\Small Breasts - Fighter Body.jpg', \
+                    'D', '', '-- Screenshots\\Alternate Screenshots\\Large Breasts - Fighter Body.jpg', \
+                    '|E', '', '-- Screenshots\\Alternate Screenshots\\Large Breasts - Fighter Body.jpg', \
+                    'H (gravity)', '', '-- Screenshots\\Alternate Screenshots\\Large Breasts - Fighter Body.jpg', \
+                    'H (implants)', '', '-- Screenshots\\Alternate Screenshots\\Large Breasts - Fighter Body.jpg'
+                    Case 'A'
+                        SelectSubPackage '10 Fighter Upper Body A Cup Nude'
+                    Break
+                    Case 'B'
+                        SelectSubPackage '10 Fighter Upper Body B Cup Nude'
+                    Break
+                    Case 'C'
+                        SelectSubPackage '10 Fighter Upper Body C Cup Nude'
+                    Break
+                    Case 'D'
+                        SelectSubPackage '10 Fighter Upper Body D Cup Nude'
+                    Break
+                    Case 'E'
+                        SelectSubPackage '10 Fighter Upper Body E Cup Nude'
+                    Break
+                    Case 'H (gravity)'
+                        SelectSubPackage '10 Fighter Upper Body H Cup Gravity Nude'
+                    Break
+                    Case 'H (implants)'
+                        SelectSubPackage '10 Fighter Upper Body H Cup Implants Nude'
+                    Break
+                EndSelect
+                SelectOne 'Choose lower body size', \
+                    'Small', '', '-- Screenshots\\N&F Lower Body Size.jpg', \
+                    '|Medium', '', '-- Screenshots\\N&F Lower Body Size.jpg', \
+                    'Large', '', '-- Screenshots\\N&F Lower Body Size.jpg', \
+                    'Extra Large', '', '-- Screenshots\\N&F Lower Body Size.jpg'
+                    Case 'Small'
+                        SelectSubPackage '09 Normal and Fighter Lower Body S Nude'
+                    Break
+                    Case 'Medium'
+                        SelectSubPackage '09 Normal and Fighter Lower Body M Nude'
+                    Break
+                    Case 'Large'
+                        SelectSubPackage '09 Normal and Fighter Lower Body L Nude'
+                    Break
+                    Case 'Extra Large'
+                        SelectSubPackage '09 Normal and Fighter Lower Body LL Nude'
+                    Break
+                EndSelect
+            Break
+            ; ======== END FIGHTER ===================================
+
+            Case 'Fighter Extra Buff Edition (EBE)'
+                SelectSubPackage '05 Fighter and EBE and GUTS Hand Meshes'
+                SelectSubPackage '10 Extra Buff Edition (EBE) Nude'
+            Break
+            Case 'GUTS'
+                SelectSubPackage '05 Fighter and EBE and GUTS Hand Meshes'
+                SelectSubPackage '10 GUTS Nude'
+            Break
+        EndSelect
+    Break
+EndSelect
