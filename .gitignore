@@ -1,1 +1,8 @@
-.venv
+# Python virtualenv
+.venv/
+
+# Folder I use for storing the generated ANTLR output
+tmp/
+
+# Wizards that I use for testing but can't redistribute due to their (lack of) license
+tests/proprietary/

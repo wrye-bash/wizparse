@@ -1,0 +1,233 @@
+;== Immersive Sounds Compendium SSE - Wrye Bash BaIn Wizard ==
+RequireVersions "", "", "", "307"
+ResetAllEspmNames
+DeSelectAll
+
+SelectSubPackage '00 - Main Files'
+
+;== WELCOME SCREEN ==
+SelectOne "Immersive Sounds Compendium SSE - Wizard Installation",\
+  "|Welcome","\nClick the options above to review information about the mod or click 'Next \>' to continue the installation.","fomod\\images\\isocomp.jpg",\
+\\
+  "Mod Description","\nThe aim of ISC is to greatly expand the functionality and scope of the audio in Skyrim\. Literally thousands of new individual sounds have been created for the game\.\n\nNo longer will you hear the same generic thud when an NPC or creature dies and falls to the ground\. No longer will creatures like wolves\, draugr\, etc cycle between a small repetitive pool of 4 or so universal footstep sounds no matter what surface they traverse\. Moving around now always reflects the type of armor you are wearing\. Picking up items will much more consistently provide appropriate audio feedback for what kind of item you are looting\. A swing from a greatsword being parried by a 1\-handed axe now reflects the elements of both weapons clashing and not just a nondescript generic parry sound\. Powerful\, high level shock spells now send thundering reflections across the vast outdoor distances\, while remaining more confined if cast indoors\. Etc etc etc\.\n\nThe goal is to have all of these small disparate elements add up and provide a more varied\, dynamic and reactive audio experience\. Ultimately this is also a significant boon to how the entire gameplay feels as there is simply more appropriate feedback for the actions in the world\.","fomod\\images\\isocomp.jpg",\
+\\
+  "Mod Version","\nMod version is\: v2.1","fomod\\images\\isocomp.jpg",\
+\\
+  "Credits","\nlazygecko \- for the mod\nTechAngel85 \- for the wizard.","fomod\\images\\isocomp.jpg"
+EndSelect
+
+;== USER CUSTOM INSTALL OPTIONS ==
+SelectMany "Check the customizations you wish to install\.\n\nSelect items below for a detailed description\. Double-click images to view a larger version\.",\
+	"|Description","The Core Files are installed by default\. The following are optional customizations the user can make\. If customizations are desired\, select the options you wish to install\. Select nothing to keep the defaults\.\n\nIf you want to hear comparisons between many of the different options\, copy this video URL to your browser\:\nhttps\:\/\/www\.youtube\.com\/watch\?v\=DGlpWMP6em4","fomod\\images\\isocomp.jpg",\
+	"Weapon Impacts","Alternative options for sounds of weapons hitting flesh\.","fomod\\images\\isocomp.jpg",\
+	"Weapon Draw and Sheathe","Alternative options for sounds of drawing and sheathing weapons\.","fomod\\images\\isocomp.jpg",\
+	"Bow Shot Sounds","Alternative options for sounds of bow shots\.","fomod\\images\\isocomp.jpg",\
+	"Bow Draw Sounds","Alternative sound option\. When drawing the bow\, tightening of the string sounds more subdued than the default sound\.","fomod\\images\\archery.jpg",\
+	"Arrow Impacts","Alternative sound option for arrow impacts\. Impacts will sound less sharp and intense than the default sound\.","fomod\\images\\archery.jpg",\
+	"Extra Weaponry Options","Alternative sounds options which include Extra Gory Killmove\, Smooth Weapon Swings\, and Silent Arrow Projectile Loop\.","fomod\\images\\isocomp.jpg",\
+	"Restoration Magic","Alternative options for sounds of healing with restoration magic\.","fomod\\images\\isocomp.jpg",\
+	"Destruction Magic","Alternative sound option for the firebolt spell\. This will make the sound a snappier\, more \"cannon-like\" Firebolt\.","fomod\\images\\firebolt.jpg",\
+	"Creature Sounds","Alternative sound options which include more menacing draugr sounds\, less obnoxious mouthbreathing from wolves\, more subtle loop sound from Storm Atronachs\.","fomod\\images\\isocomp.jpg",\
+	"Nirnroot Sounds","Alternative options for the nirnroot sounds\.","fomod\\images\\isocomp.jpg",\
+	"Miscellaneous Sound Options","Alternative options for various other sounds\.","fomod\\images\\isocomp.jpg"
+		Case "Weapon Impacts"
+			WeaponImpacts = True
+			Break
+		Case "Weapon Draw and Sheathe"
+			WeaponDrawSheathe = True
+			Break
+		Case "Bow Shot Sounds"
+			BowShot = True
+			Break
+		Case "Bow Draw Sounds"
+			SelectSubPackage '04 Ranged Weapons - Bow - Pull Alternate'
+			Break
+		Case "Arrow Impacts"
+			SelectSubPackage '05 Ranged Weapons - Bow - Less Intense Arrow'
+			Break
+		Case "Extra Weaponry Options"
+			ExtraWeaponry = True
+			Break
+		Case "Restoration Magic"
+			Restoration = True
+			Break
+		Case "Destruction Magic"
+			SelectSubPackage '10 - Magic - Destruction - Firebolt Alternate'
+			Break
+		Case "Creature Sounds"
+			Creatures = True
+			Break
+		Case "Nirnroot Sounds"
+			Nirnroot = True
+			Break
+		Case "Miscellaneous Sound Options"
+			Miscel = True
+			Break
+EndSelect
+
+;== USER SELECTIONS FOR WEAPON IMPACTS ==
+If WeaponImpacts == True
+SelectOne "Weapon Impacts\n\nThese selections are optional customizations\.\n\nSelect items below for a detailed description\. Double-click images to view a larger version\.",\
+	"Extra Bloody and Instant Impacts","Removes the short windup swings from the start of the impact sounds\, making the timing faster than normal\. This generally affects how \"loose\" the combat sounds feel and is a matter of taste\. Stick with the default if you prefer to have the timing roughly equal to how it is in vanilla\.","fomod\\images\\wpninstant.jpg",\
+	"Less Intense Impacts","Alternative impacts with less prominent blood\/gore sounds and less clipping\.","fomod\\images\\wpnless.jpg",\
+	"Less Intense and Instant Impacts","Alternative impacts with less prominent blood\/gore sounds and less clipping\, including faster impact timing\.","fomod\\images\\wpninstantless.jpg"
+		Case "Extra Bloody and Instant Impacts"
+			SelectSubPackage '01 - Weapon Impacts - Instant Impacts'
+			Break
+		Case "Less Intense Impacts"
+			SelectSubPackage '01 - Weapon Impacts - Less Intense'
+			Break
+		Case "Less Intense and Instant Impacts"
+			SelectSubPackage '01 - Weapon Impacts - Less Intense + Instant'
+			Break
+EndSelect
+EndIf
+
+;== USER SELECTIONS FOR WEAPON DRAW AND SHEATHE ==
+If WeaponDrawSheathe == True
+SelectOne "Weapon Draw and Sheathe\n\nThese selections are optional customizations\.\n\nSelect items below for a detailed description\. Double-click images to view a larger version\.",\
+	"Smooth Equip","Smoother\, leather\-based weapon drawing and sheathing\. More realistic than the default fantasy style\.","fomod\\images\\isocomp.jpg",\
+	"Semi-Smooth Equip","This is a sort of compromise between the default stylized\, high\-fantasy and smooth\.","fomod\\images\\isocomp.jpg"
+		Case "Smooth Equip"
+			SelectSubPackage '02 - Weapon DrawandSheathe - Equip Smooth'
+			Break
+		Case "Semi-Smooth Equip"
+			SelectSubPackage '02 - Weapon DrawandSheathe - Equip Semi-Smooth'
+			Break
+EndSelect
+EndIf
+
+;== USER SELECTIONS FOR BOW SHOTS ==
+If BowShot == True
+SelectOne "Bow Shots\n\nThese selections are optional customizations\.\n\nSelect items below for a detailed description\. Double-click images to view a larger version\.",\
+	"High Fantasy with Shorter Arrow Whistle","Similar to default\, but arrow whistling is shorter and less prominent\.","fomod\\images\\archery.jpg",\
+	"High Fantasy with No Arrow Whistle","Completely different bow attack sound with no audible arrow whistling\.","fomod\\images\\archery.jpg",\
+	"Realistic and Twangy","This has no additional design to it apart from necessary volume tweaks\, making it about as realistic as you can get for Skyrim\. This option has a faint twang to it after firing\.","fomod\\images\\archery.jpg",\
+	"Realistic - No Twang","This has no additional design to it apart from necessary volume tweaks\, making it about as realistic as you can get for Skyrim\. Not as twangy as the option above\.","fomod\\images\\archery.jpg"
+		Case "High Fantasy with Shorter Arrow Whistle"
+			SelectSubPackage '03 - Ranged Weapons - Bow - Short Arrow Whistle'
+			Break
+		Case "High Fantasy with No Arrow Whistle"
+			SelectSubPackage '03 - Ranged Weapons - Bow - No Arrow Whistle'
+			Break
+		Case "Realistic and Twangy"
+			SelectSubPackage '003 - Ranged Weapons - Bow - Realistic Twangy'
+			Break
+		Case "Realistic - No Twang"
+			SelectSubPackage '03 - Ranged Weapons - Bow - Realistic No Twang'
+			Break
+EndSelect
+EndIf
+
+;== USER SELECTIONS FOR EXTRA WEAPONRY ==
+If ExtraWeaponry == True
+SelectMany "Extra Weaponry Options\n\nThese selections are optional customizations\.\n\nSelect items below for a detailed description\. Double-click images to view a larger version\.",\
+	"Extra Gory Killmove Sounds","Makes the melee sounds during killmove sequences sound more gory and brutal\. Fatality\!","fomod\\images\\isocomp.jpg",\
+	"Smooth Weapon Swings","No metallic elements on top of the weapon swing sounds when attacking\.","fomod\\images\\isocomp.jpg",\
+	"Silent Arrow Projectile Loop","Mutes the looped whistling sound from flying arrows\. The way this sound\'s playback is handled ingame is\, IMO\, inherently flawed and unnatural no matter what type of sound is used\. Either you get a very sudden whistle loop out of nowhere the moment you fire\, like in AOS\, or you get a repeating swishswishswish rhythm loop like in vanilla\. So I personally recommend just having it muted\. The sound of flying arrows can still be conveyed through the bow shot and arrow impact sounds\.","fomod\\images\\archery.jpg"
+		Case "Extra Gory Killmove Sounds"
+			SelectSubPackage '06 - Weapon Options - Extra Gory Killcam'
+			Break
+		Case "Smooth Weapon Swings"
+			SelectSubPackage '07 - Weapon Options - Weapon Swings Smooth'
+			Break
+		Case "Silent Arrow Projectile Loop"
+			SelectSubPackage '08 - Weapon Options - Silent Arrow Projectile Loop'
+			Break
+EndSelect
+EndIf
+
+;== USER SELECTIONS FOR ALTERNATIVE RESTORATION SOUNDS ==
+If Restoration == True
+SelectOne "Alternative Restoration Sounds\n\nThese selections are optional customizations\.\n\nSelect items below for a detailed description\. Double-click images to view a larger version\.",\
+	"Classic RPG","Healing sounds reminiscent of classic RPGs\. A bit darker than the default sound but still quite \"holy\" sounding\.","fomod\\images\\restoration.jpg",\
+	"Templar","Healing sounds inspired by Templar spells from The Elder Scrolls Online\.","fomod\\images\\restoration.jpg",\
+	"Vanilla","For those who simply wish to retain the unmodded\, vanilla healing sounds\.","fomod\\images\\restoration.jpg"
+		Case "Classic RPG"
+			SelectSubPackage '09 - Magic - Restoration - Classic RPG Healing'
+			Break
+		Case "Templar"
+			SelectSubPackage '09 - Magic - Restoration - Templar Healing'
+			Break
+		Case "Vanilla"
+			SelectSubPackage '09 - Magic - Restoration - Vanilla Healing'
+			Break
+EndSelect
+EndIf
+
+;== USER SELECTIONS FOR CREATURES ==
+If Creatures == True
+SelectMany "Creature Options\n\nThese selections are optional customizations\.\n\nSelect items below for a detailed description\. Double-click images to view a larger version\.",\
+	"Demonic Draugr","Complete overhaul of draugr sounds to make them more menacing\.","fomod\\images\\demonicdraugr.jpg",\
+	"Well Mannered Wolves","Wolves have much less obnoxious mouthbreathing while running\.","fomod\\images\\wellmanneredwolf.jpg",\
+	"Sensible Storm Atronachs","Makes the idle loop sound coming from Storm Atronachs more subtle\.","fomod\\images\\sensiblestormatronach.jpg"
+		Case "Demonic Draugr"
+			SelectSubPackage '11 - Creature Options - Demonic Draugr'
+			Break
+		Case "Well Mannered Wolves"
+			SelectSubPackage '12 - Creature Options - Well-Mannered Wolves'
+			Break
+		Case "Sensible Storm Atronachs"
+			SelectSubPackage '13 - Creature Options - Sensible Storm Atronachs'
+			Break
+EndSelect
+EndIf
+
+;== USER SELECTIONS FOR ALTERNATIVE NIRNROOT SOUNDS ==
+If Nirnroot == True
+SelectOne "Nirnroot Options\n\nThese selections are optional customizations\.\n\nSelect items below for a detailed description\. Double-click images to view a larger version\.",\
+	"Vanilla Nirnroot Sound","The default Nirnroot sound is reverted back to the vanilla sound\.","fomod\\images\\nirnroot.jpg",\
+	"Silent Nirnroot Sound","The Nirnroot sound is muted\.","fomod\\images\\nirnroot.jpg"
+		Case "Vanilla Nirnroot Sound"
+			SelectSubPackage '14 - Extra Options - Default Nirnroot'
+			Break
+		Case "Silent Nirnroot Sound"
+			SelectSubPackage '14 - Extra Options - Silent Nirnroot'
+			Break
+EndSelect
+EndIf
+
+;== USER SELECTIONS FOR MISCELLANEOUS OPTIONS ==
+If Miscel == True
+SelectMany "Miscellaneous Options\n\nThese selections are optional customizations\.\n\nSelect items below for a detailed description\. Double-click images to view a larger version\.",\
+	"More Rustling Heavy Armor","Heavy armor makes more accentuated rustling foley noises\. This is the same as the older version of the mod\.","fomod\\images\\isocomp.jpg",\
+	"Oblivion Skillup Sound","Replaces the musical cue from leveling skills with one reminiscent of the Oblivion sound\.","fomod\\images\\isocomp.jpg",\
+	"Dungeon Ambiance","Replaces some of the looped and intermittent ambient sounds in Nordic\, Dwemer\, and Imperial dungeons\.","fomod\\images\\isocomp.jpg",\
+	"TESO Summoning","Replaces the default summoning\/conjuration portal sound with a new one inspired by the sorcerer\'s summon sound from The Elder Scrolls Online\.","fomod\\images\\conjuration.jpg",\
+	"Silent Weapon Enchants","Mutes the sounds that normally play when you unsheathe an enchanted weapon\.","fomod\\images\\isocomp.jpg",\
+	"Silent Left Hand","Mutes the sounds that normally play when you equip dual weapons\.","fomod\\images\\isocomp.jpg",\
+	"Silent Sneak Attack","Mutes the sound that normally plays when you get a sneak attack or critical strike\.","fomod\\images\\isocomp.jpg",\
+	"Silent World Map","Mutes the wind sound that normally plays while in the world map\.","fomod\\images\\isocomp.jpg",\
+	"Silent Player Ragdoll","Mutes the strange ambient loop played while the player is killed\, ragdolled\, or otherwise incapacitated\.","fomod\\images\\isocomp.jpg"
+		Case "More Rustling Heavy Armor"
+			SelectSubPackage '15 - Extra Options - More Rustling Heavy Armor'
+			Break
+		Case "Oblivion Skillup Sound"
+			SelectSubPackage '16 - Extra Options - Oblivion Skillup'
+			Break
+		Case "Dungeon Ambiance"
+			SelectSubPackage '17 - Extra Options - Dungeon Ambiance'
+			Break
+		Case "TESO Summoning"
+			SelectSubPackage '18 - Extra Options - TESO Summoning'
+			Break
+		Case "Silent Weapon Enchants"
+			SelectSubPackage '19 - Extra Options - Silent Weapon Enchant'
+			Break
+		Case "Silent Left Hand"
+			SelectSubPackage '20 - Extra Options - Silent Left Hand'
+			Break
+		Case "Silent Sneak Attack"
+			SelectSubPackage '21 - Extra Options - Silent Sneak Attack'
+			Break
+		Case "Silent World Map"
+			SelectSubPackage '22 - Extra Options - Silent World Map'
+			Break
+		Case "Silent Player Ragdoll"
+			SelectSubPackage '23 - Extra Options - Silent Player Ragdoll'
+			Break
+EndSelect
+EndIf
+
+;== FINISH PAGE ==
+Note "\nVerify your selections above before installing. If you are not happy with the selections\, use the '\< Back' button below.\n\nWhen ready\, tick 'Apply these selections' below\, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal\/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking 'Finish'. Otherwise\, right\-click the installer again and choose Install\.\n\nThank you for installing my mod\! If you like it\, don't forget to endorse!"

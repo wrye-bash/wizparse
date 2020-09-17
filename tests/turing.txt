@@ -1,0 +1,253 @@
+; Turing Machine in a BAIN wizard by Infernio
+; Proves that BAIN wizards are Turing-complete
+; For the input, place this file in a folder with subfolders laid out like this:
+;
+;  0-1R1-1RH
+;  ^
+;  State name (nonnegative integer of any length, start state must be 0)
+;
+;  0-1R1-1RH
+;   ^
+;   Separator, required for parsing (always a dash)
+;
+;  0-1R1-1RH
+;    ^
+;    What to write if a 0 is read (0 or 1)
+;
+;  0-1R1-1RH
+;     ^
+;     Where to move if a 0 is read (L or R)
+;
+;  0-1R1-1RH
+;      ^
+;      Which state to change into if a 0 is read (nonnegative integer of any length)
+;      H is a special case that means 'halt'
+;
+;  0-1R1-1RH
+;       ^
+;       Separator, required for parsing (always a dash)
+;
+;  0-1R1-1RH
+;        ^
+;        What to write if a 1 is read (0 or 1)
+;
+;  0-1R1-1RH
+;         ^
+;         Where to move if a 1 is read (L or R)
+;
+;  0-1R1-1RH
+;          ^
+;          Which state to change into if a 1 is read (nonnegative integer of any length)
+;          H is a special case that means 'halt'
+;
+; To supply the initial tape, one special subfolder is required:
+;
+;  I-0-0
+;  ^
+;  Indicates that this is the initial tape (always an I)
+;
+;  I-0-0
+;   ^
+;   Separator, for aesthetic reasons only (always a dash)
+;
+;  I-0-0
+;    ^
+;    The position in the following combination where the tape splits into positive and negative, zero-indexed (nonnegative integer of any length)
+;    This is where the head will be placed initially
+;
+;  I-0-0
+;     ^
+;     Separator, required for parsing (always a dash)
+;
+;  I-0-0
+;      ^
+;      The actual tape, zero-indexed (combination of zeroes and ones of any length)
+;
+; For example, the following subfolders implement the best 3 state, 2 symbol busy beaver:
+;
+;   0-1R1-1RH
+;   1-1L1-0R2
+;   2-1L2-1L0
+;   I-0-0
+;
+; Note that each subfolder must contain an empty file with the file ending .esp
+; for Wrye Bash to recognize the subfolder as a subpackage.
+;
+; Output will appear as Notes in the Finish window.
+
+; ======= Variable Definitions =======
+; The positive part (and 0) of the tape, implemented as a string.
+; Dynamically expanded when moving
+positive_tape = ""
+; The negative part of the tape, implemented as a string.
+; Dynamically expanded when moving
+negative_tape = ""
+; Our current position on the tape
+tape_head = 0
+; The next state we have to switch into
+target_state = 0
+; The instructions we will have to execute in this tick if we read a 0
+instructions_0 = ""
+; The instructions we will have to execute in this tick if we read a 1
+instructions_1 = ""
+; Number of ones and zeroes written. Fun statistic, useful for busy beavers
+zeroes_written = 0
+ones_written = 0
+
+; ======= Introduction =======
+SelectOne "Welcome! This wizard emulates a Turing machine, proving that BAIN wizards are Turing-complete. " + \
+        "Please read the wizard.txt file for a full introduction on how to program a Turing machine for " + \
+        "this emulator.\n\nTo skip this message in the future, simply run this wizard as an Auto Wizard.", \
+        "|Launch", "Begin emulating the programmed Turing machine", "", \
+        "Cancel", "Exit the wizard without starting the Turing machine", ""
+Case "Launch"
+    Break
+Case "Cancel"
+    Cancel "Canceled by user"
+EndSelect
+
+; ======= Find Initial Tape =======
+found = False
+For entry in SubPackages
+    ; Check if this is the 'initial tape' subpackage
+    If entry.startswith("I")
+        found = True
+
+        ; 1. Check that the separator is present
+        If entry[1] != "-"
+            Cancel "Invalid initial tape: misplaced separator"
+        EndIf
+
+        ; 2. Skip the starting I:
+        tape_config = entry[2:]
+
+        ; 3. Parse the tape config into head offset and tape contents
+        head_offset = int(tape_config[:tape_config.find("-")])
+        tape_contents = tape_config[tape_config.find("-") + 1:]
+
+        ; 4. Split the tape contents into positive and negative tape
+        negative_tape = tape_contents[:head_offset]
+        positive_tape = tape_contents[head_offset:]
+
+        ; 5. We're done, break out of the loop
+        Break
+    EndIf
+EndFor
+
+; Complain if the user forgot to specify an initial tape
+If not found
+    Cancel "No initial tape found"
+EndIf
+
+; ======= Main Algorithm =======
+While True
+    ; First, find the subpackage matching target_state
+    found = False
+    For state in SubPackages
+        ; Skip the 'initial tape' subpackage
+        If state.startswith("I")
+            Continue
+        EndIf
+
+        ; Check the state ID (number before the dash)
+        If target_state == int(state[:state.find("-")])
+            found = True
+            ; Split the instructions into parts for when we read 0 or 1
+            instructions = state[state.find("-") + 1:]
+            instructions_0 = instructions[:instructions.find("-")]
+            instructions_1 = instructions[instructions.find("-") + 1:]
+            Break
+        EndIf
+    EndFor
+
+    ; If we couldn't find the target state, let the user know
+    If not found
+        Cancel "Unknown state " + str(target_state)
+    EndIf
+
+    ; Execute the instructions for the state
+    ; 1. Read the tape at the head
+    read_head = -1
+    If tape_head < 0
+        ; Accessing negative_tape is a bit tough. We need to invert the head
+        ; since the array positions are obviously still ascending, and we need
+        ; to subtract 1 after the inversion, since 0 belongs to positive_tape
+        read_head = int(negative_tape[-tape_head - 1])
+    Else
+        read_head = int(positive_tape[tape_head])
+    EndIf
+
+    ; 2. Check if we read a 0 or a 1 (or report error if a bit got flipped :P)
+    ; 2.1. Find the right instructions to execute
+    curr_instructions = ""
+    If read_head == 0
+        curr_instructions = instructions_0
+    Elif read_head == 1
+        curr_instructions = instructions_1
+    Else
+        Cancel "Invalid tape value " + str(read_head)
+    EndIf
+
+    ; 2.2. Check to make sure the user isn't trying to write something silly
+    ; Also, update our stats on number of zeroes / ones written
+    to_write = curr_instructions[0]
+    If to_write == "0"
+        ++zeroes_written
+    Elif to_write == "1"
+        ++ones_written
+    Else
+        Cancel "Invalid write value " + curr_instructions[0]
+    EndIf
+
+    ; 3. Execute the instructions
+    ; 3.1. Write to tape head
+    If tape_head < 0
+        ; This emulates something like: negative_tape[-tape_head - 1] = curr_instructions[0]
+        negative_tape = negative_tape[:-tape_head - 1] + curr_instructions[0] + negative_tape[-tape_head:]
+    Else
+        ; This emulates something like: positive_tape[tape_head] = curr_instructions[0]
+        positive_tape = positive_tape[:tape_head] + curr_instructions[0] + positive_tape[tape_head + 1:]
+    EndIf
+
+    ; 3.2. Move tape head
+    If curr_instructions[1] == "L"
+        --tape_head
+    Elif curr_instructions[1] == "R"
+        ++tape_head
+    Else
+        ; Silly user
+        Cancel "Invalid direction " + curr_instructions[1]
+    EndIf
+
+    ; 3.3. Check if we ran out of tape
+    If tape_head < 0
+        If -tape_head >= negative_tape.len()
+            ; We're out of negative tape, make it longer
+            negative_tape += "0"
+        EndIf
+    Else
+        If tape_head >= positive_tape.len()
+            ; We're out of positive tape, make it longer
+            positive_tape += "0"
+        EndIf
+    EndIf
+
+    ; 3.4. Set the next state
+    next_state = curr_instructions[2:]
+    If next_state == "H"
+        ; H is a special value meaning 'halt', so do that
+        Break
+    Else
+        target_state = int(next_state)
+        If target_state < 0
+            Cancel "Invalid target state " + target_state
+        EndIf
+    EndIf
+EndWhile
+
+; ======= Output =======
+Note "Halting State: " + str(target_state)
+total_tape = negative_tape + positive_tape
+Note "Final Tape: " + total_tape
+Note "Final Tape Length: " + str(total_tape.len())
+Note "Total Writes: " + str(zeroes_written + ones_written) + " (" + str(zeroes_written) + " zeroes, " + str(ones_written) + " ones)"

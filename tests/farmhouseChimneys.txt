@@ -1,0 +1,263 @@
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+;--Farmhouse Chimneys-- WizBAIN by Mertz --
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+RequireVersions "1.0.0.0", "", "", "307" ; Skyrim SE reports as version 1.0.0.0
+ResetAllEspmNames
+DeSelectAll
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; Welcome Screen
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+SelectOne "Farmhouse Chimneys",\
+	"|Welcome","Farmhouse Chimneys Wrye Bash Installer\n\nThis mod adds chimneys to farmhouses that have fireplaces inside. It includes smoke effects for the chimneys\, and snow shaders where applicable.\n\nClick below to view the current Mod Version or Credits.\nClick \"Next \>\" to continue the installation\.","fomod\\banner.jpg",\
+	"|Mod Version","Mod is version 3.0.2\n\nClick 'Credits' below to view the credits or\nclick \"Next \>\" to continue the installation\.","fomod\\banner.jpg",\
+	"Credits","Farmhouse Chimneys by Scarla\n\nSkyrim Special Edition version maintained by TechAngel85\n\nWrye Bash WizBAIN Installer by Mertz","fomod\\banner.jpg"
+EndSelect
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; Start detecting mods:
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+bFalskaar = DataFileExists("Falskaar.esm")
+bHelarchenCreek = GetEspmStatus("Helarchen Creek.esp") > 1
+bMoonandStar = GetEspmStatus("MoonAndStar_MAS.esp") > 1
+bLAL = GetEspmStatus("Alternate Start - Live Another Life.esp") > 1
+bCRF = GetEspmStatus("Cutting Room Floor.esp") > 1
+bDarkwaterCrossing = GetEspmStatus("Darkwater Crossing.esp") > 1
+bDragonBridge = GetEspmStatus("Dragon Bridge.esp") > 1
+bIvarstead = GetEspmStatus("Ivarstead.esp") > 1
+bKarthwasten = GetEspmStatus("Karthwasten.esp") > 1
+bKynesgrove = GetEspmStatus("Kynesgrove.esp") > 1
+bShorsStone = GetEspmStatus("Shor's Stone.esp") > 1
+bSoljundsSinkhole = GetEspmStatus("Whistling Mine.esp") > 1
+bWhistlingMine = GetEspmStatus("Soljund's Sinkhole.esp") > 1
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; Begin main installer
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+SelectOne "Chimney Mesh Options",\
+	"|Original Meshes","Original Meshes\: The original, non-parallax meshes.","fomod\\banner.jpg",\
+	"Parallax Meshes","Parallax Meshes\: Use these if you use a parallax mod and want the chimneys to match. Requires Parallax Occlusion Mapping shader \(ENB or ReShade\) and parallax textures \(not included\)","fomod\\banner.jpg",\
+	"Clay Meshes","Clay Meshes\: SparrowPrince\'s thinner meshes with clay stacks.","fomod\\chimneysclay.jpg"
+		Case "Original Meshes"
+			SelectSubPackage '00 - Original Meshes'
+			Break
+		Case "Parallax Meshes"
+			SelectSubPackage '00 - Parallax Meshes'
+			Break
+		Case "Clay Meshes"
+			SelectSubPackage '00 - Clay Meshes'
+			Break
+EndSelect
+
+sModName001 = "Vanilla"
+sModDescription001 = "Installs the mod for the vanilla game. This option also lets you select custom options in the succeeding install steps."
+sModImage001 = "fomod\\banner.jpg"
+If bFalskaar == False or\
+ bHelarchenCreek == False or\
+ bMoonandStar == False or\
+ bLAL == False or\
+ bCRF == False or\
+ bDarkwaterCrossing == False or\
+ bDragonBridge == False or\
+ bIvarstead == False or\
+ bKarthwasten == False or\
+ bKynesgrove == False or\
+ bShorsStone == False or\
+ bSoljundsSinkhole == False or\
+ bWhistlingMine == False
+	sModName001 = "|" + sModName001
+EndIf
+
+sModName002 = "Merged Patch"
+sModDescription002 = "Installs the mod for the vanilla game plus all of the extra mods. This is a merged plugin to reduce your plugin count. Only use it if you have installed all of the extra mods which patches are available for. They are:\n\nFalskaar\nHelarchen Creek\nMoon and Star\nCutting Room Floor\nAlternate Start: Live Another Life\nDarkwater Crossing\nDragon Bridge\nIvarstead\nKarthwasten\nKynesgrove\nShor\'s Stone\nSoljund\'s Sinkhole\nWhistling Mine.."
+sModImage002 = "fomod\\banner.jpg"
+If bFalskaar &  bHelarchenCreek & bMoonandStar & bLAL & bCRF & bDarkwaterCrossing & bDragonBridge & bIvarstead & bKarthwasten & bKynesgrove & bShorsStone & bSoljundsSinkhole & bWhistlingMine
+	sModName002 = "|" + sModName002
+EndIf
+
+SelectOne "Please select your install type",\
+		str(sModName001),str(sModDescription001),str(sModImage001),\
+		str(sModName002),str(sModDescription002),str(sModImage002)
+		Case "Vanilla"
+			SelectSubPackage '01 - Vanilla'
+				sModName101 = "Falskaar"
+				sModDescription101 = " Adds chimneys to farmhouses in Falskaar."
+				sModImage101 = "fomod\\banner.jpg"
+				If bFalskaar
+					sModName101 = "|" + sModName101
+				EndIf
+
+				sModName102 = "Helarchen Creek"
+				sModDescription102 = " Adds chimneys to the farmhouses added by Arthmoor\'s village\, Helarchen Creek."
+				sModImage102 = "fomod\\banner.jpg"
+				If bHelarchenCreek
+					sModName102 = "|" + sModName102
+				EndIf
+
+				sModName103 = "Moon and Star"
+				sModDescription103 = " Adds chimneys to the farmhouses added by Little Vivec in the Moon and Star mod."
+				sModImage103 = "fomod\\banner.jpg"
+				If bMoonandStar
+					sModName103 = "|" + sModName103
+				EndIf
+
+				sModName104 = "Moon and Star + Hellarchen Creek Merged"
+				sModDescription104 = "Helarchen Creek \+ Moon and Star merged plugin\. Use this if you use both of these mods to save a plugin slot\. Adds chimneys to the farmhouses added by Helarchen Creek and Little Vivec."
+				sModImage104 = "fomod\\banner.jpg"
+
+				SelectMany "New Lands\n\nNOTE\: If you select the Merged patch below\, be certain to deselect the constituent mod options to save plugin slots.\n\n",\
+					str(sModName101),str(sModDescription101),str(sModImage101),\
+					str(sModName102),str(sModDescription102),str(sModImage102),\
+					str(sModName103),str(sModDescription103),str(sModImage103),\
+					str(sModName104),str(sModDescription104),str(sModImage104)
+					Case "Falskaar"
+						SelectSubPackage '02 - Falskaar'
+						Break
+					Case "Helarchen Creek"
+						SelectSubPackage '03 - Helarchen Creek'
+						Break
+					Case "Moon and Star"
+						SelectSubPackage '03 - Moon and Star'
+						Break
+					Case "Moon and Star + Hellarchen Creek Merged"
+						SelectSubPackage '03- Helarchen + MaS'
+						Break
+				EndSelect
+
+				sModName201 = "Live Another Life"
+				sModDescription201 = "Adds a chimney to the farmhouse added by Alternate Start: Live Another Life."
+				sModImage201 = "fomod\\banner.jpg"
+				If bLAL
+					sModName201 = "|" + sModName201
+				EndIf
+
+				sModName202 = "Cutting Room Floor"
+				sModDescription202 = "Adds chimneys to the farmhouses added by Cutting Room Floor."
+				sModImage202 = "fomod\\banner.jpg"
+				If bCRF
+					sModName202 = "|" + sModName202
+				EndIf
+
+				sModName203 = "Live Another Life + Cutting Room Floor"
+				sModDescription203 = "Live Another Life and Cutting Room Floor merged plugin. Use this if you use both of these mods. Adds chimneys to the farmhouses added by both Live Another Life and Cutting Room Floor."
+				sModImage203 = "fomod\\banner.jpg"
+
+				SelectMany "Misc. Mods\n\nNOTE\: If you select the Merged patch below\, be certain to deselect all other options on this page to save plugin slots.\n\n",\
+					str(sModName201),str(sModDescription201),str(sModImage201),\
+					str(sModName202),str(sModDescription202),str(sModImage202),\
+					str(sModName203),str(sModDescription203),str(sModImage203)
+					Case "Live Another Life"
+						SelectSubPackage '04 - Live Another Life'
+						Break
+					Case "Cutting Room Floor"
+						SelectSubPackage '04 - Cutting Room Floor'
+						Break
+					Case "Live Another Life + Cutting Room Floor"
+						SelectSubPackage '04 - LAL + CRF'
+						Break
+				EndSelect
+
+				sModName301 = "Arthmoor\'s Village Expansions Merged"
+				sModDescription301 = "This is a merged plugin of all of the expansion mods listed below. It adds chimneys to the farmhouses added by Arthmoor\'s village expansion mods: Darkwater Crossing, Dragon Bridge\, Ivarstead, Karthwasten Kynesgrove\, Shor\'s Stone, Soljund\'s Sinkhole\, and Whistling Mine. Use this if you are using all eight of these mods to save several plugin slots."
+				sModImage301 = "fomod\\banner.jpg"
+
+				sModName302 = "Darkwater Crossing"
+				sModDescription302 = "Adds chimneys to the farmhouses added by Arthmoor\'s Darkwater Crossing. DO NOT USE if using the merged plugin above."
+				sModImage302 = "fomod\\banner.jpg"
+				If bDarkwaterCrossing
+					sModName302 = "|" + sModName302
+				EndIf
+
+				sModName303 = "Dragon Bridge"
+				sModDescription303 = "Adds chimneys to the farmhouses added by Arthmoor\'s Dragon Bridge. DO NOT USE if using the merged plugin above."
+				sModImage303 = "fomod\\banner.jpg"
+				If bDragonBridge
+					sModName303 = "|" + sModName303
+				EndIf
+
+				sModName304 = "Ivarstead"
+				sModDescription304 = "Adds chimneys to the farmhouses added by Arthmoor\'s Ivarstead. DO NOT USE if using the merged plugin above."
+				sModImage304 = "fomod\\banner.jpg"
+				If bIvarstead
+					sModName304 = "|" + sModName304
+				EndIf
+
+				sModName305 = "Karthwasten"
+				sModDescription305 = "Adds chimneys to the farmhouses added by Arthmoor\'s Karthwasten. DO NOT USE if using the merged plugin above."
+				sModImage305 = "fomod\\banner.jpg"
+				If bKarthwasten
+					sModName305 = "|" + sModName305
+				EndIf
+
+				sModName306 = "Kynesgrove"
+				sModDescription306 = "Adds chimneys to the farmhouses added by Arthmoor\'s Kynesgrove. DO NOT USE if using the merged plugin above."
+				sModImage306 = "fomod\\banner.jpg"
+				If bKynesgrove
+					sModName306 = "|" + sModName306
+				EndIf
+
+				sModName307 = "Shor's Stone"
+				sModDescription307 = "Adds chimneys to the farmhouses added by Arthmoor\'s Shor\'s Stone. DO NOT USE if using the merged plugin above."
+				sModImage307 = "fomod\\banner.jpg"
+				If bShorsStone
+					sModName307 = "|" + sModName307
+				EndIf
+
+				sModName308 = "Soljund's Sinkhole"
+				sModDescription308 = "Adds chimneys to the farmhouses added by Arthmoor\'s Soljund\'s Sinkhole. DO NOT USE if using the merged plugin above."
+				sModImage308 = "fomod\\banner.jpg"
+				If bSoljundsSinkhole
+					sModName308 = "|" + sModName308
+				EndIf
+
+				sModName309 = "Whistling Mine"
+				sModDescription309 = "Adds chimneys to the farmhouses added by Arthmoor\'s Whistling Mine. DO NOT USE if using the merged plugin above."
+				sModImage309 = "fomod\\banner.jpg"
+				If bWhistlingMine
+					sModName309 = "|" + sModName309
+				EndIf
+
+				SelectMany "Arthrmoor\'s Village Expansions\n\nNOTE\: If you select the Merged patch below\, be certain to deselect all other options on this page to save plugin slots.\n\n",\
+					str(sModName301),str(sModDescription301),str(sModImage301),\
+					str(sModName302),str(sModDescription302),str(sModImage302),\
+					str(sModName303),str(sModDescription303),str(sModImage303),\
+					str(sModName304),str(sModDescription304),str(sModImage304),\
+					str(sModName305),str(sModDescription305),str(sModImage305),\
+					str(sModName306),str(sModDescription306),str(sModImage306),\
+					str(sModName307),str(sModDescription307),str(sModImage307),\
+					str(sModName308),str(sModDescription308),str(sModImage308),\
+					str(sModName309),str(sModDescription309),str(sModImage309)
+					Case "Arthmoor\'s Village Expansions Merged"
+						SelectSubPackage '05 - Arthmoor Village Expansions Merged'
+						Break
+					Case "Darkwater Crossing"
+						SelectSubPackage '05 - Darkwater Crossing'
+						Break
+					Case "Dragon Bridge"
+						SelectSubPackage '05 - Dragon Bridge'
+						Break
+					Case "Ivarstead"
+						SelectSubPackage '05 - Ivarstead'
+						Break
+					Case "Karthwasten"
+						SelectSubPackage '05 - Karthwasten'
+						Break
+					Case "Kynesgrove"
+						SelectSubPackage '05 - Kynesgrove'
+						Break
+					Case "Shor's Stone"
+						SelectSubPackage '05 - Shors Stone'
+						Break
+					Case "Soljund's Sinkhole"
+						SelectSubPackage '05 - Soljunds Sinkhole'
+						Break
+					Case "Whistling Mine"
+						SelectSubPackage '05 - Whistling Mine'
+						Break
+				EndSelect
+			Break
+		Case "Merged Patch"
+			SelectSubPackage '01 - Vanilla + Merge'
+			Return
+EndSelect
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+;== Finish Page ==
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+Note "Thank you for installing Farmhouse Chimneys\n\n\nConfirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"
