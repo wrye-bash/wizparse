@@ -1,0 +1,106 @@
+;== DynDOLOD - BaIn Wizard by Alt3rn1ty ==
+
+RequireVersions "", "", "", "295"
+
+DeSelectAll
+
+DGYES = False
+DGNO = False
+
+If DataFileExists ("Dawnguard.esm")
+    DGYES = True
+EndIf
+If not DataFileExists ("Dawnguard.esm")
+    DGNO = True
+EndIf
+
+;== WELCOME SCREEN ==
+
+SelectOne "DYNAMIC DISTANT OBJECT LOD - RESOURCES INSTALLATION WIZARD",\
+  "|WELCOME","\nCLICK OPTIONS ABOVE TO REVIEW WHAT THIS INSTALLER INCLUDES OR ..\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\WBTitle.jpg",\
+  "DESCRIPTION","\nThis Package contains the DynDOLOD Resource files required to generate static, tree and dynamic LOD with DynDOLOD.exe.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\WBTitle.jpg",\
+  "LICENCE","\nAssets Licensed under creative commons : CC BY-NC-SA\n\nDynDOLOD by Sheson is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.\n\n http://creativecommons.org/licenses/by-nc-sa/4.0/ \n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\WBTitle.jpg",\
+  "DISCLAIMER","THE SOFTWARE IS PROVIDED 'AS IS' AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.","FOMod\\images\\WBTitle.jpg"
+EndSelect
+
+;== AUTO SELECT REQUIRED FILES, AND OFFER OPTIONAL LOW RES TEXTURES ==
+
+SelectOne "SELECT LOD TEXTURES REQUIRED",\
+  "|High Res LODs","\nHigh-Res LOD Textures is a set of 256x256 single LOD textures typically used when building the LOD texture atlas.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\WBTitle.jpg",\
+  "Low Res LODs","\nLow-Res LOD Textures is a set of 128x128 single LOD textures typically used when building the LOD texture atlas.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\WBTitle.jpg"
+  Case "High Res LODs"
+    SelectSubPackage "00 DynDOLOD Core Files - Required"
+    Break
+  Case "Low Res LODs"
+    SelectSubPackage "00 DynDOLOD Core Files - Required"
+    SelectSubPackage "01 Low-Res LOD Textures"
+    Break
+EndSelect
+
+;== SELECT OPTIONAL PLUGINS ==
+
+If DGYES
+  SelectMany "TICK ALL OPTIONAL PLUGINS YOU WISH TO INSTALL",\
+    "Whiterun Exterior","\nWhiterun Exterior contains patch files for DynDOLOD.exe which add some missing buildings outside the town walls. These buildings are missing from the vanilla game for performance reasons. Includes patches for Cutting Room Floor and Provincial Courier Service.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\02 WhiterunExterior-After.jpg",\
+    "Solitude Exterior","\nSolitude Exterior contains a patch file for DynDOLOD.exe which adds some missing objects outside the town walls and adjusts some occlusion planes. These objects are missing from the vanilla game for performance reasons.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\08 SolitudeExterior-After.jpg",\
+    "High Hrothgar Window Glow","\nHigh Hrothgar Windows Glow adds glowing windows to the full model and LOD model if generating LOD with the Window Glow option.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\03 HighHrothgarWindowGlow-After.jpg",\
+    "DLC2 Vvardenfell 3D Plume","\nVvardenfell 3D Plume replaces the 2D plume of the Red Mountain with a 3D version.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\04 DLC2Vvardenfell3DPlume-After.jpg",\
+    "Desync Birds of Prey","\nDesync Birds of Prey contains a patch file for DynDOLOD.exe which randomizes the wing flapping of the birds so they don't look like a synchronized water ballet.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\05 DesyncBirdsOfPrey-After.jpg",\
+    "Giantfires Low","\nGiantfires Low replaces the dynamic LOD version with an even lighter version which uses no particles. Negligible performance improvement.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\DynDOLOD.jpg",\
+    "Holy Cow","\nHoly cow adds a holy cow to worship\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\WBTitle.jpg"
+    Case "Whiterun Exterior"
+      SelectSubPackage "02 Whiterun Exterior"
+      Break
+    Case "Solitude Exterior"
+      SelectSubPackage "08 Solitude Exterior"
+      Break
+    Case "High Hrothgar Window Glow"
+      SelectSubPackage "03 High Hrothgar Window Glow"
+      Break
+    Case "DLC2 Vvardenfell 3D Plume"
+      SelectSubPackage "04 DLC2 Vvardenfell 3D Plume"
+      Break
+    Case "Desync Birds of Prey"
+      SelectSubPackage "05 Desync Birds of Prey"
+      Break
+    Case "Giantfires Low"
+      SelectSubPackage "06 Giantfires Low"
+      Break
+    Case "Holy Cow"
+      SelectSubPackage "07 Holy Cow"
+      Break
+  EndSelect
+EndIf
+
+If DGNO
+  SelectMany "TICK ALL OPTIONAL PLUGINS YOU WISH TO INSTALL",\
+    "Whiterun Exterior","\nWhiterun Exterior contains a patch file for DynDOLOD.exe which adds some missing buildings outside the town walls. These buildings are missing from the vanilla game for performance reasons.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\02 WhiterunExterior-After.jpg",\
+    "Solitude Exterior","\nSolitude Exterior contains a patch file for DynDOLOD.exe which adds some missing objects outside the town walls and adjusts some occlusion planes. These objects are missing from the vanilla game for performance reasons.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\08 SolitudeExterior-After.jpg",\
+    "High Hrothgar Window Glow","\nHigh Hrothgar Windows Glow adds glowing windows to the full model and LOD model if generating LOD with the Window Glow option.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\03 HighHrothgarWindowGlow-After.jpg",\
+    "Desync Birds of Prey","\nDesync Birds of Prey contains a patch file for DynDOLOD.exe which randomizes the wing flapping of the birds so they don't look like a synchronized water ballet.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\05 DesyncBirdsOfPrey-After.jpg",\
+    "Giantfires Low","\nGiantfires Low replaces the dynamic LOD version with an even lighter version which uses no particles. Negligible performance improvement.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\DynDOLOD.jpg",\
+    "Holy Cow","\nHoly cow adds a holy cow to worship\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\WBTitle.jpg"
+    Case "Whiterun Exterior"
+      SelectSubPackage "02 Whiterun Exterior"
+      Break
+    Case "Solitude Exterior"
+      SelectSubPackage "08 Solitude Exterior"
+      Break
+    Case "High Hrothgar Window Glow"
+      SelectSubPackage "03 High Hrothgar Window Glow"
+      Break
+    Case "Desync Birds of Prey"
+      SelectSubPackage "05 Desync Birds of Prey"
+      Break
+    Case "Giantfires Low"
+      SelectSubPackage "06 Giantfires Low"
+      Break
+    Case "Holy Cow"
+      SelectSubPackage "07 Holy Cow"
+      Break
+  EndSelect
+EndIf
+
+;== Finish Page ==
+
+Note "\nCHECK SELECTION ABOVE, IF NOT HAPPY USE THE BACK BUTTON .. WHEN READY, TICK 'APPLY THESE SELECTIONS' BELOW, AND THEN FINISH.\n\nIF YOU HAVE AUTO-ANNEAL/INSTALL WIZARDS SET IN WRYE BASH INSTALLER PREFERENCES .. THE WIZARD WILL INSTALL YOUR SELECTIONS AFTER CLICKING FINISH - OTHERWISE, RIGHT CLICK THE INSTALLER AGAIN AND CHOOSE INSTALL"

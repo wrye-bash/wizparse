@@ -1,0 +1,56 @@
+;== DynDOLOD - BaIn Wizard by Alt3rn1ty ==
+; I probably broke this one - Sheson
+
+RequireVersions "", "", "", "295"
+
+DeSelectAll
+
+;== WELCOME SCREEN ==
+
+SelectOne "DYNAMIC DISTANT OBJECT LOD - PATCHES INSTALLATION WIZARD",\
+  "|WELCOME","\nCLICK OPTIONS ABOVE TO REVIEW WHAT THIS INSTALLER INCLUDES OR ..\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\WBTitle.jpg",\
+  "DESCRIPTION","\nThis Package contains the DynDOLOD Patches files required for some mods to worked better with DynDOLOD.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\WBTitle.jpg",\
+  "LICENCE","\nPatches were derived from the orignal mods. All credits go to their authors. \n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\WBTitle.jpg",\
+  "DISCLAIMER","THE SOFTWARE IS PROVIDED 'AS IS' AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.","FOMod\\images\\WBTitle.jpg"
+EndSelect
+
+;== SELECT OPTIONAL PLUGINS ==
+
+SelectMany "TICK ALL OPTIONAL PLUGINS YOU WISH TO INSTALL",\
+  "Beyond Reach","\nBeyond Reach contains a couple tree LOD billboards.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\DynDOLOD.jpg",\
+  "Climates Of Tamriel - Winter Edition","\nClimates Of Tamriel - Winter Edition updates a couple LOD textures.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\DynDOLOD.jpg",\
+  "Immersive Content - Realistic Outdoor Lights","\nImmersive Content - Realistic Outdoor Lights patches a papyrus script so LOD lights switch accordingly.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\DynDOLOD.jpg",\
+  "Lanterns of Skyrim","\nLanterns of Skyrim patches a papyrus script so LOD lights switch accordingly.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\DynDOLOD.jpg",\
+  "Molag Bals Inferno","\nMolag Bal's Inferno fixes terrain LOD issues of two worldspaces and adds a normal map needed for LOD texture atlas creation.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\DynDOLOD.jpg",\
+  "Enderal","\nEnderal contains optional higher resolution and improved terrain LOD meshes and textures for Vyn and Half Moon Island (Halbmondinsel).\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\Enderal.jpg",\
+  "Caranthir Tower Reborn 1.x","\nCaranthir Tower Reborn 1.x patches a couple papyrus scripts so the conceal/reveal spells switch the LOD of the tower accordingly.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\CTR.jpg",\
+  "Caranthir Tower Reborn 2.x","\nCaranthir Tower Reborn 2.x patches a couple papyrus scripts so the conceal/reveal spells switch the LOD of the tower accordingly.\n\nCLICK NEXT TO CONTINUE THE INSTALLATION","FOMod\\images\\CTR.jpg"
+  Case "Beyond Reach"
+    SelectSubPackage "01 Beyond Reach"
+    Break
+  Case "Climates Of Tamriel - Winter Edition"
+    SelectSubPackage "02 Climates Of Tamriel - Winter Edition"
+    Break
+  Case "Immersive Content - Realistic Outdoor Lights"
+    SelectSubPackage "03 Immersive Content - Realistic Outdoor Lights"
+    Break
+  Case "Lanterns of Skyrim"
+    SelectSubPackage "04 Lanterns of Skyrim"
+    Break
+  Case "Molag Bals Inferno"
+    SelectSubPackage "05 Molag Bals Inferno"
+    Break
+  Case "Enderal"
+    SelectSubPackage "06 Enderal"
+    Break
+  Case "Caranthir Tower Reborn 1.x"
+    SelectSubPackage "07 Caranthir Tower Reborn 1.x"
+    Break
+  Case "Caranthir Tower Reborn 2.x"
+    SelectSubPackage "08 Caranthir Tower Reborn 2.x"
+    Break
+EndSelect
+
+;== Finish Page ==
+
+Note "\nCHECK SELECTION ABOVE, IF NOT HAPPY USE THE BACK BUTTON .. WHEN READY, TICK 'APPLY THESE SELECTIONS' BELOW, AND THEN FINISH.\n\nIF YOU HAVE AUTO-ANNEAL/INSTALL WIZARDS SET IN WRYE BASH INSTALLER PREFERENCES .. THE WIZARD WILL INSTALL YOUR SELECTIONS AFTER CLICKING FINISH - OTHERWISE, RIGHT CLICK THE INSTALLER AGAIN AND CHOOSE INSTALL"
