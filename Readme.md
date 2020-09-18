@@ -1,5 +1,8 @@
 # wizparse
 
+[![CI](https://github.com/Infernio/wizparse/workflows/CI/badge.svg)](https://github.com/Infernio/wizparse/actions?query=workflow%3A%22CI%22)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 A new parser / interpreter for BAIN wizards based on [ANTLR](https://www.antlr.org/).
 
 ## Parser
@@ -25,7 +28,6 @@ In short:
  1. Run `./scripts/prereq.sh`. This will download a copy of ANTLR.
  1. Run `./scripts/build.sh`. This will generate a Java parser and compile it.
  1. Run `./scripts/test.sh`. This will run all tests in the tests folder.
- 1. If it worked, yo
 
 ## License
 wizparse is licensed under the MIT license. See [LICENSE](LICENSE) for the full text.
