@@ -1,6 +1,6 @@
 # wizparse
 
-[![CI](https://github.com/Infernio/wizparse/workflows/CI/badge.svg)](https://github.com/Infernio/wizparse/actions?query=workflow%3A%22CI%22)
+[![CI](https://github.com/wrye-bash/wizparse/workflows/CI/badge.svg)](https://github.com/wrye-bash/wizparse/actions?query=workflow%3A%22CI%22)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 A new parser / interpreter for BAIN wizards based on [ANTLR](https://www.antlr.org/).
