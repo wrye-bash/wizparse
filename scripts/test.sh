@@ -1,6 +1,12 @@
 #!/bin/bash
 # This script runs a test parse on each test file, failing the CI if any files fail to parse.
 
+if [ ! -d tmp ]
+then
+    echo "$(realpath temp) does not exist. Run scripts/build.sh to create it."
+    exit 1
+fi
+
 # Check if stdout is a tty and supports color
 # If not, they will be undefined and hence resolve to empty strings
 if test -t 1
