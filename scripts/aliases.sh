@@ -7,7 +7,8 @@ export CLASSPATH
 
 WIZ_TMP_DIR="$(realpath tmp/wizards)"
 
-# Parses a wizard provided as the command line argument
+# Parses a wizard provided as the command line argument, regardless of
+# what your cwd is.
 function wizparse() {
     test_wizard="$1"
     if [ -z "$test_wizard" ]

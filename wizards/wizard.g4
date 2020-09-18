@@ -1,4 +1,5 @@
 // TODO See if the use of fragments for keywords is OK or annoying in semantic analysis
+// TODO Check if the old parser allowed incrementing/decrementing anything and make that a breaking change
 
 // Style guide:
 //  - Parser rules are camelCase
@@ -124,8 +125,8 @@ expr: LeftParenthesis expr RightParenthesis
     // Increment / Decrement
     // Note that, for backwards compatibility, postfix and prefix
     // should both return the new value.
-    | Increment expr | expr Increment
-    | Decrement expr | expr Decrement
+    | Increment Identifier | Identifier Increment
+    | Decrement Identifier | Identifier Decrement
     // Mathematical operators, part 1
     | Minus expr
     // Logic operators, part 1
