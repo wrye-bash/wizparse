@@ -70,20 +70,24 @@ elifStmt: 'Elif' expr body;
 // expression.
 elseStmt: 'Else' body;
 
-// A for loop. There are two possible types of for loop.
-forStmt: 'For' (forRangeLoop | forInLoop) 'EndFor';
+// A for loop. There are two possible types of for loop that differ
+// only in their headers. They each begin with the keyword For,
+// followed by an iteration variable a and then the header. Finally,
+// a body and an EndFor keyword terminate the for loop.
+forStmt: 'For' Identifier (forRangeHeader | forInHeader) body 'EndFor';
 
-// A for loop of the form 'For a from b to c [by d]', where:
-//   a is a variable
+// The header of a for loop of the form 'For a from b to c [by d]',
+// where:
+//   a is the iteration variable, as specified in forStmt
 //   b is the start value
 //   c is the end value
 //   d (optional) is the step size
-forRangeLoop: Identifier 'from' expr 'to' expr ('by' expr)? body;
+forRangeHeader: 'from' expr 'to' expr ('by' expr)?;
 
-// A for loop of the form 'For a in b', where:
-//   a is a variable
+// The header of a for loop of the form 'For a in b', where:
+//   a is the iteration variable, as specified in forStmt
 //   b is a value to iterate over
-forInLoop: Identifier In expr body;
+forInHeader: In expr;
 
 // An if statement may have any number of elif statements, but at
 // most one else statement.
