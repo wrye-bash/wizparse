@@ -46,14 +46,15 @@ compoundAssignment: Identifier (CompoundExp
 
 /* = CONTROL FLOW = */
 // Statements that alter control flow.
-controlFlowStmt: 'Break'
-                 | 'Cancel'
-                 | 'Continue'
-                 | forStmt
-                 | ifStmt
-                 | 'Return'
-                 | selectStmt
-                 | whileStmt;
+controlFlowStmt: 'Break' # Break
+                 | 'Cancel' # Cancel
+                 | 'Continue' # Continue
+                 | forStmt # For
+                 | ifStmt # If
+                 | 'Return' # Return
+                 | selectStmt # Select
+                 | whileStmt # While
+                 ;
 
 // Describes what do in a select statement if a certain case is hit.
 // expr must be a string, type-check is during semantic analysis.
@@ -119,44 +120,47 @@ keywordStmt: Keyword argList;
 /* === EXPRESSIONS === */
 // A command with a return value.
 // The order matters here - it specifies the operator precedence.
-expr: LeftParenthesis expr RightParenthesis
+expr: LeftParenthesis expr RightParenthesis # ParenExpr
     // Function calls
     // May not actually return anything - we still parse them as
     // expressions for simplicity and check the return type when
     // doing semantic analysis.
-    | expr Dot Identifier LeftParenthesis argList RightParenthesis
-    | Identifier LeftParenthesis argList RightParenthesis
+    | expr Dot Identifier LeftParenthesis argList RightParenthesis # DotFunctionCall
+    | Identifier LeftParenthesis argList RightParenthesis # FunctionCall
     // Increment / Decrement
     // Note that, for backwards compatibility, postfix and prefix
     // should both return the new value.
-    | Increment Identifier | Identifier Increment
-    | Decrement Identifier | Identifier Decrement
+    | Increment Identifier # PreIncrement
+    | Identifier Increment # PostIncrement
+    | Decrement Identifier # PreDecrement
+    | Identifier Decrement # PostDecrement
     // Mathematical operators, part 1
-    | Minus expr
+    | Minus expr # Negative
     // Logic operators, part 1
-    | ('!' | 'not') expr
+    | ('!' | 'not') expr # Not
     // Indexing
-    | expr LeftBracket expr RightBracket
+    | expr LeftBracket expr RightBracket # Index
     // Slicing
-    | expr LeftBracket expr? Colon expr? (Colon expr?)? RightBracket
+    | expr LeftBracket expr? Colon expr? (Colon expr?)? RightBracket # Slice
     // Mathematical operators, part 2
-    | expr Raise expr
-    | expr (Times | Divide | Modulo) expr
-    | expr (Plus | Minus) expr
+    | expr Raise expr # Exponentiation
+    | expr (Times | Divide | Modulo) expr # TimesDivideModulo
+    | expr (Plus | Minus) expr # PlusMinus
     // Comparison operators
     // Colon present => case-insensitive
-    | expr (Greater | GreaterOrEqual) Colon? expr
-    | expr (Lesser | LesserOrEqual) Colon? expr
-    | expr (Equal | NotEqual) Colon? expr
+    | expr (Greater | GreaterOrEqual) Colon? expr # Greater
+    | expr (Lesser | LesserOrEqual) Colon? expr # Lesser
+    | expr (Equal | NotEqual) Colon? expr # Equal
     // Logic operators, part 2
-    | expr ('|' | 'or') expr
-    | expr ('&' | 'and') expr
+    | expr ('|' | 'or') expr # Or
+    | expr ('&' | 'and') expr # And
     // 'in' operator
     // Colon present => case-insensitive
-    | expr In expr Colon?
+    | expr In expr Colon? # In
     // Direct values
     // Constants, literals (three types) and variables
-    | (constant | decimal | integer | string | Identifier);
+    | (constant | decimal | integer | string | Identifier) # Value
+    ;
 
 /* == NONEXECUTABLE EXPRESSIONS == */
 // These are expressions that immediately resolve to a value,
