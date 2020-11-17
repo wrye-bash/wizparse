@@ -1,0 +1,70 @@
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+;-- Embers HD -- WizBAIN by Mertz --
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+RequireVersions "", "", "", "307"
+ResetAllEspmNames
+DeSelectAll
+
+
+;== Welcome screen and install core mod
+SelectOne "Welcome",\
+    "|Welcome","Welcome to the Embers HD installer.\n\nClick 'Credits' above to view the credits.\n\nClick Next to continue the installation","images\\logo.png",\
+    "Credits","Embers HD was created by mindflux. If you enjoy this mod, please make sure to show your thanks by endorsing!\n\n\nWizBAIN installer by Mertz\n\nClick next to continue the installation","images\\logo.png"
+EndSelect
+
+SelectOne "Embers HD \n\nSelect One of the following options:\n\nDouble-click image for larger version.",\
+    "|Embers HD 1k","Applies Embers HD to fire sources that have embers in the vanilla game. 1K textures for best performance.","img\\ehd.jpg",\
+    "Embers HD 1k Orange Cast","Applies Embers HD to fire sources that have embers in the vanilla game. 1K textures with more orange cast for best performance.","img\\ehd.jpg",\
+    "Embers HD 2k","Applies Embers HD to fire sources that have embers in the vanilla game. 2K textures for best quality.","img\\ehd.jpg",\
+    "Embers HD 1k Orange Cast","Applies Embers HD to fire sources that have embers in the vanilla game. 2K textures with more orange cast for best quality.","img\\ehd.jpg"
+        Case "Embers HD 1k"
+            SelectSubPackage 'EHD 1K'
+            Break
+        Case "Embers HD 1k Orange Cast"
+            SelectSubPackage 'EHD 1K Orange'
+            Break
+        Case "Embers HD 2k"
+            SelectSubPackage 'EHD 2K'
+            Break
+        Case "Embers HD 1k Orange Cast"
+            SelectSubPackage 'EHD 2K Orange'
+            Break
+EndSelect
+
+SelectMany "Embers HD Add-ons\n\nSelect Any of the following options.\n\nDouble-click image to view a larger version",\
+    "|Fireplaces","Applies Embers HD to firepits found in inns and other interior locations such as NPC homes as well as both lit and unlit campsite fires and alchemy tables. Also improves campsite stones and burning logs.","img\\fireplace.jpg",\
+    "|Forges","Applies Embers HD to forges around Tamriel and Soltsheim.","img\\ehd.jpg",\
+    "|Lava Crater","Improves \(?\) Solstheim lava craters and scattered lava rocks.","img\\lava.jpg"
+        Case "Fireplaces"
+            SelectSubPackage 'EHDFireplaces'
+            Break
+        Case "Forges"
+            SelectSubPackage 'EHDForges'
+            Break
+        Case "Lava Crater"
+            SelectSubPackage 'EHDLavaCrater'
+            Breaks
+EndSelect
+
+SelectMany "Embers HD Compatibility Patches\n\nSelect Any of the following\n\nDouble-click image to view larger version",\
+"Realistic HD Blacksmith Patch","Compatibility patch for Realistic HD Blacksmith by Halk_Hogan_PL when using Forges Add-On. This should be installed after Realistic HD Blacksmith.","",\
+"Ultimate HD Fire Effects Patch","Compatibility patch for Ultimate HD Fire Effects by BuzzDee84. This should be installed after Ultimate HD Fire Effects.","img\\UHDFE.jpg",\
+"Realistic Lighting Overhaul Patch","Compatibility patch for Realistic Lighting Overhaul to fix glitched shadows in inns when using Fireplaces Add-On.","",\
+"Campfire Patch","Compatibility patch for Chesko\'s Campfire mod.",""
+    Case "Realistic HD Blacksmith Patch"
+        SelectSubPackage 'EHDPatchRHDB'
+        Break
+    Case "Ultimate HD Fire Effects Patch"
+        SelectSubPackage 'EHDPatchUHDFE'
+        Break
+    Case "Realistic Lighting Overhaul Patch"
+        SelectSubPackage 'EHDPatchRLO'
+        Break
+    Case "Campfire Patch"
+        SelectSubPackage 'EHDPatchCF'
+        Break
+EndSelect
+
+        
+;== Finish Page ==
+Note "Confirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"

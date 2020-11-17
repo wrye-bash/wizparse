@@ -1,0 +1,46 @@
+;== Shiva's Vanilla Clothing Replacer Wrye Bash BAIN wizard by Mertz ===
+; No installer images are included in this mod.
+
+RequireVersions "", "", "", "307"
+DeSelectAll
+;== Welcome screen ==
+
+SelectOne "Shiva's Vanilla Clothing Replacer by Shiva - BAIN Install Wizard",\
+    "|Welcome","This wizard installs the files necessary for Shiva's Vanilla Clothing Replacer.\n\nClick Next to continue the installation","",\
+    "Credits","Shiva's Vanilla Clothing Replacer by Shiva\nBAIN Wizard by Mertz\n\nClick next to continue the installation",""
+EndSelect
+
+SelectOne "Choose what to replace",\
+	"|Clothing\, Armor and Vampire","Clothes Replaced\: Fine Clothes \(4 variants\)\, Party clothes\, Radiant Raiment Fine Clothes\, Wedding Clothes\, Ulfric\'s Clothes\, Noble Clothes\, Fur-Trimmed Cloak\, Emperor\'s robes\, Elisif \(Female only\)\, Igmmund \(Male only\) and Siddgeir \(Male only\)\.\n\nArmor Replaced\: Arch-mage\'s Robes\, Leather Armor and Savor\'s Hide \(Female Only\)\.\n\nVampire Replaced\: Vampire Royal Armor\, Valerica\'s Version and Vampire clothes\n\(Gloves\, boots and helmets\/hoods are also included\)","",\
+	"Clothing and Armor","Clothes Replaced\: Fine Clothes \(4 variants\)\, Party clothes\, Radiant Raiment Fine Clothes\, Wedding Clothes\, Ulfric\'s Clothes\, Noble Clothes\, Fur-Trimmed Cloak\, Emperor\'s robes\, Elisif \(Female only\)\, Igmmund \(Male only\) and Siddgeir \(Male only\)\.\n\nArmor Replaced\: Arch-mage\'s Robes\, Leather Armor and Savor\'s Hide \(Female Only\)\n\(Gloves\, boots and helmets\/hoods are also included\)","",\
+	"Clothing and Vampire","Clothes Replaced\: Fine Clothes \(4 variants\)\, Party clothes\, Radiant Raiment Fine Clothes\, Wedding Clothes\, Ulfric\'s Clothes\, Noble Clothes\, Fur-Trimmed Cloak\, Emperor\'s robes\, Elisif \(Female only\)\, Igmmund \(Male only\) and Siddgeir \(Male only\)\.\n\nVampire Replaced\: Vampire Royal Armor\, Valerica\'s Version and Vampire clothes\n\(Gloves\, boots\, and helmets\/hoods are also included\)","",\
+	"Armor and Vampire","Armor Replaced\: Arch-mage\'s Robes\, Leather Armor and Savor\'s Hide \(Female Only\)\.\n\nVampire Replaced\: Vampire Royal Armor\, Valerica\'s Version and Vampire clothes\n\\(Gloves\, boots and helmets\/hoods are also included\)","",\
+	"Clothing","Clothes Replaced\: Fine Clothes \(4 variants\)\, Party clothes\, Radiant Raiment Fine Clothes\, Wedding Clothes\, Ulfric\'s Clothes\, Noble Clothes\, Fur-Trimmed Cloak\, Emperor\'s robes\, Elisif \(Female only\)\, Igmmund \(Male only\) and Siddgeir \(Male only\)\n\(Gloves\, boots and helmets\/hoods are also included\)","",\
+	"Armor","Armor Replaced\: Arch-mage\'s Robes\, Leather Armor and Savor\'s Hide \(Female Only\)\n\(Gloves\, boots and helmets\/hoods are also included\)","",\
+	"Vampire","Vampire Replaced\: Vampire Royal Armor\, Valerica\'s Version and Vampire clothes\n\(Gloves\, boots and helmets\/hoods are also included\)",""
+		Case "Clothing\, Armor and Vampire"
+			SelectSubPackage '1 Clothing + Armor + Vampire'
+			Break
+		Case "Clothing and Armor"
+			SelectSubPackage '1 Clothing + Armor'
+			Break
+		Case "Clothing and Vampire"
+			SelectSubPackage '1 Clothing + Vampire'
+			Break
+		Case "Armor and Vampire"
+			SelectSubPackage '1 Armor + Vampire'
+			Break
+		Case "Clothing"
+			SelectSubPackage '1 Clothing'
+			Break
+		Case "Armor"
+			SelectSubPackage '1 Armor'
+			Break
+		Case "Vampire"
+			SelectSubPackage '1 Vampire'
+			Break
+EndSelect
+
+;== Finish Page ==
+Note "Thank you for installing Shiva's Vanilla Clothing Replacer\n\n\nConfirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install\n\nIf you like the mod, please make sure to endorse! Thank you!"
+

@@ -1,0 +1,70 @@
+;=-=-=-|Ruins Clutter Improved for SSE Wrye Bash BAIN wizard by Mertz |-=-=-=
+
+RequireVersions "1.0.0.0", "", "", "307" 
+DeSelectAll
+
+MOD_Readme = str("Ruins Clutter Improved started as a retexturing project\, with the main goal to improve some of the ugliest objects in the dungeons of Skyrim. It improves the visual experience of catacombs and ruins by adding more detail to common clutter objects like pots\, sconces\, candles\, doors and many other ingame materials..")
+
+
+;== Welcome screen and install core mod
+SelectOne "Ruins Clutter Improved Installer",\
+    "|Welcome"," This BAIN wizard installs Ruins Clutter Improved for Skyrim SE\n\nClick Read Me below to select the Readme for this mod\n\nClick 'Credits' above to view the credits.\n\nClick Next to continue the installation","-- Screenshots\\Ruins_Clutter_Improved.jpg",\
+	"Read Me",MOD_Readme,"-- Screenshots\\Ruins_Clutter_Improved.jpg",\
+    "Credits","Ruins Clutter Improved was created by raiserfx. If you enjoy this mod, please make sure to show your thanks by endorsing!\n\n\nWizBAIN installer by Mertz\n\nClick next to continue the installation","-- Screenshots\\Ruins_Clutter_Improved.jpg"
+EndSelect
+
+SelectOne "Installation Options",\
+	"|Install Everything","All improved textures and meshes will be installed.","-- Screenshots\\Ruins_Clutter_Improved.jpg",\
+	"Custom","Let you choose to customize your installation.","-- Screenshots\\Ruins_Clutter_Improved.jpg"
+		Case "Install Everything"
+			SelectSubPackage '00 Core'
+			SelectSubPackage '01 Candles'
+			SelectSubPackage '02 Catacomb Candles'
+			SelectSubPackage '03 Enchanting Stations'
+			SelectSubPackage '04 Spider Eggs'
+			SelectSubPackage '05 Ruins Pots'
+			SelectSubPackage '06 Ruins Doors'
+			SelectSubPackage '07 Dragonclaws'
+			SelectSubPackage '08 Subliminal Traps'
+			Break
+		Case "Custom"
+			SelectSubPackage '00 Core'
+			SelectMany "Custom Installation\n\nPlease make your selection from the choices below.\n\nClick on an option for a detailed description.\nDouble-click on images to view a larger version",\
+			"|Candles","Install high resolution candles.","-- Screenshots\\HD_Candles.jpg",\
+			"|Catacomb Candles","Install highpoly and animated catacomb candles.","-- Screenshots\\HD_Catacomb Candles.jpg",\
+			"|Enchanting Stations","Install high resolution candles for enchanting stations.","-- Screenshots\\HD_Echantstation.jpg",\
+			"|Spider Eggs","Install high resolution spider eggs.","-- Screenshots\\HD_Eggs.jpg",\
+			"|Ruins Pots","Install high resolution pots.","-- Screenshots\\HD_Pots.jpg",\
+			"|Ruins Doors","Install high resolution textures and improved meshes for ruins doors.","-- Screenshots\\HD_Doors.jpg",\
+			"|Dragon Claws","Install high resolution dragon claws.","-- Screenshots\\HD_Dragonclaws.jpg",\
+			"|Subliminal Traps","Install subliminal ground traps.","-- Screenshots\\HD_Traps.jpg"
+				Case "Candles"
+					SelectSubPackage '01 Candles'
+					Break
+				Case "Catacomb Candles"
+					SelectSubPackage '02 Catacomb Candles'
+					Break
+				Case "Enchanting Stations"
+					SelectSubPackage '03 Enchanting Stations'
+					Break
+				Case "Spider Eggs"
+					SelectSubPackage '04 Spider Eggs'
+					Break
+				Case "Ruins Pots"
+					SelectSubPackage '05 Ruins Pots'
+					Break
+				Case "Ruins Doors"
+					SelectSubPackage '06 Ruins Doors'
+					Break
+				Case "Dragon Claws"
+					SelectSubPackage '07 Dragonclaws'
+					Break
+				Case "Subliminal Traps"
+					SelectSubPackage '08 Subliminal Traps'
+					Break
+			EndSelect
+                    Break
+                EndSelect ; Infernio: added missing EndSelect
+			
+;== Finish Page ==
+Note "Confirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"

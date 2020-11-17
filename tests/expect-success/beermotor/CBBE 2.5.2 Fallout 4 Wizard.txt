@@ -1,0 +1,146 @@
+;=-=-=-|Caliente's Beautiful Bodies Enhancer -CBBE- Wrye Bash BAIN wizard by Mertz |-=-=-=
+RequireVersions "1.0.0.0", "", "", "307" 
+DeSelectAll
+
+MOD_Readme = str("CBBE replaces the vanilla female body that all adult female characters \(player and NPC\) share\, with one that is fully customizable with the BodySlide tool\. By default there are three nude options available that don\'t require anything but installation\, as well as lore-friendly underwear styles for these body shapes \(using Beth\'s own unused underwear meshes\)\.\n\nThese meshes have a total of over 21k vertices - compared to the vanilla body\'s modest 1750 - for optimal smoothness\. In tests there have been no reports of these high-poly meshes causing any slow down\, but may still be too much for weaker systems to use\, so be warned\.\n\nIncluded in the main installer are bodies\, textures\, all vanilla and DLC outfits\, and BodySlide addons for the body and outfits\.\n\nThere are also morph files for the body and the outfits included\, which are used for in-game morphing with LooksMenu or other script mods.")
+
+flagBodyType = 0
+flagNeverNude = 0
+bVanillaOutfits = False
+bAutomatronOutfits = False
+bFarHarborOutfits = False
+bNukaWorldOutfits = False
+bMorphs = False
+
+;== Welcome screen and install core mod
+SelectOne "Welcome",\
+    "|Welcome","Welcome to the Caliente's Beautiful Bodies Enhancer -CBBE- installer.\n\nClick Read Me below to select the Readme for this mod\n\nClick 'Credits' above to view the credits.\n\nClick Next to continue the installation","FOMod\\CBBE.png",\
+	"Read Me",MOD_Readme,"FOMod\\CBBE.png",\
+    "Credits","Caliente's Beautiful Bodies Enhancer -CBBE- is brought to you by:\n\n- Caliente\n- Ousnius\n- Jeir\n- NifTools team\n- MrTony and Biuc73 for the reduced CBBE with dismemberment\n- Epitaph78 for the idea/concept of the body physics\n- Shocky for assistance with SevenBase and the creators of the SevenBase shape\n- darklynxx for providing the base of the abs muscle slider\n- EU4ORICK for designing some 'UNP' and 'Dream Girl' presets\n- Includes awesome Dirty Raider skin textures by Ubercharge! Thanks!\n- Kiiba for some tweaks to the vanilla outfit sliders\n- Various alpha testers\n\n If you enjoy this mod, please make sure to show your thanks by endorsing!\n\n\nWizBAIN installer by Mertz\n\nClick next to continue the installation","FOMod\\CBBE.png"
+EndSelect
+
+SelectSubPackage '00 Required'
+
+SelectOne "Body Type",\
+	"Slim","Choose this option if you want to use the SLIM default shape.","FOMod\\Slim.jpg",\
+	"|Curvy","Choose this option if you want to use the CURVY default shape.","FOMod\\Curvy.jpg",\
+	"Vanilla","The CBBE body, shaped to conform closely to the proportions of the vanilla female body - with a few adjustments.","FOMod\\Vanilla.jpg"
+		Case "Slim"
+			flagBodyType = 1
+			Break
+		Case "Curvy"
+			SelectSubPackage '01 Curvy'
+			flagBodyType = 2
+			Break
+		Case "Vanilla"
+			SelectSubPackage '02 Vanilla'
+			flagBodyType = 3
+			Break
+EndSelect
+
+SelectOne "Underwear Options",\
+	"|Nude","This will replace the nude body with underwear that uses the vanilla textures. To stay nude, don't select this!","FOMod\\Curvy.jpg",\
+	"NeverNude","Continue with the default nude body","FOMod\\NeverNude.jpg"
+		Case "Nude"
+			Break
+		Case "NeverNude"
+			flagNeverNude = 1
+			Break
+EndSelect
+
+SelectMany "Outfit Options",\
+	"|Vanilla Outfits","Choose this option if you want to use the vanilla outfits addon for CBBE.","FOMod\\CBBE.png",\
+	"|Automatron Outfits","Choose this option if you want to use the Automatron DLC outfits addon for CBBE.","FOMod\\CBBE.png",\
+	"|Far Harbor Outfits","Choose this option if you want to use the Far Harbor DLC outfits addon for CBBE.","FOMod\\CBBE.png",\
+	"|Nuka World Outfits","Choose this option if you want to use the Nuka World DLC outfits addon for CBBE.","FOMod\\CBBE.png",\
+	"F4EE Morphs","This will install morph \.tri files for the CBBE body and outfits\, so that they can be applied in\-game via F4SE plugins such as LooksMenu\. If you don't feel like you will need this\, you can keep the option disabled\.","FOMod\\CBBE.png"
+		Case "Vanilla Outfits"
+			bVanillaOutfits = True
+			Break
+		Case "Automatron Outfits"
+			bAutomatronOutfits = True
+			Break
+		Case "Far Harbor Outfits"
+			bFarHarborOutfits = True
+			Break
+		Case "Nuka World Outfits"
+			bNukaWorldOutfits = True
+			Break
+		Case "F4EE Morphs"
+			SelectSubPackage '26 F4EE Morphs'
+			bMorphs = True
+			Break
+EndSelect
+; NeveNude?
+If flagNeverNude == 1 and flagBodyType == 1
+	SelectSubPackage '03 NeverNude Slim'
+Elif flagNeverNude == 1 and flagBodyType == 2
+	SelectSubPackage '04 NeverNude Curvy'
+Elif flagNeverNude == 1 and flagBodyType == 3
+	SelectSubPackage '05 NeverNude Vanilla'
+EndIf
+; Vanilla Outfits
+If bVanillaOutfits == True and flagBodyType == 1
+	SelectSubPackage '06 Outfits Slim - Vanilla'
+	SelectSubPackage '18 Outfits BodySlide - Vanilla'
+Elif bVanillaOutfits == True and flagBodyType == 2
+	SelectSubPackage '10 Outfits Curvy - Vanilla'
+	SelectSubPackage '18 Outfits BodySlide - Vanilla'
+Elif bVanillaOutfits == True and flagBodyType == 3
+	SelectSubPackage '14 Outfits Vanilla - Vanilla'
+	SelectSubPackage '18 Outfits BodySlide - Vanilla'
+EndIf
+; Automatron Outfits
+If bAutomatronOutfits == True and flagBodyType == 1
+	SelectSubPackage '07 Outfits Slim - Automatron'
+	SelectSubPackage '19 Outfits BodySlide - Automatron'
+Elif bAutomatronOutfits == True and flagBodyType == 2
+	SelectSubPackage '11 Outfits Curvy - Automatron'
+	SelectSubPackage '19 Outfits BodySlide - Automatron'
+Elif bAutomatronOutfits == True and flagBodyType == 3
+	SelectSubPackage '15 Outfits Vanilla - Automatron'
+	SelectSubPackage '19 Outfits BodySlide - Automatron'
+EndIf
+; Far Harbor Outfits
+If bFarHarborOutfits == True and flagBodyType == 1
+	SelectSubPackage '08 Outfits Slim - Far Harbor'
+	SelectSubPackage '20 Outfits BodySlide - Far Harbor'
+Elif bFarHarborOutfits == True and flagBodyType == 2
+	SelectSubPackage '12 Outfits Curvy - Far Harbor'
+	SelectSubPackage '20 Outfits BodySlide - Far Harbor'
+Elif bFarHarborOutfits == True and flagBodyType == 3
+	SelectSubPackage '16 Outfits Vanilla - Far Harbor'
+	SelectSubPackage '20 Outfits BodySlide - Far Harbor'
+EndIf
+
+If bNukaWorldOutfits == True and flagBodyType == 1
+	SelectSubPackage '09 Outfits Slim - Nuka World'
+	SelectSubPackage '21 Outfits BodySlide - Nuka World'
+Elif bNukaWorldOutfits == True and flagBodyType == 2
+	SelectSubPackage '13 Outfits Curvy - Nuka World'
+	SelectSubPackage '21 Outfits BodySlide - Nuka World'
+Elif bNukaWorldOutfits == True and flagBodyType == 3
+	SelectSubPackage '17 Outfits Vanilla - Nuka World'
+	SelectSubPackage '21 Outfits BodySlide - Nuka World'
+EndIf
+
+; Morphs
+If bVanillaOutfits == True and bMorphs == True
+	SelectSubPackage '22 Outfits TRI - Vanilla'
+EndIf
+
+If bAutomatronOutfits and bMorphs == True
+	SelectSubPackage '23 Outfits TRI - Automatron'
+EndIf
+
+If bFarHarborOutfits == True and bMorphs == True
+	SelectSubPackage '24 Outfits TRI - Far Harbor'
+EndIf
+
+If bNukaWorldOutfits == True and bMorphs == True
+	SelectSubPackage '25 Outfits TRI - Nuka World'
+EndIf
+
+	
+;== Finish Page ==
+Note "Confirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"

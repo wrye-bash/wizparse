@@ -1,0 +1,227 @@
+;== Nexus Skyrim Overhaul Patches BAIN wizard by Mertz ===
+; Special thanks to Alt3rn1ty
+
+RequireVersions "", "", "", "307"
+DeSelectAll
+;== Welcome screen ==
+
+SelectOne "Nexus Skyrim Overhaul Patches - BAIN Install Wizard",\
+    "|Welcome","Nexus Skyrim Overhaul Patches\n\nCompatibility Patches Provided:\n\nMain Nexus Skyrim Overhaul Patches:\n- Mods that edit \"No Stone Unturned\" \(This simply removes the Barenziah Quest Markers from the original.\)\n- For those who prefer Yorimi's take on the Companions requirements over Taj\'s. By SkyLover264.\n\nFor consistency with other mods:\n Dawnguard - Tweaks and Enhancements\n Skyrim Coin Replacer Redux\n Complete Alchemy \& Cooking Overhaul\n Immersive Weapons\n Legacy of the Dragonborn \(Dragonborn Gallery\)\n The Magic of Food and Drink\n Advanced Adversary Encounters - Ultimate Edition\n Elemental Destruction Magic\n Imperious - Races of Skyrim\n Vampire Lord and Werewolf Hybrid","fomod\\images\\ELD.jpg",\
+    "Credits","Nexus Skyrim Overhaul Patches by SkyLover264 and Kelsenellenelvian\nBAIN Wizard by Mertz\n\nClick next to continue the installation","fomod\\images\\ELD.jpg"
+EndSelect
+
+; Start testing for the presence of ESP/ESM files in the data directory to install mods.
+
+sModName101 = "Replacement esp without Stones of Barenziah Markers"
+sModDescription101 = "For compatibility with other mods that edit No Stone Unturned. By SkyLover264."
+sModImage101 = "Fomod\\Images\\NSB.jpg"
+
+sModName102 = "Slower Companions Advancement - Original Requirements"
+sModDescription102 = "For those who prefer Yorimi's take on the Companions requirements over Taj's. By SkyLover264."
+sModImage102 = "Fomod\\Images\\SCA.jpg"
+
+sModName103 = "Advanced Adversary Encounters" ; 02 AAE
+sModDescription103 = "Patch for Advanced Adversary Encounters. Patch by SirJesto."
+sModImage103 = "fomod\\images\\AAE.jpg"
+If GetEspmStatus("AAE Ultimate Edition.esp") > 1
+	sModName103 = "|" + sModName103
+EndIf
+
+sModName104 = "Avengers Massive Boss Overhaul"  ; install '02 AMBO'
+sModDescription104 = "Patch for Avengers Massive Boss Overhaul. Patch by SirJesto."
+sModImage104 = "fomod\\images\\AMBO.jpg"
+If GetEspmStatus("AvengersOverhaul.esp") > 1
+	sModName104 = "|" + sModName104
+EndIf
+
+sModName105 = "Complete Alchemy and Cooking Overhaul" ;02 CACO
+sModDescription105 = "Patch for Complete Alchemy and Cooking Overhaul. Patch by SirJesto."
+sModImage105 = "fomod\\images\\CACO.jpg"
+If GetEspmStatus("Complete Alchemy \& Cooking Overhaul.esp") > 1
+	sModName105 = "|" + sModName105
+EndIf
+
+sModName106 = "Chaos Dragons" ;02 CDP
+sModDescription106 = "Patch for Chaos Dragons. Patch by SirJesto."
+sModImage106 = "fomod\\images\\CDP.jpg"
+If GetEspmStatus("ChaosDragons.esp") > 1
+	sModName106 = "|" + sModName106
+EndIf
+
+sModName107 = "Legacy of the Dragonborn" ;02 DBM
+sModDescription107 = "Patch for Legacy of the Dragonborn. Patch by SirJesto."
+sModImage107 = "fomod\\images\\DBM.jpg"
+If GetEspmStatus("LegacyoftheDragonborn.esp") > 1
+	sModName107 = "|" + sModName107
+EndIf
+
+sModName108 = "Dawnguard Tweaks and Enhancements" ;02 DTE
+sModDescription108 = "Patch for Dawnguard Tweaks and Enhancements. Patch by SkyLover264."
+sModImage108 = "fomod\\images\\DTE.jpg"
+If GetEspmStatus("Dawnguard - Radiant Quest Requirements.esp") > 1
+	sModName108 = "|" + sModName108
+EndIf
+
+sModName109 = "Ethereal Elven Overhaul" ;02 EEO
+sModDescription109 = "Patch for Ethereal Elven Overhaul. Patch by SirJesto."
+sModImage109 = "fomod\\images\\EEO.jpg"
+If GetEspmStatus("ethereal_elven_overhaul.esp") > 1
+	sModName109 = "|" + sModName109
+EndIf
+
+sModName110 = "Elemental Destruction Magic"
+sModDescription110 = "Patch for Elemental Destruction Magic. Patch by SkyLover264."
+sModImage110 = "fomod\\images\\ELD.jpg"
+If GetEspmStatus("Elemental Destruction.esp") > 1
+	sModName110 = "|" + sModName110
+EndIf
+
+sModName111 = "Imperious - Races of Skyrim"
+sModDescription111 = "Patch for Imperious - Races of Skyrim. Patch by SkyLover264."
+sModImage111 = "fomod\\images\\IMP.jpg"
+If GetEspmStatus("Imperious - Races of Skyrim.esp") > 1
+	sModName111 = "|" + sModName111
+EndIf
+
+sModName112 = "Immersive Weapons" ;02 IW
+sModDescription112 = "Patch for Immersive Weapons. Patch by SirJesto."
+sModImage112 = "fomod\\images\\IW.jpg"
+If GetEspmStatus("Immersive Weapons.esp") > 1
+	sModName112 = "|" + sModName112
+EndIf
+
+sModName113 = "The Magic of Food and Drink"
+sModDescription113 = "Patch for The Magic of Food and Drink. Patch by MisterB1969."
+sModImage113 = "fomod\\images\\MFD.jpg"
+If GetEspmStatus("TheMagicOfFoodAndDrink.esp") > 1
+	sModName113 = "|" + sModName113
+EndIf
+
+sModName114 = "Organized Bandits In Skyrim \(OBIS\)"
+sModDescription114 = "Patch for Organized Bandits In Skyrim \(OBIS\). Patch by SirJesto."
+sModImage114 = "fomod\\images\\OBIS.jpg"
+If GetEspmStatus("OBIS SE.esp") > 1
+	sModName114 = "|" + sModName114
+EndIf
+
+sModName115 = "Opulent Outfits - All In One"
+sModDescription115 = "Patch for Opulent Outfits \(All In One\). Patch by SirJesto."
+sModImage115 = "fomod\\images\\OPO.jpg"
+If GetEspmStatus("OpulentOutfits_AIO-2017.esp") > 1
+	sModName115 = "|" + sModName115
+EndIf
+
+sModName116 = "Opulent Outfits - Replacer"
+sModDescription116 = "Patch for Opulent Outfits \(Replacer\). Patch by SirJesto."
+sModImage116 = "fomod\\images\\OPO.jpg"
+If GetEspmStatus("OpulentOutfits_Replacer-2016.esp") > 1
+	sModName116 = "|" + sModName116
+EndIf
+
+sModName117 = "Skyrim Coin Replacer Redux" 
+sModDescription117 = "Patch for Skyrim Coin Replacer Redux. Patch by SirJesto."
+sModImage117 = "fomod\\images\\SCRR.jpg"
+If GetEspmStatus("SkyrimCoinReplacerRedux.esp") > 1
+	sModName117 = "|" + sModName117
+EndIf
+
+sModName118= "Sands of Time"
+sModDescription118 = "Patch for Sands of Time. Patch by SirJesto."
+sModImage118 = "fomod\\images\\SOT.jpg"
+If GetEspmStatus("SleepingDangers-SandsofTime.esp") > 1
+	sModName118 = "|" + sModName118
+EndIf
+
+sModName119 = "SkyTEST - Harder Creatures"
+sModDescription119 = "Patch for SkyTEST - Harder Creatures. Patch by SirJesto."
+sModImage119 = "fomod\\images\\STHC.jpg"
+If GetEspmStatus("SkyTEST-HarderCreatures.esp") > 1
+	sModName119 = "|" + sModName119
+EndIf
+
+sModName120 = "Vampire Lord and Werewolf Hybrid"
+sModDescription120 = "Patch for Vampire Lord and Werewolf Hybrid.\n\nIf you prefer Yorimi\'s take on the Companions requirements over Taj\'s \(Slower Companions Advancement\) Use the optional file on the mod page instead. Patch by SkyLover264."
+sModImage120 = "fomod\\images\\VLWH.jpg"
+If GetEspmStatus("VLW_Hybrid.esp") > 1
+	sModName120 = "|" + sModName120
+EndIf
+
+; User selection of compatibility add-ons
+SelectMany "Nexus Skyrim Overhaul - Compatibility Patches\n\nThe following mods have been detected in your Skyrim SE load order.\nPlease feel free to select or de-select any mod based on your preference.\n\nYou may click to read the description for each patch before installing",\
+		str(sModName101),str(sModDescription101),str(sModImage101),\
+		str(sModName102),str(sModDescription102),str(sModImage102),\
+		str(sModName103),str(sModDescription103),str(sModImage103),\
+		str(sModName104),str(sModDescription104),str(sModImage104),\
+		str(sModName105),str(sModDescription105),str(sModImage105),\
+		str(sModName106),str(sModDescription106),str(sModImage106),\
+		str(sModName107),str(sModDescription107),str(sModImage107),\
+		str(sModName108),str(sModDescription108),str(sModImage108),\
+		str(sModName109),str(sModDescription109),str(sModImage109),\
+		str(sModName110),str(sModDescription110),str(sModImage110),\
+		str(sModName111),str(sModDescription111),str(sModImage111),\
+		str(sModName112),str(sModDescription112),str(sModImage112),\
+		str(sModName113),str(sModDescription113),str(sModImage113),\
+		str(sModName114),str(sModDescription114),str(sModImage114),\
+		str(sModName115),str(sModDescription115),str(sModImage115),\
+		str(sModName116),str(sModDescription116),str(sModImage116),\
+		str(sModName117),str(sModDescription117),str(sModImage117),\
+		str(sModName118),str(sModDescription118),str(sModImage118),\
+		str(sModName119),str(sModDescription119),str(sModImage119),\
+		str(sModName120),str(sModDescription120),str(sModImage120)
+	Case "Replacement esp without Stones of Barenziah Markers"
+		SelectSubPackage '01 NSB'
+		Break
+	Case "Slower Companions Advancement - Original Requirements"
+		SelectSubPackage '01 SCA'
+		Break
+	Case "Advanced Adversary Encounters"
+		SelectSubPackage '02 AAE'
+		Break
+	Case "Avengers Massive Boss Overhaul"
+		SelectSubPackage '02 AMBO'
+		Break
+	Case "Complete Alchemy and Cooking Overhaul"
+		SelectSubPackage '02 CACO'
+		Break
+	Case "Chaos Dragons"
+		SelectSubPackage '02 CDP'
+		Break
+	Case "Legacy of the Dragonborn"
+		SelectSubPackage '02 DBM'
+		Break
+	Case "Dawnguard Tweaks and Enhancements"
+		SelectSubPackage '02 DTE'
+		Break
+	Case "Ethereal Elven Overhaul"
+		SelectSubPackage '02 EEO'
+		Break
+	Case "Elemental Destruction Magic"
+		SelectSubPackage '02 ELD'
+		Break
+	Case "Imperious - Races of Skyrim"
+		SelectSubPackage '02 IMP'
+		Break
+	Case "The Magic of Food and Drink"
+		SelectSubPackage '02 MFD'
+		Break
+	Case "Organized Bandits In Skyrim \(OBIS\)"
+		SelectSubPackage '02 OBIS'
+		Break
+	Case "Opulent Outfits - All In One"
+		SelectSubPackage '02 OPOAIO'
+		Break
+	Case "Opulent Outfits - Replacer"
+		SelectSubPackage '02 OPOREP'
+		Break
+	Case "Sands of Time"
+		SelectSubPackage '02 SOT'
+		Break
+	Case "SkyTEST - Harder Creatures"
+		SelectSubPackage '02 STHC'
+		Break
+	Case "Vampire Lord and Werewolf Hybrid"
+		SelectSubPackage '02 VLWH'
+		Break
+EndSelect
+;== Finish Page ==
+Note "Thank you for installing Nexust Skyrim Overhaul Patches\n\n\nConfirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"

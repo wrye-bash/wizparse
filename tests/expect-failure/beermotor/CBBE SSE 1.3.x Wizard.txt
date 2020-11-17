@@ -1,0 +1,251 @@
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+;-- Caliente's Beautiful Bodies Enhancer -- WizBAIN by Mertz --
+;-- Updated for CBBE 1.3 by alt3rn1ty
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+RequireVersions "", "", "", "307"
+ResetAllEspmNames
+DeSelectAll
+
+MOD_Readme = str("CBBE replaces the vanilla female body that all adult female characters \(player and NPC\) share, with one that is fully customisable with the BodySlide tool. By default there are three nude options available that don\'t require anything but installation\, as well as two underwear styles for these body shapes.\n\nAlso included are all vanilla and DLC outfits converted to the base three body shapes, with additional BodySlide compatibility including sliders and many zaps.\n\nThe body mesh is completely custom and has 13554 vertices\, which is more than 20 times the resolution of the vanilla Skyrim body and 6 times that of the older CBBE.\n Included are textures made from photographs of real women\, and multiple choices of high-res normal map to fit the body shape you want. Also redone are the mesh weights for animation\, offering improved deformation in many poses.\n\nNote to modders: If you wish to create armour\/clothes for the bodies\, make use of the conversion references coming with BodySlide in Outfit Studio \(the base shape of CBBE\, otherwise the \"Outfit\" presets\) or your preferred modelling software. Ideally\, create BodySlide projects so that your outfits will fit regardless of shape preset.")
+
+bSlim = False
+bCurvy = False
+bVanilla = False
+bUnderwear = False
+bNeverNude = False
+bVanillaOutfits = False
+bFacePack = False
+bPubicHair = False
+bUnderwearRevealing = False
+; added in 1.17:
+bDirtToBeautyMarks = False
+bThinTrimmedBrows = False
+bThinTrimmedBrowsLight = False
+bTrimmedBrows = False
+bTrimmedBrowsLight = False
+bBushierBrows = False
+bBushierBrowsLight = False
+
+
+;== Welcome screen and install core mod
+SelectOne "Welcome",\
+    "|Welcome","Welcome to the Caliente's Beautiful Bodies Enhancer installer.\n\nClick Read Me below to select the Readme for this mod\n\nClick 'Credits' above to view the credits.\n\nClick Next to continue the installation","FOMod\\CBBE.png",\
+	"Read Me",MOD_Readme,"FOMod\\CBBE.png",\
+    "Credits","Caliente's Beautiful Bodies Enhancer was brought to you by:\n\n - Caliente\n - ousnius\n - Jeir\n - Alecu for the underwear assets and design\n - Lunyra for some of the blend options in the PSD resources\n - MrTroubleMaker for the subsurface maps resource\n - XunAmarox for the innies layer in the PSD resources\n\n- Face Pack:\n - tktk1 for Pretty Face \(edited v1\)\n - HHaleyy for tintmasks and \(edited\) specular of Fair Skin Complexion\n - AluminumFoil for Eyebrows Match Hair \(edited\).\n\nIf you enjoy this mod\, please make sure to show your thanks by endorsing!\n\nWizBAIN installer by Beermotor S. Mertz\n\nClick next to continue the installation","FOMod\\CBBE.png"
+EndSelect
+SelectSubPackage '00 Required (Slim)'
+
+SelectOne "Body Shape\n\nPlease select one of the following options.",\
+    "|Slim","Choose this option if you want to use the slim body shape. Affects the other options as well.","FOMod\\Slim.jpg",\
+    "Curvy","Choose this option if you want to use the curvy default shape. Affects the other options as well.","FOMod\\Curvy.jpg",\
+    "Vanilla Shape","The CBBE body\, shaped to conform closely to the proportions of the vanilla female body - with a few adjustments. Affects the other options as well.","FOMod\\Vanilla.jpg"
+        Case "Slim"
+            bSlim = True
+            Break
+        Case "Curvy"
+            bCurvy = True
+            SelectSubPackage '01 Curvy'
+            Break
+        Case "Vanilla Shape"
+            bVanilla = True
+            SelectSubPackage '02 Vanilla'
+            Break
+EndSelect
+
+SelectOne "Underwear Options\n\nPlease select one of the following options",\
+    "|Nude","Nude body with no underwear","FOMod\\Slim.jpg",\
+    "Underwear","This will replace the nude body with underwear\. Color and shape options for this one follow in the next step. The bows can be removed in BodySlide. To stay nude\, don't select this!","FOMod\\Underwear.jpg",\
+    "NeverNude","This will replace the nude body with the vanilla underwear. To stay nude\, don't select this!","FOMod\\NeverNude.jpg"
+        Case "Nude"
+            Break
+        Case "Underwear"
+            bUnderwear = True
+            Break
+        Case "NeverNude"
+            bNeverNude = True
+            Break
+EndSelect
+; New Dirt-to-Beauty-marks option added in 1.17.
+SelectMany "Additional Options\n\nPlease select or deselect any items below",\
+        "|Vanilla Outfits","Choose this option if you want to install the adjusted vanilla outfits for CBBE. Required for the shape and properly appearing body textures. Includes BodySlide addon for the outfits as well.","FOMod\\CBBE.png",\
+        "Face Pack","Installs female head textures and masks that are compatible with the default CBBE body textures. Required if you don't use another CBBE compatible set of head and body textures already.","FOMod\\Face Pack.jpg",\
+        "Dirt to Beauty Marks","Turns the facial dirt options in the character creation into three beauty mark options. Doesn't affect NPCs, unless their face is regenerated in the Creation Kit.","FOMod\\Beauty Marks.jpg",\
+        "Pubic Hair","Installs a body texture with pubic hair on the front.","FOMod\\Pubic Hair.png"
+            Case "Vanilla Outfits"
+                bVanillaOutfits = True
+                Break
+            Case "Face Pack"
+                bFacePack = True
+                Break
+            Case "Dirt to Beauty Marks"
+                bDirtToBeautyMarks = True
+                Break
+            Case "Pubic Hair"
+                bPubicHair = True
+                Break
+EndSelect
+; Added in 1.17 and 1.22 - Eyebrow options
+SelectOne "Eyebrow Options\n\nPlease select one of the following options",\
+    "|Thin + Trimmed Brows","Female eyebrow textures that are both thinned out and trimmed. They match the hair colors more closely than vanilla eyebrows.","FOMod\\Thin + Trimmed Brows.png",\
+    "Thin + Trimmed Brows - Light","Female eyebrow textures that are both thinned out and trimmed. Light option is recommended for very light hair colors.","FOMod\\Thin + Trimmed Brows (Light).png",\
+    "Trimmed Brows","Female eyebrow textures that are a little more trimmed compared to vanilla. They match the hair colors more closely than vanilla eyebrows.","FOMod\\Trimmed Brows.png",\
+    "Trimmed Brows Light","Female eyebrow textures that are a little more trimmed compared to vanilla. Light option is recommended for very light hair colors.","FOMod\\Trimmed Brows (Light).png",\
+    "Bushier Brows","Female eyebrow textures that aren't trimmed, so they are a little bushier just like vanilla. They match the hair colors more closely than vanilla eyebrows.","FOMod\\Bushier Brows.png",\
+    "Bushier Brows Light","Female eyebrow textures that aren't trimmed, so they are a little bushier just like vanilla. Light option is recommended for very light hair colors.","FOMod\\Bushier Brows (Light).png"
+        Case "Thin + Trimmed Brows"
+            bThinTrimmedBrows = True
+            Break
+        Case "Thin + Trimmed Brows - Light"
+            bThinTrimmedBrowsLight = True
+            Break
+        Case "Trimmed Brows"
+            bTrimmedBrows = True
+            Break
+        Case "Trimmed Brows Light"
+            bTrimmedBrowsLight = True
+            Break
+        Case "Bushier Brows"
+            bBushierBrows = True
+            Break
+        Case "Bushier Brows Light"
+            bBushierBrowsLight = True
+            Break
+EndSelect
+
+If bUnderwear
+bUnderwearDarkPurple = False
+bUnderwearAqua = False
+bUnderwearGray = False
+bUnderwearDarkRed = False
+    SelectOne "Underwear Options",\
+        "|Normal","The underwear in its normal shape. The bows can be removed in BodySlide.","FOMod\\Underwear.jpg",\
+        "Revealing","The underwear in its more revealing shape. The bows can be removed in BodySlide.","FOMod\\Underwear Revealing.jpg"
+            Case "Normal"
+                Break
+            Case "Revealing"
+                bUnderwearRevealing = True
+                Break
+    EndSelect
+    SelectOne "Underwear Color",\
+        "|Black","The underwear in a black color.","FOMod\\Underwear Black.png",\
+        "Dark Purple","The underwear in dark purple.","FOMod\\Underwear Dark Purple.png",\﻿
+        "Aqua","The underwear in aqua","FOMod\\Underwear Aqua.png",\
+        "Gray","The underwear in gray","FOMod\\Underwear Gray.png",\
+        "Dark Red","The underwear in dark red","FOMod\\Underwear Dark Red.png"
+            Case "Black"
+                Break
+            Case "Dark Purple"
+                bUnderwearDarkPurple = True
+                Break
+            Case "Aqua"
+                bUnderwearAqua = True
+                Break
+            Case "Gray"
+                bUnderwearGray = True
+                Break
+            Case "Dark Red"
+                bUnderwearDarkRed = True
+                Break
+    EndSelect
+EndIf
+
+; Conditional File Installs
+If bNeverNude and bSlim
+    SelectSubPackage '03 NeverNude Slim'
+EndIf
+
+If bNeverNude and bCurvy 
+    SelectSubPackage '04 NeverNude Curvy'
+EndIf
+
+If bNeverNude and bVanilla
+    SelectSubPackage '05 NeverNude Vanilla'
+EndIf    
+
+If bVanillaOutfits and bSlim
+    SelectSubPackage '06 Outfits Slim'
+    SelectSubPackage '09 Outfits BodySlide'
+    SelectSubPackage '10 Outfits 1st Person'
+EndIf
+
+If bVanillaOutfits and bCurvy
+    SelectSubPackage '07 Outfits Curvy'
+    SelectSubPackage '09 Outfits BodySlide'
+    SelectSubPackage '10 Outfits 1st Person'
+EndIf
+
+If bFacePack
+    SelectSubPackage '11 Face Pack'
+EndIf
+; Added in 1.17 - Brow options and Dirt-to-Beauty-Marks, 
+; Added in 1.2.2 - Lighter brow options
+If bThinTrimmedBrows
+    SelectSubPackage '14 Thin + Trimmed Brows'
+EndIf
+
+If bThinTrimmedBrowsLight
+    SelectSubPackage '14 Thin + Trimmed Brows (Light)'
+EndIf
+
+If bTrimmedBrows
+    SelectSubPackage '15 Trimmed Brows'
+EndIf
+
+If bTrimmedBrowsLight
+    SelectSubPackage '15 Trimmed Brows (Light)'
+EndIf
+
+If bBushierBrows
+    SelectSubPackage '16 Bushier Brows'
+EndIf
+
+If bBushierBrowsLight
+    SelectSubPackage '16 Bushier Brows (Light)'
+EndIf
+
+If bDirtToBeautyMarks
+    SelectSubPackage '17 Dirt to Beauty Marks'
+EndIf
+
+If bPubicHair
+    SelectSubPackage '12 Pubic Hair'
+EndIf
+
+If bUnderwear and bUnderwearRevealing == False
+    If bSlim
+        SelectSubPackage '20 Underwear'
+    Elif bCurvy
+        SelectSubPackage '21 Underwear Curvy'
+    Elif bVanilla 
+        SelectSubPackage '22 Underwear Vanilla'      
+    EndIf
+EndIf
+
+If bUnderwear and bUnderwearRevealing
+    If bSlim
+        SelectSubPackage '23 Underwear Revealing Slim'
+    Elif bCurvy
+        SelectSubPackage '24 Underwear Revealing Curvy'
+    Elif bVanilla
+        SelectSubPackage '25 Underwear Revealing Vanilla'
+    EndIf
+EndIf
+
+If bUnderwear and bUnderwearDarkPurple
+    SelectSubPackage '26 Underwear Dark Purple'
+EndIf
+
+If bUnderwear and bUnderwearAqua
+    SelectSubPackage '27 Underwear Aqua'
+EndIf
+
+If bUnderwear and bUnderwearGray
+    SelectSubPackage '28 Underwear Gray'
+EndIf
+
+If bUnderwear and bUnderwearDarkRed
+    SelectSubPackage '29 Underwear Dark Red'
+EndIf
+
+;== Finish Page ==
+Note "Confirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"

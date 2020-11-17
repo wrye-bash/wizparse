@@ -1,0 +1,179 @@
+;--Sounds of Skyrim Compleate -- WizBAIN by Mertz --
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+RequireVersions "", "", "", "307"
+ResetAllEspmNames
+DeSelectAll
+
+;== Welcome screen and install core mod
+SelectOne "Sounds of Skyrim Complete for Skyrim Special Edition\nby tonycubed2",\
+    "|Welcome","This installs the CORE Sounds of Skyrim Complete mod which is a merged version of the three individual mods, Sounds of Skyrim - Civilization, Sounds of Skyrim - The Wilds, and Sounds of Skyrim - The Dungeons.\n\nYou do not need to have those individual mods installed when using this combined plugin. Also, the patches that will install on the following pages will replace any of the patches you may have had for the individual mods as well.\n\nClick 'Credits' below to view the credits or..\n\nClick Next to continue the installation","fomod\\images\\SoSLogo.jpg",\
+    "Credits","Sounds of Skyrim Compelte by tonycubed2\n\nCompatibility Patches by SirJesto\n\nWizBAIN installer by Mertz\n\nClick next to continue the installation","fomod\\images\\SoSLogo.jpg"
+EndSelect
+SelectSubPackage '00 SOS'
+
+; Start testing for the presence of ESP/ESM files in the data directory to install mods.
+
+sModName101 = "Climates of Tamriel"
+sModDescription101 = "Installs the Climates of Tamriel compatibility patch"
+sModImage101 = "FOMOD\\Images\\CoT.jpg"
+If GetEspmStatus("ClimatesOfTamriel.esm") > 1
+	sModName101 = "|" + sModName101
+EndIf
+sModName102 = "Dolomite Weathers"
+sModDescription102 = "Installs the Dolomite Weathers Compatibility Patch"
+sModImage102 = "FOMOD\\Images\\DOL.jpg"
+If GetEspmStatus("Dolomite Weathers.esp") > 1
+	sModName102 = "|" + sModName102
+EndIf
+
+
+sModName103 = "Enhanced Lighting For ENB"
+sModDescription103 = "Installs the Enhanced Lighting For ENB Compatibility Patch"
+sModImage103 = "FOMOD\\Images\\ELE.jpg"
+If GetEspmStatus("ELE_SSE.esp") > 1
+	sModName103 = "|" + sModName102
+EndIf
+
+sModName104 = "Immersive Citizens"
+sModDescription104 = "Installs the Immersive Citizens Compatibility Patch"
+sModImage104 = "FOMOD\\Images\\IC.jpg"
+If GetEspmStatus("Immersive Citizens - AI Overhaul.esp") > 1
+	sModName104 = "|" + sModName104
+EndIf
+
+sModName105= "Natural Atmospheric Tamriel"
+sModDescription105 = "Installs the Natural Atmospheric Tamriel Compatibility Patch"
+sModImage105 = "FOMOD\\Images\\NAT.jpg"
+If GetEspmStatus("NAT.esp") > 1
+	sModName105 = "|" + sModName105
+EndIf
+
+sModName106= "Realistic Lighting Overhaul"
+sModDescription106 = "Installs the Realistic Lighting Overhaul Compatibility Patch"
+sModImage106 = "FOMOD\\Images\\RLO.jpg"
+If GetEspmStatus("RLO - Interiors.esp") > 1
+	sModName106 = "|" + sModName106
+EndIf
+
+sModName107= "True Storms"
+sModDescription107 = "Installs the True Storms Compatibility Patch"
+sModImage107 = "FOMOD\\Images\\TS.jpg"
+If GetEspmStatus("TrueStormsSE.esp") > 1
+	sModName107 = "|" + sModName107
+EndIf
+
+sModName108= "Vivid Weathers"
+sModDescription108 = "Installs the Vivid Weathers Compatibility Patch"
+sModImage108 = "FOMOD\\Images\\VW.jpg"
+If GetEspmStatus("Vivid WeathersSE.esp") > 1
+	sModName108 = "|" + sModName108
+EndIf
+
+; Compatibility Add-ons
+SelectMany "Sounds of Skyrim - Compatibility Patches\n\nThe following mods have been detected in your Skyrim SE load order.\nPlease feel free to select or de-select any mod based on your preference.\n\nYou may click to read the description for each patch before installing",\
+		str(sModName101),str(sModDescription101),str(sModImage101),\
+		str(sModName102),str(sModDescription102),str(sModImage102),\
+		str(sModName103),str(sModDescription103),str(sModImage103),\
+		str(sModName104),str(sModDescription104),str(sModImage104),\
+		str(sModName105),str(sModDescription105),str(sModImage105),\
+		str(sModName106),str(sModDescription106),str(sModImage106),\
+		str(sModName107),str(sModDescription107),str(sModImage107),\
+		str(sModName108),str(sModDescription108),str(sModImage108)
+	Case "Climates of Tamriel"
+		SelectSubPackage '01 COT'
+	Break
+	Case "Dolomite Weathers"
+		SelectSubPackage '01 DOL'
+	Break
+	Case "Enhanced Lighting For ENB"
+		SelectSubPackage '01 ELE'
+	Break
+	Case "Immersive Citizens"
+		SelectSubPackage '01 IC'
+	Break
+	Case "Natural Atmospheric Tamriel"
+		SelectSubPackage '01 NAT'
+	Break
+	Case "Realistic Lighting Overhaul"
+	SelectSubPackage '01 RLO'
+	Break
+	Case "True Storms"
+		SelectSubPackage '01 TS'
+	Break
+	Case "Vivid Weathers"
+		SelectSubPackage '01 VW'
+	Break
+EndSelect
+
+; ELFX stuff
+sModName201 = "ELFX"
+sModDescription201 = "This option will be selected if you use ELFX Core ONLY. Patch by SirJesto"
+sModImage201 = "Fomod\\Images\\ELFX.jpg"
+If GetEspmStatus("EnhancedLightsandFX.esp") > 1 and GetEspmStatus("ELFXEnhancer.esp") < 1 and GetEspmStatus("ELFX - Hardcore.esp") < 1 and GetEspmStatus("ELFX - Weathers.esp") < 1
+	sModName201 = "|" + sModName201
+EndIf
+
+sModName202 = "ELFX + Enhancer"
+sModDescription202 = "This option will be selected if you use ELFX and ELFX Enhancer. Patch by SirJesto"
+sModImage201 = "Fomod\\Images\\ELFX.jpg"
+If GetEspmStatus("EnhancedLightsandFX.esp") > 1 and GetEspmStatus("ELFXEnhancer.esp") > 1 and GetEspmStatus("ELFX - Hardcore.esp") < 1 and GetEspmStatus("ELF - Weathers.esp") < 1
+	sModName201 = "|" + sModName203
+EndIf
+
+sModName203 = "ELFX + Enhancer + Weathers"
+sModDescription203 = "This option will be selected if you use ELFX and ELFX Enhancer, and ELFX Weathers. Patch by SirJesto"
+sModImage203 = "Fomod\\Images\\ELFX.jpg"
+If GetEspmStatus("EnhancedLightsandFX.esp") > 1 and GetEspmStatus("ELFXEnhancer.esp") > 1 and GetEspmStatus("ELFX - Hardcore.esp") < 1 and GetEspmStatus("ELF - Weathers.esp") > 1
+	sModName203 = "|" + sModName203
+EndIf
+
+sModName204 = "ELFX + Hardcore"
+sModDescription204 = "This option will be selected if you use ELFX and ELFX Hardcore. Patch by SirJesto"
+sModImage204 = "Fomod\\Images\\ELFX.jpg"
+If GetEspmStatus("EnhancedLightsandFX.esp") > 1 and GetEspmStatus("ELFXEnhancer.esp") < 1 and GetEspmStatus("ELFX - Hardcore.esp") > 1 and GetEspmStatus("ELF - Weathers.esp") < 1
+	sModName204 = "|" + sModName204
+EndIf
+
+sModName205 = "ELFX + Hardcore + Weathers"
+sModDescription205 = "This option will be selected if you use ELFX, ELFX Hardcore, and ELFX Weathers. Patch by SirJesto"
+sModImage205 = "Fomod\\Images\\ELFX.jpg"
+If GetEspmStatus("EnhancedLightsandFX.esp") > 1 and GetEspmStatus("ELFXEnhancer.esp") < 1 and GetEspmStatus("ELFX - Hardcore.esp") > 1 and GetEspmStatus("ELF - Weathers.esp") > 1
+	sModName205 = "|" + sModName205
+EndIf
+
+sModName206 = "ELFX + Weathers"
+sModDescription206 = "This option will be selected if you use ELFX and ELFX Weathers. Patch by SirJesto"
+sModImage206 = "Fomod\\Images\\ELFX.jpg"
+If GetEspmStatus("EnhancedLightsandFX.esp") > 1 and GetEspmStatus("ELFXEnhancer.esp") < 1 and GetEspmStatus("ELFX - Hardcore.esp") < 1 and GetEspmStatus("ELF - Weathers.esp") > 1
+	sModName206 = "|" + sModName206
+EndIf
+
+SelectMany "ELFX Patches for Sounds of Skyrim SE\n\nThe following ELFX options have been detected\nPlease feel free to select or de-select any mod based on your preference.\n\nYou may click to read the description for each patch before installing",\
+		str(sModName201),str(sModDescription201),str(sModImage201),\
+		str(sModName202),str(sModDescription202),str(sModImage202),\
+		str(sModName203),str(sModDescription203),str(sModImage203),\
+		str(sModName204),str(sModDescription204),str(sModImage204),\
+		str(sModName205),str(sModDescription205),str(sModImage205),\
+		str(sModName206),str(sModDescription206),str(sModImage206)
+	Case "ELFX"
+		SelectSubPackage '02 ELFX'
+	Break
+	Case "ELFX + Enhanced"
+		SelectSubPackage '"02 ELFX ENH'
+	Break
+	Case "ELFX + Enhancer + Weathers"
+		SelectSubPackage '02 ELFX ENH WEA'
+	Break
+	Case "ELFX + Hardcore"
+		SelectSubPackage '02 ELFX HAR'
+	Break
+	Case "ELFX + Hardcore + Weathers"
+		SelectSubPackage '02 ELFX HAR WEA'
+	Break
+	Case "ELFX + Weathers"
+		SelectSubPackage '02 ELFX WEA'
+	Break
+EndSelect ; Infernio: added missing EndSelect
+	
+;== Finish Page ==
+Note "Thank you for installing Sounds of Skyrim Complete!\n\n\nConfirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"

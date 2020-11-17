@@ -1,0 +1,72 @@
+;=-=-=-|Bells of Skyrim Wrye Bash BAIN wizard by Mertz |-=-=-=
+
+RequireVersions "1.0.0.0", "", "", "307" 
+DeSelectAll
+
+MOD_Readme = str("BELLS OF SKYRIM\n\n\nDescription\n\nEver wondered why the game\'s official trailer shows us a ringing alarm bell during the dragon attack\, but there is no such thing in the game? This mod fixes that and adds those bells. When a dragon attack happens\, the guards will ring the bell, alerting citizens.\n\n\nHow it works:\n\nThe mod places bells at the major cities. There are guards that are associated to the bells; and if they notice a dragon\, they will run to the bell and ring it until the combat ends. They\'ll do this automatically. If a player activates the bell outside of a battle they will also turn it off. Citizens and other guards will also react to the bells and act accordingly. Guards will unsheathe their weapons and search for an enemy\, while citizens will flee..")
+
+;== Welcome screen and install core mod
+SelectOne "Welcome",\
+    "|Welcome"," This BAIN wizard installs Bells of Skyrim for Skyrim Special Edition\n\nClick Read Me below to select the Readme for this mod\n\nClick 'Credits' above to view the credits.\n\nClick Next to continue the installation","FOMod\\Default.png",\
+	"Read Me",MOD_Readme,"FOMod\\Default.png",\
+    "Credits","This mod was created by Soandso. If you enjoy this mod, please make sure to show your thanks by endorsing the mod!\n\n\nWizBAIN installer by Mertz\n\nClick next to continue the installation","FOMod\\Default.png"
+EndSelect
+SelectSubPackage '00 MainFiles'
+
+sModName101 = "Open Cities Skyrim Patch"
+sModDescription101 = "Patch for Arthmoor's Open Cities Skyrim."
+sModImage101 = "FOMod\\Default.png"
+If GetEspmStatus("Open Cities Skyrim.esp") > 1
+	sModName101 = "|" + sModName101
+EndIf
+
+sModName102 = "Immersive Citizens Patch"
+sModDescription102 = "Patch for Shurah's Immersive Citizens - AI Overhaul."
+sModImage102 = "FOMod\\Default.png"
+If GetEspmStatus("Immersive Citizens - AI Overhaul.esp") > 1
+	sModName102 = "|" + sModName102
+EndIf
+
+sModName103 = "Open Cities AND Immersive Citizens Patch"
+sModDescription103 = "Patch for BOTH Arthmoor\'s Open Cities Skyrim and Shurah\'s Immersive Citizens - AI Overhaul. Also requires the Open Cities Patch for Immersive Citizens."
+sModImage103 = "FOMod\\Default.png"
+
+sModName104 = "Dawn of Skyrim Director\'s Cut Patch"
+sModDescription104 = "Patch for BluePianoTwo\'s Dawn of Skyrim. For the Director\'s Cut version. Requires the alternate Solitude addon which can be selected on the next page"
+sModImage104 = "FOMod\\Default.png"
+If GetEspmStatus("Blues Skyrim.esp") > 1
+	sModName104 = "|" + sModName104
+EndIf
+
+SelectMany "Optional Compatibility Patches\n\nIf any of the mods below were detected in your Skyrim SE data folder they should be selected automatically\, however you may select or deselect them as desired.\n\nPlease click any selection below to read a detailed description",\
+		str(sModName101),str(sModDescription101),str(sModImage101),\
+		str(sModName102),str(sModDescription102),str(sModImage102),\
+		str(sModName103),str(sModDescription103),str(sModImage103),\
+		str(sModName104),str(sModDescription104),str(sModImage104)
+			Case "Open Cities Skyrim Patch"
+				SelectSubPackage '02 OpenCitiesSkyrimPatch'
+				Break
+			Case "Immersive Citizens Patch"
+				SelectSubPackage '03 ImmersiveCitizensPatch'
+				Break
+			Case "Open Cities AND Immersive Citizens Patch"
+				SelectSubPackage '04 OpenCitiesSkyrimWithImmersiveCitizensPatch'
+				Break
+			Case "Dawn of Skyrim Director\'s Cut Patch"
+				SelectSubPackage '05 DawnOfSkyrimDirectorsPatch'
+				Break
+EndSelect
+
+SelectMany "Bells of Skyrim Options",\
+	"|Reduced Volume Addon","Reduces the volume of the bells.","FOMod\\Default.png",\
+	"Alternate Solitude","Moves the bell tower in Solitude to a different location. Must be selected if using Dawn of Skyrim - Director\'s cut\, or can be used standalone. Not compatible with Open Cities Skyrim. Credit: Kojak 747","FOMod\\Default.png"
+		Case "Reduced Volume Addon"
+			SelectSubPackage '01 ReducedVolumeAddon'
+			Break
+		Case "Alternate Solitude"
+			SelectSubPackage '06 SolitudeAlternative'
+			Break
+EndSelect
+
+;== Finish Page ==
+Note "Confirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"

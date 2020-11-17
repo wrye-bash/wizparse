@@ -1,0 +1,67 @@
+;--Immersive Citizens AI Overhaul for Skyrim SE -- WizBAIN by Mertz --
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+RequireVersions "", "", "", "307"
+ResetAllEspmNames
+DeSelectAll
+
+; Welcome screen: since this is for SSE, the DLC ESM checks are not necessary.
+; This will queue the Main_Full_Version payload immediately after the user clicks "next"
+SelectOne "Immersive Citizens AI Overhaul",\
+	"|Welcome","This will install Immersive Citizens - AI Overhaul\n\nImmersive Citizens - AI Overhaul is a mod whose purpose is to increase player in-game immersion by greatly improving Artificial Intelligence \(AI\) of friendly NPCs \(citizens\) in order to make them act and react like true humans in relation to their environment or to an aggressor. Specifically\, this plugin deeply overhauls the AI used by NPCs citizens when they are in a \“standard state\” and in a \“combat state\”. The \“alert state\” is left untouched. To explain\, an NPC is in a \“standard state\” when he is unaware of an aggressor\, a \“combat state\” when he has detected an aggressor\, and an \“alert state\” when he is aware of an aggressor that cannot be located.\n\nClick \"Credits\" to read credits for this mod, or click \Next\" to continue the installation","Fomod\\Images\\01_FirstScreen\\ICAIO.png",\
+	"Credits","Immersive Citizens - AI Overhaul\n\by Arnaud dOrchymont\v 0.3.9\n\nWrye Bash installer by Mertz","Fomod\\Images\\01_FirstScreen\\ICAIO.png"
+EndSelect
+SelectSubPackage '10_Main_Full_Version'
+
+; Datafile detection for optional patches.
+; This will pre-select options based on what the user has installed. 
+; For "GetEspmStatus", Anything greater than "1" means the mod is installed, ghosted, or merged into the Bashed Patch.
+sModName101 = "Open Cities Skyrim"
+sModDescription101 = "Checking this box will install the compatibility patch for Open Cities Skyrim. \[Nexus ID: 281\]"
+sModImage101 = "Fomod\\Images\\01_FirstScreen\\ICAIO.png"
+If GetEspmStatus("Open Cities Skyrim.esp") > 1
+	sModName101 = "|" + sModName101
+EndIf
+
+sModName102 = "Enhanced Lights and FX - ELFX Enhancer"
+sModDescription102 = "Checking this box will install the compatibility patch for ELFXEnhancer.esp \(an optional plugin from Enhanced Lights and FX\). \[Nexus ID: 2424\]"
+sModImage102 = "Fomod\\Images\\01_FirstScreen\\ICAIO.png"
+If GetEspmStatus("ELFXEnhancer.esp") > 1
+	sModName102 = "|" + sModName102
+EndIf
+
+sModName103 = "Patch for ELFX - Hardcore.esp"
+sModDescription103 = "Checking this box will install the compatibility patch for ELFX - Hardcore.esp \(an optional plugin from Enhanced Lights and FX\). \[Nexus ID: 2424\]"
+sModImage103 = "Fomod\\Images\\01_FirstScreen\\ICAIO.png"
+If GetEspmStatus("ELFX - Hardcore.esp") > 1
+	sModName103 = "|" + sModName102
+EndIf
+
+sModName104 = "Enhanced Lighting for ENB"
+sModDescription104 = "Checking this box will install a compatibility patch for ELE. \[Nexus ID: 1377\]"
+sModImage104 = "Fomod\\Images\\01_FirstScreen\\ICAIO.png"
+If GetEspmStatus("ELE_SSE.esp") > 1
+	sModName104 = "|" + sModName102
+EndIf
+
+SelectMany "Optional Compatibility Patches\n\nIf any of the mods below were detected in your Skyrim SE data folder they should be selected automatically.\n\nPlease click any selection below to read a detailed description",\
+		str(sModName101),str(sModDescription101),str(sModImage101),\
+		str(sModName102),str(sModDescription102),str(sModImage102),\
+		str(sModName103),str(sModDescription103),str(sModImage103),\
+		str(sModName104),str(sModDescription104),str(sModImage104)
+		Case "Open Cities Skyrim"
+			SelectSubPackage '50_Open_Cities_Skyrim'
+			Break
+		Case "Enhanced Lights and FX - ELFX Enhancer"
+			SelectSubPackage '40_ELFX_Enhancer'
+			Break
+		Case "Patch for ELFX - Hardcore.esp"
+			SelectSubPackage '41_ELFX_Hardcore'
+			Break
+		Case "Enhanced Lighting for ENB"
+			SelectSubPackage '30_ELE'
+			Break
+EndSelect
+
+;== Finish Page ==
+Note "Thank you for installing Immersive Citizens AI Overhaul!\n\n\nConfirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences\, the Wizard will install your selections after clicking Finish\nOtherwise\, right-click the installer again and choose Install"
+

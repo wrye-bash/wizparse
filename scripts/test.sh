@@ -7,6 +7,9 @@ then
     exit 1
 fi
 
+# We need globstar to capture all tests below
+shopt -s globstar
+
 # Check if stdout is a tty and supports color
 # If not, they will be undefined and hence resolve to empty strings
 if test -t 1
@@ -30,9 +33,12 @@ export CLASSPATH
 cd tmp/wizards || exit
 
 num_tests=$(find ../../tests -type f -name '*.txt' -printf x | wc -c)
-echo -e "${C_BLUE}==>${C_NC} Testing $num_tests wizards"
+num_success=$(find ../../tests/expect-success -type f -name '*.txt' -printf x | wc -c)
+num_failure=$(find ../../tests/expect-failure -type f -name '*.txt' -printf x | wc -c)
+echo -e "${C_BLUE}==>${C_NC} Testing $num_tests wizards (expecting $num_success successes and $num_failure failures)"
 
-for rel_test in ../../tests/*.txt
+# Run expect-success tests (must pass)
+for rel_test in ../../tests/expect-success/**/*.txt
 do
     # Get rid of the .., looks better in logs
     real_test=$(realpath "$rel_test")
@@ -42,11 +48,29 @@ do
     if [ -s parseErrors.txt ] # exists and is not empty
     then
         # Since we swallowed the stderr output, print it back out
-        echo -e "${C_BLUE}==>${C_NC} ${C_RED}Test failed, error message follows${C_NC}"
+        echo -e "${C_BLUE}==>${C_NC} ${C_RED}Test failed, but expected success; error message follows${C_NC}"
         echo "$(<parseErrors.txt)"
         exit 1 # fail the CI
     fi
-    echo -e "   ${C_BLUE}::${C_NC} ${C_GREEN}Test passed${C_NC}"
+    echo -e "   ${C_BLUE}::${C_NC} ${C_GREEN}Test succeeded, as expected${C_NC}"
+done
+
+# Run expect-failure tests (must fail)
+for rel_test in ../../tests/expect-failure/**/*.txt
+do
+    # Get rid of the .., looks better in logs
+    real_test=$(realpath "$rel_test")
+    echo -e "   ${C_BLUE}::${C_NC} ${C_YELLOW}Current test wizard:${C_NC} $real_test"
+    # TestRig doesn't set an abnormal return code, so analyze its stderr output
+    java org.antlr.v4.gui.TestRig wizard parseWizard "$real_test" 2> parseErrors.txt
+    if [ ! -s parseErrors.txt ] # exists and is not empty
+    then
+        # Since we swallowed the stderr output, print it back out
+        echo -e "${C_BLUE}==>${C_NC} ${C_RED}Test succeeded, but expected failure; error message follows${C_NC}"
+        echo "$(<parseErrors.txt)"
+        exit 1 # fail the CI
+    fi
+    echo -e "   ${C_BLUE}::${C_NC} ${C_GREEN}Test failed, as expected${C_NC}"
 done
 
 echo -e "${C_BLUE}==>${C_NC} ${C_GREEN}All test passed${C_NC}"

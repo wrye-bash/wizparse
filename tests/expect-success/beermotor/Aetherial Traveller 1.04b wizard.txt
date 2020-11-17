@@ -1,0 +1,138 @@
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+;--Aetherial Traveler-- WizBAIN by Mertz --
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+RequireVersions "1.0.0.0", "", "", "307" ; Skyrim SE reports as version 1.0.0.0
+ResetAllEspmNames
+DeSelectAll
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; Readme from Nexus:
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+ATReadme = str("READ ME\n-------\n\nThis mod was developed in the original Creation Kit and then ported so users of either the Legendary Edition or Special Edition can enjoy it. Both versions have the same features. Aetherial Traveller was made with Skyrim: Special Edition in mind, so it does not require SKSE.\n\n------------\nInstallation\n------------\n\nDawnguard\, Hearthfire\, and Dragonborn are required.\n\nBack up your saved games\, just in case. Then if you don\'t have it yet, be sure to grab the Modern Brawl Bug Fix by Enai Siaion\, otherwise your brawls will turn into real fights.\n\n- Download the installer.\n\n- Install through your favorite mod manager and choose your patches. Otherwise, install it manually by unzipping the folder and dragging and dropping the appropriate folders into your Data folder.\n\n- Optional: Download and install the USKP patch from the optional files.\n\n\nStart a new game.\n\n-------------\nCompatibility\n-------------\n\nContains patches for:\n- Campfire\n- Frostfall\n- Climates of Tamriel\n- Vivid Weathers\n- Better-Shaped Weapons\n- Practical Female Armors\n- Ethereal Elven Overhaul\n\nThese patches do not contain any meshes or textures created by other users. They merely hold updated records. They'll be useless without the files they were made for.\n\nThe optional Falmer add-on is not compatible with mods that add other playable races.\n\nThere is also a small patch for the Unofficial Skyrim Patch. It will not change any of the USKP's records. Instead, it reverts a few recipes from the base game or adds an absolute buttload of booze as a crafting requirement to certain things, to hide any Aetherial Traveller recipes that would be redundant with USKP installed.\n\nThis mod is a bit extensive with its changes and I cannot guarantee compatibility with mods that make significant changes to food, smithing, lycanthropy, vampirism, and certain other parts of the game. If you aren't sure about something, ask in the comments or try it out.\n\nThis mod uses a few injected records to assist you in future patch-making endeavors. If you know what this means, great. If not, there are certain records you can copy as overrides into a new or existing file, and it'll treat them as Update.esm records instead of Aetherial Traveller records so that you don't necessarily need this as a master file. It makes editing in the Creation Kit way easier.\n\n\n-----------\nPermissions\n-----------\n\nYou are allowed to create and post patches between this and any other mod you need. You don't need to ask. A link back is appreciated and of course would help people find this mod.\n\nYou are allowed to translate this mod by using it as a master file. Be sure to list the original as a requirement and link back. Do not post a translated redistribution.\n\nYou may not redistribute this mod.\n\n\n-------\nCredits\n-------\n\nChesko - Campfire and Frostfall\nJjc71 - Climates of Tamriel\nMangaclub - Vivid Weathers\nLeanwolf - Leanwolf's Better-Shaped Weapons\n\Jzbai - Practical Female Armors\nNuska - Ethereal Elven Overhaul\n\n\n---------\nThanks To\n---------\n\nThe modding community in general for its many useful tutorials and examples that taught me what I needed to know about the Creation Kit, Papyrus, and editing meshes and textures.\n\nMy JavaScript and PHP professors from my college years. Without their classes I wouldn't have had prior experience to translate to Papyrus.\n\nMy wonderful fiancee for providing certain textures and lore books, many hours of alpha and beta testing time, editor skills, and support.")
+
+
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; Welcome Page	
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+SelectOne "Aetherial Traveler",\
+	"|Welcome","Aetherial Traveler Wrye Bash Installer\n\nAetherial Traveller is a Skyrim overhaul aimed at creating a smoother and more interesting adventure. It provides many changes to character customization and growth\, loot\, food\, and more.\n\nSee the Read Me section for details on installation, compatibility\, credits\, permissions\, and thanks.","fomod\\images\\cover.png",\
+	"Read Me",ATReadme,"fomod\\images\\cover.png",\
+	"Credits","Aetherial Traveler by Summerwolf and AsterCorbett\n\nWrye Bash WizBAIN by Mertz","fomod\\images\\cover.png"
+EndSelect
+SelectSubPackage 'Aetherial Traveller SSE'
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; Playable Falmer choice:
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+bFalmerPlayable = False
+SelectOne "Playable Falmer Add-on\n\nInstall playable Falmer\, or Snow Elves. Snow Elves have the overall appearance of High Elves\, and may be mistaken as such. They also have frost resistance.\n\nWARNING: This will conflict badly with anything that adds other races to the same parts formlists as humanoids or High Elves. If Falmer or the other new race suddenly lose their hair\, this is why.\n\nWould you like to be able to play as a Falmer\/Snow Elf?",\
+	"Yes","Install the playable Falmer add-on","fomod\\images\\falmer.png",\
+	"|No","Do not install the playable Falmer Add-on","fomod\\images\\falmer.png"
+		Case "Yes"
+			bFalmerPlayable = True
+			SelectSubPackage 'Aetherial Traveller Falmer Addon'
+			Break
+		Case "No"
+			Break
+EndSelect
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; Weather mods autodetection:
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+sModName101 = "Climates of Tamriel"
+sModDescription101 = "Allows certain perks to work with new weathers added by Climates of Tamriel. Please choose only one weather mod and patch."
+sModImage101 = "fomod\\images\\weathers.png"
+If DataFileExists("ClimatesOfTamriel.esm")
+	sModName101 = "|" + sModName101
+EndIf
+
+sModName102 = "Vivid Weathers"
+sModDescription102 = "Allows certain perks to work with new weathers added by Vivid Weathers. Please choose only one weather mod and patch."
+sModImage102 = "fomod\\images\\weathers.png"
+If GetEspmStatus("Vivid WeathersSE.esp") > 1
+	sModName102 = "|" + sModName102
+EndIf
+
+SelectMany "Weather Patches\n\nPlease select an option below to view more information.\n\nDouble-click image for larger version",\
+		str(sModName101),str(sModDescription101),str(sModImage101),\
+		str(sModName102),str(sModDescription102),str(sModImage102)
+		Case "Climates of Tamriel"
+			SelectSubPackage 'AT Patch Climates of Tamriel SSE'
+			Break
+		Case "Vivid Weathers"
+			SelectSubPackage 'AT Patch Vivid Weathers SSE'
+			Break
+EndSelect
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; Survival Mods autodetection:
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+sModName201 = "Campfire"
+sModDescription201 = "Install a patch to improve consistency with Chesko's Campfire.\n\nThis is mainly needed if you want to make sure Chesko\'s woodcutting script changes are maintained. It will also ensure that you gain experience from cooking with Chesko\'s camping equipment."
+sModImage201 = "fomod\\images\\campfire.png"
+If DataFileExists("Campfire.esm")
+	sModName201 = "|" + sModName201
+EndIf
+
+sModName202 = "Frostfall"
+sModDescription202 = "Install a patch for Chesko's Frostfall.\n\nThis will add food\, warmth\, and coverage keywords where needed."
+sModImage202 = "fomod\\images\\frostfall.png"
+If GetEspmStatus("Frostfall.esp") > 1
+	sModName202 = "|" + sModName202
+EndIf
+
+SelectMany "Survival Patches\n\nPlease select an option below to view more information.\n\nDouble-click image for larger version",\
+		str(sModName201),str(sModDescription201),str(sModImage201),\
+		str(sModName202),str(sModDescription202),str(sModImage202)
+		Case "Campfire"
+			SelectSubPackage 'AT Patch Campfire SSE'
+			Break
+		Case "Frostfall"
+			SelectSubPackage 'AT Patch Frostfall SSE'
+			Break
+EndSelect
+
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; The weapon and armor patches below are for pluginless
+; mods, and replace assets. No detection available unless
+; we do witchery, which might be buggy. Better to just let 
+; the user select what they want here.
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+SelectMany "Weapons and Armor Patches\n\nPlease select an option below to view more information.\n\nDouble-click image for larger version",\
+	"Better-shaped Weapons","Install a patch for Leanwolf's Better-Shaped Weapons.\n\nThis will provide an alternative texture for part of a new weapons set. If you don't have Better-Shaped Weapons, this will be pointless and probably look weird.","fomod\\images\\weapons.png",\
+	"Practical Female Armors","Install a patch for JZBai's Practical Female Armors.\n\nThis will ensure that the new armor set has a realistic shape. Does not include assets from Practical Female Armors. You need to install the Glass Armors from that mod or this patch will not help.","fomod\\images\\armor.png"
+		Case "Better-shaped Weapons"
+			SelectSubPackage 'AT Patch BetterShaped Weapons SSE'
+			Break
+		Case "Practical Female Armors"
+			SelectSubPackage 'AT Patch Practical Female Armors SSE'
+			Break
+EndSelect
+
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; EEO autodetection:
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+sModName301 = "Ethereal Elven Overhaul"
+sModDescription301 = "Install a patch for Ethereal Elven Overhaul.\n\nYour elves will have the appearance of Ethereal Elven Overhaul elves, with the bonus content of Aetherial Traveller. This will not work without Ethereal Elven Overhaul."
+sModImage301 = "fomod\\images\\EEO.png"
+If GetEspmStatus("ethereal_elven_overhaul.esp") > 1 and bFalmerPlayable == False
+	sModName301 = "|" + sModName301
+EndIf
+
+sModName302 = "Ethereal Elven Overhaul \(Falmer\)"
+sModDescription302 = "Install a patch for Ethereal Elven Overhaul.\n\nYou'll want this if you're using both the Falmer addon and Ethereal Elven Overhaul, if you want to give your new Snow Elf the same improved face.\n\nThis will be automatically selected if you chose to install the playable Falmer module and have EEO installed"
+sModImage302 = "fomod\\images\\Falmer_EEO.png"
+If GetEspmStatus("ethereal_elven_overhaul.esp") > 1 and bFalmerPlayable == True
+	sModName302 = "|" + sModName302
+EndIf
+
+SelectMany "Character Appearance Patches\n\nPlease select an option below to view more information.\n\nDouble-click image for larger version",\
+		str(sModName301),str(sModDescription301),str(sModImage301),\
+		str(sModName302),str(sModDescription302),str(sModImage302)
+		Case "Ethereal Elven Overhaul"
+			SelectSubPackage 'AT Patch Ethereal Elven Overhaul SSE'
+			Break
+		Case "Ethereal Elven Overhaul \(Falmer\)"
+			SelectSubPackage 'AT Patch Falmer Ethereal Elven Overhaul'
+			Break
+EndSelect
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+;== Finish Page and Note ==
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+Note "Thank you for installing Aetherial Traveler\n\n\nConfirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick \'Apply these selections\' below then click the \'Finish\' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences\, the Wizard will install your selections after clicking Finish\nOtherwise\, right-click the installer again and choose Install"

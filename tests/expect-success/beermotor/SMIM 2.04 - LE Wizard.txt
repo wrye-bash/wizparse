@@ -1,0 +1,691 @@
+;  --Static Mesh Improvement Mod for Skyrim Legendary Edition
+;  -- WizBAIN by Mertz --
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+If CompareWBVersion(296) < 0
+    Cancel "You need to use Wrye Bash v296 or higher to use this Wizard\n\nYou can download the latest Wrye Bash \(for either Skyrim Edition\) from http:\/\/www.nexusmods.com\/skyrimspecialedition\/mods\/6837\/"
+EndIf
+ResetAllEspmNames
+DeSelectAll
+SMIM_readme = str("Skyrim is the greatest open-world RPG ever created and includes fantastic 3D character and creature models. However, playing the game for even one hour made me notice Skyrim also contains many ugly 3D models. More precisely, there are quite a few low-polygon static meshes that comprise the architectural elements, clutter, furniture, and landscape objects.\n\nIt would appear that while the artists devoted a large amount of time to create the races, creatures, armors, weapons, and major buildings, the more \"boring\" 3D models that make up the game world were severely neglected.\n\nHence, this mod edits many 3D models to improve their appearance and to fix many of the ugly seams and other oddities. I started in February 2012 with the ultimate goal of improving about 500 of the worst offenders. In June 2014 750+ meshes have been completed; my goal has been exceeded with over 15,000 placements of said meshes! In October 2016 900+ meshes are improved, with over 30,000+ placements! Cool.\n\nStill, SMIM still has more to do! Improving meshes takes a long time, and I'll release incremental updates to include new 3D models as I finish them.")
+SelectOne "Static Mesh Improvement Mod Welcome Screen",\
+	"|Welcome"," This installs Static Mesh Improvement Mod for Skyrim Legendary Edition\n\nClick Read Me below to select the Readme for SMIM\n\nClick 'Credits' above to view the credits or..\n\nClick Next to continue the installation","--- Screenshots ---\\Everything.jpg",\
+	"Readme",SMIM_readme,"--- Screenshots ---\\Everything.jpg",\
+	"Credits","Static Mesh Improvement Mod by Brumbek\n\nWizBAIN installer by Mertz\n\nClick next to continue the installation","--- Screenshots ---\\Everything.jpg"
+EndSelect
+bSSEEverything = False
+bSSEXboxLite = False
+bSSEVeryLite = False
+bSSECustom = False
+
+; Main installer choice
+SelectOne "Skyrim Game Version and Install Choices\n\nSelect one of the following\n\nDouble-click images to view larger version",\
+	"|Skyrim Legendary Edition - Everything","All improved meshes will be installed using SMIM\'s high resolution textures. One click goodness!","--- Screenshots ---\\EverythingWithDragonborn.jpg",\
+	"Skyrim Legendary Edition Lite","This installs the basic mesh fixes and performance-friendly improvements. This installs the basic mesh fixes and performance-friendly improvements\. This will not install the 3D ropes\, 3D chains\, smoothed rocks\, or detailed chests\. You still get furniture\, barrels\, food\, dwemer clutter\, nordic tables\, bridges\, lanterns\, tankards\, 3D skeletal remains\, woven fences\, smelters\, hawks\, carriages\, juniper and tundra trees\, ruins\, rings\, and other stuff\. This also uses the Half-Sized textures option. For users who DO USE the Dragonborn DLC\. Your game will crash if you pick this but don\'t have Dragonborn\!","--- Screenshots ---\\LiteWithDragonborn.jpg",\
+	"Skyrim Legendary Edition Custom","This lets you customize many options. Pick this if you prefer to use only some fixes, the non-animated Barrels, smaller 3D chains on Pull Levers, the glorious bright red Tomato, and so on.","--- Screenshots ---\\CustomOS.jpg"
+	Case "Skyrim Legendary Edition - Everything"
+		SelectSubPackage '00 Core'
+		SelectSubPackage '01 Furniture'
+		SelectSubPackage '02 SMIM Barrel Textures Animations'
+		SelectSubPackage '03 Food'
+		SelectSubPackage '04 Farmhouse 3D Ropes No Fade (Best)'
+		SelectSubPackage '05 Chains 3D - Misc'
+		SelectSubPackage '06 Chains 3D - Signs'
+		SelectSubPackage '07 Chains 3D - Whiterun'
+		SelectSubPackage '08 Chains 3D - Pull Levers Small Rings'
+		SelectSubPackage '09 Dwemer Clutter'
+		SelectSubPackage '10 Nordic Tables and Benches'
+		SelectSubPackage '11 Bridges Real Roads'
+		SelectSubPackage '12 Whiterun Doors'
+		SelectSubPackage '13 Lanterns'
+		SelectSubPackage '14 Stockade 3D Ropes'
+		SelectSubPackage '14 Stockade 3D Ropes'
+		SelectSubPackage '15 Clothing Fixes'
+		SelectSubPackage '16 Tankard Pewter Metal'
+		SelectSubPackage '17 Nordic Catacombs Skeletal Remains'
+		SelectSubPackage '18 Farmhouse Woven Fence Less Flicker'
+		SelectSubPackage '19 Smelter'
+		SelectSubPackage '21 Dwemer Animated Lifts'
+		SelectSubPackage '22 Solitude Docks Ropes'
+		SelectSubPackage '25 Solitude Gate Doors'
+		SelectSubPackage '26 Human Skull Fixes'
+		SelectSubPackage '27 Hawk'
+		SelectSubPackage '30 Rocks - Generic'
+		SelectSubPackage '31 Rocks - Blackreach'
+		SelectSubPackage '32 Rocks - Mountains'
+		SelectSubPackage '33 Orc Longhouse'
+		SelectSubPackage '35 Shack Kit'
+		SelectSubPackage '37 Riften 3D Ropes'
+		SelectSubPackage '39 Dungeons 3D Ropes and Glorious Scaffolding'
+		SelectSubPackage '40 Furniture Chests'
+		SelectSubPackage '41 Draugr Corpses'
+		SelectSubPackage '42 Furniture Noble'
+		SelectSubPackage '43 Whiterun Castle Wood Carvings Celtic'
+		SelectSubPackage '44 Poor Coffin Custom Texture'
+		SelectSubPackage '45 Hanging Rings'
+		SelectSubPackage '46 Carriage Seats and Fixes'
+		SelectSubPackage '47 Juniper Tree'
+		SelectSubPackage '49 Tundra Tree'
+		SelectSubPackage '50 Dawnguard Soulcairn Bone Piles'
+		SelectSubPackage '55 Windmills Base Vanilla Version Sails'
+		SelectSubPackage '56 Windmills SkyMills Compatibility Sails'
+		SelectSubPackage '57 Ruins Sarcophagus'
+		SelectSubPackage '58 Jewelry Rings'
+		SelectSubPackage '59 Jewelry Rings CCO Remade or Jewelcraft Patch'
+		SelectSubPackage '60 Hearthfires Stuff'
+		SelectSubPackage '61 Bowl Ingredients'
+		SelectSubPackage '70 Rabbit'
+		SelectSubPackage '71 Candelabras Sconces Walltorches'
+		SelectSubPackage '72 Chandeliers'
+		SelectSubPackage '75 Dungeons Cliffs Snow Skirts'
+			DeSelectEspm 'SMIM-FarmhouseFlickeringFix.esp'
+	        DeSelectEspm 'SMIM-SE-FarmhouseFlickeringFix.esp'
+			DeSelectEspm 'SMIM-ShackRoofFixes.esp'
+			DeSelectEspm 'SMIM-SE-ShackRoofFixes.esp'
+			DeSelectEspm 'SMIM-ShackRoofFixesDragonborn.esp'
+			DeSelectEspm 'SMIM-SE-ShackRoofFixesDragonborn.esp'
+			DeSelectEspm 'SMIM-DragonbornTernFix.esp'
+			DeSelectEspm 'SMIM-SE-DragonbornTernFix.esp'
+			DeSelectEspm 'SMIM-RiftenDocksRopesObjectFix.esp'
+			DeSelectEspm 'SMIM-SE-RiftenDocksRopesObjectFix.esp'
+			DeSelectEspm 'SMIM-FurnitureChestSnowFix.esp'
+			DeSelectEspm 'SMIM-SE-FurnitureChestSnowFix.esp'
+			DeSelectEspm 'SMIM-DungeonsCliffsIceSkirts.esp'
+			DeSelectEspm 'SMIM-SE-DungeonsCliffsIceSkirts.esp'
+		SelectSubPackage '95 Merged ESP OS All'
+		Break
+	Case "Skyrim Legendary Edition Lite"
+		SelectSubPackage '00 Core'
+		SelectSubPackage '01 Furniture'
+		SelectSubPackage '01 Furniture'
+		SelectSubPackage '02 SMIM Barrel Textures Animations'
+		SelectSubPackage '03 Food'
+		SelectSubPackage '03 Food'
+		SelectSubPackage '04 Farmhouse 3D Ropes Distance Fade'
+		SelectSubPackage '05 Chains 3D - Misc'
+		SelectSubPackage '05 Chains 3D - Misc'
+		SelectSubPackage '06 Chains 3D - Signs'
+		SelectSubPackage '06 Chains 3D - Signs'
+		SelectSubPackage '08 Chains 3D - Pull Levers Small Rings'
+		SelectSubPackage '09 Dwemer Clutter'
+		SelectSubPackage '10 Nordic Tables and Benches'
+		SelectSubPackage '11 Bridges'
+		SelectSubPackage '12 Whiterun Doors'
+		SelectSubPackage '13 Lanterns'
+		SelectSubPackage '14 Stockade 3D Ropes'
+		SelectSubPackage '15 Clothing Fixes'
+		SelectSubPackage '16 Tankard Pewter Metal'
+		SelectSubPackage '17 Nordic Catacombs Skeletal Remains'
+		SelectSubPackage '18 Farmhouse Woven Fence Less Flicker'
+		SelectSubPackage '19 Smelter'
+		SelectSubPackage '22 Solitude Docks Ropes'
+		SelectSubPackage '25 Solitude Gate Doors'
+		SelectSubPackage '26 Human Skull Fixes'
+		SelectSubPackage '27 Hawk'
+		SelectSubPackage '30 Rocks - Generic'
+		SelectSubPackage '31 Rocks - Blackreach'
+		SelectSubPackage '33 Orc Longhouse'
+		SelectSubPackage '35 Shack Kit'
+		SelectSubPackage '37 Riften 3D Ropes'
+		SelectSubPackage '39 Dungeons 3D Ropes and Glorious Scaffolding'
+		SelectSubPackage '40 Furniture Chests'
+		SelectSubPackage '41 Draugr Corpses'
+		SelectSubPackage '42 Furniture Noble'
+		SelectSubPackage '43 Whiterun Castle Wood Carvings Celtic'
+		SelectSubPackage '44 Poor Coffin Custom Texture'
+		SelectSubPackage '45 Hanging Rings'
+		SelectSubPackage '46 Carriage Seats and Fixes'
+		SelectSubPackage '47 Juniper Tree'
+		SelectSubPackage '49 Tundra Tree'
+		SelectSubPackage '50 Dawnguard Soulcairn Bone Piles'
+		SelectSubPackage '55 Windmills Base Vanilla Version Sails'
+		SelectSubPackage '56 Windmills SkyMills Compatibility Sails'
+		SelectSubPackage '57 Ruins Sarcophagus'
+		SelectSubPackage '58 Jewelry Rings'
+		SelectSubPackage '59 Jewelry Rings CCO Remade or Jewelcraft Patch'
+		SelectSubPackage '60 Hearthfires Stuff'
+		SelectSubPackage '61 Bowl Ingredients'
+		SelectSubPackage '70 Rabbit'
+		SelectSubPackage '71 Candelabras Sconces Walltorches'
+		SelectSubPackage '72 Chandeliers'
+		SelectSubPackage '73 Chandeliers No 3D Chains Addon'
+		SelectSubPackage '75 Dungeons Cliffs Snow Skirts'
+			DeSelectEspm 'SMIM-FarmhouseFlickeringFix.esp'
+	        DeSelectEspm 'SMIM-SE-FarmhouseFlickeringFix.esp'
+			DeSelectEspm 'SMIM-ShackRoofFixes.esp'
+			DeSelectEspm 'SMIM-SE-ShackRoofFixes.esp'
+			DeSelectEspm 'SMIM-ShackRoofFixesDragonborn.esp'
+			DeSelectEspm 'SMIM-SE-ShackRoofFixesDragonborn.esp'
+			DeSelectEspm 'SMIM-DragonbornTernFix.esp'
+			DeSelectEspm 'SMIM-SE-DragonbornTernFix.esp'
+			DeSelectEspm 'SMIM-RiftenDocksRopesObjectFix.esp'
+			DeSelectEspm 'SMIM-SE-RiftenDocksRopesObjectFix.esp'
+			DeSelectEspm 'SMIM-FurnitureChestSnowFix.esp'
+			DeSelectEspm 'SMIM-SE-FurnitureChestSnowFix.esp'
+			DeSelectEspm 'SMIM-DungeonsCliffsIceSkirts.esp'
+			DeSelectEspm 'SMIM-SE-DungeonsCliffsIceSkirts.esp'
+		SelectSubPackage '95 Merged ESP OS No Riften Ropes'
+	Break
+	Case "Skyrim Legendary Edition Custom"
+		SelectSubPackage '00 Core'
+		SelectMany "Misc\:\n\nDouble-click image to view a larger version", \
+			"|Hearthfires Stuff","This installs some improved meshes for Hearthfires DLC\. The DLC is not required\, but without it you won\'t get any benefit from this\.","--- Screenshots ---\\Hearthfire-Lock.jpg",\
+			"|Dwemer Animated Lifts","This installs Dwemer lifts that have a nice down and up animation when you pull the lever. The original game just had static lifts that faded to black for the cell change\. Now these animated lifts show you a brief down and up movement with gears spinning\. Thank you to DoubleBrewski for letting me edit and include his Animated Dwemer Lifts mod\.","--- Screenshots ---\\DwemerAnimatedLifts.jpg",\
+			"|Improved Bowl Ingredients","This installs nice smoothed bowl with custom texture plus custom bonemeal and ectoplasm textures with better UV mapping\.","--- Screenshots ---\\Bonemeal.jpg",\
+			"|Improved Carriages","This installs my improved carriages with new\, leather seats and backrest. Also features many\, many\, UV fixes and other various improvements to the carriages\.","--- Screenshots ---\\CarriageSeat.jpg",\
+			"|Solitude Docks 3D Ropes","This installs 3D ropes versions of the various Solitude Docks meshes\.","--- Screenshots ---\\SolitudeDocksRopes.jpg",\
+			"|Ropes 3D - Stockade","This installs 3D ropes versions of all applicable Stockade Post meshes \(often used as dock posts\)\. This can increase the polycount by upwards of 100\,000 in a few places \(East Empire Warehouse\) but looks oh\, so awesome\! Disable if you get slowdowns\.","--- Screenshots ---\\StockadePosts-Comp.jpg",\
+			"|Chains 3D - Misc","This installs my 3D chains for several objects such as metal cages\, torture racks\, anchors\, hanging chains\, and herb racks\.","--- Screenshots ---\\3D Chains Misc.jpg",\
+			"|Chains 3D - Signs","This installs my 3D animated chains for all the swinging signs in the game\.","--- Screenshots ---\\Signs_SMIM.jpg",\
+			"|Chains 3D - Whiterun","This installs my 3D chains for the Whiterun Drawbridge and Dragonsreach\. This greatly increases the polycount by 100\,000\! Disable if you get slowdowns\.","--- Screenshots ---\\WRDrawbridge_SMIM.jpg",\
+			"|Nordic Tables and Benches","This installs greatly enhanced Nordic marble tables and benches\.","--- Screenshots ---\\Nordic_Marble_Comp.jpg",\
+			"|Whiterun Doors","This installs an improved Whiterun front gate and castle entrance\. The metal parts are made 3D and the handles are smoothed. Plus minor fixes.","--- Screenshots ---\\WR_Door_Comp.jpg",\
+			"|Lanterns","This installs improved lanterns with high-resolution textures. Plus minor fixes.","--- Screenshots ---\\Lantern-Comp.jpg",\
+			"|Clothing Fixes","This installs two minor clothing fixes. No reason to not use it.","--- Screenshots ---\\Clothing _Fix.jpg",\
+			"|Ruins Sarcophagus","This installs improved meshes and custom textures for the ruins sarcophagus meshes.","--- Screenshots ---\\Sarcophagus.jpg",\
+			"|Smelters","This installs improved Smelters with real 3D stonework\, smoother dome\, better textures\, new inside charcoal model\, grate on top to match the collision\, and other stuff\.\n\nSix new textures require 36MB VRAM.","--- Screenshots ---\\Smelter-Full.jpg",\
+			"|Solitude Gate Doors","This installs improved Solitude gate doors with high-resolution textures. Plus minor fixes. Other Solitude gate texture mods will not work with this since SMIM will overwrite any changes\,unless you're running Wrye Bash and can control that\, of course.","--- Screenshots ---\\SolitudeGate.jpg",\
+			"|Draugr Corpses","This installs improved Draugr treasure corpses so they use the full polygon Draugr models instead of very low polygon versions.","--- Screenshots ---\\DraugrCorpses-Comp.jpg",\
+			"|Orc Longhouse","This installs improved Orc Longhouse architecture that uses a new custom texture with nice detail instead of the poorly applied farmhouse texture.","--- Screenshots ---\\OrcBeams.jpg",\
+			"|Poor Coffin","This installs an improved mesh and custom texture for the poor coffin. Look at how amazing it now looks.","--- Screenshots ---\\PoorCoffin.jpg",\
+			"|Skeletal Remains 3D","This installs improved 3D skeletal remains instead of using the default flat 2D skeletons.","--- Screenshots ---\\Skeleton-Comp.jpg",\
+			"|Human Skull Fixes","This installs fixes for the texture stretching and seams on all human skull foreheads. Sadly I can\'t fix the seam entirely since this appears to be a rendering error when using specular maps. Bad engine\, bad\! \(this may be fixed in SSE however\) Use this fix regardless since it is an improvement.","--- Screenshots ---\\SkullFixComp.jpg",\
+			"|Hawk Improvements","This installs an improved Hawk mesh to use more polygons and have a real beak and remove texture seams. This only affects shot-down hawks. New high-resolution texture included based on \"Improved Hawk Texture\" by tehxen.Thanks tehxen\!","--- Screenshots ---\\Hawk.jpg",\
+			"|Improved Rabbit","This installs high quality rabbit meshes and a new texture. This actually includes the rabbit creature itself and the hanging dead variants. The original rabbit mesh and texture was pretty awful.","--- Screenshots ---\\RabbitComp.jpg",\
+			"|Improved Juniper Tree","This installs improved Juniper Trees. I fixed the very ugly tree UV mapping and stretched texture. Now uses a high-quality texture. Also fixed various branch placement issues.","--- Screenshots ---\\JuniperComp.jpg",\
+			"|Improved Tundra Tree","This installs improved Tundra Trees. I fixed the very ugly tree UV mapping and stretched texture.","--- Screenshots ---\\TundraTree.jpg",\
+			"|Improved Shack Roofs with Dragonborn","This installs proper 3D shack roofs instead of the very horrible 2D flat surfaces. The shack roofs also have new collision that lets you shoot arrows through the slits. Cool.","--- Screenshots ---\\ShackRoof.jpg",\
+			"|Rocks - Generic","This installs high-polygon, smoothed rocks for those who felt many rocks were way too blocky. This includes some of the generic rocks used everywhere.","--- Screenshots ---\\Rocks_Render_Comp.jpg",\
+			"|Rocks - Blackreach","This installs high-polygon, smoothed rocks for those who felt many rocks were way too blocky. This includes all Blackreach rocks.","--- Screenshots ---\\Rocks_Blackreach_Comp.jpg",\
+			"|Rocks - Mountains","This installs high-polygon, smoothed rocks for those who felt many rocks were way too blocky. This includes some Mountains rocks.","--- Screenshots ---\\Rocks_Render_Comp.jpg",\
+			"|Hanging Rings","This installs high-polygon\, detailed hanging ingredient rings that occur mostly in interiors. The originals had blurry\, ugly textures with no detail\.","--- Screenshots ---\\Hanging_Rings.jpg",\
+			"|Improved Candelabras", "Improved Candelabras","--- Screenshots ---\\Candelabras.jpg"
+				Case "Hearthfires Stuff"
+					SelectSubPackage '60 Hearthfires Stuff'
+					Break
+				Case "Dwemer Animated Lifts"
+					SelectSubPackage '21 Dwemer Animated Lifts'
+					Break
+				Case "Improved Bowl Ingredients"
+					SelectSubPackage '61 Bowl Ingredients'
+					Break
+				Case "Improved Carriages"
+					SelectSubPackage '46 Carriage Seats and Fixes'
+					Break
+				Case "Solitude Docks 3D Ropes"
+					SelectSubPackage '22 Solitude Docks Ropes'
+					Break
+				Case "Ropes 3D - Stockade"
+					SelectSubPackage '14 Stockade 3D Ropes'
+					Break
+				Case "Chains 3D - Misc"
+					SelectSubPackage '05 Chains 3D - Misc'
+					Break
+				Case "Chains 3D - Signs"
+					SelectSubPackage '06 Chains 3D - Signs'
+					Break
+				Case "Chains 3D - Whiterun"
+					SelectSubPackage '07 Chains 3D - Whiterun'
+					Break
+				Case "Nordic Tables and Benches"
+					SelectSubPackage '10 Nordic Tables and Benches'
+					Break
+				Case "Whiterun Doors"
+					SelectSubPackage '12 Whiterun Doors'
+					Break
+				Case "Lanterns"
+					SelectSubPackage '13 Lanterns'
+					Break
+				Case "Clothing Fixes"
+					SelectSubPackage '15 Clothing Fixes'
+					Break
+				Case "Ruins Sarcophagus"
+					SelectSubPackage '57 Ruins Sarcophagus'
+					Break
+				Case "Smelters"
+					SelectSubPackage '19 Smelter'
+					Break
+				Case "Solitude Gate Doors"
+					SelectSubPackage '25 Solitude Gate Doors'
+					Break
+				Case "Draugr Corpses"
+					SelectSubPackage '41 Draugr Corpses'
+					Break
+				Case "Orc Longhouse"
+					SelectSubPackage '33 Orc Longhouse'
+					Break
+				Case "Poor Coffin"
+					SelectSubPackage '44 Poor Coffin Custom Texture'
+					Break
+				Case "Skeletal Remains 3D"
+					SelectSubPackage '17 Nordic Catacombs Skeletal Remains'
+					Break
+				Case "Human Skull Fixes"
+					SelectSubPackage '26 Human Skull Fixes'
+					Break
+				Case "Hawk Improvements"
+					SelectSubPackage '27 Hawk'
+					Break
+				Case "Improved Rabbit"
+					SelectSubPackage '70 Rabbit'
+					Break
+				Case "Improved Juniper Tree"
+					SelectSubPackage '47 Juniper Tree'
+					Break
+				Case "Improved Tundra Tree"
+					SelectSubPackage '49 Tundra Tree'
+					Break
+				Case "Improved Shack Roofs with Dragonborn"
+					SelectSubPackage '35 Shack Kit'
+					Break
+				Case "Rocks - Generic"
+					SelectSubPackage '30 Rocks - Generic'
+					Break
+				Case "Rocks - Blackreach"
+					SelectSubPackage '31 Rocks - Blackreach'
+					Break
+				Case "Rocks - Mountains"
+					SelectSubPackage '32 Rocks - Mountains'
+					Break
+				Case "Hanging Rings"
+					SelectSubPackage '45 Hanging Rings'
+					Break
+				Case "Improved Candelabras"
+					SelectSubPackage '71 Candelabras Sconces Walltorches'
+					Break
+		EndSelect
+		SelectOne "Chandeliers\n\nDouble-click image to view a larger version",\
+          "|Improved Chandeliers - Recommended", "Improved Chandeliers", "--- Screenshots ---\\Chandeliers.jpg",\
+          "Improved Chandeliers - No 3D Chains","Improved Chandeliers without 3D chains","--- Screenshots ---\\Chandeliers.jpg"
+          Case "Improved Chandeliers"
+            SelectSubPackage '72 Chandeliers'
+			Break
+          Case "Improved Chandeliers - No 3D Chains"
+            SelectSubPackage '72 Chandeliers'
+			SelectSubPackage '73 Chandeliers No 3D Chains Addon'
+			Break
+        EndSelect
+		bSnowBlending = False
+		SelectOne "Dungeons Cliffs Snow Skirts\n\nDouble-click image to view a larger version",\
+          "|Snow Blending ESP - Recommended", "This installs an .esp file to improve the snow blending on the dungeon cliff skirts.", "--- Screenshots ---\\SnowSkirtFix.jpg",\
+          "No Snow Blending ESP","This keeps the default snow skirt meshes which look decent but don't blend the snow as well in my opinion.","--- Screenshots ---\\SnowSkirtFix.jpg"
+          Case "Snow Blending ESP - Recommended"
+			bSnowBlending = True
+            SelectSubPackage '75 Dungeons Cliffs Snow Skirts'
+			Break
+          Case "No Snow Blending ESP"
+            Break
+        EndSelect
+		SelectOne "Furniture Common\n\nDouble-click image to view a larger version",\
+          "|Improved Furniture SMIM Textures - Recommended", "This installs my highly-detailed, improved furniture meshes and textures. It generally makes chairs, tables, cabinets, and so on have smoother edges as if designed by skilled Nord craftsmen. Uses a worn wood texture that is very similar to vanilla for furniture.", "--- Screenshots ---\\Table_SMIM_Default.jpg",\
+          "Improved Furniture Smooth Skyrim HD","This installs my highly-detailed, improved furniture meshes and textures. It generally makes chairs, tables, cabinets, and so on have smoother edges as if designed by skilled Nord craftsmen. Uses a smooth-non-weather-worn wood texture for furniture based on the Skyrim HD appearance.","--- Screenshots ---\\Table_SkyrimHD.jpg",\
+		  "Improved Furniture Weathered Dark","This installs my highly-detailed, improved furniture meshes and textures. It generally makes chairs, tables, cabinets, and so on have smoother edges as if designed by skilled Nord craftsmen. Uses a smooth texture that merges the Skyrim HD and vanilla weathered appearance. This is darker than vanilla.","--- Screenshots ---\\Table_SkyrimHD_Weathered.jpg"
+          Case "Improved Furniture SMIM Textures - Recommended"
+            SelectSubPackage '01 Furniture'
+			Break
+          Case "Improved Furniture Smooth Skyrim HD"
+            SelectSubPackage '01 Furniture'
+			SelectSubPackage '20 Furniture Skyrim HD Appearance'
+			Break
+		  Case "Improved Furniture Weathered Dark"
+			SelectSubPackage '01 Furniture'
+			SelectSubPackage '20 Furniture Skyrim HD Weathered Appearance'
+			Break
+        EndSelect
+		bFurnitureChests = False
+		SelectOne "Furniture Chests\n\nDouble-click image to view a larger version",\
+          "|Improved Furniture Chests", "Improved Furniture Chests","--- Screenshots ---\\Furniture_Chest_SMIM.jpg",\
+		  "Default Chests","Do nothing and use the default Skyrim chests","--- Screenshots ---\\Furniture_Chest_SMIM.jpg"
+			Case "Improved Furniture Chests"
+				bFurnitureChests = True
+				SelectSubPackage '40 Furniture Chests'
+				Break
+			Case  "Default Chests"
+				Break
+        EndSelect
+		SelectOne "Furniture Noble\n\nDouble-click image to view a larger version",\
+          "|Improved Furniture Noble - Recommended","This installs improved Noble furniture meshes and textures. It uses vanilla style textures the same resolution as vanilla. I did this because I wanted to retain Bethesda's art style.","--- Screenshots ---\\NobleChairComp.jpg",\
+          "Default Furniture Noble","Use the default Skyrim meshes","--- Screenshots ---\\NobleChairComp.jpg"
+          Case "Improved Furniture Noble - Recommended"
+            SelectSubPackage '42 Furniture Noble'
+				Break
+          Case "Default Furniture Noble"
+            Break
+		EndSelect
+		SelectOne "Barrels\n\nDouble-click image to view a larger version",\
+			"|Brumbek's New High-Res - Recommended","These are my new, custom made, high-resolution textures that look fantastic in-game, but I admit they are a different color and style than vanilla. They also have an open and close animation for wonderful immersion! These SMIM'd barrels really flip their lid! Ha, so funny!!","--- Screenshots ---\\Barrels_NewTexturesAnimate.jpg",\
+			"Brumbek's New High-Res No Animations","These are my new, custom made, high-resolution textures that look fantastic in-game, but I admit they are a different color and style than vanilla. This removes the open/close lid animation I added.","--- Screenshots ---\\Barrels_NewTextures.jpg",\
+			"Brumbek's New High-Res Rustic","An alternative, custom made, high-resolution textures with a more rustic look. They also have an open and close animation for wonderful immersion! These SMIM'd barrels really flip their lid!\nHa, so funny!!","--- Screenshots ---\\Barrels_Rustic.jpg",\
+			"Brumbek's New High-Res Rustic No Animations","An alternative, custom made, high-resolution textures with a more rustic look. This removes the open/close lid animation I added.","--- Screenshots ---\\Barrels_Rustic.jpg",\
+			"Modified Vanilla Barrels","These use vanilla textures fit onto my new barrel meshes. You can use any regular barrel texture replacer with this option. They also have an open and close animation for wonderful immersion! These SMIM'd barrels really flip their lid!\nHa, so funny!!","--- Screenshots ---\\Barrels_VanillaTexturesAnimate.jpg",\
+			"Modified Vanilla Barrels No Animations","These use vanilla textures fit onto my new barrel meshes. You can use any regular barrel texture replacer with this option. This removes the open/close lid animation I added.","--- Screenshots ---\\Barrels_VanillaTextures.jpg",\
+			"Default Barrels","Do not install SMIM Barrels","--- Screenshots ---\\Barrels_VanillaTextures.jpg"
+			Case "Brumbek's New High-Res - Recommended"
+				SelectSubPackage '02 SMIM Barrel Textures Animations'
+				Break
+			Case "Brumbek's New High-Res No Animations"
+				SelectSubPackage '02 SMIM Barrel Textures No Animations'
+				Break
+			Case "Brumbek's New High-Res Rustic"
+				SelectSubPackage '02 SMIM Rustic Barrel Textures Animations'
+				Break
+			Case "Brumbek's New High-Res Rustic No Animations"
+				SelectSubPackage '02 SMIM Rustic Barrel Textures No Animations'
+				Break
+			Case "Modified Vanilla Barrels"
+				SelectSubPackage '02 Vanilla Barrel Textures Animations'
+				Break
+			Case "Modified Vanilla Barrels No Animations"
+				SelectSubPackage '02 Vanilla Barrel Textures No Animations'
+				Break
+			Case "Default Barrels"
+				Break
+		EndSelect
+		
+		SelectOne "Food\n\nDouble-click image to view a larger version",\
+			"|Improved Food","This installs my highly-detailed, improved food meshes and textures for certain food items.","--- Screenshots ---\\Food_SMIM.jpg",\
+			"Default Food","Keep Skyrim default food","--- Screenshots ---\\Food_SMIM.jpg"
+			Case "Improved Food"
+				SelectSubPackage '03 Food'
+				SelectOne "Food - Tomato Style\n\nDouble-click image to view a larger version",\
+					"Default Heirloom","Only pick this if you also picked the \"Improved Food\" option. This uses my default tomato texture that is a bit ragged, closer to vanilla.","--- Screenshots ---\\Tomato_Comparison.jpg",\
+					"|Pure Red \(Brumbek's Preference\)","Only pick this if you also picked the \"Improved Food\" option. This uses a very red, modern blemish-free tomato texture. So perfect.","--- Screenshots ---\\Tomato_Comparison.jpg"
+					Case "Default Heirloom"
+						Break
+					Case "Pure Red \(Brumbek's Preference\)"
+						SelectSubPackage '23 Tomato Pure Red without Blemish'
+						Break
+				EndSelect
+				Break
+			Case "Default Food"
+				Break
+		EndSelect
+		SelectOne "Ropes 3D - Farmhouse\n\nDouble-click image to view a larger version",\
+			"|Farmhouse 3D Ropes No Fade - Recommended","This installs 3D ropes versions of all applicable Farmhouse meshes. This can increase the polycount by upwards of 200,000 in Riverwood but looks oh, so awesome! Disable if you get slowdowns. Note if you don't pick this, you still always get my improved Farmhouse meshes that fix the blurry wood beams. This version makes the ropes always render, even when up on a mountain looking down at, say, Riverwood. This is more realistic, and I get zero FPS hit for it.","--- Screenshots ---\\Farmhouse_3D_Ropes.jpg",\
+			"Farmhouse 3D Ropes Distance Fade","This installs 3D ropes versions of all applicable Farmhouse meshes. This can increase the polycount by upwards of 200,000 in Riverwood but looks oh, so awesome! Disable if you get slowdowns. Note if you don't pick this, you still always get my improved Farmhouse meshes that fix the blurry wood beams. This version keeps the default behavior of the ropes disappearing when you get far enough away. This is supposed to help performance but also looks a bit unrealistic.","--- Screenshots ---\\Farmhouse_3D_Ropes.jpg",\
+			"Farmhouse Texture UV Fixes Only","This keeps the original game\'s 2D ropes but includes SMIM\'s anti-blurry texture fixes for Farmhouse meshes.","--- Screenshots ---\\Farmhouse_3D_Ropes.jpg"
+			Case "Farmhouse 3D Ropes No Fade - Recommended"
+				SelectSubPackage '04 Farmhouse 3D Ropes No Fade \(Best\)'
+				Break
+			Case "Farmhouse 3D Ropes Distance Fade"
+				SelectSubPackage '04 Farmhouse 3D Ropes Distance Fade'
+				Break
+			Case "Farmhouse Texture UV Fixes Only"
+				Break
+			EndSelect
+		SelectOne "Ropes 3D - Dungeons\n\nDouble-click image to view a larger version",\
+			"|Dungeons 3D Ropes and Glorious Scaffolding","This installs 3D ropes versions of the various dungeons ropes meshes that hang or extend between various objects. This also installs my glorious high-polygon scaffolding planks, beams, and walkways which use custom high-resolution textures. These scaffolding meshes are used in over 5200 places, so this makes dungeons and mines look much nicer!","--- Screenshots ---\\MinesRopesAndScaffolding.jpg",\
+			"Dungeons 3D Ropes","This installs 3D ropes versions of the various dungeons ropes meshes that hang or extend between various objects.","--- Screenshots ---\\3DDungeonRopes.jpg"
+			Case "Dungeons 3D Ropes and Glorious Scaffolding"
+				SelectSubPackage '39 Dungeons 3D Ropes and Glorious Scaffolding'
+				Break
+			Case "Dungeons 3D Ropes"
+				SelectSubPackage '39 Dungeons 3D Ropes'
+				Break
+		EndSelect
+		bSERiftenDocksRopesObjectFix = False
+		SelectOne "Ropes 3D - Riften\n\nDouble-click image to view a larger version",\
+			"|Riften 3D Ropes Default Ropes Style - Recommended","This installs 3D ropes versions of all applicable Riften Dock meshes. This can increase the polycount by upwards of 500\,000 at the Riften Docks. Disable if you get slowdowns. This also requires editing the worldspace to move certain objects. Other mods that edit the Riften Docks might conflict. This option uses a modified vanilla texture that looks identical to the original Riften ropes texture.","--- Screenshots ---\\RiftenRopes.jpg",\
+			"Riften 3D Ropes Optional Better Ropes Style","This installs 3D ropes versions of all applicable Riften Dock meshes. This can increase the polycount by upwards of 500\,000 at the Riften Docks. Disable if you get slowdowns. This also requires editing the worldspace to move certain objects. Other mods that edit the Riften Docks might conflict. This option uses an alternate rope texture from the Better Ropes mod that is a little more worn than the more clean vanilla texture.","--- Screenshots ---\\RiftenRopesTextureComp.jpg",\
+			"Default Riften Ropes","Do not install SMIM Riften Ropes","--- Screenshots ---\\RiftenRopes.jpg"
+			Case "Riften 3D Ropes Default Ropes Style - Recommended"
+				bSERiftenDocksRopesObjectFix = True
+				SelectSubPackage '37 Riften 3D Ropes'
+				Break
+			Case "Riften 3D Ropes Optional Better Ropes Style"
+				bSERiftenDocksRopesObjectFix = True
+				SelectSubPackage '37 Riften 3D Ropes'
+				SelectSubPackage '38 Riften 3D Ropes Better Ropes Texture'
+				Break
+			Case "Default Riften Ropes"
+				Break
+		EndSelect				
+		SelectOne "Chains 3D 0 Pull Levers\n\nDouble-click image to view a larger version",\
+			"|Chains 3D - Pull Levers Small Rings \(Recommended\)","This installs my 3D chains for all the pull lever activators used mostly in Dungeons. So clinky now! This makes all the rings small so it realistically could fit into the cogs. This increases the polycount by 52\,000\!  Disable if you get slowdowns\.","--- Screenshots ---\\PullLever_Full_Smaller_Chain.jpg",\
+			"Chains 3D - Pull Levers","This installs my 3D chains for all the pull lever activators used mostly in Dungeons\. So clinky now\! This increases the polycount by 48\,000\!  Disable if you get slowdowns\.","--- Screenshots ---\\PullLever_Full.jpg",\
+			"Chains 3D - Pull Levers Lite","This installs my 3D chains for all the pull lever activators used mostly in Dungeons\. So clinky now\! The lite version makes only the very visable chain 3D and leaves the chain on the cog 2D\. This increases the polycount by 8\,000\.","--- Screenshots ---\\PullLever_Lite.jpg"
+				Case "Chains 3D - Pull Levers Small Rings \(Recommended\)"
+					SelectSubPackage '08 Chains 3D - Pull Levers Small Rings'
+					Break
+				Case "Chains 3D - Pull Levers"
+					SelectSubPackage '08 Chains 3D - Pull Levers'
+					Break
+				Case "Chains 3D - Pull Levers Lite"
+					SelectSubPackage '08 Chains 3D - Pull Levers Lite'
+					Break
+		EndSelect
+		
+		SelectOne "Dwemer Clutter\n\nDouble-click image to view a larger version",\
+			"|Dwemer Clutter","This installs SMIM\'s greatly enhanced Dwemer plates\, cups\, pots\, utensils\, and misc items\.","--- Screenshots ---\\Dwemer Clutter Comp.jpg",\
+			"Default Dwemer Clutter","Keep the default Skyrim Dwemer clutter.","--- Screenshots ---\\Dwemer Clutter Comp.jpg"
+				Case "Dwemer Clutter"
+					SelectSubPackage '09 Dwemer Clutter'
+					Break
+				Case "Default Dwemer Clutter"
+					Break
+		EndSelect
+				
+		SelectOne "Bridges\n\nDouble-click image to view a larger version",\
+			"|Bridges Real Roads - Recommended","This installs SMIM\'s more detailed bridges that use high-resolution custom textures based on Skyrim HD\. This changes the cobblestone roads to be actual 3D models using the Real Roads style by dukefx\. You don\'t actually have to use his mod to install this option\, but you'll want to install his mod to make sure all roads have 3D cobblestone\.","--- Screenshots ---\\BridgesRealRoads.jpg",\
+			"Bridges","This installs SMIM\'s more detailed bridges that use high-resolution custom textures based on Skyrim HD.","--- Screenshots ---\\Bridges_Stonework_Comp.jpg",\
+			"Bridges - Old Stonework","This installs SMIM\'s more detailed bridges that use high-resolution custom textures based on Skyrim HD. This uses my old SMIM stonework on the top of the bridge.\nSometimes in life something gets changed\, but then you don\'t like the change. And you can't decide if you like the old or new. Therefore, Brumbek\, in his mercy\, gives you the option to use the old stonework. End of story\, please stop reading this.  ...hurry up and finish installing SMIM\!","--- Screenshots ---\\BridgeSMIMComp.jpg"
+				Case "Bridges Real Roads - Recommended"
+					SelectSubPackage '11 Bridges Real Roads'
+					Break
+				Case "Bridges"
+					SelectSubPackage '11 Bridges'
+					Break
+				Case "Bridges - Old Stonework"
+					SelectSubPackage '11 Bridges Old Stonework'
+					Break
+		EndSelect
+				
+		SelectOne "Farmhouse Woven Fence\n\nDouble-click image to view a larger version",\
+			"|Woven Fence Less Flicker - Recommended","This installs real 3D woven fences instead of the ugly flat 2D fence\. This non\-dense option has a less dense weave for slightly better performance but still increases the polycount of Riverwood by 50\,000 or so.","--- Screenshots ---\\FarmhouseWovenFenceLessFlicker.jpg",\
+			"Woven Fence","This installs real 3D woven fences instead of the ugly flat 2D fence\. This non\-dense option has a less dense weave for slightly better performance but still increases the polycount of Riverwood by 70\,000 or so\. This fence can flicker at a distance if you aren\'t running 1440p or 2160p or higher screen resolution.","--- Screenshots ---\\FarmhouseWovenFenceComp.jpg",\
+			"Woven Fence Dense","This installs real 3D woven fences instead of the ugly flat 2D fence\. This Dense option can cause shimmering if running 1080p or lower\. It does increase the polycount of Riverwood by 100\,000 or so\. This fence will flicker very badly at a distance if you aren\'t running 1440p or 2160p or higher screen resolution.","--- Screenshots ---\\FarmhouseWovenFenceComp.jpg",\
+			"Woven Fence Dense Grey","This installs real 3D woven fences instead of the ugly flat 2D fence\. Entirely gray option\. This Dense option can cause shimmering if running 1080p or lower\. It does increase the polycount of Riverwood by 100\,000 or so\. This fence will flicker very badly at a distance if you aren\'t running 1440p or 2160p or higher screen resolution.","--- Screenshots ---\\FarmhouseWovenFenceGray.jpg"
+				Case "Woven Fence Less Flicker - Recommended"
+					SelectSubPackage '18 Farmhouse Woven Fence Less Flicker'
+					Break
+				Case "Woven Fence"
+					SelectSubPackage '18 Farmhouse Woven Fence'
+					Break
+				Case "Woven Fence Dense"
+					SelectSubPackage '"18 Farmhouse Woven Fence Dense'
+					Break
+				Case "Woven Fence Dense Grey"
+					SelectSubPackage '18 Farmhouse Woven Fence Dense Gray'
+					Break
+		EndSelect		
+		
+		SelectOne "Tankards\n\nDouble-click image to view a larger version",\
+			"|Pewter Tankards","This installs improved high-polygon tankards with high-resolution textures. This uses a pewter texture that is very close to vanilla in style.","--- Screenshots ---\\Tankard_Comp-4Way.jpg",\
+			"Dark Brushed Metal Tankards","This installs improved high-polygon tankards with high-resolution textures. This uses a more dark brushed metal texture that is very close to vanilla in brightness.","--- Screenshots ---\\Tankard_Comp-4Way.jpg",\
+			"Bright Brushed Metal Tankards","This installs improved high-polygon tankards with high-resolution textures. This uses a brighter brushed metal texture with some bevel lines for visual interest. The overall appearance more of a bright metal.","--- Screenshots ---\\Tankard_Comp-4Way.jpg",\
+			"Pewter Tankards Half-size Textures","This installs improved high-polygon tankards with high-resolution textures. This uses a pewter texture that is very close to vanilla in style. Half-Size textures are used.","--- Screenshots ---\\Tankard_Comp-4Way.jpg",\
+			"Dark Brushed Metal Tankards Half-size Textures","This installs improved high-polygon tankards with high-resolution textures. This uses a more dark brushed metal texture that is very close to vanilla in brightness. Half-Size textures are used.","--- Screenshots ---\\Tankard_Comp-4Way.jpg",\
+			"Bright Brushed Metal Tankards Half-Size Textures","This installs improved high-polygon tankards with high-resolution textures. This uses a brighter brushed metal texture with some bevel lines for visual interest. The overall appearance more of a bright metal. Half-Size textures are used.","--- Screenshots ---\\Tankard_Comp-4Way.jpg"
+				Case "Pewter Tankards"
+					SelectSubPackage '16 Tankard Pewter Metal'
+					Break
+				Case "Dark Brushed Metal Tankards"
+					SelectSubPackage '16 Tankard Dark Brushed Metal'
+					Break
+				Case "Bright Brushed Metal Tankards"
+					SelectSubPackage '16 Tankard Bright Brushed Metal'
+					Break
+				Case "Pewter Tankards Half-size Textures"
+					SelectSubPackage '16 Tankard Pewter Metal'
+					SelectSubPackage '84 Half-Sized Textures Tankard Pewter Metal'
+					Break
+				Case "Dark Brushed Metal Tankards Half-size Textures"
+					SelectSubPackage '16 Tankard Dark Brushed Metal'
+					SelectSubPackage '84 Half-Sized Textures Tankard Dark Brushed Metal'
+					Break
+				Case "Bright Brushed Metal Tankards Half-Size Textures"
+					SelectSubPackage '16 Tankard Bright Brushed Metal'
+					SelectSubPackage '84 Half-Sized Textures Tankard Bright Brushed Metal'
+					Break
+		EndSelect
+		
+		SelectOne "Whiterun Castle \(Dragonsreach\) Wood Carvings\n\nDouble-click image to view a larger version",\
+			"|Wood Carvings Celtic - Recommended","This installs a custom wood carving texture in the Celtic style for Whiterun's Castle interior. This matches the theme of the vanilla texture the best. This install option also fixes many castle mesh errors.","--- Screenshots ---\\Whiterun_Wood_Carvings_Options.jpg",\
+			"Wood Carvings Moroccan","This installs a custom wood carving texture in the Moroccan style for Whiterun\'s Castle interior. This departs from the vanilla style\, but it looks really nice in-game. This install option also fixes many castle mesh errors.","--- Screenshots ---\\Whiterun_Wood_Carvings_Options.jpg",\
+			"Wood Carvings Improved Vanilla","This installs a modified vanilla wood carving texture for Whiterun\'s Castle interior. This keeps the exact vanilla wood carving but removes the ugly seam.\nThis install option also fixes many castle mesh errors.","--- Screenshots ---\\Whiterun_Wood_Carvings_Options.jpg",\
+			"Skip Wood Carvings Install","Use the default Dragonsreach wood carvings","--- Screenshots ---\\Whiterun_Wood_Carvings_Options.jpg"
+				Case "Wood Carvings Celtic - Recommended"
+					SelectSubPackage '43 Whiterun Castle Wood Carvings Celtic'
+					Break
+				Case "Wood Carvings Moroccan"
+					SelectSubPackage '43 Whiterun Castle Wood Carvings Moroccan'
+					Break
+				Case "Wood Carvings Improved Vanilla"
+					SelectSubPackage '43 Whiterun Castle Wood Carvings Vanilla'
+					Break
+				Case "Skip Wood Carvings Install"
+					Break
+		EndSelect
+		
+		SelectOne "Windmills\n\nDouble-click image to view a larger version",\
+			"|Base Vanilla Version Sails - Recommended","This will install windmills the same size as vanilla and won\'t include DynDOLOD\/SkyMills specific meshes. This is the sails version\, which adds pretty fabric to the windmills.","--- Screenshots ---\\Windmill_Sails.jpg",\
+			"Base Vanilla Version","This will install windmills the same size as vanilla and won't include DynDOLOD/SkyMills specific meshes. This version has no fabric sails, which is more like the vanilla game.","--- Screenshots ---\\Windmills.jpg",\
+			"DynDOLOD\/SkyMills Compatibility Sails","DynDOLOD is a brilliant mod that creates distant objects based on your installed mods, and it makes the SkyFalls and SkyMills unneccessary. Install this if you use DynDOLOD or if you are using only the SkyFalls and SkyMills mod. This is the sails version\, which adds pretty fabric to the windmills.","--- Screenshots ---\\Windmill_Sails.jpg",\
+			"DynDOLOD\/SkyMills Compatibility","DynDOLOD is a brilliant mod that creates distant objects based on your installed mods, and it makes the SkyFalls and SkyMills unneccessary. Install this if you use DynDOLOD or if you are using only the SkyFalls and SkyMills mod. This version has no fabric sails\, which is more like the vanilla game.","--- Screenshots ---\\Windmills.jpg",\
+			"Keep default windmills","Keep the default windmills","--- Screenshots ---\\Windmills.jpg"
+				Case "Base Vanilla Version Sails - Recommended"
+					SelectSubPackage '55 Windmills Base Vanilla Version Sails'
+					Break
+				Case "Base Vanilla Version"
+					SelectSubPackage '55 Windmills Base Vanilla Version'
+					Break
+				Case "DynDOLOD\/SkyMills Compatibility Sails"
+					SelectSubPackage '55 Windmills Base Vanilla Version Sails'
+					SelectSubPackage '56 Windmills SkyMills Compatibility Sails'
+					Break
+				Case "DynDOLOD\/SkyMills Compatibility"
+					SelectSubPackage '55 Windmills Base Vanilla Version'
+					SelectSubPackage '56 Windmills SkyMills Compatibility'
+					Break
+				Case "Keep default windmills"
+					Break
+		EndSelect
+		SelectOne "Jewelry Rings\n\nDouble-click image to view a larger version",\
+			"|Jewelry Rings Vanilla","This installs high-polygon round rings with a custom high-res texture using a modified version of pfaffendrill's Jewels of the Nord mod texture. Pick this option if you don\'t use Complete Crafting Overhaul Remade or Jewelcraft mods.","--- Screenshots ---\\Rings.jpg",\
+			"Jewelry Rings CCO Remade or Jewelcraft","This installs high-polygon round rings with a custom high-res texture using a modified version of pfaffendrill's Jewels of the Nord mod texture. Pick this option if you use Complete Crafting Overhaul or Jewelcraft mods.","--- Screenshots ---\\Rings.jpg",\
+			"Skip SMIM Rings","Skip installing the custom SMIM jewelry rings","--- Screenshots ---\\Rings.jpg"
+				Case "Jewelry Rings Vanilla"
+					SelectSubPackage '58 Jewelry Rings'
+					Break
+				Case "Jewelry Rings CCO Remade or Jewelcraft"
+					SelectSubPackage '58 Jewelry Rings'
+					SelectSubPackage '59 Jewelry Rings CCO Remade or Jewelcraft Patch'
+					Break
+				Case "Skip SMIM Rings"
+					Break
+		EndSelect
+		SelectOne "Dawnguard Soulcairn Bone Piles\n\nDouble-click image to view a larger version",\
+			"|Bone Piles Yellow Bones - Recommended","This installs high-polygon skulls and bones on the Dawnguard Soulcairn bone piles. This uses yellow bone colors since yellow bones are more realistic for decayed bones.","--- Screenshots ---\\Soulcairn_Comparison.jpg",\
+			"Bone Piles White Bones","This installs high-polygon skulls and bones on the Dawnguard Soulcairn bone piles. This uses white bone colors to better match the default game.","--- Screenshots ---\\Soulcairn_Comparison.jpg",\
+			"Bone Piles Yellow Bones More Bones","This installs high-polygon skulls and bones on the Dawnguard Soulcairn bone piles. This uses yellow bone colors since yellow bones are more realistic for decayed bones. This option can significantly hurt performance\, dropping 10\-15 frames per second even on 4\.2Ghz nVidia 680 systems while using other mods like ENB.","--- Screenshots ---\\Soulcairn_Comparison.jpg",\
+			"Bone Piles White Bones More Bones","This installs high-polygon skulls and bones on the Dawnguard Soulcairn bone piles. This uses white bone colors to better match the default game. This also features many extra bones scattered around. This option can significantly hurt performance\, dropping 10-15 frames per second even on 4\.2Ghz nVidia 680 systems while using other mods like ENB.","--- Screenshots ---\\Soulcairn_Comparison.jpg",\
+			"Default Bone Piles","Use default Soulcairn bone piles","--- Screenshots ---\\Soulcairn_Comparison.jpg"
+				Case "Bone Piles Yellow Bones - Recommended"
+					SelectSubPackage '50 Dawnguard Soulcairn Bone Piles'
+					Break
+				Case "Bone Piles White Bones"
+					SelectSubPackage '50 Dawnguard Soulcairn Bone Piles'
+					SelectSubPackage '52 Dawnguard Soulcairn Bone Piles \(White Bones\)'
+					Break
+				Case "Bone Piles Yellow Bones More Bones"
+					SelectSubPackage '50 Dawnguard Soulcairn Bone Piles'
+					SelectSubPackage '51 Dawnguard Soulcairn Bone Piles \(More Bones\)'
+					Break
+				Case "Bone Piles White Bones More Bones"
+					SelectSubPackage '50 Dawnguard Soulcairn Bone Piles'
+					SelectSubPackage '51 Dawnguard Soulcairn Bone Piles \(More Bones\)'
+					SelectSubPackage '51 Dawnguard Soulcairn Bone Piles \(More Bones\)'
+					Break
+				Case "Default Bone Piles"
+					Break
+		EndSelect
+		SelectOne "Xtra Options - Half-Size Textures Addon\n\nDouble-click image to view a larger version",\
+			"|Keep regular full-sized textures","Do not install half-sized textures","--- Screenshots ---\\Blurry.jpg",\
+			"Half-Size","This uses reduced texture sizes for those with not much VRAM. Only use if you get performance decreases.","--- Screenshots ---\\Blurry.jpg",\
+			"Half-Size with Skyrim HD Furniture","This includes the Skyrim HD furniture option. This uses reduced texture sizes for those with not much VRAM. Only use if you get performance decreases.","--- Screenshots ---\\Blurry.jpg",\
+			"Half-Size with Skyrim HD Weathered Furniture","This includes the Skyrim HD weathered furniture option. This uses reduced texture sizes for those with not much VRAM. Only use if you get performance decreases.","--- Screenshots ---\\Blurry.jpg"
+				Case "Keep regular full-sized textures"
+					Break
+				Case "Half-Size"
+					SelectSubPackage '80 Half-Sized Textures'
+					Break
+				Case "Half-Size with Skyrim HD Furniture"
+					SelectSubPackage '80 Half-Sized Textures'
+					SelectSubPackage '81 Half-Sized Furniture Skyrim HD Appearance'
+					Break
+				Case "Half-Size with Skyrim HD Weathered Furniture"
+					SelectSubPackage '80 Half-Sized Textures'
+					SelectSubPackage '81 Half-Sized Furniture Skyrim HD Weathered Appearance'
+					Break
+		EndSelect
+		SelectOne "Xtra Options - Ultra-Sized Textures Addon\n\nDouble-click image to view a larger version",\
+			"|Keep default textures","Do not install 4096x4096 textures\, see below for more information","--- Screenshots ---\\Empty.jpg",\
+			"Ultra-Sized 4096x4096 Textures","This installs extremely high-resolution textures for a few objects. This option is for top-of-the-line graphics cards or for years to come when running the game in very high resolutions. Currently a few various items are covered like the Lantern\, Windmills\, Whiterun Benches\, Hawk\, Chests\, Carriage Metalwork\, Campfire Rocks\, Smelter\, Shack Roof\, and one Wooden Chair style.","--- Screenshots ---\\Empty.jpg"
+				Case "Keep default textures"
+					Break
+				Case "Ultra-Sized 4096x4096 Textures"
+					SelectSubPackage '90 Ultra-Sized Textures'
+					Break
+		EndSelect
+		If bSERiftenDocksRopesObjectFix == True
+			SelectOne "Merged Plugin\n\nWrye Bash has detected you have selected several plugins which could be merged.\n\nWould you like to use a merged plugin instead?",\
+			"|Yes","Yes use a merged plugin to save slots in your load order","",\
+			"No","Install all of the plugins picked up during the install process.",""
+				Case "Yes"
+					DeSelectEspm 'SMIM-FarmhouseFlickeringFix.esp'
+					DeSelectEspm 'SMIM-SE-FarmhouseFlickeringFix.esp'
+					DeSelectEspm 'SMIM-ShackRoofFixes.esp'
+					DeSelectEspm 'SMIM-SE-ShackRoofFixes.esp'
+					DeSelectEspm 'SMIM-ShackRoofFixesDragonborn.esp'
+					DeSelectEspm 'SMIM-SE-ShackRoofFixesDragonborn.esp'
+					DeSelectEspm 'SMIM-DragonbornTernFix.esp'
+					DeSelectEspm 'SMIM-SE-DragonbornTernFix.esp'
+					DeSelectEspm 'SMIM-RiftenDocksRopesObjectFix.esp'
+					DeSelectEspm 'SMIM-SE-RiftenDocksRopesObjectFix.esp'
+					DeSelectEspm 'SMIM-FurnitureChestSnowFix.esp'
+					DeSelectEspm 'SMIM-SE-FurnitureChestSnowFix.esp'
+					DeSelectEspm 'SMIM-DungeonsCliffsIceSkirts.esp'
+					DeSelectEspm 'SMIM-SE-DungeonsCliffsIceSkirts.esp'
+					SelectSubPackage '95 Merged ESP OS All'
+					Break
+				Case "No"
+					Break
+			EndSelect
+		Elif bSERiftenDocksRopesObjectFix == False
+			SelectOne "Merged Plugin\n\nWrye Bash has detected you have selected several plugins which could be merged.\n\nWould you like to use a merged plugin instead?",\
+			"|Yes","Yes use a merged plugin to save slots in your load order","",\
+			"No","Install all of the plugins picked up during the install process.",""
+				Case "Yes"
+					DeSelectEspm 'SMIM-FarmhouseFlickeringFix.esp'
+					DeSelectEspm 'SMIM-SE-FarmhouseFlickeringFix.esp'
+					DeSelectEspm 'SMIM-ShackRoofFixes.esp'
+					DeSelectEspm 'SMIM-SE-ShackRoofFixes.esp'
+					DeSelectEspm 'SMIM-ShackRoofFixesDragonborn.esp'
+					DeSelectEspm 'SMIM-SE-ShackRoofFixesDragonborn.esp'
+					DeSelectEspm 'SMIM-DragonbornTernFix.esp'
+					DeSelectEspm 'SMIM-SE-DragonbornTernFix.esp'
+					DeSelectEspm 'SMIM-RiftenDocksRopesObjectFix.esp'
+					DeSelectEspm 'SMIM-SE-RiftenDocksRopesObjectFix.esp'
+					DeSelectEspm 'SMIM-FurnitureChestSnowFix.esp'
+					DeSelectEspm 'SMIM-SE-FurnitureChestSnowFix.esp'
+					DeSelectEspm 'SMIM-DungeonsCliffsIceSkirts.esp'
+					DeSelectEspm 'SMIM-SE-DungeonsCliffsIceSkirts.esp'
+					SelectSubPackage '95 Merged ESP OS No Riften Ropes'
+					Break
+				Case "No"
+					Break
+			EndSelect
+	EndIf
+	Break
+EndSelect
+
+Note "This is the end of the installer"
