@@ -46,14 +46,15 @@ compoundAssignment: Identifier (CompoundExp
 
 /* = CONTROL FLOW = */
 // Statements that alter control flow.
-controlFlowStmt: Break
-                 | cancelStmt
-                 | Continue
-                 | forStmt
-                 | ifStmt
-                 | Return
-                 | selectStmt
-                 | whileStmt;
+controlFlowStmt: Break        # Break
+                 | cancelStmt # Cancel
+                 | Continue   # Continue
+                 | forStmt    # For
+                 | ifStmt     # If
+                 | Return     # Return
+                 | selectStmt # Select
+                 | whileStmt  # While
+                 ;
 
 // Cancels the entire wizard and optionally shows a reason to the
 // user. The expr (which is the optional reason) must be a string if
