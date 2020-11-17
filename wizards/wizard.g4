@@ -46,15 +46,14 @@ compoundAssignment: Identifier (CompoundExp
 
 /* = CONTROL FLOW = */
 // Statements that alter control flow.
-controlFlowStmt: 'Break'      # Break
-                 | cancelStmt # Cancel
-                 | 'Continue' # Continue
-                 | forStmt    # For
-                 | ifStmt     # If
-                 | 'Return'   # Return
-                 | selectStmt # Select
-                 | whileStmt  # While
-                 ;
+controlFlowStmt: Break
+                 | cancelStmt
+                 | Continue
+                 | forStmt
+                 | ifStmt
+                 | Return
+                 | selectStmt
+                 | whileStmt;
 
 // Cancels the entire wizard and optionally shows a reason to the
 // user. The expr (which is the optional reason) must be a string if
@@ -70,17 +69,17 @@ caseStmt: 'Case' expr body;
 defaultStmt: 'Default' body;
 
 // An elif statement, parsed like a regular if statement.
-elifStmt: 'Elif' expr body;
+elifStmt: Elif expr body;
 
 // An else statement, parsed like an if statement without a guard
 // expression.
-elseStmt: 'Else' body;
+elseStmt: Else body;
 
 // A for loop. There are two possible types of for loop that differ
 // only in their headers. They each begin with the keyword For,
 // followed by an iteration variable a and then the header. Finally,
 // a body and an EndFor keyword terminate the for loop.
-forStmt: 'For' Identifier (forRangeHeader | forInHeader) body 'EndFor';
+forStmt: 'For' Identifier (forRangeHeader | forInHeader) body EndFor;
 
 // The header of a for loop of the form 'For a from b to c [by d]',
 // where:
@@ -97,10 +96,10 @@ forInHeader: In expr;
 
 // An if statement may have any number of elif statements, but at
 // most one else statement.
-ifStmt: 'If' expr body elifStmt* elseStmt? 'EndIf';
+ifStmt: 'If' expr body elifStmt* elseStmt? EndIf;
 
 // There are two types of Select statement.
-selectStmt: (selectOne | selectMany) 'EndSelect';
+selectStmt: (selectOne | selectMany) EndSelect;
 
 // The two types differ only in their initial keyword.
 // We copy their signature here to simplify the semantic analysis.
@@ -113,7 +112,7 @@ selectOne:  'SelectOne' expr (Comma optionTuple)* Comma? selectCaseList;
 selectMany: 'SelectMany' expr (Comma optionTuple)* Comma? selectCaseList;
 
 // A simple while loop. Runs until the guard is false.
-whileStmt: 'While' expr body 'EndWhile';
+whileStmt: 'While' expr body EndWhile;
 
 /* = Keyword STATEMENTS = */
 // A keyword statement is just a keyword followed by a
@@ -244,7 +243,18 @@ NotEqual: EXMARK EQ_SIGN;
 Assign: EQ_SIGN;
 
 // Control Flow Keywords
-Break: 'Break';
+// These are separate tokens for the benefit of interpreters
+// (specifically, to allow them to recover from errors due to
+// incorrect wizard syntax more easily).
+Break:     'Break';
+Continue:  'Continue';
+Elif:      'Elif';
+Else:      'Else';
+EndFor:    'EndFor';
+EndIf:     'EndIf';
+EndSelect: 'EndSelect';
+EndWhile:  'EndWhile';
+Return:    'Return';
 
 // Keywords
 // Note the alternatives that are kept for backwards compatibility.
