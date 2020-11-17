@@ -1,0 +1,2 @@
+; Tests a breaking change: Functions must have parentheses after them
+Note a.len

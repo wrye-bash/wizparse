@@ -1,0 +1,10 @@
+; Tests a breaking change: Default statements must come last in a case list
+SelectOne "Test", "Cancel", "", "", "Return", "", ""
+    Case "Cancel"
+        Cancel
+    Default
+        Note "Default 1"
+        Break
+    Case "Return"
+        Return
+EndSelect

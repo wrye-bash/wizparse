@@ -66,8 +66,7 @@ do
     if [ ! -s parseErrors.txt ] # exists and is not empty
     then
         # Since we swallowed the stderr output, print it back out
-        echo -e "${C_BLUE}==>${C_NC} ${C_RED}Test succeeded, but expected failure; error message follows${C_NC}"
-        echo "$(<parseErrors.txt)"
+        echo -e "${C_BLUE}==>${C_NC} ${C_RED}Test succeeded, but expected failure${C_NC}"
         exit 1 # fail the CI
     fi
     echo -e "   ${C_BLUE}::${C_NC} ${C_GREEN}Test failed, as expected${C_NC}"

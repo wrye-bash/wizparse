@@ -1,0 +1,13 @@
+; Tests a breaking change: Multiple Default statements per Select are no longer allowed
+SelectOne "Test", "Cancel", "", "", "Return", "", ""
+    Case "Cancel"
+        Cancel
+    Case "Return"
+        Return
+    Default
+        Note "Default 1"
+        Break
+    Default
+        Note "Default 2"
+        Break
+EndSelect
