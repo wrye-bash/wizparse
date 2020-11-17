@@ -244,16 +244,17 @@ Break: 'Break';
 // Keywords
 // Note the alternatives that are kept for backwards compatibility.
 Keyword: 'DeSelectAll'
-         | 'DeSelectAllPlugins' | 'DeSelectAllEspms'
-         | 'DeSelectPlugin'     | 'DeSelectEspm'
+         | 'DeSelectAllPlugins'  | 'DeSelectAllEspms'
+         | 'DeSelectPlugin'      | 'DeSelectEspm'
          | 'DeSelectSubPackage'
          | 'Note'
-         | 'RenamePlugin'       | 'RenameEspm'
+         | 'RenamePlugin'        | 'RenameEspm'
          | 'RequireVersions'
-         | 'ResetPluginName'    | 'ResetEspmName'
+         | 'ResetPluginName'     | 'ResetEspmName'
+         | 'ResetAllPluginNames' | 'ResetAllEspmNames'
          | 'SelectAll'
-         | 'SelectAllPlugins'   | 'SelectAllEspms'
-         | 'SelectPlugin'       | 'SelectEspm'
+         | 'SelectAllPlugins'    | 'SelectAllEspms'
+         | 'SelectPlugin'        | 'SelectEspm'
          | 'SelectSubPackage';
 
 // Literals
