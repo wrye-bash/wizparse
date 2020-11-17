@@ -62,8 +62,9 @@ A full list of breaking changes follows:
   Still, this technically breaks backwards compatibility, so noting it here.
 - As mentioned above, assignments and compound assignments no longer return a value,
   meaning that they cannot be used for commands that expect a value (e.g. If statements).
-- Multiple `Default` statements for a single `SelectOne` / `SelectMany` statement are explicitly disallowed.
-  Previously, they were allowed, but the second one would never be executed.
+- `SelectOne` / `SelectMany` statements may now only contain a single `Default` statement at the end of the case list.
+  Previously, any number were allowed and they could occur anywhere in the case list.
+  Only a single one would have been executed, and the fallthrough logic made using them in any position except the last one awkward.
 - Functions now *must* have parentheses after them. Previously, this was allowed:
   ```
   Note 'foo'.len
