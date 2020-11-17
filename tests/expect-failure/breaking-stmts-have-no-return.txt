@@ -1,0 +1,4 @@
+; Tests a breaking change: Statements (e.g. assignment) no longer return a value
+If a = 0
+    Note a
+EndIf

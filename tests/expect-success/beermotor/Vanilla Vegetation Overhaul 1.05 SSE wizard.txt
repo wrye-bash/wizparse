@@ -1,0 +1,63 @@
+;=-=-=-|Vanilla Vegetation Overhaul Wrye Bash BAIN wizard by Mertz |-=-=-=
+
+RequireVersions "1.0.0.0", "", "", "307" 
+DeSelectAll
+
+MOD_Readme = str("Description\n\nThe Vanilla Vegetation Overhaul improves textures of trees\, plants and grasses\, but tries at the same time to keep a very vanilla\-like look\. This mod does change textures of tree branches\, most plants and grasses and also adds new grasses for more variety\. The mod also includes new generated high resolution Tree LOD and also provides the used LodGen billboards for those that want to generate their own Tree LOD \(which is highly recommended\) with SSELodGen..")
+
+
+;== Welcome screen and install core mod
+SelectOne "Welcome",\
+    "|Welcome"," This BAIN wizard installs Vanilla Vegetation Overhaul for Skyrim Special Edition\n\nClick Read Me below to select the Readme for this mod\n\nClick 'Credits' above to view the credits.\n\nClick Next to continue the installation","images\\main.jpg",\
+	"Read Me",MOD_Readme,"images\\main.jpg",\
+    "Credits","Vanilla Vegetation Overhaul was created by poetr. If you enjoy this mod, please make sure to show your thanks by endorsing!\n\n\nWizBAIN installer by Mertz\n\nClick next to continue the installation","images\\main.jpg"
+EndSelect
+
+SelectOne "Main Files\n\nSelect installation type",\
+	"|Full Install","Vanilla Vegetation Overhaul will improve the textures\/meshes of trees\, plants and grasses\, while keeping a very vanilla-like look\. This mod is based on various other environment and flora mods\. Textures are high resolution and may cause a small impact on performance\. The grass addon was build with the GoS Performance tweak and will provide high grass density\/variety while still giving good performance\. The mod also includes new HD Tree LOD \(8k texture\)\.","images\\main.jpg",\
+	"Custom Install","Select each install option individually","images\\main.jpg"
+		Case "Full Install"
+			SelectSubPackage '00_Trees'
+			SelectSubPackage '01_Plants'
+			SelectSubPackage '02_Grasses'
+			SelectSubPackage '03_HD_LOD'
+			SelectSubPackage '03_HD_LOD_Billboards'
+			Break
+		Case "Custom Install"
+			SelectMany "Custom Installation\n\nPlease select from the options below\n\nClick on each item to read a detailed description of the option to be installed",\
+			"|Trees", "High resolution tree branch\/pine and leaf textures \(for better bark textures HQ Bark is highly recommended\)","images\\main.jpg",\
+			"|Plants","High resolution plant textures \(from Skyrim Flora Overhaul with some changes\)","images\\main.jpg",\
+			"|Grasses","High resolution grass textures and new grasses for more variety","images\\main.jpg",\
+			"|HD LOD","High resolution Tree LOD textures for SSELodGen","images\\main.jpg",\
+			"|HD Billboards","High resolution billboards for SSELODGen","images\\main.jpg"
+				Case "Trees"
+					SelectSubPackage '00_Trees'
+					Break
+				Case "Plants"
+					SelectSubPackage '01_Plants'
+					Break
+				Case "Grasses"
+					SelectSubPackage '02_Grasses'
+					Break
+				Case "HD LOD"
+					SelectSubPackage '03_HD_LOD'
+					Break
+				Case "HD Billboards"
+					SelectSubPackage '03_HD_LOD_Billboards'
+					Break
+			EndSelect
+EndSelect
+			
+SelectOne "Optional INI Tweak for improved grass\n\nThis will place an optional \(but recommended\) INI Tweak to improve grass density and appearance under the Wrye Bash INI Edits tab.\n\nAt the end of this installation\,agree to the INI tweak when prompted\, then go to your \"INI Edits\" tab to apply the tweak to your Skyrim\.ini. Please refer to the Wrye Bash documentation if you need more information on how to install custom INI Edits.\n\n\nWould you like to have this INI Edit added?",\
+	"|Yes","Apply the recommended INI edit for Skyrim.ini to your Wrye Bash INI Edits tab","images\\main.jpg",\
+	"No","Skip adding the INI tweak.","images\\main.jpg"
+		Case "Yes"
+			EditINI('Skyrim.ini', 'Grass', 'iMaxGrassTypesPerTexure', 10)
+			EditINI('Skyrim.ini', 'Grass', 'iMinGrassSize', 60)
+			Break
+		Case "No"
+			Break
+EndSelect
+	
+;== Finish Page ==
+Note "Confirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"

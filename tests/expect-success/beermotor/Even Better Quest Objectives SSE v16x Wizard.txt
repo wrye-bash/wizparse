@@ -1,0 +1,74 @@
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+;-- Even Better Quest Objectives -- WizBAIN by Mertz --
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+RequireVersions "", "", "", "307"
+ResetAllEspmNames
+DeSelectAll
+
+MOD_Readme = str("Thank you for installing Even Better Quest Objectives\!\n\nThis is a \"smart\" installer\. It will automatically select options based on the mods you have installed and active in your load order\. For options which are available to change\, feel free to change them from the auto-selected option\.")
+
+;== Welcome screen and install core mod
+SelectOne "Even Better Quest Objectives Install Wizard",\
+    "|Welcome","Welcome to the Even Better Quest Objectives installer.\n\nClick Read Me below to select the Readme for this mod\n\nClick 'Credits' above to view the credits.\n\nClick Next to continue the installation","fomod\\images\\ebqo.png",\
+	"Read Me",MOD_Readme,"fomod\\images\\ebqo.png",\
+    "Credits","Even Better Quest Objectives was created by William Imm. If you enjoy this mod, please make sure to show your thanks by endorsing!\n\n\nWizBAIN installer by Mertz\n\nClick next to continue the installation","fomod\\images\\ebqo.png"
+EndSelect
+; Core mod is always installed:
+SelectSubPackage '000 Core'
+
+SelectMany "Add-ons",\
+    "|Dark Brotherhood Forever to Misc Quests","This add-on moves the infinitely repeatable \"Dark Brotherhood Forever\!\" quest to the Miscellaneous section of the Journal.","fomod\\images\\ebqo.png"
+        Case "Dark Brotherhood Forever to Misc Quests"
+            SelectSubPackage '200 DB Forever to Misc Quests - Addon'
+            Break
+EndSelect
+; Actual autodetection which the FOMOD doesn't really do.
+sModName101 = "Alternative Start - Live Another Life"
+sModDescription101 = "This patches changes from \'Alternative Start \- Live Another Life\' making it compatible with EBQO."
+sModImage101 = "fomod\\images\\ebqo.png"
+If GetEspmStatus("Alternate Start - Live Another Life.esp") > 1
+	sModName101 = "|" + sModName101
+EndIf
+
+sModName102 = "Book Covers Skyrim"
+sModDescription102 = "This pathces changes from \'Book Covers Skyrim\' making it compatible with EBQO\. You will get Book Covers Skyrim\'s book designs with EBQO\'s text changes."
+sModImage102 = "fomod\\images\\ebqo.png"
+If GetEspmStatus("Book Covers Skyrim.esp") > 1
+	sModName102 = "|" + sModName102
+EndIf
+
+sModName103 = "Cutting Room Floor"
+sModDescription103 = "This pathces changes from \'Cutting Room Floor\' making it compatible with EBQO."
+sModImage103 = "fomod\\images\\ebqo.png"
+If GetEspmStatus("Cutting Room Floor.esp") > 1
+	sModName103 = "|" + sModName103
+EndIf
+
+sModName104 = "The Paarthurnax Dilemma"
+sModDescription104 = "This pathces changes from \'The Paarthurnax Dilemma\' making it compatible with EBQO."
+sModImage104 = "fomod\\images\\ebqo.png"
+If GetEspmStatus("The Paarthurnax Dilemma.esp") > 1
+	sModName104 = "|" + sModName104
+EndIf
+
+SelectMany "Mod patches:\n\nBash has auto-detected the following mods in your Data folder and has selected patches for these plugins.\n\nYou may de-select any option you do not wish to install",\
+		str(sModName101),str(sModDescription101),str(sModImage101),\
+		str(sModName102),str(sModDescription102),str(sModImage102),\
+        str(sModName103),str(sModDescription103),str(sModImage103),\
+        str(sModName104),str(sModDescription104),str(sModImage104)
+            Case "Alternative Start - Live Another Life"
+                SelectSubPackage '100 LAL Patch'
+                Break
+            Case "Book Covers Skyrim"
+                SelectSubPackage '103 Book Covers Skyrim Patch'
+                Break
+            Case "Cutting Room Floor"
+                SelectSubPackage '101 Cutting Room Floor Patch'
+                Break
+            Case "The Paarthurnax Dilemma"
+                SelectSubPackage '102 The Paarthurnax Dilemma Patch'
+                Break
+EndSelect                
+
+;== Finish Page ==
+Note "Confirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"

@@ -1,0 +1,2 @@
+; Tests a breaking change: Random unicode characters at random positions are no longer ignored
+Note 'foo' ▒▒▒

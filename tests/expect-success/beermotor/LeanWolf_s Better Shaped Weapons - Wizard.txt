@@ -1,0 +1,849 @@
+;=-=-=-|LeanWolf's Better Shaped Weapons Wrye Bash BAIN wizard by Mertz and alt3rn1ty |-=-=-=
+
+RequireVersions "1.0.0.0", "", "", "307" 
+DeSelectAll
+
+; need a flag? We got flags...
+flagNoGreatswordSheaths = False
+flagDualSheathRedux = False
+flagInstallall = False
+flagCustom = False
+flagIron = False
+flagDraugr = False
+flagGhostblade = False
+flagImperial = False
+flagSteel = False
+flagSilver = False
+flagOrcish = False
+flagElven = False
+flagNordHero = False
+flagDwarven = False
+flagGlass = False
+flagChillrend = False
+flagEbony = False
+flagDaedric = False
+flagNightingale = False
+flagDawnbreaker = False
+flagScimitar = False
+flagMehrunesRazor = False
+flagKeening = False
+flagCustom = False
+flagDawnguard = False
+flagDragonborn = False
+flagSkyforge = False
+flagGlassChoose = False
+flagKeening = False
+flagDawnbreakerChoose = False
+flagRunedNordHero = False
+flagUHSilver = False
+flagGlassRefract = False
+flagGlassRefractAlpha = False
+flagChillrendRefract = False
+flagDawnbreakerENB = False
+flagDawnbreakerAlt = False
+flagDawnbreakerAltENB = False
+flagDragonbone = False
+flagDragonBlingRed = False
+flagDragonBlingBlue = False
+flagDragonBlingGreen = False
+flagDragonBlingRedGQ = False
+flagDragonBlingBlueGQ = False
+flagDragonBlingGreenGQ = False
+flagStalhrim = False
+flagStalhrimRefract = False
+flagStalhrimRefractAlpha = False
+flagNordic = False
+
+
+LWBSW_Readme = str("This is simply a re-shaping of the vanilla weapon meshes so that they are less like WoW-styled foam paddles and more like realistic weapons.\nThe edits range from subtle reshaping to more extreme redesign, and include the blood meshes which are often of better quality than vanilla.\n\nSwords, Daggers and Greatswords that didn't have a proper scabbard have been given one, the Greatsword sheaths are optional.\nThese meshes are fully compatible with ANY textures. weapon or blood.\nCompatibility is provided for several popular mods.\nLook at the weapons in-game to really see how they look and feel.\nSelect the meshes that appeal to you.\n\nNote: There is no plugin (.esp) for this mod, so don't look for it in your load order.")
+
+;== Welcome screen and install core mod
+SelectOne "LeanWolf's Better-Shaped Weapons - All in One BAIN Installer",\
+    "|Welcome"," This installs LeanWolf's Better Shaped Weapons for Skyrim Special Edition\Click Read Me below to select the Readme for RLO\n\nClick 'Credits' above to view the credits or..\n\nClick Next to continue the installation","Images\\BSW_Banner.jpg",\
+	"Read Me",LWBSW_Readme,"Images\\BSW_Banner.jpg",\
+    "Credits","Created by LeanWolf\n\nWizBAIN installer by Mertz and alt3rn1ty\n\nClick next to continue the installation","Images\\BSW_Banner.jpg"
+EndSelect
+
+
+
+SelectMany "Options 1\n\nDouble Click images for a larger version",\
+	"NO Greatsword Sheaths","Select this if you DON\'T want my Greatsword scabbards \(vanilla style\).","Images\\BSW_NGS.jpg",\
+	"Dual Sheath Redux Patch","This will install the left\-hand sheathed weapon meshes required for the Dual Sheath Redox mod\. If you don\'t use DSR then you don\'t need this\, if you do then overwrite the DSR meshes.","Images\\BSW_DSR.jpg"
+		Case "NO Greatsword Sheaths"
+			flagNoGreatswordSheaths = True
+			Break
+		Case "Dual Sheath Redux Patch"
+			flagDualSheathRedux = True
+			Break
+EndSelect
+
+SelectOne "Options 2",\
+	"|Install everything","All currently modified meshes will be installed. In the next steps you can choose between variants.","Images\\BSW_Default.jpg",\
+	"Custom Installation","Choose individually which weapons you want to install.","Images\\BSW_Custom.jpg"
+		Case "Install everything"
+			flagInstallall = True
+			flagIron = True
+			flagDraugr = True
+			flagGhostblade = True
+			flagImperial = True
+			flagSteel = True
+			flagSilver = True
+			flagOrcish = True
+			flagElven = True
+			flagNordHero = True
+			flagDwarven = True
+			flagGlass = True
+			flagChillrend = True
+			flagEbony = True
+			flagDaedric = True
+			flagNightingale = True
+			flagDawnbreaker = True
+			flagScimitar = True
+			flagMehrunesRazor = True
+			flagKeening = True
+			SelectSubPackage '000 BSW Textures'
+			SelectSubPackage '001 Iron'
+			SelectSubPackage '002 Ancient Nordic'
+			SelectSubPackage '003 Ghostblade and Drainblood'
+			SelectSubPackage '004 Imperial'
+			SelectSubPackage '005 Steel'
+			SelectSubPackage '007 Silver'
+			SelectSubPackage '008 Orcish'
+			SelectSubPackage '009 Elven'
+			SelectSubPackage '010 Nord Hero'
+			SelectSubPackage '011 Dwarven'
+			SelectSubPackage '012 Glass'
+			SelectSubPackage '013 Chillrend'
+			SelectSubPackage '014 Ebony'
+			SelectSubPackage '015 Daedric'
+			SelectSubPackage '016 Bound Weapons'
+			SelectSubPackage '017 Nightingale'
+			SelectSubPackage '018 Dawnbreaker'
+			SelectSubPackage '022 Scimitar'
+			SelectSubPackage '023 Mehrunes Razor'
+			SelectSubPackage '024 Keening'
+			SelectSubPackage '301 Arrow Iron'
+			SelectSubPackage '302 Arrow Ancient Nordic'
+			SelectSubPackage '303 Arrow Forsworn'
+			SelectSubPackage '304 Arrow Falmer'
+			SelectSubPackage '305 Arrow Steel'
+			SelectSubPackage '308 Arrow Orcish'
+			SelectSubPackage '309 Arrow Elven'
+			SelectSubPackage '310 Arrow Nord Hero'
+			SelectSubPackage '311 Arrow Dwarven'
+			SelectSubPackage '312 Arrow Glass'
+			SelectSubPackage '314 Arrow Ebony'
+			SelectSubPackage '315 Arrow Daedric'
+			Break					
+		Case "Custom Installation"
+			flagCustom = True
+			SelectSubPackage '000 BSW Textures'
+			Break
+EndSelect
+
+
+
+If flagInstallall
+	SelectMany "Patches",\
+	"|Dawnguard","Installes LeanWolf's Dawnguard meshes.","Images\\BSW_Dawnguard.jpg",\
+	"|Dragonborn","Installes LeanWolf's Dragonborn meshes.","Images\\BSW_Draginborn.jpg",\
+	"Skyforge Weapons","For use with the aMidianBorn Wolf Armour and Skyforge Weapons mod \(useless without that mod\)\.","Images\\BSW_Skyforge.jpg",\
+	"Glass Weapon Options","Select this to pick a shiny\, reflective Glass that can be used as-is \(opaque\) or with a separate transparency mod.","Images\\BSW_Chillrend.jpg",\
+	"Dawnbreaker Options","Select this if you want something OTHER than the default Elven-sheathed non-ENB Dawnbreaker\. Others choices are a Dwarven sheath or ENB \(Particle Patch\) version.","Images\\BSW_DawnbreakerArt.jpg",\
+	"Runed Nord Hero Weapons","For use with the Runed Nord Hero Weapons mod. Overwrite that mod's meshes.","Images\\BSW_RunedNordHero.jpg",\
+	"Ultra HD Silver Sword","For use with the Ultra HD Silver Sword mod\. Overwrite that mod\'s meshes.",""
+		Case "Dawnguard"
+			flagDawnguard = True
+			Break
+		Case "Dragonborn"
+			flagDragonborn = True
+			Break
+		Case "Skyforge Weapons"
+			flagSkyforge = True
+			SelectSubPackage '006 Skyforge'
+			SelectSubPackage '306 Arrow Skyforge'
+			Break
+		Case "Glass Weapon Options"
+			flagGlassChoose = True
+			Break
+		Case "Dawnbreaker Options"
+			flagDawnbreakerChoose = True
+			Break
+		Case "Runed Nord Hero Weapons"
+			flagRunedNordHero = True
+			SelectSubPackage '010aRuned Nord Hero'
+			Break
+		Case "Ultra HD Silver Sword"
+			flagUHSilver = True
+			SelectSubPackage '007aSilver FrankFamily'
+			Break
+	EndSelect
+EndIf
+
+If flagCustom
+	SelectMany "Custom Installation Options",\
+	"|Iron Weapons","Iron sword, dagger and greatsword with proper sheaths.","Images\\BSW_Iron.jpg",\
+	"|Iron Quiver","Quiver for iron arrows.","Images\\BSW_Quivers.jpg",\
+	"|Ancient Nordic Weapons","Draugr sword and greatsword. No sheaths as all Draugr would then have them and it wouldn\'t fit their rotting look.","Images\\BSW_Draugr.jpg",\
+	"|Ancient Nordic Quiver","Quiver for ancient nordic arrows.","Images\\BSW_Quivers.jpg",\
+	"|Ghostblade and Drainblood","Ghostly Draugr swords use this mesh.","Images\\BSW_Draugr.jpg",\
+	"|Imperial Sword","Imperial Sword","Images\\BSW_Imperial.jpg",\
+	"|Steel Weapons","Steel sword, dagger and greatsword.","Images\\BSW_Steel.jpg",\
+	"|Steel Quiver","Quiver for steel arrows.","Images\\BSW_Quivers.jpg",\
+	"Skyforge Weapons","For use with aMidianBorn Wolf Armour and Skyforge Weapons mod \(useless without that mod\, overwrite its meshes\).","Images\\BSW_Skyforge.jpg",\
+	"|Skyforge Quiver","Quiver for Skyforge arrows.","Images\\BSW_Quivers.jpg",\
+	"|Orcish Weapons","Orcish sword, dagger and greatsword. Scabbards with a proper opening.","Images\\BSW_Orcish.jpg",\
+	"|Orcish Quiver","Quiver for Orcish arrows.","Images\\BSW_Quivers.jpg",\
+	"|Elven Weapons","Elven sword\, dagger\, waraxe\, and greatsword.","Images\\BSW_Elven.jpg",\
+	"|Elven Quiver","Quiver for Elven arrows","Images\\BSW_Quivers.jpg",\
+	"|Dwarven Weapons","Dwarven sword, dagger and greatsword.","Images\\BSW_Dwarven.jpg",\
+	"|Dwarven Quiver","Quiver for Dwarven arrows.","Images\\BSW_Quivers.jpg",\
+	"|Ebony Weapons","Ebony sword, dagger and greatsword. Includes Blade of Sacrifice and Nettlebane.","Images\\BSW_Ebony.jpg",\
+	"|Ebony Quivers","Quiver for ebony arrows.","Images\\BSW_Quivers.jpg",\
+	"|Daedric Weapons","Daedric sword\, dagger\, waraxe\, battleaxe\, and greatsword.","Images\\BSW_Daedric.jpg",\
+	"|Daedric Quiver","Quiver for Daedric arrows","Images\\BSW_Quivers.jpg",\
+	"|Bound Weapons","Matching Conjuration Bound Sword\, Dagger\, and Battleaxe meshes.","Images\\BSW_BoundSword.jpg",\
+	"|Nightingale Blade","Nightingale Blade with proper sheath.","Images\\BSW_Nightingale.jpg",\
+	"|Scimitar","Replace the vanilla scimitar with my fixed and re-shaped mesh from the Weapons of the Third Era Mod.","Images\\BSW_Scimitar.jpg",\
+	"|Mehrunes Razor","Mehrune\'s Razor including separate quest pieces.","Images\\BSW_MehrunesRazor.jpg"
+		Case "Iron Weapons"
+			flagIron = True
+			SelectSubPackage '001 Iron'
+			Break
+		Case "Iron Quiver"
+			SelectSubPackage '301 Arrow Iron'
+			Break
+		Case "Ancient Nordic Weapons"
+			flagDraugr = True
+			SelectSubPackage '002 Ancient Nordic'
+			Break
+		Case "Ancient Nordic Quiver"
+			SelectSubPackage '302 Arrow Ancient Nordic'
+			Break
+		Case "Ghostblade and Drainblood"
+			flagGhostblade = True
+			SelectSubPackage '003 Ghostblade and Drainblood'
+			Break
+		Case "Imperial Sword"
+			flagImperial = True
+			SelectSubPackage '004 Imperial'
+			Break
+		Case "Steel Weapons"
+			flagSteel = True
+			SelectSubPackage '005 Steel'
+			Break
+		Case "Steel Quiver"
+			SelectSubPackage '305 Arrow Steel'
+			Break
+		Case "Skyforge Weapons"
+			flagSkyforge = True
+			SelectSubPackage '006 Skyforge'
+			Break
+		Case "Skyforge Quiver"
+			SelectSubPackage '306 Arrow Skyforge'
+			Break
+		Case "Orcish Weapons"
+			flagOrcish = True
+			SelectSubPackage '008 Orcish'
+			Break
+		Case "Orcish Quiver"
+			SelectSubPackage '308 Arrow Orcish'
+			Break
+		Case "Elven Weapons"
+			flagElven = True
+			SelectSubPackage '009 Elven'
+			Break
+		Case "Elven Quiver"
+			SelectSubPackage '309 Arrow Elven'
+			Break
+		Case "Dwarven Weapons"
+			flagDwarven = True
+			SelectSubPackage '011 Dwarven'
+			Break
+		Case "Dwarven Quiver"
+			SelectSubPackage '311 Arrow Dwarven'
+			Break
+		Case "Ebony Weapons"
+			flagEbony = True
+			SelectSubPackage '014 Ebony'
+			Break
+		Case "Ebony Quivers"
+			SelectSubPackage '314 Arrow Ebony'
+			Break
+		Case "Daedric Weapons"
+			flagDaedric = True
+			SelectSubPackage '015 Daedric'
+			Break
+		Case "Daedric Quiver"
+			SelectSubPackage '315 Arrow Daedric'
+			Break
+		Case "Bound Weapons"
+			SelectSubPackage '016 Bound Weapons'
+			Break
+		Case "Nightingale Blade"
+			flagNightingale = True
+			SelectSubPackage '017 Nightingale'
+			Break
+		Case "Scimitar"
+			flagScimitar = True
+			SelectSubPackage '022 Scimitar'
+			Break
+		Case "Mehrunes Razor"
+			flagMehrunesRazor = True
+			SelectSubPackage '023 Mehrunes Razor'
+			Break
+	EndSelect
+	
+	SelectOne "Silver Weapons",\
+	"|Silver Swords","Silver sword and greatsword with proper sheaths.","Images\\BSW_Silver.jpg",\
+	"Ultra HD Silver Sword","For use with the Ultra HD Silver Sword mod\. Overwrite that mod\'s meshes.","Images\\BSW_Silver.jpg"
+		Case "Silver Swords"
+			flagSilver = True
+			SelectSubPackage '007 Silver'
+			Break
+		Case "Ultra HD Silver Sword"
+			flagUHSilver = True
+			SelectSubPackage '007aSilver FrankFamily'
+			Break
+	EndSelect
+	
+	SelectOne "Nord Hero Weapons",\
+	"|Nord Hero Weapons","Nord Hero sword and greatsword with proper sheaths.","Images\\BSW_Draugr.jpg",\
+	"Runed Nord Hero Weapons","For use with the Runed Nord Hero Weapons mod\, overwrite its meshes.","Images\\BSW_RunedNordHero.jpg"
+		Case "Nord Hero Weapons"
+			flagNordHero = True
+			SelectSubPackage '010 Nord Hero'
+			Break
+		Case "Runed Nord Hero Weapons"
+			flagRunedNordHero = True
+			SelectSubPackage '010aRuned Nord Hero'
+			Break
+	EndSelect
+	
+	SelectMany "More Options",\
+		"|Glass Weapons","Select this to choose glass weapons.","Images\\BSW_GlassRefract.jpg",\
+		"|Dawnbreaker","Select this to choose Dawnbreaker and options","Images\\BSW_DawnbreakerArt.jpg",\
+		"|Dawnguard","Select this if you have the Dawnguard DLC and want my DG meshes.","Images\\BSW_Dawnguard.jpg",\
+		"|Dragonborn","Select this if you have the Dragonborn DLC and want my DB meshes.","Images\\BSW_Dragonborn.jpg"
+			Case "Glass Weapons"
+				flagGlassChoose = True
+				Break
+			Case "Dawnbreaker"
+				flagDawnbreakerChoose = True
+				Break
+			Case "Dawnguard"	
+				flagDawnguard = True
+				Break
+			Case "Dragonborn"	
+				flagDragonborn = True
+				Break
+	EndSelect
+EndIf
+
+SelectMany "More Quivers",\
+	"|Nord Hero Quiver","Quiver for Nord Hero arrows.","Images\\BSW_Quivers.jpg",\
+	"|Forsworn Quiver","Quiver for Forsworn arrows","Images\\BSW_Quivers.jpg",\
+	"|Falmer Quiver","Quiver for Falmer arrows","Images\\BSW_Quivers.jpg"
+		Case "Nord Hero Quiver"
+			SelectSubPackage '310 Arrow Nord Hero'
+			Break
+		Case "Forsworn Quiver"
+			SelectSubPackage '303 Arrow Forsworn'
+			Break
+		Case "Falmer Quiver"	
+			SelectSubPackage '304 Arrow Falmer'
+			Break
+EndSelect
+
+If flagInstallall or flagCustom
+	SelectOne "Chillrend Options",\
+		"|Chillrend","Chillrend with a proper sheath.","Images\\BSW_Glass.jpg",\
+		"Chillrend with Refraction","Adds refraction to Chillrend\, looks shiny and reflective.","Images\\BSW_Chillrend.jpg",\
+		"Reflective Chillrend for Transparency","For use with a transparency mod\. Note\: blood cannot appear on transparent weapons.","Images\\BSW_Chillrend.jpg"
+			Case "Chillrend"
+				flagChillrend = True
+				SelectSubPackage '013 Chillrend'
+				Break
+			Case "Chillrend with Refraction"
+				flagChillrendRefract = True
+                DeSelectSubPackage '013 Chillrend'
+				SelectSubPackage '013aChillrend Refraction'
+				Break
+			Case "Reflective Chillrend for Transparency"
+				flagChillrendRefract = True
+                DeSelectSubPackage '013 Chillrend'
+				SelectSubPackage '013bChillrend for Transparency'
+				Break
+	EndSelect
+	SelectOne "Keening",\
+	"|Keening","Keening in a Dwarven sheath.","Images\\BSW_Keening.jpg",\
+	"Keening with Refraction","Keening with Refraction.","Images\\BSW_Keening.jpg"
+		Case "Keening"
+			flagKeening = True
+			SelectSubPackage '024 Keening'
+			Break
+		Case "Keening with Refraction"
+			flagKeening = True
+            DeSelectSubPackage '024 Keening'
+			SelectSubPackage '024aKeening Refraction'
+			Break
+	EndSelect
+EndIf
+	
+; Based on install flags, give final options for either install type:
+
+If flagGlassChoose
+	SelectOne "Glass Weapon Options",\
+		"|Normal Glass Weapons","Glass sword, dagger and greatsword with proper sheaths.","Images\\BSW_Glass.jpg",\
+		"Refractive Glass Weapons","Adds refraction to the glass, looks shiny and reflective.","Images\\BSW_GlassRefract.jpg",\
+		"Refractive Glass for Transparency","For use with a transparency mod. Note: blood cannot appear on transparent weapons.","Images\\BSW_GlassRefract.jpg"
+			Case "Normal Glass Weapons"
+				flagGlass = True
+				SelectSubPackage '012 Glass'
+				Break
+			Case "Refractive Glass Weapons"
+				flagGlassRefract = True
+				DeSelectSubPackage '012 Glass'
+				SelectSubPackage '012aGlass Refraction'
+				Break
+			Case "Refractive Glass for Transparency"
+				flagGlassRefractAlpha = True
+				DeSelectSubPackage '012 Glass'
+				SelectSubPackage '012bGlass for Transparency'
+				Break
+	EndSelect
+	SelectOne "Glass Quiver Options",\
+		"|Glass Quiver","Quiver for Glass arrows","Images\\BSW_Quivers.jpg",\
+		"Glass Quiver with Refraction","Reflective glass\, use as-is or with a transparency mod.","Images\\BSW_GlassRefract.jpg"
+			Case "Glass Quiver"
+				SelectSubPackage '312 Arrow Glass'
+				Break
+			Case "Glass Quiver with Refraction"
+				DeSelectSubPackage '312 Arrow Glass'
+				SelectSubPackage '312aArrow Glass Refraction'
+				Break
+	EndSelect
+EndIf
+
+If flagDawnbreakerChoose
+	SelectOne "Dawnbreaker Options",\
+		"|Dawnbreaker Elven Sheath","Dawnbreaker with an Elven sheath - non-ENB version.","Images\\BSW_Dawnbreaker.jpg",\
+		"Dawnbreaker Elven Shaped ENB","Dawnbreaker with an Elven sheath - ENB (Particle Patch) version.]","Images\\BSW_DawnbreakerAlt.jpg",\
+		"Dawnbreaker Dwarven Sheath","Dawnbreaker with a Dwarven sheath - non-ENB version.","Images\\BSW_DawnbreakerArt.jpg",\
+		"Dawnbreaker Dwarven Sheath ENB","Dawnbreaker with a Dwarven sheath - ENB (Particle Patch) version.","Images\\BSW_DawnbreakerAlt.jpg"
+			Case "Dawnbreaker Elven Sheath"
+				SelectSubPackage '018 Dawnbreaker'
+				Break
+			Case "Dawnbreaker Elven Shaped ENB"
+				flagDawnbreakerENB = True
+				DeSelectSubPackage '018 Dawnbreaker'
+				SelectSubPackage '018 Dawnbreaker ENB'
+				Break
+			Case "Dawnbreaker Dwarven Sheath"
+				flagDawnbreakerAlt = True
+				DeSelectSubPackage '018 Dawnbreaker'
+				SelectSubPackage '018aDawnbreakerAlt'
+				Break
+			Case "Dawnbreaker Dwarven Sheath ENB"
+				flagDawnbreakerAltENB = True
+				DeSelectSubPackage '018 Dawnbreaker'
+				SelectSubPackage '018aDawnbreakerAlt ENB'
+				Break
+	EndSelect
+EndIf
+
+If flagDawnguard
+	SelectOne "Dragonbone Weapons",\
+	"|Dragonboring Weapons","Dragonbone weapons - no pommel gem (if using my DragonBling Gemling All Standalone optional download select this).","Images\\BSW_Dragonbone.jpg",\
+	"DragonBling Weapons Red","Dragonbone weapons with opaque ruby pommel-stones.","Images\\BSW_DragonBling.jpg",\
+	"DragonBling Weapons Blue","Dragonbone weapons with opaque sapphire pommel-stones.","Images\\BSW_DragonBling.jpg",\
+	"DragonBling Weapons Green","Dragonbone weapons with opaque emerald pommel-stones.","Images\\BSW_DragonBling.jpg",\
+	"DragonBling Weapons Red Gemling","High quality translucent ruby pommel-stones - requires textures from \"Gemling Queen Jewelry\" mod.","Images\\BSW_DragonBlingGemling.jpg",\
+	"DragonBling Weapons Blue Gemling","High quality translucent sapphire pommel-stones - requires textures from \"Gemling Queen Jewelry\" mod.","Images\\BSW_DragonBlingGemling.jpg",\
+	"DragonBling Weapons Green Gemling","High quality translucent emerald pommel-stones - requires textures from \"Gemling Queen Jewelry\" mod.","Images\\BSW_DragonBlingGemling.jpg"
+		Case "Dragonboring Weapons"
+			flagDragonbone = True
+			SelectSubPackage '019 Dragonbone'
+			Break
+		Case "DragonBling Weapons Red"
+			flagDragonBlingRed = True
+			SelectSubPackage '019aDragonBling Red'
+			Break
+		Case "DragonBling Weapons Blue"
+			flagDragonBlingBlue = True
+			SelectSubPackage '019bDragonBling Blue'
+			Break
+		Case "DragonBling Weapons Green"
+			flagDragonBlingGreen = True
+			SelectSubPackage '019cDragonBling Green'
+			Break
+		Case "DragonBling Weapons Red Gemling"
+			flagDragonBlingRedGQ = True
+			SelectSubPackage '019aDragonBling Red Gemling'
+			Break
+		Case "DragonBling Weapons Blue Gemling"
+			flagDragonBlingBlueGQ = True
+			SelectSubPackage '019bDragonBling Blue Gemling'
+			Break
+		Case "DragonBling Weapons Green Gemling"
+			flagDragonBlingGreenGQ = True
+			SelectSubPackage '019cDragonBling Green Gemling'
+			Break
+	EndSelect
+	SelectOne "Dragonbone Quivers",\
+	"|DragonBoring Quiver","Quiver for dragonbone arrows \+ custom arrowhead \(if using my DragonBling Gemling All Standalone optional download select this\).","Images\\BSW_Quivers.jpg",\
+	"DragonBoring Quiver Red","Quiver with opaque ruby \+ custom arrowhead.","Images\\BSW_DragonBling.jpg",\
+	"DragonBoring Quiver Blue","Quiver with opaque sapphire \+ custom arrowhead.","Images\\BSW_DragonBling.jpg",\
+	"DragonBoring Quiver Green","Quiver with opaque emerald \+ custom arrowhead.","Images\\BSW_DragonBling.jpg",\
+	"DragonBling Quiver Red Gemling","High quality translucent ruby \+ custom arrowhead - requires textures from \"Gemling Queen Jewelry\" mod.","Images\\BSW_DragonBlingGemling.jpg",\
+	"DragonBling Quiver Blue Gemling","High quality translucent sapphire \+ custom arrowhead - requires textures from \"Gemling Queen Jewelry\" mod.","Images\\BSW_DragonBlingGemling.jpg",\
+	"DragonBling Quiver Green Gemling","High quality translucent emerald \+ custom arrowhead - requires textures from \"Gemling Queen Jewelry\" mod.","Images\\BSW_DragonBlingGemling.jpg"
+		Case "DragonBoring Quiver"
+			SelectSubPackage '319 Arrow Dragonbone'
+			Break
+		Case "DragonBoring Quiver Red"
+			SelectSubPackage '319aArrow DragonBling Red'
+			Break
+		Case "DragonBoring Quiver Blue"
+			SelectSubPackage '319bArrow DragonBling Blue'
+			Break
+		Case "DragonBoring Quiver Green"
+			SelectSubPackage '319cArrow DragonBling Green'
+			Break
+		Case "DragonBling Quiver Red Gemling"
+			SelectSubPackage '319aArrow DragonBling Red Gemling'
+			Break
+		Case "DragonBling Quiver Blue Gemling"
+			SelectSubPackage '319bArrow DragonBling Blue Gemling'
+			Break
+		Case "DragonBling Quiver Green Gemling"
+			SelectSubPackage '319cArrow DragonBling Green Gemling'
+			Break
+	EndSelect
+	SelectMany "More Quivers",\
+		"|Auriel Quivers","Quivers for Sunhallowed and Bloodcursed Elven arrows.","Images\\BSW_Quivers.jpg"
+			Case "Auriel Quivers"
+				SelectSubPackage '309aArrow Auriel'
+				Break
+	EndSelect
+EndIf
+
+If flagDragonborn
+	SelectOne "Stalhrim Weapons",\
+		"|Normal Stalhrim","Stalhrim sword\, dagger\, battleaxe\, and greatsword.","Images\\BSW_Stalhrim.jpg",\
+		"Stalhrim with Refraction","Refraction added to Stalhrim\, looks shiny and reflective.","Images\\BSW_StalhrimRefract.jpg",\
+		"Refractive Stalhrim with Transparency","For use with a transparency mod. Note\: blood cannot appear on transparent weapons.","Images\\BSW_StalhrimRefract.jpg"
+			Case "Normal Stalhrim"
+				flagStalhrim = True
+				SelectSubPackage '020 Stalhrim'
+				Break
+			Case "Stalhrim with Refraction"
+				flagStalhrimRefract = True
+				SelectSubPackage '020aStalhrim Refraction'
+				Break
+			Case "Refractive Stalhrim with Transparency"
+				flagStalhrimRefractAlpha = True
+				SelectSubPackage '020bStalhrim for Transparency'
+				Break
+	EndSelect
+	SelectOne "Stalhrim Quivers",\
+	"|Stalhrim Quiver","Quiver for Stalhrim arrows.","Images\\BSW_Quivers.jpg",\
+	"Stalhrim Quiver with Refraction","Reflective Stalhrim Quiver\, can be used as-is or with a transparency mod.","Images\\BSW_StalhrimRefract.jpg"
+		Case "Stalhrim Quiver"
+			SelectSubPackage '320 Arrow Stalhrim'
+			Break
+		Case "Stalhrim Quiver with Refraction"
+			SelectSubPackage '320aArrow Stalhrim Refraction'
+			Break
+	EndSelect
+	SelectMany "Nordic Weapons",\
+		"|Swords","Nordic battleaxe and waraxe plus sword and greatsword with proper sheaths.","Images\\BSW_Nordic.jpg",\
+		"|Quiver","Quiver for Nordic arrows.","Images\\BSW_Quivers.jpg"
+			Case "Swords"
+				flagNordic = True
+				SelectSubPackage '021 Nordic'
+				Break
+			Case "Quiver"
+				SelectSubPackage '321 Arrow Nordic'
+				Break
+	EndSelect
+EndIf
+
+; payload time
+If flagDualSheathRedux and flagIron
+	SelectSubPackage '101 DSR Iron'
+EndIf
+
+If flagDualSheathRedux and flagDraugr
+	SelectSubPackage '102 DSR Ancient Nordic'
+EndIf
+
+If flagDualSheathRedux and flagGhostblade
+	SelectSubPackage '103 DSR Ghostblade and Drainblood'
+EndIf
+
+If flagDualSheathRedux and flagImperial
+	SelectSubPackage '104 DSR Imperial'
+EndIf
+
+If flagDualSheathRedux and flagSteel
+	SelectSubPackage '105 DSR Steel'
+EndIf
+
+If flagDualSheathRedux and flagSkyforge
+	SelectSubPackage '106 DSR Skyforge'
+EndIf
+
+If flagDualSheathRedux and flagSilver
+	SelectSubPackage '107 DSR Silver'
+EndIf
+
+If flagDualSheathRedux and flagUHSilver
+	DeSelectSubPackage '107 DSR Silver'
+	SelectSubPackage '107aDSR Silver FrankFamily'
+EndIf
+If flagDualSheathRedux and flagOrcish
+	SelectSubPackage '108 DSR Orcish'
+EndIf
+
+If flagDualSheathRedux and flagElven
+	SelectSubPackage '109 DSR Elven'
+EndIf
+
+If flagDualSheathRedux and flagNordHero
+	SelectSubPackage '110 DSR Nord Hero'
+EndIf
+
+If flagDualSheathRedux and flagRunedNordHero
+	DeSelectSubPackage '110 DSR Nord Hero'
+	SelectSubPackage '110aDSR Runed Nord Hero'
+EndIf
+
+If flagDualSheathRedux and flagDwarven
+	SelectSubPackage '111 DSR Dwarven'
+EndIf
+
+If flagDualSheathRedux and flagGlass
+	SelectSubPackage '112 DSR Glass'
+EndIf
+
+If flagDualSheathRedux and flagGlassRefract
+	DeSelectSubPackage '112 DSR Glass'
+	SelectSubPackage '112aDSR Glass Refraction'
+EndIf
+
+If flagDualSheathRedux and GlassRefractAlpha
+	DeSelectSubPackage '112 DSR Glass'
+	SelectSubPackage '112aDSR Glass Refraction'
+EndIf
+
+If flagDualSheathRedux and flagChillrend
+	SelectSubPackage '113 DSR Chillrend'
+EndIf
+
+If flagDualSheathRedux and flagChillrendRefract
+	DeSelectSubPackage '113 DSR Chillrend'
+	SelectSubPackage '113aDSR Chillrend Refraction'
+EndIf
+
+If flagDualSheathRedux and flagEbony
+	SelectSubPackage '114 DSR Ebony'
+EndIf
+
+If flagDualSheathRedux and flagDaedric
+	SelectSubPackage '115 DSR Daedric'
+EndIf
+
+If flagDualSheathRedux and flagNightingale
+	SelectSubPackage '117 DSR Nightingale'
+EndIf
+
+If flagDualSheathRedux and flagDawnbreaker
+	SelectSubPackage '118 DSR Dawnbreaker'
+EndIf
+
+If flagDualSheathRedux and flagDawnbreakerENB
+	DeSelectSubPackage '118 DSR Dawnbreaker'
+	SelectSubPackage '118 DSR Dawnbreaker ENB'
+EndIf
+
+If flagDualSheathRedux and flagDawnbreakerAlt
+	DeSelectSubPackage '118 DSR Dawnbreaker'
+	SelectSubPackage '118aDSR DawnbreakerAlt'
+EndIf
+
+If flagDualSheathRedux and flagDawnbreakerAltENB
+	DeSelectSubPackage '118 DSR Dawnbreaker'
+	SelectSubPackage '118aDSR DawnbreakerAlt ENB'
+EndIf
+
+If flagDualSheathRedux and flagDragonbone
+	SelectSubPackage '119 DSR Dragonbone'
+EndIf
+
+If flagDualSheathRedux and flagDragonBlingRed
+	SelectSubPackage '119aDSR DragonBling Red'
+EndIf
+
+If flagDualSheathRedux and flagDragonBlingBlue
+	SelectSubPackage '119bDSR DragonBling Blue'
+EndIf
+
+If flagDualSheathRedux and flagDragonBlingGreen
+	SelectSubPackage '119cDSR DragonBling Green'
+EndIf
+
+If flagDualSheathRedux and flagDragonBlingRedGQ
+	SelectSubPackage '119aDSR DragonBling Red Gemling'
+EndIf
+
+If flagDualSheathRedux and flagDragonBlingBlueGQ
+	SelectSubPackage '119bDSR DragonBling Blue Gemling'
+EndIf
+
+If flagDualSheathRedux and flagDragonBlingGreenGQ
+	SelectSubPackage '119cDSR DragonBling Green Gemling'
+EndIf
+
+If flagDualSheathRedux and flagStalhrim
+	SelectSubPackage '120 DSR Stalhrim'
+EndIf
+
+If flagDualSheathRedux and flagStalhrimRefract
+	SelectSubPackage '120aDSR Stalhrim Refraction'
+EndIf
+
+If flagDualSheathRedux and flagStalhrimRefractAlpha
+	SelectSubPackage '120aDSR Stalhrim Refraction'
+EndIf
+
+If flagDualSheathRedux and flagNordic
+	SelectSubPackage '121 DSR Nordic'
+EndIf
+
+If flagDualSheathRedux and flagScimitar
+	SelectSubPackage '122 DSR Scimitar'
+EndIf
+
+If flagDualSheathRedux and flagMehrunesRazor
+	SelectSubPackage '123 DSR Mehrunes Razor'
+EndIf
+
+If flagDualSheathRedux and flagKeening
+	SelectSubPackage '124 DSR Keening'
+EndIf
+
+
+If flagNoGreatswordSheaths and flagIron
+	SelectSubPackage '201 NGS Iron'
+EndIf
+
+If flagNoGreatswordSheaths and flagDraugr 
+	SelectSubPackage '202 NGS Ancient Nordic'
+EndIf
+
+If flagNoGreatswordSheaths and flagSteel
+	SelectSubPackage '205 NGS Steel'
+EndIf
+
+If flagNoGreatswordSheaths and flagSkyforge
+	SelectSubPackage '206 NGS Skyforge'
+EndIf
+
+If flagNoGreatswordSheaths and flagSilver
+	SelectSubPackage '207 NGS Silver'
+EndIf
+
+If flagNoGreatswordSheaths and flagUHSilver
+	SelectSubPackage '207aNGS Silver FrankFamily'
+EndIf
+
+If flagNoGreatswordSheaths and flagOrcish
+	SelectSubPackage '208 NGS Orcish'
+EndIf
+
+If flagNoGreatswordSheaths and flagElven
+	SelectSubPackage '209 NGS Elven'
+EndIf
+
+If flagNoGreatswordSheaths and flagNordHero
+	SelectSubPackage '210 NGS Nord Hero'
+EndIf
+
+If flagNoGreatswordSheaths and flagRunedNordHero
+	DeSelectSubPackage '210 NGS Nord Hero'
+	SelectSubPackage '210aNGS Runed Nord Hero'
+EndIf
+
+If flagNoGreatswordSheaths and flagDwarven
+	SelectSubPackage '211 NGS Dwarven'
+EndIf
+
+If flagNoGreatswordSheaths and flagGlass
+	SelectSubPackage '212 NGS Glass'
+EndIf
+
+If flagNoGreatswordSheaths and flagGlassRefract
+	DeSelectSubPackage '212 NGS Glass'
+	SelectSubPackage '212aNGS Glass Refraction'
+EndIf
+
+If flagNoGreatswordSheaths and flagGlassRefractAlpha
+	SelectSubPackage '212bNGS Glass for Transparency'
+EndIf
+
+If flagNoGreatswordSheaths and flagEbony
+	SelectSubPackage '214 NGS Ebony'
+EndIf
+
+If flagNoGreatswordSheaths and flagDaedric
+	SelectSubPackage '215 NGS Daedric'
+EndIf
+
+If flagNoGreatswordSheaths and flagDragonbone
+	SelectSubPackage '219 NGS Dragonbone'
+EndIf
+
+If flagNoGreatswordSheaths and flagDragonBlingRed
+	SelectSubPackage '219aNGS DragonBling Red'
+EndIf
+
+If flagNoGreatswordSheaths and flagDragonBlingBlue
+	SelectSubPackage '219bNGS DragonBling Blue'
+EndIf
+
+If flagNoGreatswordSheaths and flagDragonBlingGreen
+	SelectSubPackage '219cNGS DragonBling Green'
+EndIf
+
+If flagNoGreatswordSheaths and flagDragonBlingRedGQ
+	SelectSubPackage '219aNGS DragonBling Red Gemling'
+EndIf
+
+If flagNoGreatswordSheaths and flagDragonBlingBlueGQ
+	SelectSubPackage '219bNGS DragonBling Blue Gemling'
+EndIf
+
+If flagNoGreatswordSheaths and flagDragonBlingGreenGQ
+	SelectSubPackage '219cNGS DragonBling Green Gemling'
+EndIf
+
+If flagNoGreatswordSheaths and flagStalhrim
+	SelectSubPackage '220 NGS Stalhrim'
+EndIf
+
+If flagNoGreatswordSheaths and flagStalhrimRefract
+	SelectSubPackage '220aNGS Stalhrim Refraction'
+EndIf
+
+If flagNoGreatswordSheaths and flagStalhrimRefractAlpha
+	SelectSubPackage '220bNGS Stalhrim for Transparency'
+EndIf
+
+If flagNoGreatswordSheaths and flagNordic
+	SelectSubPackage '221 NGS Nordic'
+EndIf
+
+
+;== Finish Page ==
+Note "Confirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"

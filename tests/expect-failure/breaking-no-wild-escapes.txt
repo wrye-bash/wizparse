@@ -1,0 +1,3 @@
+; Tests a breaking change: Escape sequences can only be used inside strings now
+\Note \'\f\o\o'
+\; This is a comment

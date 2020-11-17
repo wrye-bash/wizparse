@@ -1,0 +1,51 @@
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+;-- CBBE Normal Map Options -- WizBAIN by Mertz --
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+RequireVersions "", "", "", "307"
+ResetAllEspmNames
+DeSelectAll
+
+
+;== Welcome screen and install core mod
+SelectOne "Welcome",\
+    "|Welcome","Welcome to the CBBE Normal Map Options installer.\n\nClick Read Me below to select the Readme for this mod\n\nClick 'Credits' above to view the credits.\n\nClick Next to continue the installation","FOMod\\CBBE.png",\
+    "Credits","CBBE Normal Map Options by Ousnius. If you enjoy this mod, please make sure to show your thanks by endorsing!\n\n\nWizBAIN installer by Mertz\n\nClick next to continue the installation","FOMod\\CBBE.png"
+EndSelect
+
+SelectOne "Normal Map Options\n\nDouble-click image to view a larger version",\
+    "|Base","Default normal map that comes with the main CBBE installer. Works well enough for a lot of body shapes.","FOMod\\Base.png",\
+    "Petite","Less shading for the breast area compared to the base map. Works better for body shapes with smaller breasts.","FOMod\\Petite.png",\
+    "Curvier","More shading for the breast area compared to the base map. Works better for body shapes with larger breasts.","FOMod\\Curvier.png",\
+    "Cleavage","More shading for the upper breast area to provide a nice look of cleavage. Doesn't look as natural while nude\, but works well for outfits.","FOMod\\Cleavage.png",\
+    "SevenBase","Shading that matches the SevenBase body shape. Recommended to use this only with the CBBE SevenBase preset from BodySlide.","FOMod\\SevenBase.png",\
+    "SevenBase Muscular","Shading that matches the SevenBase body shape including muscles. Recommended to use this only with the CBBE SevenBase preset from BodySlide.","FOMod\\SevenBase Muscular.png",\
+    "Muscular","Provides abs and a little bit of definition for the inner thighs and butt.","FOMod\\Muscular.png",\
+    "Fetish","More defined nipple and areola shape. A little bit of abs and curvy breasts. Recommended to use this with the matching preset from BodySlide.","FOMod\\Fetish.png"
+        Case "Base"
+            SelectSubPackage '00 Base'
+            Break
+        Case "Petite"
+            SelectSubPackage '01 Petite'
+            Break
+        Case "Curvier"
+            SelectSubPackage '02 Curvier'
+            Break
+        Case "Cleavage"
+            SelectSubPackage '03 Cleavage'
+            Break
+        Case "SevenBase"
+            SelectSubPackage '04 SevenBase'
+            Break
+        Case "SevenBase Muscular"
+            SelectSubPackage '05 SevenBase Muscular'
+            Break
+        Case "Muscular"
+            SelectSubPackage '06 Muscular'
+            Break
+        Case "Fetish"
+            SelectSubPackage '07 Fetish'
+            Break
+EndSelect
+
+;== Finish Page ==
+Note "Confirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"

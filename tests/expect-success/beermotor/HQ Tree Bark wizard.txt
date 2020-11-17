@@ -1,0 +1,120 @@
+;=-=-=-|HQ Tree Bark Wrye Bash BAIN wizard by Mertz for somerandomguy83|-=-=-=
+; Special thanks to Alt3rn1ty for his Wizard guide on AFK mods
+RequireVersions "1.0.0.0", "", "", "307" 
+DeSelectAll
+bMainSet = False
+bAltSet = False
+SelectOne "HQ Tree Bark Installer - Texture Design",\
+	"|Main Set","Tree, gather up my thoughts\nlike the clouds in your branches\nDraw up my soul\nlike the waters in your root\n\nIn the arteries of your trunk\nbring me together.\nThrough your leaves\nbreathe out the sky.\n\n- J. Daniel Beaudry","--images\\Diverse_summer.jpg",\
+	"Alternative Set","Before I leave, almost without noticing,\nbefore I cross the road and head toward\nwhat I have intentionally postponed —\n\nLet me stop to say a blessing for these woods\nfor crows barking and squirrels scampering,\nfor trees and fungus and multi-colored leaves,\n\nfor the way sunlight laces with shadows\nthrough each branch and leaf of tree,\nfor these paths that take me in,\nfor these paths that lead me out.\n\n- Michael Glaser","--images\\Diverse_moss.jpg"
+	Case "Main Set"
+		bMainSet = True
+		Break
+	Case "Alterative Set"
+		bAltSet = True
+		Break
+EndSelect
+
+b2KRez = False
+b4KRez = False
+SelectOne "Texture Resolution (Select One)",\
+	"|2k","2k Texture resolution","--images\\2k.jpg",\
+	"4k","4k Texture Resolution","--images\\main_4k.jpg"
+	Case "2k" 
+		b2KRez = True
+	Break
+	Case "4k"	
+		b4KRez = True
+	Break
+EndSelect
+	
+If b2KRez and bMainSet == True
+	SelectOne "Select Textures",\
+		"|Realistic","2k Realistic colors texture files","--images\logo.png",\
+		"Vibrant","2k Vibrant colors texture files","--images\logo.png"
+		Case "Realistic"
+			SelectSubPackage '001 Main (2k)'
+			SelectSubPackage '003 Realistic_Summer (2k)'
+			Break
+		Case "Vibrant"
+			SelectSubPackage '001 Main (2k)'
+			SelectSubPackage '007 Vibrant_Summer (2k)'
+		Break
+	EndSelect
+EndIf
+
+If b4KRez and bMainSet == True
+	SelectOne "Select Textures",\
+		"|Realistic","4k Realistic colors texture files","--images\logo.png",\
+		"Vibrant","4k Vibrant colors texture files","--images\logo.png"
+		Case "Realistic"
+			SelectSubPackage '002 Main (4k)'
+			SelectSubPackage '004 Realistic_Summer (4k)'
+			Break
+		Case "Vibrant"
+			SelectSubPackage '002 Main (4k)'
+			SelectSubPackage '008 Vibrant_Summer (4k)'
+		Break
+	EndSelect
+EndIf
+
+If b2kRez and bAltSet == True
+	SelectOne "Select Textures",\
+		"|2k Core","2k Core mossy textures","--images\logo.png"
+		Case "2k Core"
+			SelectSubPackage '001 Main (2k)'
+			SelectSubPackage '005 Main_Mossy (2k)'
+			Break
+	EndSelect
+EndIf
+
+If b4KRez and bAltSet == True
+	SelectOne "Select Textures",\
+		"|4k Core","4k Core Mossy Textures","--images\logo.png"
+		Case "4k Core"
+			SelectSubPackage '002 Main (4k)'	
+			SelectSubPackage '006 Main_Mossy (4k)'
+			Break
+	EndSelect
+EndIf
+
+; Lush Trees portion
+bLushTrees = False
+bBDistTrees = False
+SelectMany "Additional Options",\
+	"Lush Trees", "installs the Lush Trees stuff","",\
+	"Better Distant Trees", "Adds 2k LOD Atlas that will match your textures\n\nNote: This file conflicts with Simply Bigger Trees and other mods that add their own LODs.\n\n**Do not select this option if you use any such mods!**\n\nIf you see cut-in-half distant trees after installing this option, that means you have a LOD conflict and should reinstall without selecting this option.",""
+	Case "Lush Trees"
+		bLushTrees = True
+	Break
+	Case "Simply Bigger Trees"
+		bBDistTrees = True
+	Break
+EndSelect
+
+If bLushTrees == True
+	SelectOne "Since you selected Lush Trees..",\
+		"|Lush Trees Standard","More leaves on the trees","",\
+		"Lush Simply Bigger Trees","Adds Lush trees compatible with Simply Bigger Trees",""
+		Case "Lush Trees Standard"
+			SelectSubPackage '108 LUSH Trees'
+			Break
+		Case "Lush Simply Bigger Trees"
+			SelectSubPackage '202 LUSH Skyrim Bigger Trees'
+		Break
+	EndSelect
+EndIf
+
+If bMainSet and bBDistTrees == True
+SelectSubPackage '106 Summer LODs (Distant Tree textures)'
+Break
+EndIf
+
+If bAltSet and bBDistTrees == True
+SelectSubPackage '107 Mossy LODs (Distant Tree textures)'
+Break
+EndIf
+
+
+;== Finish Page ==
+Note "\nConfirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"

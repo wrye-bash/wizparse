@@ -1,0 +1,913 @@
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; Bellyache's Animal and Creature pack - WizBAIN by Mertz
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+RequireVersions "", "", "", "307"
+ResetAllEspmNames
+DeSelectAll
+; ===== Welcome Screen =====
+; This can be expanded by entering text within the double quotes. Use \n to denote a new line.
+SelectOne 'Bellyaches Animal and Creature Pack',\
+ "|Welcome","This mod provides new and modified 2k textures for wildlife, domesticated animals, and creatures in the game. This mod is a pack of replacements and does not add new variants to the game. You can just choose my textures to overwrite the default textures.","Fomod\\Screens\\main3.jpg",\
+ "Credits","Bellyache\'s Animal and Creature Pack by Bellyaches \(wrig675\) and Kelsenellenelvian.\n\nWizbain by Mertz","Fomod\\Screens\\main3.jpg"
+ EndSelect
+ ; User select install mode. If user selects "custom" they will be routed to the nested installer options
+ SelectOne "Please select one of the options below\n\nDouble-click image to view a larger version",\
+	"|Default Replacement","Uses HIGH RESOLUTION skins which most closely resemble the default colors and patterns. One click install!","Fomod\\Screens\\main1.jpg",\
+	"Bellyache\'s Choice","Don\'t want the default replacer and don\'t want to choose your own? This is a selection of HIGH RESOLUTION animals and creatures\, chosen by yours truly! If you trust me to make good choices\, pick this option. One click install!","Fomod\\Screens\\main3.jpg",\
+	"Custom Install","Lets you choose which HIGH RESOLUTION animal and creature skins you want to use in your game. If you don\'t select a choice for a category\, your game will use the default texture for that creature \(which will be the default high resolution texture if you are running Bethesda's high resolution content pack or the lower resolution texture that shipped with the game if you are not using Bethesda\'s high resolution content pack\). You can double-click any image to view a larger version","Fomod\\Screens\\main2.jpg"
+	Case "Default Replacement"
+		SelectSubPackage '01 Bear'
+		SelectSubPackage '02 Chaurus - Black'
+		SelectSubPackage '03 Chicken - Brown'
+		SelectSubPackage '04 Dog - Default'
+		SelectSubPackage '05 Dragonfly'
+		SelectSubPackage '06 Elk and Caribou'
+		SelectSubPackage '07 Fox - Arctic - Default'
+		SelectSubPackage '08 Fox - Normal - Red'
+		SelectSubPackage '09 Frostbite Spider - Normal - Dark Brown'
+		SelectSubPackage '10 Frostbite Spider - Arctic - Grey'
+		SelectSubPackage '11 Goat (Shaggy) - Brown'
+		SelectSubPackage '12 Hawk - Common Buzzard'
+		SelectSubPackage '13 Highland Cow - Brown'
+		SelectSubPackage '14 Horker - Grey'
+		SelectSubPackage '15 Horse (All Defaults)'
+		SelectSubPackage '16 Horse - Default Mane and Tail'
+		SelectSubPackage '22 Mammoth - Brown'
+		SelectSubPackage '23 Mudcrab - Grey'
+		SelectSubPackage '24 Rabbit'
+		SelectSubPackage '25 Sabre Cat - Striped'
+		SelectSubPackage '26 Sabre Cat - Arctic - White spotted'
+		SelectSubPackage '27 Skeever - Mangy Grey'
+		SelectSubPackage '28 Skeever - Arctic - Mangy White'
+		SelectSubPackage '29 Werewolf - Black'
+		SelectSubPackage '30 Werewolf Eyes - All Iris Brown'
+		SelectSubPackage '31 Wolf - Black - Darker Black'
+		SelectSubPackage '32 Wolf - Ice - Light Grey'
+		SelectSubPackage '33 Wolf - Red - Brown'
+		Break
+	Case "Bellyache\'s Choice"
+		SelectSubPackage '01 Bear'
+		SelectSubPackage '02 Chaurus - Black'
+		SelectSubPackage '03 Chicken - Barred'
+		SelectSubPackage '04 Dog - Black and white'
+		SelectSubPackage '05 Dragonfly'
+		SelectSubPackage '06 Elk and Caribou'
+		SelectSubPackage '07 Fox - Arctic - Default'
+		SelectSubPackage '08 Fox - Normal - Silver'
+		SelectSubPackage '09 Frostbite Spider - Normal - Brown Striped'
+		SelectSubPackage '10 Frostbite Spider - Arctic - Grey'
+		SelectSubPackage '11 Goat (Shaggy) - White'
+		SelectSubPackage '12 Hawk - Common Buzzard'
+		SelectSubPackage '13 Highland Cow - Black'
+		SelectSubPackage '14 Horker - Light brown'
+		SelectSubPackage '15 Horse (All Defaults)'
+		SelectSubPackage '17 Horse - Windhelm - Pangare'
+		SelectSubPackage '21 Horse - Markarth - White'
+		SelectSubPackage '22 Mammoth - Brown'
+		SelectSubPackage '23 Mudcrab - Oblivion'
+		SelectSubPackage '24 Rabbit'
+		SelectSubPackage '25 Sabre Cat - Striped'
+		SelectSubPackage '26 Sabre Cat - Arctic - White solid'
+		SelectSubPackage '27 Skeever - Brown'
+		SelectSubPackage '28 Skeever - Arctic - White'
+		SelectSubPackage '29 Werewolf - Black'
+		SelectSubPackage '30 Werewolf Eyes - All Iris Brown'
+		SelectSubPackage '31 Wolf - Black - Timber'
+		SelectSubPackage '32 Wolf - Ice - Light Grey'
+		SelectSubPackage '33 Wolf - Red - Brown'
+		Break
+	Case "Custom Install"
+		SelectOne "Bear \(Brown and Black\)\n\nDouble-click image to view a larger version",\
+			"|Bear Replacers","Replaces the default black, brown and polar bears with my bears.","Fomod\\Screens\\bear1.jpg",\
+			"Blue-eyed Polar Bear","Replaces the default black\, brown\, and polar bear. Polar bear has blue eyes.","Fomod\\Screens\\bear1.jpg",\
+			"Default","Use default Skyrim bear","Fomod\\Screens\\bear1.jpg"
+			Case "Bear Replacers"
+				SelectSubPackage '01 Bear'
+				Break
+			Case "Blue-eyed Polar Bear"
+				SelectSubPackage '01 Bear - Blue-eyed Polar'
+				Break
+			Case "Default"
+				Break
+		EndSelect
+		
+		SelectOne "Charus\n\nDouble-click image to view a larger version",\
+			"|Black","Replaces the default charus with my black charus.","Fomod\\Screens\\chaurus1.jpg",\
+			"Brown","Replaces the default charus with my brown charus.","Fomod\\Screens\\chaurus1.jpg",\
+			"Green","Replaces the default charus with my green charus.","Fomod\\Screens\\chaurus1.jpg",\
+			"Red","Replaces the default charus with my brown charus.","Fomod\\Screens\\chaurus1.jpg",\
+			"Default","Use default Skyrim charus","Fomod\\Screens\\chaurus1.jpg"
+			Case "Black"
+				SelectSubPackage '02 Chaurus - Black'
+				Break
+			Case "Brown"
+				SelectSubPackage '02 Chaurus - Brown'
+				Break
+			Case "Green"
+				SelectSubPackage '02 Chaurus - Green'
+				Break
+			Case "Red"
+				SelectSubPackage '02 Chaurus - Red'
+				Break
+			Case "Default"
+				Break
+		EndSelect
+		
+		SelectOne "Chicken\n\nDouble-click image to view a larger version",\
+			"|Barred","Replaces the default chicken with my barred rock chicken.","Fomod\\Screens\\chicken1.jpg",\
+			"Bicolor","Replaces the default chicken with my bicolor chicken.","Fomod\\Screens\\chicken1.jpg",\
+			"Black","Replaces the default chicken with my black chicken.","Fomod\\Screens\\chicken1.jpg",\
+			"Brown","Replaces the default chicken with my brown chicken.","Fomod\\Screens\\chicken1.jpg",\
+			"Dark Brown","Replaces the default chicken with my dark brown chicken.","Fomod\\Screens\\chicken1.jpg",\
+			"Speckled","Replaces the default chicken with my speckled Sussex chicken.","Fomod\\Screens\\chicken1.jpg",\
+			"White","Replaces the default chicken with my white chicken.","Fomod\\Screens\\chicken1.jpg",\
+			"Default","Use default Skyrim chickens","fomod\\screens\\chicken1.jpg"
+			Case "Barred"
+				SelectSubPackage '03 Chicken - Barred'
+				Break
+			Case "Bicolor"
+				SelectSubPackage '03 Chicken - Bicolor'
+				Break
+			Case "Black"
+				SelectSubPackage '03 Chicken - Black'
+				Break
+			Case "Brown"
+				SelectSubPackage '03 Chicken - Brown'
+				Break
+			Case "Dark Brown"
+				SelectSubPackage '03 Chicken - Dark Brown'
+				Break
+			Case "Speckled"
+				SelectSubPackage '03 Chicken - Speckled'
+				Break
+			Case "White"
+				SelectSubPackage '03 Chicken - White'
+				Break
+			Case "Default"
+				Break
+		EndSelect
+		
+		SelectOne "Dog\n\nDouble-click image to view a larger version",\
+			"Default HD","Replaces the default dog with Bethesda's high resolution texture.","Fomod\\Screens\\dog1.jpg",\
+			"|Patterned - Black and White","Replaces the default dog with my patterned black and white dog.","Fomod\\Screens\\dog1.jpg",\
+			"Patterned - Brown and White","Replaces the default dog with my patterned brown and white dog.","Fomod\\Screens\\dog1.jpg",\
+			"Solid - Brown","Replaces the default dog with my solid colored brown dog.","Fomod\\Screens\\dog1.jpg",\
+			"Solid - Dark Brown","Replaces the default dog with my solid-colored dark brown dog.","Fomod\\Screens\\dog1.jpg",\
+			"Solid - Dark Grey","Replaces the default dog with my solid colored dark grey dog..","Fomod\\Screens\\dog1.jpg",\
+			"Solid - Light Brown","Replaces the default dog with my solid colored light brown dog.","Fomod\\Screens\\dog1.jpg",\
+			"Solid - White","Replaces the default dog with my solid colored white dog.","Fomod\\Screens\\dog1.jpg",\
+			"Default","Use existing Skyrim dog textures","fomod\\screens\dog1.jpg"
+			Case "Default HD"
+				SelectSubPackage '04 Dog - Default'
+				Break
+			Case "Patterned - Black and White"
+				SelectSubPackage '04 Dog - Black and white'
+				Break
+			Case "Patterned - Brown and White"
+				SelectSubPackage '04 Dog - Brown and white'
+				Break
+			Case "Solid - Brown"
+				SelectSubPackage '04 Dog - Brown'
+				Break
+			Case "Solid - Dark Brown"
+				SelectSubPackage '04 Dog - Dark Brown'
+				Break
+			Case "Solid - Dark Grey"
+				SelectSubPackage '04 Dog - Dark grey'
+				Break
+			Case "Solid - Light Brown"
+				SelectSubPackage '04 Dog - Light brown'
+				Break
+			Case "Solid - White"
+				SelectSubPackage '04 Dog - White'
+				Break
+			Case "Default"
+				Break
+
+		EndSelect
+
+		SelectOne "Dragonfly\n\nDouble-click image to view a larger version",\
+		"|Dartwing Replacers","Replaces the default blue dartwing and default orange dartwing with my higher resolution versions. Fixes wing orientation.","Fomod\\Screens\\dragonfly1.jpg",\
+		"Default","Use default Skyrim textures","Fomod\\Screens\\dragonfly1.jpg"
+			Case "Dartwing Replacers"
+				SelectSubPackage '05 Dragonfly'
+				Break
+			Case "Default"
+				Break
+		EndSelect
+
+		SelectOne "Deer\n\nDouble-click image to view a larger version",\
+			"|Deer Replacers","Replaces the default elk, caribou (reindeer), and white stag with my retextures. All with less shaggy faces.","Fomod\\Screens\\deer1.jpg",\
+			"Default","Use default Skyrim deer species textures","fomod\\screens\\deer1.jpg"
+			Case "Deer Replacers"
+				SelectSubPackage '06 Elk and Caribou'
+				Break
+			Case "Default"
+				Break
+		EndSelect
+
+		SelectOne "Fox \(Red\)\n\nDouble-click image to view a larger version",\
+			"Red","Replaces the DEFAULT RED FOX with my red fox. Recolored pelt included.","Fomod\\Screens\\fox1.jpg",\
+			"|Silver","Replaces the DEFAULT RED FOX with my silver fox. Recolored pelt included.","Fomod\\Screens\\fox1.jpg",\
+			"Grey","Replaces the DEFAULT RED FOX with my grey fox. Recolored pelt included.","Fomod\\Screens\\fox1.jpg",\
+			"Default","Use the default Skyrim Fox textures","fomod\\screens\\fox1.jpg"
+			Case "Red"
+				SelectSubPackage '08 Fox - Normal - Red'
+				Break
+			Case "Silver"
+				SelectSubPackage '08 Fox - Normal - Silver'
+				Break
+			Case "Grey"
+				SelectSubPackage '08 Fox - Normal - Grey'
+				Break
+			Case "Default"
+				Break
+		EndSelect
+
+		SelectOne "Fox \(Arctic\)\n\nDouble-click image to view a larger version",\
+			"|Arctic","Replaces the DEFAULT ARCTIC FOX with my arctic fox. Recolored pelt included.","Fomod\\Screens\\fox1.jpg",\
+			"Silver","Replaces the DEFAULT ARCTIC FOX with my silver fox. Recolored pelt included.","Fomod\\Screens\\fox1.jpg",\
+			"Grey","Replaces the DEFAULT ARCTIC FOX with my grey fox. Recolored pelt included.","Fomod\\Screens\\fox1.jpg",\
+			"Default","Use the default Skyrim Fox textures","fomod\\screens\\fox1.jpg"
+				Case "Arctic"
+					SelectSubPackage '07 Fox - Arctic - Default'
+					Break
+				Case "Silver"
+					SelectSubPackage '07 Fox - Arctic - Silver'
+					Break
+				Case "Grey"
+					SelectSubPackage '07 Fox - Arctic - Grey'
+					Break
+				Case "Default"
+					Break
+		EndSelect
+
+		SelectOne "Frostbite Spider \(Brown\)\n\nDouble-click image to view a larger version",\
+			"Black","Replaces the DEFAULT BROWN FROSTBITE SPIDER with my black frostbite spider.","Fomod\\Screens\\spider1.jpg",\
+			"Dark Brown","Replaces the DEFAULT BROWN FROSTBITE SPIDER with my dark brown frostbite spider.","Fomod\\Screens\\spider1.jpg",\
+			"Tan","Replaces the DEFAULT BROWN FROSTBITE SPIDER with my tan frostbite spider.","Fomod\\Screens\\spider1.jpg",\
+			"|Brown Striped","Replaces the DEFAULT BROWN FROSTBITE SPIDER with my brown frostbite spider.","Fomod\\Screens\\spider1.jpg",\
+			"Default","Use default brown Frostbite Spider textures","fomod\\screens\\spider1.jpg"
+				Case "Black"
+					SelectSubPackage '09 Frostbite Spider - Normal - Black'
+					Break
+				Case "Dark Brown"
+					SelectSubPackage '09 Frostbite Spider - Normal - Dark Brown'
+					Break
+				Case "Tan"
+					SelectSubPackage '09 Frostbite Spider - Normal - Tan'
+					Break
+				Case "Brown Striped"
+					SelectSubPackage '09 Frostbite Spider - Normal - Brown Striped'
+					Break
+				Case "Default"
+					Break
+		EndSelect
+
+		SelectOne "Frostbite Spider \(Arctic\)\n\nDouble-click image to view a larger version",\
+			"Frosty","Replaces the DEFAULT WHITE FROSTBITE SPIDER with my frosty frostbite spider.","Fomod\\Screens\\spider1.jpg",\
+			"|Grey","Replaces the DEFAULT WHITE FROSTBITE SPIDER with my grey frostbite spider.","Fomod\\Screens\\spider1.jpg",\
+			"Tan","Replaces the DEFAULT WHITE FROSTBITE SPIDER with my tan frostbite spider.","Fomod\\Screens\\spider1.jpg",\
+			"Default","Use the default Arctic Frostbite Spider textures","fomod\\screens\\spider1.jpg"
+				Case "Frosty"
+					SelectSubPackage '10 Frostbite Spider - Arctic - Frosty'
+					Break
+				Case "Grey"
+					SelectSubPackage '10 Frostbite Spider - Arctic - Grey'
+					Break
+				Case "Tan"
+					SelectSubPackage '10 Frostbite Spider - Arctic - Tan'
+					Break
+				Case "Default"
+					Break
+		EndSelect
+
+		SelectOne "Goat\n\nDouble-click image to view a larger version",\
+			"Shaggy - Brown","Replaces the default shaggy brown goat with my shaggy brown goat.","Fomod\\Screens\\goat1.jpg",\
+			"Shaggy - Grey","Replaces the default shaggy brown goat with my shaggy grey goat.","Fomod\\Screens\\goat1.jpg",\
+			"|Shaggy - White","Replaces the default shaggy brown goat with my shaggy white goat.","Fomod\\Screens\\goat1.jpg",\
+			"Non-Shaggy - Brown","Replaces the default shaggy brown goat with my non-shaggy brown goat.","Fomod\\Screens\\goat1.jpg",\
+			"Non-Shaggy - Grey","Replaces the default shaggy brown goat with my non-shaggy grey goat.","Fomod\\Screens\\goat1.jpg",\
+			"Non-Shaggy - White","Replaces the default shaggy brown goat with my non-shaggy white goat.","Fomod\\Screens\\goat1.jpg",\
+			"Default","Use the default Skyrim goat textures","fomod\\screens\\goat1.jpg"
+				Case "Shaggy - Brown"
+					SelectSubPackage '11 Goat \(Shaggy\) - Brown'
+					Break
+				Case "Shaggy - Grey"
+					SelectSubPackage '11 Goat (Shaggy) - Grey'
+					Break
+				Case "Shaggy - White"
+					SelectSubPackage '11 Goat (Shaggy) - White'
+					Break
+				Case "Non-Shaggy - Brown"
+					SelectSubPackage '11 Goat - Brown'
+					Break
+				Case "Non-Shaggy - Grey"
+					SelectSubPackage '11 Goat - Grey'
+					Break
+				Case "Non-Shaggy - White"
+					SelectSubPackage '11 Goat - White'
+					Break
+				Case "Default"
+					Break
+		EndSelect
+
+		SelectOne "Hawk\n\nDouble-click image to view a larger version",\
+			"Default","Use the default Skyrim hawk textures","fomod\\screens\\hawk1.jpg",\
+			"|Common Buzzard","Replaces the default hawk with my common buzzard.","Fomod\\Screens\\hawk1.jpg",\
+			"Golden Eagle","Replaces the default hawk with my golden eagle.","Fomod\\Screens\\hawk1.jpg"
+			Case "Common Buzzard"
+				SelectSubPackage '12 Hawk - Common Buzzard'
+				Break
+			Case "Golden Eagle"
+				SelectSubPackage '12 Hawk - Golden Eagle'
+				Break
+			Case "Default"
+				Break
+		EndSelect
+
+		SelectOne "Highland Cow\n\nDouble-click image to view a larger version",\
+		"Belted Galloway","Replaces the default highland cow with my Belted Galloway retexture. One small issue: tail uses the same texture as the body\, so the tail is also banded. Includes my brown highland cow retexture for the painted cow. Modified normal map\; original normal map by Mancer.","Fomod\\Screens\\cow1.jpg",\
+		"|Black","Replaces the default highland cow with my black cow. Includes my brown highland cow retexture for the painted cow. Modified normal map\; original normal map by Mancer.","Fomod\\Screens\\cow1.jpg",\
+		"Brown","Replaces the default highland cow with my brown cow. Includes my brown highland cow retexture for the painted cow. Modified normal map\; original normal map by Mancer.","Fomod\\Screens\\cow1.jpg",\
+		"Orange","Replaces the default highland cow with my orange cow. Includes my brown highland cow retexture for the painted cow. Modified normal map\; original normal map by Mancer.","Fomod\\Screens\\cow1.jpg",\
+		"White","Replaces the default highland cow with my white cow. Includes my brown highland cow retexture for the painted cow. Modified normal map\; original normal map by Mancer.","Fomod\\Screens\\cow1.jpg",\
+		"Default","Use the default Skyrim Cow textures","fomod\\screens\\cow1.jpg"
+			Case "Belted Galloway"
+				SelectSubPackage '13 Highland Cow - Belted Galloway'
+				Break
+			Case "Black"
+				SelectSubPackage '13 Highland Cow - Black'
+				Break
+			Case "Brown"
+				SelectSubPackage '13 Highland Cow - Brown'
+				Break
+			Case "Orange"
+				SelectSubPackage '13 Highland Cow - Orange'
+				Break
+			Case "White"
+				SelectSubPackage '13 Highland Cow - White'
+				Break
+			Case "Default"
+				Break
+		EndSelect
+
+		SelectOne "Horker\n\nDouble-click image to view a larger version",\
+		"|Black","Replaces the default horker with my black horker.","Fomod\\Screens\\horker1.jpg",\
+		"Light Brown","Replaces the default horker with my light brown horker.","Fomod\\Screens\\horker1.jpg",\
+		"Brown","Replaces the default horker with my brown horker.","Fomod\\Screens\\horker1.jpg",\
+		"Grey","Replaces the default horker with my grey horker.","Fomod\\Screens\\horker1.jpg",\
+		"White","Replaces the default horker with my white horker.","Fomod\\Screens\\horker1.jpg",\
+		"Default","Use the default Skyrim horker textures","fomod\\screens\\horker1.jpg"
+			Case "Black"
+				SelectSubPackage '14 Horker - Black'
+				Break
+			Case "Light Brown"
+				SelectSubPackage '14 Horker - Light brown'
+				Break
+			Case "Brown"
+				SelectSubPackage '14 Horker - Brown'
+				Break
+			Case "Grey"
+				SelectSubPackage '14 Horker - Grey'
+				Break
+			Case "White"
+				SelectSubPackage '14 Horker - White'
+				Break
+			Case "Default"
+				Break
+		EndSelect
+
+		SelectOne "Horse Tails\n\nDouble-click image to view a larger version",\
+			"|Default Tails","Replaces the default tails with my tails. Same length as the originals. Colors slightly modified from the defaults to match my horse textures.","Fomod\\Screens\\horsetail1.jpg",\
+			"Docked Tails","Replaces the default tails with my short tails. Colors slightly modified from the defaults to match my horse textures.","Fomod\\Screens\\horsetail2.jpg"
+				Case "Default Tails"
+					SelectSubPackage '16 Horse - Default Mane and Tail'
+					Break
+				Case "Docked Tails"
+					SelectSubPackage '16 Horse - Short Mane and Tail'
+					Break
+		EndSelect
+
+		SelectOne "Horse Textures\n\nDouble-click image to view a larger version",\
+			"|Bellyache\'s Defaults","Replaces the default textures with my textures which most closely resemble the default colors and patterns.","Fomod\\Screens\\horsetail1.jpg",\
+			"Customize","Select your own horse textures.","Fomod\\Screens\\horsetail2.jpg"
+				Case "Bellyache\'s Defaults"
+					SelectSubPackage '15 Horse \(All Defaults\)'
+					Break
+				Case "Customize"
+					SelectOne "Select Windhelm Horse Options\n\nDouble-click image to view a larger version",\\
+						"|Black Spotted","Replaces the default brown and white Windhelm\/Carriage horse with my black spotted horse.","Fomod\\Screens\\horseblackspotted.jpg",\
+						"Blue Roan","Replaces the default brown and white Windhelm\/Carriage horse with my blue roan horse.","Fomod\\Screens\\horseblueroan.jpg",\
+						"Pangare","Replaces the default brown and white Windhelm\/Carriage horse with my pangare-coat horse.","Fomod\\Screens\\horsepangare.jpg",\
+						"Dun","Replaces the default brown and white Windhelm\/Carriage horse with my dun horse.","Fomod\\Screens\\horsedun.jpg",\
+						"Piebald","Replaces the default brown and white Windhelm\/Carriage horse with my piebald horse.","Fomod\\Screens\\horsepiebald.jpg",\
+						"Dirty Grey","Replaces the default brown and white Windhelm\/Carriage horse with my dirty grey horse.","Fomod\\Screens\\horsedirtygrey.jpg",\
+						"Black and White","Replaces the default brown and white Windhelm\/Carriage horse with a similar version that is black and white.","Fomod\\Screens\\horseblackwhite.jpg",\
+						"Dark Dapple","Replaces the default brown and white Windhelm\/Carriage horse with a dark/black dappled horse.","Fomod\\Screens\\horsedarkdapple.jpg",\
+						"Chestnut Sabino","Replaces the default brown and white Windhelm\/Carriage horse with my chestnut sabino horse.","Fomod\\Screens\\horsechestnutsabino.jpg"
+							Case "Black Spotted"
+								SelectSubPackage '17 Horse - Windhelm - Black spotted'
+								Break
+							Case "Blue Roan"
+								SelectSubPackage '17 Horse - Windhelm - Blue Roan'
+								Break
+							Case "Pangare"
+								SelectSubPackage '17 Horse - Windhelm - Pangare'
+								Break
+								Case "Dun"
+								SelectSubPackage '17 Horse - Windhelm - Dun'
+								Break
+							Case "Piebald"
+								SelectSubPackage '17 Horse - Windhelm - Piebald'
+								Break
+							Case "Dirty Grey"
+								SelectSubPackage '17 Horse - Windhelm - Dirty Grey'
+								Break
+							Case "Black and White"
+								SelectSubPackage '17 Horse - Windhelm - Black and White'
+								Break
+							Case "Dark Dapple"
+								SelectSubPackage '17 Horse - Windhelm - Dark Dapple'
+								Break
+							Case "Chestnut Sabino"
+								SelectSubPackage '17 Horse - Windhelm - Chestnut Sabino'
+								Break
+					EndSelect
+					SelectOne "Solitude Horse Options\n\nNOTE: these options affect FROST!\n\nDouble-click image to view a larger version",\
+						"|Default replacer","Replaces the default palomino horse with my version that stays true to its colors and patterns. AFFECTS FROST!","Fomod\\Screens\\horse02.jpg",\
+						"Other - White","Replaces the default palomino horse with my white horse. AFFECTS FROST!","Fomod\\Screens\\horsewhite.jpg",\
+						"Other - Light Dapple","Replaces the default palomino horse with my lightened dapple grey horse. AFFECTS FROST!","Fomod\\Screens\\horselightdapple.jpg",\
+						"Other - Light Pangare","Replaces the default palomino horse with my pangare-coat horse. AFFECTS FROST!","Fomod\\Screens\\horsepangarelight.jpg"
+							Case "Default replacer"
+								SelectSubPackage '18 Horse - Solitude - Default'
+								Break
+							Case "Other - White"
+								SelectSubPackage '18 Horse - Solitude - White'
+								Break
+							Case "Other - Light Dapple"
+								SelectSubPackage '18 Horse - Solitude - Light Dapple'
+								Break
+							Case "Other - Light Pangare"
+								SelectSubPackage '18 Horse - Solitude - Light Pangare'
+								Break
+					EndSelect
+					SelectOne "Riften Horse Options\n\nDouble-click image to view a larger version",\
+						"|Default Replacer","Replaces the default dapple grey horse with my version that stays true to its colors and patterns.","Fomod\\Screens\\horse03.jpg",\
+						"Other - Black spotted","Replaces the default dapple grey horse with my black spotted horse.","Fomod\\Screens\\horseblackspotted.jpg",\
+						"Other - Blue Roan","Replaces the default dapple grey horse with my blue roan horse.","Fomod\\Screens\\horseblueroan.jpg",\
+						"Other - Pangare","Replaces the default dapple grey horse with my pangare-coat horse.","Fomod\\Screens\\horsepangare.jpg",\
+						"Other - Dun","Replaces the default dapple grey horse with my dun horse","Fomod\\Screens\\horsedun.jpg",\
+						"Other - Piebald","Replaces the default dapple grey horse with my piebald horse","Fomod\\Screens\\horsepiebald.jpg",\
+						"Other - Dirty Grey","Replaces the default dapple grey horse with my dirty grey horse.","Fomod\\Screens\\horsedirtygrey.jpg",\
+						"Other - Black and White","Replaces the default dapple grey horse with a black and white horse.","Fomod\\Screens\\horseblackwhite.jpg",\
+						"Other - Dark Dapple","Replaces the default dapple grey horse with my dark\/black dappled horse.","Fomod\\Screens\\horsedarkdapple.jpg",\
+						"Other - Chestnut Sabino","Replaces the default dapple grey horse with my chestnut sabino horse","Fomod\\Screens\\horsechestnutsabino.jpg"
+							Case "Default Replacer"
+								SelectSubPackage '19 Horse - Riften - Default'
+								Break
+							Case "Other - Black spotted"
+								SelectSubPackage '19 Horse - Riften - Black spotted'
+								Break
+							Case "Other - Blue Roan"
+								SelectSubPackage '19 Horse - Riften - Blue Roan'
+								Break
+							Case "Other - Pangare"
+								SelectSubPackage '19 Horse - Riften - Pangare'
+								Break
+							Case "Other - Dun"
+								SelectSubPackage '19 Horse - Riften - Dun'
+								Break
+							Case "Other - Piebald"
+								SelectSubPackage '19 Horse - Riften - Piebald'
+								Break
+							Case "Other - Dirty Grey"
+								SelectSubPackage '19 Horse - Riften - Dirty Grey'
+								Break
+							Case "Other - Black and White"
+								SelectSubPackage '19 Horse - Riften - Black and White'
+								Break
+							Case "Other - Dark Dapple"
+								SelectSubPackage '19 Horse - Riften - Dark Dapple'
+								Break
+							Case "Other - Chestnut Sabino"
+								SelectSubPackage '19 Horse - Riften - Chestnut Sabino'
+								Break
+					EndSelect
+					SelectOne "Whiterun Horse Options\n\nBe aware that these options affect Shadowmere!\n\nDouble-click images to view larger versions",\
+						"|Default Replacer","Replaces the default dark brown horse with my black horse. AFFECTS SHADOWMERE!","Fomod\\Screens\\horse04.jpg",\
+						"Other - Black spotted","Replaces the default dark brown horse with my black spotted horse. AFFECTS SHADOWMERE!","Fomod\\Screens\\horseblackspotted.jpg",\
+						"Other - Blue Roan","Replaces the default dark brown horse with my blue roan horse. AFFECTS SHADOWMERE!","Fomod\\Screens\\horseblueroan.jpg",\
+						"Other - Pangare","Replaces the default dark brown horse with my pangare-coat horse. AFFECTS SHADOWMERE!","Fomod\\Screens\\horsepangare.jpg",\
+						"Other - Dun","Replaces the default dark brown horse with my dun horse. AFFECTS SHADOWMERE!","Fomod\\Screens\\horsedun.jpg",\
+						"Other - Piebald","Replaces the default dark brown horse with my piebald horse. AFFECTS SHADOWMERE!","Fomod\\Screens\\horsepiebald.jpg",\
+						"Other - Dirty Grey","Replaces the default dark brown horse with my dirty grey horse. AFFECTS SHADOWMERE!","Fomod\\Screens\\horsedirtygrey.jpg",\
+						"Other - Black and White","Replaces the default dark brown horse with a black and white horse. AFFECTS SHADOWMERE!","Fomod\\Screens\\horseblackwhite.jpg",\
+						"Other - Dark Dapple","Replaces the default dark brown horse with my dark\/black dappled horse. AFFECTS SHADOWMERE!","Fomod\\Screens\\horsedarkdapple.jpg",\
+						"Other - Chestnut Sabino","Replaces the default dark brown horse with my chestnut sabino horse. AFFECTS SHADOWMERE!","Fomod\\Screens\\horsechestnutsabino.jpg"
+							Case "Default Replacer"
+								SelectSubPackage '20 Horse - Whiterun - Default'
+								Break
+							Case "Other - Black spotted"
+								SelectSubPackage '20 Horse - Whiterun - Black Spotted'
+								Break
+							Case "Other - Blue Roan"
+								SelectSubPackage '20 Horse - Whiterun - Blue Roan'
+								Break
+							Case "Other - Pangare"
+								SelectSubPackage '20 Horse - Whiterun - Pangare'
+								Break
+							Case "Other - Dun"
+								SelectSubPackage '20 Horse - Whiterun - Dun'
+								Break
+							Case "Other - Piebald"
+								SelectSubPackage '20 Horse - Whiterun - Piebald'
+								Break
+							Case "Other - Dirty Grey"
+								SelectSubPackage '20 Horse - Whiterun - Dirty Grey'
+								Break
+							Case "Other - Black and White"
+								SelectSubPackage '20 Horse - Whiterun - Black and White'
+								Break
+							Case "Other - Dark Dapple"
+								SelectSubPackage '20 Horse - Whiterun - Dark Dapple'
+								Break
+							Case "Other - Chestnut Sabino"
+								SelectSubPackage '20 Horse - Whiterun - Chestnut Sabino'
+								Break
+					EndSelect
+					SelectOne "Markarth Horse Options\n\nDouble-click image to view a larger version",\
+						"|Default Replacer","Replaces the default pinto horse with my version that stays true to its colors and patterns.","Fomod\\Screens\\horse05.jpg",\
+						"Other - White","Replaces the default pinto horse with my white horse.","Fomod\\Screens\\horsewhite.jpg",\
+						"Other - Light Dapple","Replaces the default pinto horse with my lightened dapple grey horse.","Fomod\\Screens\\horselightdapple.jpg",\
+						"Other - Pangare","Replaces the default pinto horse with my pangare-coat horse.","Fomod\\Screens\\horsepangarelight.jpg"
+							Case "Default Replacer"
+								SelectSubPackage '21 Horse - Markarth - Default'
+								Break
+							Case "Other - White"
+								SelectSubPackage '21 Horse - Markarth - White'
+								Break
+							Case "Other - Light Dapple"
+								SelectSubPackage '21 Horse - Markarth - Light Dapple'
+								Break
+							Case "Other - Pangare"
+								SelectSubPackage '21 Horse - Markarth - Light Pangare'
+								Break
+					EndSelect
+					Break	
+		EndSelect
+		
+		SelectOne "Mammoth\n\nDouble-click image to view a larger version",\
+			"|Brown","Replaces the default mammoth with my brown mammoth.","Fomod\\Screens\\mammoth1.jpg",\
+			"Light Brown","Replaces the default mammoth with my light brown mammoth","Fomod\\Screens\\mammoth1.jpg",\
+			"Grey","Replaces the default mammoth with my grey mammoth.","Fomod\\Screens\\mammoth1.jpg",\
+			"Light Grey","Replaces the default mammoth with my light-grey mammoth.","Fomod\\Screens\\mammoth1.jpg",\
+			"White","Replaces the default mammoth with my white mammoth.","Fomod\\Screens\\mammoth1.jpg",\
+			"Default","Use the default Skyrim mammoth texture","fomod\\screens\\mammoth1.jpg"
+				Case "Brown"
+					SelectSubPackage '22 Mammoth - Brown'
+					Break
+				Case "Light Brown"
+					SelectSubPackage '22 Mammoth - Light Brown'
+					Break
+				Case "Grey"
+					SelectSubPackage '22 Mammoth - Grey'
+					Break
+				Case "Light Grey"
+					SelectSubPackage '22 Mammoth - Light Grey'
+					Break
+				Case "White"
+					SelectSubPackage '22 Mammoth - White'
+					Break
+				Case "Default"
+					Break
+		EndSelect
+			
+		SelectOne "Mudcrab\n\nDouble-click image to view a larger version",\
+		"Grey","Replaces the default grey mudcrab with Bethesda's HD mudcrab texture.","Fomod\\Screens\\mudcrab1.jpg",\
+			"Muddy","Replaces the default grey mudcrab with my muddy mudcrab. Includes alchemical ingredient recolor.","Fomod\\Screens\\mudcrab1.jpg",\
+			"|Oblivion","Replaces the default grey mudcrab with my Oblivion-styled mudcrab. Includes alchemical ingredient recolor.","Fomod\\Screens\\mudcrab1.jpg",\
+			"White","Replaces the default grey mudcrab with my white mudcrab. Includes alchemical ingredient recolor.","Fomod\\Screens\\mudcrab1.jpg",\
+			"Default","Use Skyrim's default mudcrab textures","fomod\\screens\\mudcrab1.jpg"
+			
+				Case "Grey"
+					SelectSubPackage '23 Mudcrab - Grey'
+					Break
+				Case "Muddy"
+					SelectSubPackage '23 Mudcrab - Muddy'
+					Break
+				Case "Oblivion"
+					SelectSubPackage '23 Mudcrab - Oblivion'
+					Break
+				Case "White"
+					SelectSubPackage '23 Mudcrab - White'
+					Break
+				Case "Default"
+					Break
+		EndSelect
+		
+		SelectOne "Rabbit\n\nDouble-click image to view a larger version",\
+			"|Rabbit replacer","Replaces the default rabbit with my rabbit.","Fomod\\Screens\\rabbit1.jpg",\
+			"Default","Use the default Skyrim rabbit textures","fomod\\screens\\rabbit1.jpg"
+				Case "Rabbit Replacer"
+					SelectSubPackage '24 Rabbit'
+					Break
+				Case "Default"
+					Break
+		EndSelect
+		
+		SelectOne "Sabrecat \(Brown\)\n\nDouble-click image to view a larger version",\
+			"Lion\, Female","Replaces the DEFAULT BROWN SABRE CAT with my female lion retexture.","Fomod\\Screens\\sabrecat1.jpg",\
+			"Lion\, Male","Replaces the DEFAULT BROWN SABRE CAT with my male lion retexture.","Fomod\\Screens\\sabrecat1.jpg",\
+			"|Striped","Replaces the DEFAULT BROWN SABRE CAT with my striped sabre cat.","Fomod\\Screens\\sabrecat1.jpg",\
+			"Black","Replaces the DEFAULT BROWN SABRE CAT with my black sabre cat.","Fomod\\Screens\\sabrecat1.jpg",\
+			"Default","Use the default Skyrim sabrecat texture","fomod\\screens\\sabrecat1.jpg"
+				Case "Lion\, Female"
+					SelectSubPackage '25 Sabre Cat - Lion female'
+					Break
+				Case "Lion\, Male"
+					SelectSubPackage '25 Sabre Cat - Lion male'
+					Break
+				Case "Striped"
+					SelectSubPackage '25 Sabre Cat - Striped'
+					Break
+				Case "Black"
+					SelectSubPackage '25 Sabre Cat - Black'
+					Break
+				Case "Default"
+					Break
+		EndSelect
+		
+		SelectOne "Sabrecat \(Arctic\)\n\nDouble-click image to view a larger version",\
+			"|Solid White","Replaces the DEFAULT WHITE SABRE CAT with my solid white sabre cat.","Fomod\\Screens\\sabrecat1.jpg",\
+			"White Spotted","Replaces the DEFAULT WHITE SABRE CAT with my spotted white sabre cat.","Fomod\\Screens\\sabrecat1.jpg",\
+			"White Striped","Replaces the DEFAULT WHITE SABRE CAT with my striped white sabre cat.","Fomod\\Screens\\sabrecat1.jpg",\
+			"Default","Use the default Skyrim Arctic sabercat texture","fomod\\screens\\sabrecat1.jpg"
+				Case "Solid White"
+					SelectSubPackage '26 Sabre Cat - Arctic - White solid'
+					Break
+				Case "White Spotted"
+					SelectSubPackage '26 Sabre Cat - Arctic - White spotted'
+					Break
+				Case "White Striped"
+					SelectSubPackage '26 Sabre Cat - Arctic - White striped'
+					Break
+				Case "Default"
+					Break
+		EndSelect
+		
+		SelectOne "Skeever \(Grey\)\n\nDouble-click image to view a larger version",\
+			"Healthy - Grey","Replaces the DEFAULT GREY SKEEVER with my less mangy grey skeever. If you choose a healthy skeever skin to replace the default grey skeever\, be sure to choose a healthy skeever skin for the default white skeever\, too. The normal maps are different between healthy and mangy skeevers\, and there is only one normal map that is shared between them.","Fomod\\Screens\\skeever1.jpg",\
+			"|Healthy - Brown","Replaces the DEFAULT GREY SKEEVER with my less mangy brown skeever. If you choose a healthy skeever skin to replace the default grey skeever\, be sure to choose a healthy skeever skin for the default white skeever\, too. The normal maps are different between healthy and mangy skeevers\, and there is only one normal map that is shared between them.","Fomod\\Screens\\skeever1.jpg",\
+			"Healthy - Dark Grey","Replaces the DEFAULT GREY SKEEVER with my less mangy dark grey skeever. If you choose a healthy skeever skin to replace the default grey skeever\, be sure to choose a healthy skeever skin for the default white skeever\, too. The normal maps are different between healthy and mangy skeevers\, and there is only one normal map that is shared between them.","Fomod\\Screens\\skeever1.jpg",\
+			"Mangy - Brown","Replaces the DEFAULT GREY SKEEVER with my mangy brown skeever. If you choose a mangy skeever skin to replace the default grey skeever\, be sure to choose a mangy skeever skin for the default white skeever\, too. The normal maps are different between healthy and mangy skeevers\, and there is only one normal map that is shared between them.","Fomod\\Screens\\skeever2.jpg",\
+			"Mangy - Dark Grey","Replaces the DEFAULT GREY SKEEVER with my mangy dark grey skeever. If you choose a mangy skeever skin to replace the default grey skeever\, be sure to choose a mangy skeever skin for the default white skeever\, too. The normal maps are different between healthy and mangy skeevers\, and there is only one normal map that is shared between them.","Fomod\\Screens\\skeever2.jpg",\
+			"Mangy - Grey","Replaces the DEFAULT GREY SKEEVER with my mangy grey skeever. If you choose a mangy skeever skin to replace the default grey skeever\, be sure to choose a mangy skeever skin for the default white skeever\, too. The normal maps are different between healthy and mangy skeevers\, and there is only one normal map that is shared between them.","Fomod\\Screens\\skeever2.jpg",\
+			"Default","Use default Skyrim grey skeever texture","fomod\\screens\\skeever1.jpg"
+				Case "Healthy - Grey"
+					SelectSubPackage '27 Skeever - Grey'
+					Break
+				Case "Healthy - Brown"
+					SelectSubPackage '27 Skeever - Brown'
+					Break
+				Case "Healthy - Dark Grey"
+					SelectSubPackage '27 Skeever - Dark Grey'
+					Break
+				Case "Mangy - Brown"
+					SelectSubPackage '27 Skeever - Mangy Brown'
+					Break
+				Case "Mangy - Dark Grey"
+					SelectSubPackage '27 Skeever - Mangy Dark Grey'
+					Break
+				Case "Mangy - Grey"
+					SelectSubPackage '27 Skeever - Mangy Grey'
+					Break
+				Case "Default"
+					Break
+		EndSelect
+		
+		SelectOne "Skeever \(Arctic\)\n\nDouble-click image to view a larger version",\
+			"Healthy - Grey Hooded","Replaces the DEFAULT WHITE SKEEVER with my less mangy grey hooded skeever. If you choose a healthy skeever skin to replace the default grey skeever\, be sure to choose a healthy skeever skin for the default white skeever\, too. The normal maps are different between healthy and mangy skeevers\, and there is only one normal map that is shared between them.","Fomod\\Screens\\skeever1.jpg",\
+			"Healthy - Brown Hooded","Replaces the DEFAULT WHITE SKEEVER with my less mangy brown hooded skeever. If you choose a healthy skeever skin to replace the default grey skeever\, be sure to choose a healthy skeever skin for the default white skeever\, too. The normal maps are different between healthy and mangy skeevers\, and there is only one normal map that is shared between them.","Fomod\\Screens\\skeever1.jpg",\
+			"|Healthy - White","Replaces the DEFAULT WHITE SKEEVER with my less mangy white skeever. If you choose a healthy skeever skin to replace the default grey skeever\, be sure to choose a healthy skeever skin for the default white skeever\, too. The normal maps are different between healthy and mangy skeevers\, and there is only one normal map that is shared between them.","Fomod\\Screens\\skeever1.jpg",\
+			"Mangy - Grey Hooded","Replaces the DEFAULT WHITE SKEEVER with my mangy grey hooded skeever.","Fomod\\Screens\\skeever2.jpg",\
+			"Mangy - Brown Hooded","Replaces the DEFAULT WHITE SKEEVER with my mangy brown hooded skeever.","Fomod\\Screens\\skeever2.jpg",\
+			"Default Arctic Skeever","Use default Skyrim assets for arctic skeevers","fomod\\screens\\skeever2.jpg"
+				Case "Healthy - Grey Hooded"
+					SelectSubPackage '28 Skeever - Arctic - Grey Hooded'
+					Break
+				Case "Healthy - Brown Hooded"
+					SelectSubPackage '28 Skeever - Arctic - Brown Hooded'
+					Break
+				Case "Healthy - White"
+					SelectSubPackage '28 Skeever - Arctic - White'
+					Break
+				Case "Mangy - Grey Hooded"
+					SelectSubPackage ''
+				Case "Mangy - Brown Hooded"
+					SelectSubPackage '28 Skeever - Arctic - Mangy Brown Hooded'
+					Break
+				Case "Default Arctic Skeever"
+				Break
+		EndSelect
+		
+		SelectOne "Wolf \(Black\)\n\nDouble-click image to view a larger version",\
+			"Darker Black","Replaces the DEFAULT BLACK WOLF with my darker black wolf.","Fomod\\Screens\\wolf1.jpg",\
+			"|Timber","Replaces the DEFAULT BLACK WOLF with my timber wolf.","Fomod\\Screens\\wolf1.jpg",\
+			"Brown","Replaces the DEFAULT BLACK WOLF with my brown wolf.","Fomod\\Screens\\wolf1.jpg",\
+			"Default Black Wolf","Use the Skytim default black wolf.","Fomod\\Screens\\wolf1.jpg"
+				Case "Darker Black"
+					SelectSubPackage '31 Wolf - Black - Darker Black'
+					Break
+				Case "Timber"
+					SelectSubPackage '31 Wolf - Black - Timber'
+					Break
+				Case "Brown"
+					SelectSubPackage '31 Wolf - Black - Brown'
+					Break
+				Case "Default Black Wolf"
+				Break
+		EndSelect
+		
+		SelectOne "Wolf \(Ice\)\n\nDouble-click image to view a larger version",\
+			"|Light Grey","Replaces the DEFAULT ICE WOLF with my light grey wolf.","Fomod\\Screens\\wolf1.jpg",\
+			"White \(brown eyes\)","Replaces the DEFAULT ICE WOLF with my white wolf with brown eyes.","Fomod\\Screens\\wolf1.jpg",\
+			"White \(blue eyes\)","Replaces the DEFAULT ICE WOLF with my white wolf with blue eyes.","Fomod\\Screens\\wolf1.jpg",\
+			"Brown","Replaces the DEFAULT ICE WOLF with my brown wolf.","Fomod\\Screens\\wolf1.jpg",\
+			"Default Ice Wolf","Use the Skyrim default ice wolf","Fomod\\Screens\\wolf1.jpg"
+				Case "Light Grey"
+					SelectSubPackage '32 Wolf - Ice - Light Grey'
+					Break
+				Case "White \(brown eyes\)"
+					SelectSubPackage '32 Wolf - Ice - White w Brown Eyes'
+					Break
+				Case "White \(blue eyes\)"
+					SelectSubPackage '32 Wolf - Ice - White w Blue Eyes'
+					Break
+				Case "Brown"
+					SelectSubPackage '32 Wolf - Ice - Brown'
+					Break
+				Case "Default Ice Wolf"
+					Break
+		EndSelect
+		
+		SelectOne "Wolf \(Red\)\n\nDouble-click image to view a larger version",\
+			"|Light Grey","Replaces the DEFAULT RED WOLF with my light grey wolf.","Fomod\\Screens\\wolf1.jpg",\
+			"White \(brown eyes\)","Replaces the DEFAULT RED WOLF with my white wolf with brown eyes.","Fomod\\Screens\\wolf1.jpg",\
+			"White \(blue eyes\)","Replaces the DEFAULT RED WOLF with my white wolf with blue eyes.","Fomod\\Screens\\wolf1.jpg",\
+			"|Brown","Replaces the DEFAULT RED WOLF with my brown wolf.","Fomod\\Screens\\wolf1.jpg",\
+			"Darker Black","Replaces the DEFAULT RED WOLF with my darker black wolf.","Fomod\\Screens\\wolf1.jpg",\
+			"Timber","Replaces the DEFAULT RED WOLF with my timber wolf.","Fomod\\Screens\\wolf1.jpg",\
+			"Default Red Wolf","Use the Skyrim default red wolf","Fomod\\Screens\\wolf1.jpg"
+				Case "Light Grey"
+					SelectSubPackage '33 Wolf - Red - Light Grey'
+				Case "White \(brown eyes\)"
+					SelectSubPackage '33 Wolf - Red - White w Brown Eyes'
+					Break
+				Case "White \(blue eyes\)"
+					SelectSubPackage '33 Wolf - Red - White w Blue Eyes'
+					Break
+				Case "Brown"
+					SelectSubPackage '33 Wolf - Red - Brown'
+					Break
+				Case "Darker Black"
+					SelectSubPackage '33 Wolf - Red - Darker Black'
+					Break
+				Case "Timber"
+					SelectSubPackage '33 Wolf - Red - Timber'
+					Break
+				Case "Default Red Wolf"
+					Break
+		EndSelect
+		
+		SelectOne "Werewolf\n\nDouble-click image to view a larger version",\
+			"|Black","Replaces the default werewolf with my more wolf-like black werewolf.","Fomod\\Screens\\werewolf1.jpg",\
+			"Brown","Replaces the default werewolf with my more wolf-like brown werewolf.","Fomod\\Screens\\werewolf1.jpg",\
+			"Dark Brown","Replaces the default werewolf with my more wolf-like dark brown werewolf.","Fomod\\Screens\\werewolf1.jpg",\
+			"Gold","Replaces the default werewolf with my more wolf-like gold werewolf.","Fomod\\Screens\\werewolf1.jpg",\
+			"Grey","Replaces the default werewolf with my more wolf-like black werewolf.","Fomod\\Screens\\werewolf1.jpg",\
+			"Orange","Replaces the default werewolf with my more wolf-like orange werewolf.","Fomod\\Screens\\werewolf1.jpg",\
+			"White","Replaces the werewolf with my more wolf-like white werewolf.","Fomod\\Screens\\werewolf1.jpg",\
+			"Dark Grey","Replaces the default werewolf with my more wolf-like dark grey werewolf.","Fomod\\Screens\\werewolf1.jpg",\
+			"Timber","Replaces the default werewolf with my more wolf-like timber werewolf","Fomod\\Screens\\werewolf1.jpg",\
+			"Default Werewolf","Use the default Skyrim werewolf texture","Fomod\\Screens\\werewolf1.jpg"
+			Case "Black"
+				SelectSubPackage '29 Werewolf - Black'
+				Break
+			Case "Brown"
+				SelectSubPackage '29 Werewolf - Brown'
+				Break
+			Case "Dark Brown"
+				SelectSubPackage '29 Werewolf - Dark Brown'
+				Break
+			Case "Gold"
+				SelectSubPackage '29 Werewolf - Gold'
+				Break
+			Case "Grey"
+				SelectSubPackage '29 Werewolf - Grey'
+				Break
+			Case "Orange"
+				SelectSubPackage '29 Werewolf - Orange'
+				Break
+			Case "White"
+				SelectSubPackage '29 Werewolf - White'
+				Break
+			Case "Dark Grey"
+				SelectSubPackage '29 Werewolf - Dark Grey'
+				Break
+			Case "Timber"
+				SelectSubPackage '29 Werewolf - Timber'
+				Break
+			Case "Default Werewolf"
+				Break
+		EndSelect
+		
+		SelectOne "Werewolf Eyes\n\nDouble-click image to view a larger version",\
+			"All Iris Black","Replaces the default werewolf eye with an all black eye with no sclera.","Fomod\\Screens\\werewolf2.jpg",\
+			"All Iris Blue","Replaces the default werewolf eye with an all blue eye with no sclera.","Fomod\\Screens\\werewolf2.jpg",\
+			"|All Iris Brown","Replaces the default werewolf eye with an all brown eye with no sclera.","Fomod\\Screens\\werewolf2.jpg",\
+			"All Iris Cloudy Red","Replaces the default werewolf eye with an all red \(cloudy\) eye with no sclera.","Fomod\\Screens\\werewolf2.jpg",\
+			"All Iris Green","Replaces the default werewolf eye with an all green eye with no sclera.","Fomod\\Screens\\werewolf2.jpg",\
+			"All Iris Grey","Replaces the default werewolf eye with an all grey eye with no sclera.","Fomod\\Screens\\werewolf2.jpg",\
+			"All Iris Ice Blue","Replaces the default werewolf eye with an all blue \(ice\) eye with no sclera.","Fomod\\Screens\\werewolf2.jpg",\
+			"All Iris Light Green","Replaces the default werewolf eye with an all green \(light\) eye with no sclera.","Fomod\\Screens\\werewolf2.jpg",\
+			"All Iris Light Grey","Replaces the default werewolf eye with an all grey \(light\) eye with no sclera","Fomod\\Screens\\werewolf2.jpg",\
+			"All Iris Orange","Replaces the default werewolf eye with an all orange eye with no sclera.","Fomod\\Screens\\werewolf2.jpg",\
+			"All Iris Red","Replaces the default werewolf eye with an all red eye with no sclera.","Fomod\\Screens\\werewolf2.jpg",\
+			"Normal Brown","Replaces the default werewolf eye with a brown eye with sclera.","Fomod\\Screens\\werewolf2.jpg",\
+			"Normal Light Brown","Replaces the default werewolf eye with a light brown eye with sclera.","Fomod\\Screens\\werewolf2.jpg",\
+			"Normal Dark Blue","Replaces the default werewolf eye with a dark blue eye with sclera.","Fomod\\Screens\\werewolf2.jpg",\
+			"Normal Ice Blue","Replaces the default werewolf eye with an ice blue eye with sclera.","Fomod\\Screens\\werewolf2.jpg",\
+			"Normal Dark Green","Replaces the default werewolf eye with a green eye with sclera.","Fomod\\Screens\\werewolf2.jpg",\
+			"Normal Light Green","Replaces the default werewolf eye with a light green eye with sclera.","Fomod\\Screens\\werewolf2.jpg",\
+			"Normal Grey","Replaces the default werewolf eye with a grey eye with sclera","Fomod\\Screens\\werewolf2.jpg",\
+			"Normal Light Grey","Replaces the default werewolf eye with a light grey eye with sclera","Fomod\\Screens\\werewolf2.jpg",\
+			"Normal Red","Replaces the default werewolf eye with a red eye with sclera","Fomod\\Screens\\werewolf2.jpg",\
+			"Default Werewolf Eyes","Use the default Skyrim werefolf eye texture","Fomod\\Screens\\werewolf2.jpg"
+				Case "All Iris Black"
+					SelectSubPackage '30 Werewolf Eyes - All Iris Black'
+					Break
+				Case "All Iris Blue"
+					SelectSubPackage '30 Werewolf Eyes - All Iris Blue'
+					Break
+				Case "All Iris Brown"
+					SelectSubPackage '30 Werewolf Eyes - All Iris Brown'
+					Break
+				Case "All Iris Cloudy Red"
+					SelectSubPackage '30 Werewolf Eyes - All Iris Cloudy Red'
+					Break
+				Case "All Iris Green"
+					SelectSubPackage '30 Werewolf Eyes - All Iris Green'
+					Break
+				Case "All Iris Grey" 
+					SelectSubPackage '30 Werewolf Eyes - All Iris Grey'
+					Break
+				Case "All Iris Ice Blue"
+					SelectSubPackage '30 Werewolf Eyes - All Iris Ice Blue'
+					Break
+				Case "All Iris Light Green"
+					SelectSubPackage '30 Werewolf Eyes - All Iris Light Green'
+					Break
+				Case "All Iris Light Grey"
+					SelectSubPackage '30 Werewolf Eyes - All Iris Light Grey'
+					Break
+				Case "All Iris Orange"
+					SelectSubPackage '30 Werewolf Eyes - All Iris Orange'
+					Break
+				Case "All Iris Red"
+					SelectSubPackage '30 Werewolf Eyes - All Iris Red'
+					Break
+				Case "Normal Brown"
+					SelectSubPackage '30 Werewolf Eyes - Normal Brown'
+					Break
+				Case "Normal Light Brown"
+					SelectSubPackage '30 Werewolf Eyes - Normal Light Brown'
+					Break
+				Case "Normal Dark Blue"
+					SelectSubPackage '30 Werewolf Eyes - Normal Dark Blue'
+					Break
+				Case "Normal Ice Blue"
+					SelectSubPackage '30 Werewolf Eyes - Normal Ice Blue'
+					Break
+				Case "Normal Dark Green"
+					SelectSubPackage '30 Werewolf Eyes - Normal Dark Green'
+					Break
+				Case "Normal Light Green"
+					SelectSubPackage '30 Werewolf Eyes - Normal Light Green'
+					Break
+				Case "Normal Grey"
+					SelectSubPackage '30 Werewolf Eyes - Normal Grey'
+					Break
+				Case "Normal Light Grey"
+					SelectSubPackage '30 Werewolf Eyes - Normal Light Grey'
+					Break
+				Case "Normal Red"
+					SelectSubPackage '30 Werewolf Eyes - Normal Red'
+					Break
+				Case "Default Werewolf Eyes"
+					Break
+		EndSelect
+	EndSelect ; Infernio: added missing EndSelect
+
+;== Finish Page ==
+Note "Thank you for installing Bellyache\'s Animal and Creature Pack!\n\n\nConfirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"

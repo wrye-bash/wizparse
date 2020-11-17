@@ -1,0 +1,85 @@
+;--Realistic Water Two -- WizBAIN by Mertz --
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+RequireVersions "", "", "", "307"
+ResetAllEspmNames
+DeSelectAll
+
+;== Welcome screen and install core mod
+SelectOne "Realistic Water Two for Skyrim Special Edition\nby isoku",\
+    "|Welcome","Contains the main esp file, which modifies the water in Skyrim, replaces some rowboats with a version that bob in the water\, adds new blacksmith water troughs\, adds new ambient sound effects for each body of water\, and increases the volume of waterfalls and rapids. Also includes files for the improved waves\, improved waterfalls\, faster foamy streams and improved rain ripples.\n\nThis comes default with 2K uncompressed water surface normals. Lower resolutions can be chosen in the options.\n\nClick 'Credits' below to view the credits or..\n\nClick Next to continue the installation","FOMod\\screenshot.jpg",\
+    "Credits","Realistic Water Two by isoku\n\nWizBAIN installer by Mertz\n\nClick next to continue the installation","FOMod\\screenshot.jpg"
+EndSelect
+SelectSubPackage '000 Core \(Required\)'
+
+
+SelectOne "Optional Texture Resolutions\n\nPlease select one of the following",\
+	"|Ultra","Uses the Realistic Water Two 2048x2048 water surface normals. This is the highest quality setting","fomod\\ultra.jpg",\
+	"High","1024x1024 uncompressed water surface normals. This is the equivalent of the default textures that come with Skyrim Special Edition. As resolution decreases, ripples and reflections will start to blend together and become more blurry.","fomod\\high.jpg",\
+	"Medium","512x512 uncompressed water surface normals. As resolution decreases, ripples and reflections will start to blend together and become more blurry.","FOMod\\medium.jpg"
+	Case "Ultra"
+		Break
+	Case "High"
+		SelectSubPackage '100 High Resolution \(1K\)'
+		Break
+	Case "Medium"
+		SelectSubPackage '100 Medium Resolution \(512x\)'
+		Break
+EndSelect
+
+SelectMany "Alternative Textures - Choose any of the following optional textures\n\nSelect option below to view a detailed description.\n\nDouble-click image to view a larger version",\
+	"Flowing Lakes","Reverts lake water back to river water\, visually and aurally. Lake water will flow strongly in one direction again instead of being made up of slow\, lapping waves. This option is not recommended. Users will have a LOD seams.","FOMod\\flowlake.jpg",\
+	"Original Foam","Reverts the rapids foam back to the original from RWT. The default foam textures are from the mod\, WATER. Credits to SparrowPrince for those textures.","FOMod\\Foam.jpg",\
+	"Cinematic Rain Ripples","The default rain ripples are more chaotic in nature which blends the ripples together. This option will make the ripples more uniform and cinematic. Credits to SparrowPrince for this texture.","FOMod\\RainRipples.jpg",\
+	"Smoother Rivers","The default river flow texture is a more choppy texture. This option is very similar\, but will make the \"waves\" on the water smoother. Credits to SparrowPrince for this texture.","FOMod\\Rivers.jpg",\
+	"Watercolor","Turns the water into a more vibrant\, fantasy-like\, teal color. If you have iNeed installed\, do not select this option. There is patch availabe on the next page.","FOMod\\watercolor.jpg"
+	Case "Flowing Lakes"
+		SelectSubPackage '110 Flowing Lakes \(not recommended\)'
+		Break
+	Case "Original Foam"
+		SelectSubPackage '120 Original Foam'
+		Break
+	Case "Cinematic Rain Ripples"
+		SelectSubPackage '130 Cinematic Rain Ripples'
+		Break
+	Case "Smoother Rivers"
+		SelectSubPackage '140 Smoother Rivers'
+		Break
+	Case "Watercolor"
+		If DataFileExists("iNeed.esp")
+			Cancel "You cannot install the Watercolor option with iNeed installed. You will need to skip the Watercolor option and install the iNeed patch instead"
+		Else 
+			SelectSubPackage '150 Watercolor'
+		EndIf
+		Break
+EndSelect
+
+SelectMany "Optional Sounds\n\nClick the option below to view a detailed description",\
+	"Extended Ambiance","Extends the lake and ocean ambient looping sound effects from 30 seconds to 50 seconds long.","FOMod\\ambiance.jpg"
+	Case "Extended Ambiance"
+		SelectSubPackage '200 Extended Ambiance'
+		Break
+EndSelect
+
+; Start testing for the presence of ESP/ESM files in the data directory to install mods.
+sModName101 = "iNeed Compatibility"
+sModDescription101 = "Select this option if you have \'iNeed\' installed. An unintended but necessary side effect of enabling compatibility is missing character\/object splashes. This option will automatically be selected if you have iNeed active."
+sModImage101 = "FOMod\\ineed.jpg"
+If GetEspmStatus("iNeed.esp") > 1
+	sModName101 = "|" + sModName101
+EndIf
+
+
+; Mod options
+SelectMany "Optional patches for iNeed\n\nPlease feel free to select or de-select any mod based on your preference or if you plan on installing iNeed in the future.\n\nYou may click to read the description for each patch before installing",\
+		str(sModName101),str(sModDescription101),str(sModImage101),\
+	"Watercolor for iNeed","Turns the water into a more vibrant\, fantasy-like\, teal color. Only select this option if you have iNeed installed or will be installing it.","FOMod\\watercolor.jpg"
+	Case "iNeed Compatibility"
+		SelectSubPackage '300 iNeed Patch'
+	Break
+	Case "Watercolor for iNeed"
+		SelectSubPackage '310 Watercolor - iNeed'
+	Break
+EndSelect
+
+;== Finish Page ==
+Note "Thank you for installing Realistic Water Two!\n\n\nConfirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"

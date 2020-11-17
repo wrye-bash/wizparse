@@ -1,0 +1,51 @@
+;== Paper World Maps for SSE Wrye Bash BAIN wizard by Mertz ===
+; Special thanks to Alt3rn1ty for his guide on AFK mods
+
+RequireVersions "", "", "", "307"
+DeSelectAll
+;== Welcome screen ==
+
+SelectOne "Paper World Maps for SSE by Warburg - BAIN Install Wizard",\
+    "|Welcome","This wizard installs the files necessary for Paper World Maps for SSE.\n\nClick 'Credits' below to view the credits or..\n\nClick Next to continue the installation","images\\S2.jpg",\
+    "Credits","Paper World Maps for SSE by Warburg\nBAIN Wizard by Mertz\n\nClick next to continue the installation","images\\S2.jpg"
+EndSelect
+SelectSubPackage '00 CORE'
+
+SelectOne "Map Options\n\nDouble-click image to see a larger version",\
+    "|Skyrim Style Map","Style based on the maps found in-game. Created by Warburg.","images\\S2.jpg",\
+	"Oblivion Style Map","Oblivion-style map. Created by Warburg.","images\\S1.jpg"
+		Case "Skyrim Style Map"
+			SelectSubPackage '02 Skyrim_T_2'
+			Break
+		Case "Oblivion Style Map"
+			SelectSubPackage '01 Skyrim_T_1'
+			Break
+EndSelect
+
+SelectOne "Solstheim \(Dragonborn DLC\) Map Options\n\nDouble-click image to see a larger version",\
+	"|Deathbrand Treasure Map Style","Style inspired by the Deathbrand Treasure Map you can find in-game. Created by Duncan E. Larsen.","Images\\D2.jpg",\
+	"Oblivion Style Solstheim Map","Oblivion-style map. Incomplete: is missing rivers, roads, and other features. Created by Warburg.","Images\\D1.jpg"
+		Case "Deathbrand Treasure Map Style"
+			SelectSubPackage '04 Solstheim_T_2'
+			Break
+		Case "Oblivion Style Solstheim Map"
+			SelectSubPackage '03 Solstheim_T_1'
+			Break
+EndSelect
+
+SelectOne "Map Marker Options\n\n\No image preview available",\
+	"Default Markers","Same as vanilla, leaves the default markers as-is","",\
+	"|Beige Markers","Beige Markers. Same as the original Paper World Map","",\
+	"No Player Marker","Beige map markers with the player marker hidden.",""
+		Case "Default Markers"
+			Break
+		Case "Beige Markers"
+			SelectSubPackage 'Beige Markers'
+			Break
+		Case "No Player Marker"
+			SelectSubPackage 'No Player Marker'
+			Break
+EndSelect
+
+;== Finish Page ==
+Note "Thank you for installing Paper World Maps for SSE!\n\n\nConfirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"

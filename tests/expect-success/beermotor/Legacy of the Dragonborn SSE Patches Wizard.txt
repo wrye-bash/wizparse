@@ -1,0 +1,143 @@
+;=-=-=-|Legacy of the Dragonborn SSE Wrye Bash BAIN wizard by Mertz |-=-=-=
+
+RequireVersions "1.0.0.0", "", "", "307" 
+DeSelectAll
+
+;== Welcome screen
+SelectOne "Welcome",\
+    "|Welcome","Welcome to the Legacy of the Dragonborn SSE installer.\n\nClick Read Me below to select the Readme for this mod\n\nClick 'Credits' above to view the credits.\n\nClick Next to continue the installation","Fomod\\Images\\SFC.jpg",\
+    "Credits","Legacy of the Dragonborn SSE is brought to you by Pickysaurus. If you enjoy this mod, please make sure to show your thanks by endorsing!\n\n\nWizBAIN installer by Mertz\n\nClick next to continue the installation","Fomod\\Images\\SFC.jpg"
+EndSelect
+
+
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; Mod autodetection for Patches:
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+sModName101 = "Open Cities Skyrim"
+sModDescription101 = "Provides navmesh and static support for the museum and Open Cities. Requires a new save on initial install."
+sModImage101 = "Fomod\\Images\\OCS.jpg"
+If GetEspmStatus("Open Cities Skyrim.esp") > 1
+	sModName101 = "|" + sModName101
+EndIf
+
+sModName102 = "Nexus Skyrim Overhaul"
+sModDescription102 = "Compatibility for Legacy and Nexus Skyrim Overhaul mod. Patch by SirJesto."
+sModImage102 = "Fomod\\Images\\NSO.jpg"
+If GetEspmStatus("NexusSkyrimOverhaul.esp") > 1
+	sModName102 = "|" + sModName102
+EndIf
+
+sModName103 = "Cutting Room Floor"
+sModDescription103 = "Allows Cutting Room Floor to work properly with Legacy. Patch by Ishara Meradin\, Mebantiza\, and SirJesto"
+sModImage103 = "Fomod\\Images\\NSO.jpg"
+If GetEspmStatus("Cutting Room Floor.esp") > 1
+	sModName103 = "|" + sModName103
+EndIf
+
+sModName104 = "Men of Winter"
+sModDescription104 = "Compatibility patch for The Men of Winter mod. Patch by SirJesto."
+sModImage104 = "Fomod\\Images\\MOW.jpg"
+If GetEspmStatus("NexusSkyrimOverhaul.esp") > 1
+	sModName104 = "|" + sModName104
+EndIf
+
+sModName105 = "Beyond Reach"
+sModDescription105 = "This file ensures compatibility between Legacy and Beyond Reach. Patch by SirJesto."
+sModImage105 = "Fomod\\Images\\BRP.jpg"
+If GetEspmStatus("arnima.esm") > 1
+	sModName105 = "|" + sModName105
+EndIf
+
+sModName106 = "Dark Brotherhood for Good Guys"
+sModDescription106 = "This file ensures compatibility between Legacy and Dark Brotherhood for Good Guys. Patch by SirJesto."
+sModImage106 = "Fomod\\Images\\GBP.jpg"
+If GetEspmStatus("goodbrother.esp") > 1
+	sModName106 = "|" + sModName106
+EndIf
+
+sModName107 = "Zim\'s Improved Artifacts"
+sModDescription107 = "Compatibility for Legacy and Zim\'s Immersive Artifacts mod. Patch by SirJesto."
+sModImage107 = "Fomod\\Images\\ZIA.jpg"
+If GetEspmStatus("Complete Pack.esp") > 1
+	sModName107 = "|" + sModName107
+EndIf
+
+sModName108 = "Mystic Condenser"
+sModDescription108 = " Compatibility for Legacy and the Mystic Condenser mod.\n\nAdds a Mystic Condenser to the Safehouse crafting rooom.  Patch by SirJesto."
+sModImage108 = "Fomod\\Images\\MCP.jpg"
+If GetEspmStatus("Mystic Condenser.esp") > 1
+	sModName107 = "|" + sModName107
+EndIf
+
+sModName109 = "Morrowloot Ultimate"
+sModDescription109 = "Fixes problems for those players who want to play with the full system. Supplied by Mebantiza. Edited by SirJesto.\n\nDOESN'T ADD ITEMS only addresses vanilla conflicts."
+sModImage109 = "Fomod\\Images\\MLU.jpg"
+If GetEspmStatus("MLU.esp") > 1
+	sModName109 = "|" + sModName109
+EndIf
+
+sModName110 = "Palaces and Castles Enhanced"
+sModDescription110 = "Patch for \"Palaces and Castles Enhanced\" mod\. Supplied by SetteLisette."
+sModImage110 = "Fomod\\Images\\PCE.jpg"
+If GetEspmStatus("Palaces Castles Enhanced.esp") > 1
+	sModName110 = "|" + sModName110
+EndIf
+
+sModName111 = "Snazzy Furniture and Clutter Overhaul"
+sModDescription111 = "Snazzy Furniture and Clutter Overhaul patch for LOTD\. Patch supllied by Gutmaw."
+sModImage111 = "Fomod\\Images\\SFC.jpg"
+If GetEspmStatus("Snazzy Furniture and Clutter Overhaul.esp") > 1
+	sModName111 = "|" + sModName111
+EndIf
+
+
+SelectMany "Select Mod Patches as necessary\n\nWrye Bash may have detected some of these mods for you already.\n\nPlease select an option below to view more information.\n\nDouble-click image for larger version",\
+		str(sModName101),str(sModDescription101),str(sModImage101),\
+		str(sModName102),str(sModDescription102),str(sModImage102),\
+		str(sModName103),str(sModDescription103),str(sModImage103),\
+		str(sModName104),str(sModDescription104),str(sModImage104),\
+		str(sModName105),str(sModDescription105),str(sModImage105),\
+		str(sModName106),str(sModDescription106),str(sModImage106),\
+		str(sModName107),str(sModDescription107),str(sModImage107),\
+		str(sModName108),str(sModDescription108),str(sModImage108),\
+		str(sModName109),str(sModDescription109),str(sModImage109),\
+		str(sModName110),str(sModDescription110),str(sModImage110),\
+		str(sModName111),str(sModDescription111),str(sModImage111)
+		Case "Open Cities Skyrim"
+			SelectSubPackage '02a - OCS'
+			Break
+		Case "Nexus Skyrim Overhaul"
+			SelectSubPackage '06h - NSO'
+			Break
+		"Cutting Room Floor"
+			SelectSubPackage '07a - CRF'
+			Break
+		"Men of Winter"
+			SelectSubPackage '08n - MOW'
+			Break
+		"Beyond Reach"
+			SelectSubPackage '08p - BRP'
+			Break
+		"Dark Brotherhood for Good Guys"
+			SelectSubPackage '08q - GBP'
+			Break
+		"Zim\'s Improved Artifacts"
+			SelectSubPackage '08k - ZIA'
+			Break
+		"Mystic Condenser"
+			SelectSubPackage '08a - MCP'
+			Break
+		"Morrowloot Ultimate"
+			SelectSubPackage '09 MLU'
+			Break
+		"Palaces and Castles Enhanced"
+			SelectSubPackage '09 PCE'
+			Break
+		"Snazzy Furniture and Clutter Overhaul"
+			SelectSubPackage '09 SFC'
+			Break
+EndSelect
+
+
+;== Finish Page ==
+Note "Confirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"

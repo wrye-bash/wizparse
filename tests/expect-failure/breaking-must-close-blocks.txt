@@ -1,0 +1,6 @@
+; Tests a breaking change: Blocks must be closed properly now
+SelectOne "Test", "Cancel", "", "", "Return", "", ""
+    Case "Cancel"
+        Cancel
+    Case "Return"
+        Return

@@ -1,0 +1,133 @@
+;=-=-=-|LeanWolf's Better-Shaped and Armed Talos Wrye Bash BAIN wizard by Mertz |-=-=-=
+
+RequireVersions "1.0.0.0", "", "", "307" 
+DeSelectAll
+
+MOD_Readme = str("The mod readme would normally be here if Mertz had remembered to add it.")
+
+
+bLowPolyStatue = False
+bHighPolyStatue = False
+bNSUtR = False
+bIronGS = False
+bSteelGS = False
+bSilverGS = False
+bNordHeroGS = False
+bDragonboneGS = False
+
+;== Welcome screen and install core mod
+SelectOne "Welcome",\
+    "|Welcome","Welcome to the LeanWolf's Better-Shaped and Armed Talos installer.\n\nClick Read Me below to select the Readme for this mod\n\nClick 'Credits' above to view the credits.\n\nClick Next to continue the installation","Fomod\\Images\\HighPolyStatue.jpg",\
+	"Read Me",MOD_Readme,"Fomod\\Images\\HighPolyStatue.jpg",\
+    "Credits","LeanWolf's Better-Shaped and Armed Talos was created by LeanWolf. If you enjoy this mod, please make sure to show your thanks by endorsing!\n\n\nWizBAIN installer by Mertz\n\nClick next to continue the installation","Fomod\\Images\\HighPolyStatue.jpg"
+EndSelect
+
+SelectOne "Options: Talos Statue",\
+	"Vanilla Statue","Vanilla statue model with minor shape tweaks.","Fomod\\Images\\VanillaStatue.jpg",\
+	"|High-Poly Statue","My own smoother statue version that was manually edited to maintain the vanilla form and prevent texture distortion.","Fomod\\Images\\HighPolyStatue.jpg"
+		Case "Vanilla Statue"
+			bLowPolyStatue = True
+			Break
+		Case "High-Poly Statue"
+			bHighPolyStatue= True
+			Break
+EndSelect
+
+
+
+SelectMany "Options: Patches",\
+	"No Snow Under the Roof","Select this if you have the \"No Snow Under the Roof\" mod installed","Fomod\\Images\\BSW_NSUtR.jpg"
+	Case "No Snow Under the Roof"
+		bNSUtR = True
+		Break
+EndSelect
+
+If bNSUtR
+	SelectOne "No Snow Under the Roof Weapon Options",\
+		"|Snow Iron Greatsword","Iron greatsword for snowy Talos","Fomod\\Images\\VanillaStatue.jpg",\
+		"Snow Steel Greatsword","Steel greatsword for snowy Talos.","Fomod\\Images\\SteelGS.jpg",\
+		"Snow Silver Greatsword","Silver greatsword for snowy Talos.","Fomod\\Images\\SilverGS.jpg",\
+		"Snow Nord Hero Greatsword","Nord Hero greatsword for snowy Talos.","Fomod\\Images\\NordHeroGS.jpg",\
+		"Snow Dragonbone Greatsword","Dragonbone greatsword for snowy Talos.","Fomod\Images\DragonboneGS.jpg"
+			Case "Snow Iron Greatsword"
+				SelectSubPackage '30 NSUtR HP+Iron'
+				Break
+			Case "Snow Steel Greatsword"
+				SelectSubPackage '31 NSUtR HP+Steel'
+				Break
+			Case "Snow Silver Greatsword"
+				SelectSubPackage '32 NSUtR HP+Silver'
+				Break
+			Case "Snow Nord Hero Greatsword"
+				SelectSubPackage '33 NSUtR HP+NordHero'
+				Break
+			Case "Snow Dragonbone Greatsword"
+				SelectSubPackage '34 NSUtR HP+DragonBone'
+				Break
+	EndSelect
+	
+Elif bNSUtR == False 
+	SelectOne "Options: Weapon",\
+		"|Iron Greatsword","Iron was all the rage back in Talos\' day!","Fomod\\Images\\VanillaStatue.jpg",\
+		"Steel Greatsword","If there was steel back then\, mighty Talos would have used it!","Fomod\\Images\\SteelGS.jpg",\
+		"Silver Greatsword","What\'s better for monster-slaying than precious silver\?","Fomod\\Images\\SilverGS.jpg",\
+		"Nord Hero Greatsword","If ever there was a Nord Hero\, it was mighty Talos\!","Fomod\\Images\\NordHeroGS.jpg",\
+		"Dragonbone Greatsword","Were there Dragons in Talos\' time? Who cares\, it looks cool\!","Fomod\\Images\\DragonboneGS.jpg"
+			Case "Iron Greatsword"
+				bIronGS = True
+				Break
+			Case "Steel Greatsword"
+				bSteelGS = True
+				Break
+			Case "Silver Greatsword"
+				bSilverGS = True
+				Break
+			Case "Nord Hero Greatsword"
+				bNordHeroGS = True
+				Break
+			Case "Dragonbone Greatsword"
+				bDragonboneGS = True
+				Break
+	EndSelect
+EndIf
+
+If bLowPolyStatue and bIronGS 
+	SelectSubPackage '00 Sword Textures'
+	SelectSubPackage '10 Lo-Poly+Iron'
+Elif bLowPolyStatue and bSteelGS
+	SelectSubPackage '00 Sword Textures'
+	SelectSubPackage '11 Lo-Poly+Steel'
+Elif bLowPolyStatue and bSilverGS
+	SelectSubPackage '00 Sword Textures'
+	SelectSubPackage '12 Lo-Poly+Silver'
+Elif bLowPolyStatue and bNordHeroGS
+	SelectSubPackage '00 Sword Textures'
+	SelectSubPackage '13 Lo-Poly+NordHero'
+Elif bLowPolyStatue and bDragonboneGS
+	SelectSubPackage '00 Sword Textures'
+	SelectSubPackage '14 Lo-Poly+DragonBone'
+EndIf
+
+If bHighPolyStatue and bIronGS 
+	SelectSubPackage '00 Sword Textures'
+	SelectSubPackage '20 Hi-Poly+Iron'
+Elif bHighPolyStatue and bSteelGS
+	SelectSubPackage '00 Sword Textures'
+	SelectSubPackage '21 Hi-Poly+Steel'
+Elif bHighPolyStatue and bSilverGS
+	SelectSubPackage '00 Sword Textures'
+	SelectSubPackage '22 Hi-Poly+Silver'
+Elif bHighPolyStatue and bNordHeroGS
+	SelectSubPackage '00 Sword Textures'
+	SelectSubPackage '23 Hi-Poly+NordHero'
+Elif bHighPolyStatue and bDragonboneGS
+	SelectSubPackage '00 Sword Textures'
+	SelectSubPackage '24 Hi-Poly+DragonBone'
+EndIf
+
+
+
+
+
+;== Finish Page ==
+Note "Confirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"

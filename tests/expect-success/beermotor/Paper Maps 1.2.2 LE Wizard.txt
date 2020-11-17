@@ -1,0 +1,48 @@
+;=-=-=-|Paper World Map Wrye Bash BAIN wizard by Mertz |-=-=-=
+
+RequireVersions "1.0.0.0", "", "", "307" 
+DeSelectAll
+
+;== Welcome screen and install core mod
+SelectOne "Welcome",\
+    "|Welcome","Welcome to the Paper World Map installer.\n\nClick Read Me below to select the Readme for this mod\n\nClick 'Credits' above to view the credits.\n\nClick Next to continue the installation","fomod\\Images\\Banner.png",\
+	"Credits","Paper World Map was created by DuncanLarson1. If you enjoy this mod, please make sure to show your thanks by endorsing!\n\n\nWizBAIN installer by Mertz\n\nClick next to continue the installation","fomod\\Images\\Banner.png"
+EndSelect
+
+SelectMany "Core Files and Options\n\nClick on an item below to read the description.\n\Double-click images to view a larger version",\
+	"|Core Files","Includes modified Flat Map Markers .dll (credit to underthesky) and a flat mesh for Warburg's Skyrim map","fomod\\Images\\Banner.png",\
+	"Map Screen Lighting Fix","mall plugin that edits the imagespace used for the world map to increase saturation and implement a small bloom effect. Highly reccommended\, but may look strange with some ENBs\/reshades\, or you may simply prefer the default lighting.","fomod\\Images\\Banner.png",\
+	"Solsheim Map","Map for Solstheim. Requires Dragonborn DLC","fomod\\Images\\DB.jpg",\
+	"Falskaar Map","Requires Falskaar","fomod\\Images\\FS.jpg",\
+	"Grey Cowl of Nocturnal Map","Requires The Gray Cowl of Nocturnal","fomod\\Images\\GC.jpg",\
+	"Darkend Map","Requires Darkend","fomod\\Images\\DE.jpg",\
+	"Wyrmstooth Map","Requires Wyrmstooth","fomod\\Images\\WT.jpg",\
+	"Beyond Skyrim: Bruma Map","06 Wyrmstooth 1.2.0","fomod\\Images\\BS B.jpg"
+		Case "Core Files"
+			SelectSubPackage '00 CORE'
+			Break
+		Case "Map Screen Lighting Fix"
+			SelectSubPackage '01 ENHANCER'
+			Break
+		Case "Solsheim Map"
+			SelectSubPackage '02 Solsthiem 1.1.0'
+			Break
+		Case "Falskaar Map"
+			SelectSubPackage '03 Falskaar 1.2.0'
+			Break
+		Case "Grey Cowl of Nocturnal Map"
+			SelectSubPackage '04 The Gray Cowl 1.1.0'
+			Break
+		Case "Darkend Map"
+			SelectSubPackage '05 Darkend 1.0'
+			Break
+		Case "Wyrmstooth Map"
+			SelectSubPackage '06 Wyrmstooth 1.2.0'
+			Break
+		Case "Beyond Skyrim: Bruma Map"
+			SelectSubPackage '07 BS Bruma 1.2'
+			Break
+EndSelect
+
+;== Finish Page ==
+Note "Confirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"

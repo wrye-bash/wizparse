@@ -10,4 +10,5 @@
 tmp/
 
 # Wizards that I use for testing but can't redistribute due to their (lack of) license
-tests/proprietary/
+tests/expect-failure/proprietary/*.txt
+tests/expect-success/proprietary/*.txt

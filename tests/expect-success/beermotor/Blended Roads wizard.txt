@@ -7,7 +7,7 @@ DeSelectAll
 
 SelectOne "Blended Roads by T4gtr34um3r - BAIN Install Wizard",\
     "|Welcome","This wizard installs the files necessary for Blended Roads for Skyrim Special Edition.\n\nThis package also includes the optional REALly Blended Roads alternate version of this mod along with SMIM compatibility patches for either choice.\nClick 'Credits' below to view the credits or..\n\nClick Next to continue the installation","images\\real_blend.jpg",\
-    "Credits","Blended Roads by T4gtr34um3l\nBAIN Wizard by Mertz\nSpecial thanks to Alt3rnity\n\nClick next to continue the installation","images\\flat_blend.jpg"
+    "Credits","Blended Roads by T4gtr34um3l\nBAIN Wizard by Mertz\nSpecial thanks to Alt3rnity helping keep BAIN Wizardry alive\n\nClick next to continue the installation","images\\flat_blend.jpg"
 EndSelect
 
 ;== Select Blended Roads Version ==
@@ -15,13 +15,13 @@ bBlendRoads = False
 bReallyRoads = False
 SelectOne "Choose one of the following:",\
     "|Blended Roads","Blended roads with vanilla flat road meshes, no performance drop.\n\nDouble-click the image to view a larger verion","images\\flat_blend.jpg",\
-    "REALly Blended Roads","REALly Blended roads with 3D road meshes, similar to Real Roads, but with minor performance drop.\n\nDouble-click the image to view a larger verion","images\\real_blend.jpg"
+	"REALly Blended Roads","REALly Blended roads with 3D road meshes, similar to Real Roads, but with minor performance drop.\n\nDouble-click the image to view a larger verion","images\\real_blend.jpg"
     Case "Blended Roads"
         bBlendRoads = True
-        Break
-    Case "REALly Blended Roads"
+		Break
+	Case "REALly Blended Roads"
         bReallyRoads = True
-        Break
+		Break
 EndSelect
 
 ; SMIM Patch check
@@ -31,15 +31,15 @@ bSMIMReallyPatch = False
 If bBlendRoads == True
 SelectMany "SMIM Compatibility Patch",\
 "SMIM Patch for Blended Roads","SMIM Compatibility Patch for the bridge. Pick  this if you have selected Blended Roads as Main Files. Or none if you don't use SMIM.\n\nClick the checkbox to select, then click Next to continue","images\\flat_blend.jpg"
-    Case "SMIM Patch for Blended Roads"
+	Case "SMIM Patch for Blended Roads"
          bSMIMBlendPatch = True
         Break
 EndSelect
-;Or did the user pick REALly Blended Roads?    
+;Or did the user pick REALly Blended Roads?	
 Elif bReallyRoads == True
 SelectMany "SMIM Compatibility Patch",\
 "SMIM Patch for REALly Blended Roads","SMIM Compatibility Patch for the bridge. Pick  this if you have selected REALly Blended Roads as Main Files. Or none if you don't use SMIM.\n\nClick the checkbox to select, then click Next to continue","images\\real_blend.jpg"
-    Case "SMIM Patch for REALly Blended Roads"
+	Case "SMIM Patch for REALly Blended Roads"
          bSMIMReallyPatch = True
         Break
 EndSelect
@@ -47,18 +47,18 @@ EndSelect
 EndIf
 ; Now our variables are toggled, lets get down to business.
 If bBlendRoads == True and bSMIMBlendPatch == False
-    SelectSubPackage '00 Blended Roads'
-    
+	SelectSubPackage '00 Blended Roads'
+	
 Elif bBlendRoads == True and bSMIMBlendPatch == True
-    SelectSubPackage '00 Blended Roads'
-    SelectSubPackage '01 Blended Roads SMIM Compatibility patch'
-    
+	SelectSubPackage '00 Blended Roads'
+	SelectSubPackage '01 Blended Roads SMIM Compatibility patch'
+	
 Elif bReallyRoads == True and bSMIMReallyPatch == False
-    SelectSubPackage '02 REALly Blended ROADS'
-    Elif bReallyRoads == True and bSMIMReallyPatch == True
-    SelectSubPackage '02 REALly Blended ROADS'
-    SelectSubPackage '03 REALly Blended ROADS SMIM Compatibility Patch'
-    
+	SelectSubPackage '02 REALly Blended ROADS'
+	Elif bReallyRoads == True and bSMIMReallyPatch == True
+	SelectSubPackage '02 REALly Blended ROADS'
+	SelectSubPackage '03 REALly Blended ROADS SMIM Compatibility Patch'
+	
 EndIf
 
 ;== Finish Page ==

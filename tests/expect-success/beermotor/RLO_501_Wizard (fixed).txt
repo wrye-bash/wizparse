@@ -1,0 +1,127 @@
+;--Realistic Lighting Overhaul 5.x -- WizBAIN by Mertz --
+; Special thanks to alt3rn1ty and the folks at AFK mods \
+; for their advice and guidance. Thanks to sialiv for
+; demonstrating how to do detection and pre-selection
+; through the Blowing in the Wind BAIN wizard. 
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+RequireVersions "1.0.0.0", "", "", "307" ; Skyrim SE reports as version 1.0.0.0
+ResetAllEspmNames
+DeSelectAll
+
+RLO_Readme = str("Realistic Lighting Overhaul \(RLO\) is the fourth iteration of the popular lighting mod, Realistic Lighting without Post-Processing.\n\nIt is a complete overhaul of the games lighting system and is one of the most comprehensive lighting mods available for Skyrim. The changes number in the thousands and cover many bases. The aim of this mod is to make the lighting as realistic as possible within the confines of the game engine. It makes the lighting more realistic without the use of screen shader injections or other post-processing. This means the changes made to this mod only utilize the game engine and changes are only made via the Creation Kit. So this means there will be no performance decrease at all, in fact, some people might even get an FPS boost from using this mod due to the removal of bloom which takes up considerable processing power from older machines. We are also optimizing RLO so that it may even run FASTER than vanilla Skyrim in some instances.\n\nThis mod does not aim to make the game fantasy like, or add lights for the purpose of it looking beautiful on screenshots. This is a hardcore realism mod, that should be used by people who want their game to have an increased immersion level. Sunlight will be realistic and not blue and places which are poorly lit WILL be dark. If a cabin only has a few candles, yes it will be dark, don't blame us, blame Bethesda \(haha\) because we are trying to keep this \"lore friendly\" and realistic as we can, even with huge engine limitations.\n\nThis mod adds a vast amount of sun lighting to cells , more shadow casting lights and bounced lighting \(Over 600 new shadow casting lights as of v4.1\). The lighting in RLO is very subtle and very balanced and many of its features can be missed if people are looking for a more -in your face- fantasy approach. This is why we only really tell you about a few main features and the rest is up to you to experience.\n\nIf you want fantasy lighting with over the top (for cinematic purposes) boom and effects, edited meshes etc - I would recommend looking for other mods, such as Climates of Tamriel or Enhanced Lights and Effects, which are mods we also adore and use!\n\nRLO while complex in it's own way - does not edit meshes or textures, it does not use scripts. We do this to lower the chances of bugs or issues to your game. As of 4.1 RLO added some fixes for cloud textures to suit RLO weathers. 5.0 will introduce meshes and textures for smoke effects. All of these will be optional.\n")
+
+;== Welcome screen and install core mod
+SelectOne "Realistic Lighting Overhaul SSE",\
+    "|Welcome"," This installs Realistic Lighting Overhaul 5.0.1 for Skyrim Special Edition\Click Read Me below to select the Readme for RLO\n\nClick 'Credits' above to view the credits or..\n\nClick Next to continue the installation","fomod\\TitleBanner.png",\
+	"Read Me",RLO_Readme,"fomod\\TitleBanner.png",\
+    "Credits","Realistic Lighting Overhaul by the RLO 5.0 Team:\n\nCurrent Active Main Members :\nSydney666 (Tony) - Project Manager, Lighting design/Ideas, Writer, QA/Testing. Major City Interiors/Exteriors lighting. Community guy!\nEAGnR (Edwin) - RLO programmer, bug fixes, Xedit guru and general modder. Smoke Effects (Texture) tweaks. Implementer of Dwemer Lighting Technology.\nShana (Tatiana) - Minor City Interiors. Tester and compatibility patches.\n\nContributors :\nMindflux - Smoke Effects.\nE10X11 (Brandon) - Riverwood, Shor's Stone and Rorikstead Exteriors.\nDaemonui (Donovan) - Dawnguard DLC edits, General lighting edits, Weathers/Weather Tweaks.\n\n\nWizBAIN installer by Mertz\n\nClick next to continue the installation","fomod\\TitleBanner.png"
+EndSelect
+
+bRLOInteriors = False
+bRLOExteriors = False
+bRLOEffects = False
+bRLOIluminatedSpells = False
+
+SelectMany "Realistic Lighting Overhaul - Select core modules\n\nPlease select at least one of the following modules",\
+	"|RLO Interiors","Major City Interiors, Minor City/Town Interiors, and Dungeons + Dwemer Lighting Technology (DLT).\n\n- Immersively hand placed light sources which have been modified for realism.\n\n- True color imagespaces with no tints, which show actual texture colors and deeper blacks (ENB Friendly).\n\n - Fixed orange fog and ambient lighting.\n\n -The DLT module brings you intricate Dwemer lighting contraptions with interesting new lore behind them. (DLT Locations: Markarth Understone Keep, more locations coming in future updates based on suggestions.)","Fomod\\InteriorsDLT.png",\
+	"RLO Exteriors","Major City Exteriors, Minor City/Town Exteriors, and No Guard Torches Utility (Helps Prevent Flickering).\n\n - Immersively hand placed light sources (dependent on the modified light sources from RLO Interiors, otherwise will use Vanilla or those from another lighting mod)\n\n - Realistic towns with a lived-in feeling.\n\n - The No Guard Torches Utility can be found in the Magic Menu under Powers, and when activated it will dynamically remove torches from guards at night.\n\nNote: Compatible with any weather mod, this module does not edit exterior weathers.","Fomod\\Exteriors.png",\
+	"RLO Effects","Improved candles, torches, and embers. As well as added realistic candle and torch smoke effects.","Fomod\Effects.png",\
+	"RLO Illuminated Spells","Spells will produce light and illuminate your sorroundings.","Fomod\IlluminatedSpells.png"
+	Case "RLO Interiors"
+		bRLOInteriors = True
+	Break
+	Case "RLO Exteriors"
+		bRLOExteriors = True
+	Break
+	Case "RLO Effects"
+		bRLOEffects = True
+	Break
+	Case "RLO Illuminated Spells"
+		bRLOIluminatedSpells = True
+	Break
+EndSelect
+; Infernio: these were assignments
+If bRLOInteriors == True
+	SelectSubPackage '0 Interiors'
+EndIf
+If bRLOExteriors == True
+	SelectSubPackage '1 Exteriors'
+EndIf
+If bRLOEffects == True
+	SelectSubPackage '2 Effects'
+EndIf
+If bRLOIluminatedSpells == True
+	SelectSubPackage '3 Illuminated Spells'
+EndIf
+
+; Start testing for the presence of ESP/ESM files in the data directory to install patches
+
+sModName101 = "Cutting Room Floor Patch"
+sModDescription101 = "This patch provides compatibility for RLO Interiors with the Cutting Room Floor mod. Credit to ttabakova.\n\nREQUIRES: Cutting Room Floor.esp,\nRLO - Interiors.esp"
+sModImage101 = ""
+If GetEspmStatus("Cutting Room Floor.esp") > 1 and bRLOInteriors == True
+	sModName101 = "|" + sModName101
+EndIf
+sModName102 = "Immersive Citizens Patch"
+sModDescription102 = "This patch provides compatibility for RLO Interiors with the Immersive Citizens mod. Credit to ttabakova.\n\nREQUIRES: Immersive Citizens - AI Overhaul.esp,\nRLO - Interiors.esp"
+sModImage102 = ""
+If GetEspmStatus("Immersive Citizens - AI Overhaul.esp") > 1 and bRLOInteriors == True
+	sModName102 = "|" + sModName102
+EndIf
+
+sModName103 = "Valdacil's Item Sorting Patch"
+sModDescription103 = "This patch provides compatibility for RLO Interiors and Exteriors with Valdacil's Item Sorting mod. Credit to ttabakova.\n\nREQUIRES: ValdacilsItemSorting.esp,\nRLO - Interiors.esp, RLO - Exteriors.esp"
+sModImage103 = ""
+If GetEspmStatus("ValdacilsItemSorting.esp") > 1
+	sModName103 = "|" + sModName102
+EndIf
+; Compatibility Add-ons presentation
+bCRFpatch = False
+bICPatch = False
+bVISPatch = False
+
+SelectMany "Realistic Lighting Overhaul\nCompatibility Patches",\
+		str(sModName101),str(sModDescription101),str(sModImage101),\
+		str(sModName102),str(sModDescription102),str(sModImage102),\
+		str(sModName103),str(sModDescription103),str(sModImage103)
+	Case "Cutting Room Floor Patch"
+		bCRPatch = True
+	Break
+	Case "Immersive Citizens Patch"
+		bICPatch = True
+	Break
+	Case "Valdacil's Item Sorting Patch"
+		bVISPatch = True
+	Break
+EndSelect
+; This isn't pretty but it works
+If bCRFpatch == False and bICPatch == False and bVISPatch == False
+EndIf
+If bCRFpatch == True and bICPatch == False and bVISPatch == False
+	SelectSubPackage '4 Patches'
+	DeSelectEspm '4 Patches\\RLO - IC Patch.esp'
+	DeSelectEspm '4 Patches\\RLO - VIS Patch.esp'	
+EndIf
+If bCRFpatch == True and bICPatch == True and bVISPatch == False
+	SelectSubPackage '4 Patches'
+	DeSelectEspm '4 Patches\\RLO - VIS Patch.esp'	
+EndIf
+If bCRFpatch == True and bICPatch == False and bVISPatch == True
+	SelectSubPackage '4 Patches'
+	DeSelectEspm '4 Patches\\RLO - IC Patch.esp'
+EndIf
+If bCRFpatch == False and bICPatch == False and bVISPatch == True
+	SelectSubPackage '4 Patches'
+	DeSelectEspm '4 Patches\\RLO - IC Patch.esp'
+	DeSelectEspm '4 Patches\\RLO - CRF Patch.esp'
+EndIf
+If bCRFpatch == False and bICPatch == True and bVISPatch == True
+	SelectSubPackage '4 Patches'
+	DeSelectEspm '4 Patches\\RLO - CRF Patch.esp'
+EndIf
+If bCRFpatch == True and bICPatch == True and bVISPatch == True
+	SelectSubPackage '4 Patches'
+EndIf
+
+;== Finish Page ==
+Note "Thank you for installing Realistic Lighting Overhaul!\n\n\nConfirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready, tick 'Apply these selections' Below, and then click the 'Finish' button.\n\nIf You Have Auto-Anneal/Install Wizards set in Wrye Bash preferences, the Wizard will install your selections after clicking Finish\nOtherwise, right-click the installer again and choose Install"

@@ -1,0 +1,42 @@
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+;-- Expanded Towns and Cities - SSE by missjennabee -- WizBAIN by Mertz --
+;=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+RequireVersions "", "", "", "307"
+ResetAllEspmNames
+DeSelectAll
+
+;== Welcome screen and install core mod
+SelectOne "Expanded Towns and Cities Install Wizard",\
+    "|Welcome","Welcome to the Expanded Towns and Cities - SSE installer.\n\nClick 'Credits' above to view the credits.\n\nClick Next to continue the installation","images\\logo.png",\
+    "Credits","Expanded Towns and Cities - SSE was created by missjennabee. If you enjoy this mod, please make sure to show your thanks by endorsing!\n\n\nWizBAIN installer by Mertz\n\nClick next to continue the installation","images\\logo.png"
+EndSelect
+
+SelectSubPackage '00 Core'
+
+SelectOne "Pick an ESM version",\
+	"|ESM","Requires SKSE and SkyUI\. Will add in-game configuration options ala MCM\.","--- Screenshots ---\\mcm_yes.png",\
+	"ESM - No MCM","For those of you who do not have SkyUI installed\, or want to use the standard ESM file without the MCM stuff.","--- Screenshots ---\\mcm_no.png"
+		Case "ESM"
+			SelectSubPackage '00 ESM'
+			Break
+		Case "ESM - No MCM"
+			SelectSubPackage '00 ESM - No MCM'
+			Break
+EndSelect
+
+SelectOne "Select ETaC Version",\
+		"|Complete","Complete version. Includes all towns and cities with additional character dialogue and\/or quests.","",\
+		"Complete - No Quests","Complete version. Includes all towns and cities WITHOUT additional character dialogue and/or quests",""
+			Case "Complete"
+				SelectSubPackage '01 Complete'
+				Break
+			Case "Complete - No Quests"
+				SelectSubPackage '01 Complete - No Quests'
+				Break
+EndSelect
+
+
+
+;== Finish Page ==
+Note "Confirm your selections above - if you are not happy with the selection use the BACK button below.\nWhen ready\, tick \'Apply these selections\' Below\, and then click the \'Finish\' button.\n\nIf You Have Auto-Anneal\/Install Wizards set in Wrye Bash preferences\, the Wizard will install your selections after clicking Finish\nOtherwise\, right-click the installer again and choose Install"
+
