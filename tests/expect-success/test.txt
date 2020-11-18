@@ -1,5 +1,7 @@
 Note 3 + 6 * 2
+a = 0
 ++a
 --a
 a++
 a--
+Note a
